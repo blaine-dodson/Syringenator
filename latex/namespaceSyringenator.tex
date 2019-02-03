@@ -1,0 +1,117 @@
+\hypertarget{namespaceSyringenator}{}\subsection{Syringenator Namespace Reference}
+\label{namespaceSyringenator}\index{Syringenator@{Syringenator}}
+\subsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceSyringenator_1_1py}{py}}
+\begin{DoxyCompactList}\small\item\em An outline python script for robot control. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classSyringenator_1_1Target}{Target}}
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceSyringenator_aff01237d3ff3e33f0ffc32927d813df0}{scan}} ()
+\begin{DoxyCompactList}\small\item\em H\+E\+L\+P\+ER F\+U\+N\+C\+T\+I\+O\+NS. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespaceSyringenator_a6aecf5518c352d012eb1422d9970146d}{move\+Closer}} (t)
+\item 
+def \mbox{\hyperlink{namespaceSyringenator_a9409dbfa8ede969288bb659ef23befb6}{pick\+Up}} (t)
+\item 
+def \mbox{\hyperlink{namespaceSyringenator_afe04905c8a4a9d077457422866633203}{return\+To\+Line}} ()
+\item 
+def \mbox{\hyperlink{namespaceSyringenator_a824ef6e71bc0975483435ffbdd58cb3e}{line\+Follow}} ()
+\begin{DoxyCompactList}\small\item\em Follow the line. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespaceSyringenator_acb08d40f080a03cb4e7a43ee3ab4854b}{can\+Be\+Picked}} (t)
+\begin{DoxyCompactList}\small\item\em A routine to determine if the target is in position to be picked up. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespaceSyringenator_a161fa877b77c9ebb120c1ed20739260b}{on\+The\+Line}} = True
+\begin{DoxyCompactList}\small\item\em boolean indicating whether we are on the line \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespaceSyringenator_a66c7999289f77a4adce05169661f9660}{target}} = \mbox{\hyperlink{namespaceSyringenator_aff01237d3ff3e33f0ffc32927d813df0}{scan}}()
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceSyringenator_acb08d40f080a03cb4e7a43ee3ab4854b}\label{namespaceSyringenator_acb08d40f080a03cb4e7a43ee3ab4854b}} 
+\index{Syringenator@{Syringenator}!canBePicked@{canBePicked}}
+\index{canBePicked@{canBePicked}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{canBePicked()}{canBePicked()}}
+{\footnotesize\ttfamily def Syringenator.\+can\+Be\+Picked (\begin{DoxyParamCaption}\item[{}]{t }\end{DoxyParamCaption})}
+
+
+
+A routine to determine if the target is in position to be picked up. 
+
+Calculates whether the center of the target bounding box is in the pickup area. x=(x\+\_\+1+x\+\_\+2)/2 and y=(y\+\_\+1+y\+\_\+2)/2
+
+\begin{DoxyReturn}{Returns}
+a boolean 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceSyringenator_a824ef6e71bc0975483435ffbdd58cb3e}\label{namespaceSyringenator_a824ef6e71bc0975483435ffbdd58cb3e}} 
+\index{Syringenator@{Syringenator}!lineFollow@{lineFollow}}
+\index{lineFollow@{lineFollow}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{lineFollow()}{lineFollow()}}
+{\footnotesize\ttfamily def Syringenator.\+line\+Follow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Follow the line. 
+
+this routine simply signals the arduino to execute its \mbox{\hyperlink{namespaceSyringenator_a824ef6e71bc0975483435ffbdd58cb3e}{line\+Follow()}} routine
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceSyringenator_a6aecf5518c352d012eb1422d9970146d}\label{namespaceSyringenator_a6aecf5518c352d012eb1422d9970146d}} 
+\index{Syringenator@{Syringenator}!moveCloser@{moveCloser}}
+\index{moveCloser@{moveCloser}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{moveCloser()}{moveCloser()}}
+{\footnotesize\ttfamily def Syringenator.\+move\+Closer (\begin{DoxyParamCaption}\item[{}]{t }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceSyringenator_a9409dbfa8ede969288bb659ef23befb6}\label{namespaceSyringenator_a9409dbfa8ede969288bb659ef23befb6}} 
+\index{Syringenator@{Syringenator}!pickUp@{pickUp}}
+\index{pickUp@{pickUp}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{pickUp()}{pickUp()}}
+{\footnotesize\ttfamily def Syringenator.\+pick\+Up (\begin{DoxyParamCaption}\item[{}]{t }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceSyringenator_afe04905c8a4a9d077457422866633203}\label{namespaceSyringenator_afe04905c8a4a9d077457422866633203}} 
+\index{Syringenator@{Syringenator}!returnToLine@{returnToLine}}
+\index{returnToLine@{returnToLine}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{returnToLine()}{returnToLine()}}
+{\footnotesize\ttfamily def Syringenator.\+return\+To\+Line (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceSyringenator_aff01237d3ff3e33f0ffc32927d813df0}\label{namespaceSyringenator_aff01237d3ff3e33f0ffc32927d813df0}} 
+\index{Syringenator@{Syringenator}!scan@{scan}}
+\index{scan@{scan}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{scan()}{scan()}}
+{\footnotesize\ttfamily def Syringenator.\+scan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+H\+E\+L\+P\+ER F\+U\+N\+C\+T\+I\+O\+NS. 
+
+A routine to take a picture and report back the closest target \begin{DoxyReturn}{Returns}
+a target object 
+\end{DoxyReturn}
+
+
+\subsubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceSyringenator_a161fa877b77c9ebb120c1ed20739260b}\label{namespaceSyringenator_a161fa877b77c9ebb120c1ed20739260b}} 
+\index{Syringenator@{Syringenator}!onTheLine@{onTheLine}}
+\index{onTheLine@{onTheLine}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{onTheLine}{onTheLine}}
+{\footnotesize\ttfamily bool Syringenator.\+on\+The\+Line = True}
+
+
+
+boolean indicating whether we are on the line 
+
+\mbox{\Hypertarget{namespaceSyringenator_a66c7999289f77a4adce05169661f9660}\label{namespaceSyringenator_a66c7999289f77a4adce05169661f9660}} 
+\index{Syringenator@{Syringenator}!target@{target}}
+\index{target@{target}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{target}{target}}
+{\footnotesize\ttfamily def Syringenator.\+target = \mbox{\hyperlink{namespaceSyringenator_aff01237d3ff3e33f0ffc32927d813df0}{scan}}()}
+

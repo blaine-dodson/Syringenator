@@ -1,0 +1,170 @@
+\hypertarget{Syringenator_8hpp}{}\subsection{src/\+Syringenator.hpp File Reference}
+\label{Syringenator_8hpp}\index{src/Syringenator.hpp@{src/Syringenator.hpp}}
+
+
+Arduino controller code.  
+
+
+{\ttfamily \#include \char`\"{}constants.\+py\char`\"{}}\newline
+Include dependency graph for Syringenator.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{Syringenator_8hpp__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{Syringenator_8hpp_ad664efb71d5032009deade168a23dfc0}{line\+Detector\+\_\+\+I\+SR}} (void)
+\begin{DoxyCompactList}\small\item\em A function to respond to a line detector being triggered. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Syringenator_8hpp_a9e189084091b3c3bbee94b015c1a3257}{obstacle\+Detector\+\_\+\+I\+SR}} (void)
+\begin{DoxyCompactList}\small\item\em A function to respond to a detected obstacle while under locamotion. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}{serial\+Communication\+\_\+\+I\+SR}} (void)
+\begin{DoxyCompactList}\small\item\em Motor encoder I\+SR. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Syringenator_8hpp_af385a70a6e85c3a48cc34be30ce82cdd}{move\+Rotate}} (int ticks)
+\begin{DoxyCompactList}\small\item\em Rotate the robot around central axis rotate by running both motors at the same speed in opposite directions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Syringenator_8hpp_a49d3945f861fc2372c5acf7dcbe38deb}{move\+Straight}} (int ticks)
+\begin{DoxyCompactList}\small\item\em Move the robot forward or reverse. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Syringenator_8hpp_a329dc12ddbc9d24c02724b380a041b04}{move\+Line\+Follow}} (void)
+\begin{DoxyCompactList}\small\item\em Routine to follow the guide-\/line for some fixed interval. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Syringenator_8hpp_a9ec347be5f02ccfe7e4c03fbce6a4d9d}{arm\+Park}} (void)
+\begin{DoxyCompactList}\small\item\em Move the arm to its parking position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Syringenator_8hpp_a4378f1f92482e766c7e5d0c41dc97ae6}{arm\+Dispose}} (void)
+\begin{DoxyCompactList}\small\item\em Routine to dispose of a syringe once it has been picked. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{Syringenator_8hpp_a7bce05d8cc8087b6256ac2d1ed0b83b0}{arm\+Pick}} (byte azimuth, byte range, byte orientation)
+\begin{DoxyCompactList}\small\item\em Routine to attempt target pickup. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Arduino controller code. 
+
+--A\+BD 
+
+\subsubsection{Function Documentation}
+\mbox{\Hypertarget{Syringenator_8hpp_a4378f1f92482e766c7e5d0c41dc97ae6}\label{Syringenator_8hpp_a4378f1f92482e766c7e5d0c41dc97ae6}} 
+\index{Syringenator.hpp@{Syringenator.hpp}!armDispose@{armDispose}}
+\index{armDispose@{armDispose}!Syringenator.hpp@{Syringenator.hpp}}
+\paragraph{\texorpdfstring{armDispose()}{armDispose()}}
+{\footnotesize\ttfamily void arm\+Dispose (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Routine to dispose of a syringe once it has been picked. 
+
+\mbox{\Hypertarget{Syringenator_8hpp_a9ec347be5f02ccfe7e4c03fbce6a4d9d}\label{Syringenator_8hpp_a9ec347be5f02ccfe7e4c03fbce6a4d9d}} 
+\index{Syringenator.hpp@{Syringenator.hpp}!armPark@{armPark}}
+\index{armPark@{armPark}!Syringenator.hpp@{Syringenator.hpp}}
+\paragraph{\texorpdfstring{armPark()}{armPark()}}
+{\footnotesize\ttfamily void arm\+Park (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Move the arm to its parking position. 
+
+The parking position needs to leave a clear view of the pickup area, but also should move the center of gravity as far forward as possible to reduce drive wheel slippage. \mbox{\Hypertarget{Syringenator_8hpp_a7bce05d8cc8087b6256ac2d1ed0b83b0}\label{Syringenator_8hpp_a7bce05d8cc8087b6256ac2d1ed0b83b0}} 
+\index{Syringenator.hpp@{Syringenator.hpp}!armPick@{armPick}}
+\index{armPick@{armPick}!Syringenator.hpp@{Syringenator.hpp}}
+\paragraph{\texorpdfstring{armPick()}{armPick()}}
+{\footnotesize\ttfamily bool arm\+Pick (\begin{DoxyParamCaption}\item[{byte}]{azimuth,  }\item[{byte}]{range,  }\item[{byte}]{orientation }\end{DoxyParamCaption})}
+
+
+
+Routine to attempt target pickup. 
+
+This routine should attempt to close the claw completely and detect if an object as actually been grabbed. parameters should be bytes because they will have to be transmitted over serial from the pi. Ranges on these values T\+BD as convenient for the arm software, but must be recorded in the system constants file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuth} & arm azimuth value \\
+\hline
+{\em range} & distance to the target \\
+\hline
+{\em orientation} & rotation of the target\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on successful pick, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Syringenator_8hpp_ad664efb71d5032009deade168a23dfc0}\label{Syringenator_8hpp_ad664efb71d5032009deade168a23dfc0}} 
+\index{Syringenator.hpp@{Syringenator.hpp}!lineDetector\_ISR@{lineDetector\_ISR}}
+\index{lineDetector\_ISR@{lineDetector\_ISR}!Syringenator.hpp@{Syringenator.hpp}}
+\paragraph{\texorpdfstring{lineDetector\_ISR()}{lineDetector\_ISR()}}
+{\footnotesize\ttfamily void line\+Detector\+\_\+\+I\+SR (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+A function to respond to a line detector being triggered. 
+
+The line detectors are mounted forward and inboard of the wheels. This function needs to reorient the robot to clear the sensor, but also to prevent the line from being hit again.
+
+The simplest way to do this is to rotate the opposite wheel forward until the sensor clears. Because the sensor is forward of the wheel it will rotate away from the line as the opposite wheel moves forward. This should work as long as the curvature of the line is not too great.
+
+This may need to be two routines, one for each sensor
+
+--A\+BD \mbox{\Hypertarget{Syringenator_8hpp_a329dc12ddbc9d24c02724b380a041b04}\label{Syringenator_8hpp_a329dc12ddbc9d24c02724b380a041b04}} 
+\index{Syringenator.hpp@{Syringenator.hpp}!moveLineFollow@{moveLineFollow}}
+\index{moveLineFollow@{moveLineFollow}!Syringenator.hpp@{Syringenator.hpp}}
+\paragraph{\texorpdfstring{moveLineFollow()}{moveLineFollow()}}
+{\footnotesize\ttfamily void move\+Line\+Follow (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Routine to follow the guide-\/line for some fixed interval. 
+
+This function assumes that we are already over the line \mbox{\Hypertarget{Syringenator_8hpp_af385a70a6e85c3a48cc34be30ce82cdd}\label{Syringenator_8hpp_af385a70a6e85c3a48cc34be30ce82cdd}} 
+\index{Syringenator.hpp@{Syringenator.hpp}!moveRotate@{moveRotate}}
+\index{moveRotate@{moveRotate}!Syringenator.hpp@{Syringenator.hpp}}
+\paragraph{\texorpdfstring{moveRotate()}{moveRotate()}}
+{\footnotesize\ttfamily void move\+Rotate (\begin{DoxyParamCaption}\item[{int}]{ticks }\end{DoxyParamCaption})}
+
+
+
+Rotate the robot around central axis rotate by running both motors at the same speed in opposite directions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ticks} & sign indicates direction of rotation\+: positive is rotation to the right. magnitude indicates the number of encoder ticks on each motor. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Syringenator_8hpp_a49d3945f861fc2372c5acf7dcbe38deb}\label{Syringenator_8hpp_a49d3945f861fc2372c5acf7dcbe38deb}} 
+\index{Syringenator.hpp@{Syringenator.hpp}!moveStraight@{moveStraight}}
+\index{moveStraight@{moveStraight}!Syringenator.hpp@{Syringenator.hpp}}
+\paragraph{\texorpdfstring{moveStraight()}{moveStraight()}}
+{\footnotesize\ttfamily void move\+Straight (\begin{DoxyParamCaption}\item[{int}]{ticks }\end{DoxyParamCaption})}
+
+
+
+Move the robot forward or reverse. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ticks} & number of encoder ticks to move. Sign indicates direction\+: positive is forward. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Syringenator_8hpp_a9e189084091b3c3bbee94b015c1a3257}\label{Syringenator_8hpp_a9e189084091b3c3bbee94b015c1a3257}} 
+\index{Syringenator.hpp@{Syringenator.hpp}!obstacleDetector\_ISR@{obstacleDetector\_ISR}}
+\index{obstacleDetector\_ISR@{obstacleDetector\_ISR}!Syringenator.hpp@{Syringenator.hpp}}
+\paragraph{\texorpdfstring{obstacleDetector\_ISR()}{obstacleDetector\_ISR()}}
+{\footnotesize\ttfamily void obstacle\+Detector\+\_\+\+I\+SR (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+A function to respond to a detected obstacle while under locamotion. 
+
+There may be two cases to handle\+: whether we are line following, or aproaching. If we are line following we need to ensure that we don\textquotesingle{}t lose the line while avoiding the obstacle.
+
+This may need to be multiple routines, one for each sensor
+
+--A\+BD \mbox{\Hypertarget{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}\label{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}} 
+\index{Syringenator.hpp@{Syringenator.hpp}!serialCommunication\_ISR@{serialCommunication\_ISR}}
+\index{serialCommunication\_ISR@{serialCommunication\_ISR}!Syringenator.hpp@{Syringenator.hpp}}
+\paragraph{\texorpdfstring{serialCommunication\_ISR()}{serialCommunication\_ISR()}}
+{\footnotesize\ttfamily void serial\+Communication\+\_\+\+I\+SR (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Motor encoder I\+SR. 
+
+A function to handle incomming communication from the pi. 

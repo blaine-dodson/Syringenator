@@ -1,0 +1,119 @@
+\begin{theindex}
+
+  \item {ARM\_AZIMUTH\_MAX}
+    \subitem {constants}, \hyperpage{6}
+  \item {ARM\_AZIMUTH\_MIN}
+    \subitem {constants}, \hyperpage{6}
+  \item {ARM\_ORIENT\_MAX}
+    \subitem {constants}, \hyperpage{6}
+  \item {ARM\_ORIENT\_MIN}
+    \subitem {constants}, \hyperpage{6}
+  \item {ARM\_RANGE\_MAX}
+    \subitem {constants}, \hyperpage{6}
+  \item {ARM\_RANGE\_MIN}
+    \subitem {constants}, \hyperpage{6}
+  \item {armDispose}
+    \subitem {Syringenator.hpp}, \hyperpage{12}
+  \item {armPark}
+    \subitem {Syringenator.hpp}, \hyperpage{12}
+  \item {armPick}
+    \subitem {Syringenator.hpp}, \hyperpage{12}
+
+  \indexspace
+
+  \item {canBePicked}
+    \subitem {Syringenator}, \hyperpage{8}
+  \item {constants}, \hyperpage{5}
+    \subitem {ARM\_AZIMUTH\_MAX}, \hyperpage{6}
+    \subitem {ARM\_AZIMUTH\_MIN}, \hyperpage{6}
+    \subitem {ARM\_ORIENT\_MAX}, \hyperpage{6}
+    \subitem {ARM\_ORIENT\_MIN}, \hyperpage{6}
+    \subitem {ARM\_RANGE\_MAX}, \hyperpage{6}
+    \subitem {ARM\_RANGE\_MIN}, \hyperpage{6}
+    \subitem {PICKUP\_X\_MAX}, \hyperpage{6}
+    \subitem {PICKUP\_X\_MIN}, \hyperpage{6}
+    \subitem {PICKUP\_Y\_MAX}, \hyperpage{7}
+    \subitem {PICKUP\_Y\_MIN}, \hyperpage{7}
+
+  \indexspace
+
+  \item {lineDetector\_ISR}
+    \subitem {Syringenator.hpp}, \hyperpage{12}
+  \item {lineFollow}
+    \subitem {Syringenator}, \hyperpage{8}
+
+  \indexspace
+
+  \item {moveCloser}
+    \subitem {Syringenator}, \hyperpage{8}
+  \item {moveLineFollow}
+    \subitem {Syringenator.hpp}, \hyperpage{13}
+  \item {moveRotate}
+    \subitem {Syringenator.hpp}, \hyperpage{13}
+  \item {moveStraight}
+    \subitem {Syringenator.hpp}, \hyperpage{13}
+
+  \indexspace
+
+  \item {obstacleDetector\_ISR}
+    \subitem {Syringenator.hpp}, \hyperpage{14}
+  \item {onTheLine}
+    \subitem {Syringenator}, \hyperpage{9}
+
+  \indexspace
+
+  \item {pickUp}
+    \subitem {Syringenator}, \hyperpage{8}
+  \item {PICKUP\_X\_MAX}
+    \subitem {constants}, \hyperpage{6}
+  \item {PICKUP\_X\_MIN}
+    \subitem {constants}, \hyperpage{6}
+  \item {PICKUP\_Y\_MAX}
+    \subitem {constants}, \hyperpage{7}
+  \item {PICKUP\_Y\_MIN}
+    \subitem {constants}, \hyperpage{7}
+
+  \indexspace
+
+  \item {README.md}, \hyperpage{10}
+  \item {requirements.md}, \hyperpage{10}
+  \item {returnToLine}
+    \subitem {Syringenator}, \hyperpage{8}
+
+  \indexspace
+
+  \item {scan}
+    \subitem {Syringenator}, \hyperpage{9}
+  \item {serialCommunication\_ISR}
+    \subitem {Syringenator.hpp}, \hyperpage{14}
+  \item {src/constants.py}, \hyperpage{10}
+  \item {src/Syringenator.hpp}, \hyperpage{11}
+  \item {src/Syringenator.py}, \hyperpage{14}
+  \item {Syringenator}, \hyperpage{7}
+    \subitem {canBePicked}, \hyperpage{8}
+    \subitem {lineFollow}, \hyperpage{8}
+    \subitem {moveCloser}, \hyperpage{8}
+    \subitem {onTheLine}, \hyperpage{9}
+    \subitem {pickUp}, \hyperpage{8}
+    \subitem {returnToLine}, \hyperpage{8}
+    \subitem {scan}, \hyperpage{9}
+    \subitem {target}, \hyperpage{9}
+  \item {Syringenator.hpp}
+    \subitem {armDispose}, \hyperpage{12}
+    \subitem {armPark}, \hyperpage{12}
+    \subitem {armPick}, \hyperpage{12}
+    \subitem {lineDetector\_ISR}, \hyperpage{12}
+    \subitem {moveLineFollow}, \hyperpage{13}
+    \subitem {moveRotate}, \hyperpage{13}
+    \subitem {moveStraight}, \hyperpage{13}
+    \subitem {obstacleDetector\_ISR}, \hyperpage{14}
+    \subitem {serialCommunication\_ISR}, \hyperpage{14}
+  \item {Syringenator.py}, \hyperpage{9}
+  \item {Syringenator.Target}, \hyperpage{10}
+
+  \indexspace
+
+  \item {target}
+    \subitem {Syringenator}, \hyperpage{9}
+
+\end{theindex}
