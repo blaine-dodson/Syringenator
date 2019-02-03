@@ -8,11 +8,11 @@ Winter 2019
 
 
 # Development Team:
-*	Alex Boyle
-*	Ammon Dodson,  ammon0@uw.edu
-*	Alex Marlow, alexmarlow117@gmail.com
-*	Jake McKenzie, jake314@uw.edu
-*	Brooke Stevenson
+@author Alex Boyle
+@author Ammon Dodson,  ammon0@uw.edu
+@author Alex Marlow, alexmarlow117@gmail.com
+@author Jake McKenzie, jake314@uw.edu
+@author Brooke Stevenson
 
 
 # HypoRobot Assignment

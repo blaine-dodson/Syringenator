@@ -24,7 +24,6 @@
  *	the curvature of the line is not too great.
  *
  *	This may need to be two routines, one for each sensor
- *
  *	--ABD
  */
 void lineDetector_ISR(void){
@@ -47,7 +46,6 @@ void lineDetector_ISR(void){
  *	avoiding the obstacle.
  *	
  *	This may need to be multiple routines, one for each sensor
- *
  *	--ABD
  */
 void obstacleDetector_ISR(void){
@@ -136,6 +134,7 @@ void armDispose(void){
  *	have to be transmitted over serial from the pi. Ranges on these values TBD as
  *	convenient for the arm software, but must be recorded in the system constants
  *	file.
+ *	--ABD
  *
  *	@param azimuth arm azimuth value
  *	@param range distance to the target

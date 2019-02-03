@@ -61,7 +61,7 @@ The parking position needs to leave a clear view of the pickup area, but also sh
 \paragraph{\texorpdfstring{armPick()}{armPick()}}
 {\footnotesize\ttfamily bool arm\+Pick (\begin{DoxyParamCaption}\item[{byte}]{azimuth,  }\item[{byte}]{range,  }\item[{byte}]{orientation }\end{DoxyParamCaption})}
 
-This routine should attempt to close the claw completely and detect if an object as actually been grabbed. parameters should be bytes because they will have to be transmitted over serial from the pi. Ranges on these values T\+BD as convenient for the arm software, but must be recorded in the system constants file.
+This routine should attempt to close the claw completely and detect if an object as actually been grabbed. parameters should be bytes because they will have to be transmitted over serial from the pi. Ranges on these values T\+BD as convenient for the arm software, but must be recorded in the system constants file. --A\+BD
 
 
 \begin{DoxyParams}{Parameters}
@@ -85,9 +85,7 @@ The line detectors are mounted forward and inboard of the wheels. This function 
 
 The simplest way to do this is to rotate the opposite wheel forward until the sensor clears. Because the sensor is forward of the wheel it will rotate away from the line as the opposite wheel moves forward. This should work as long as the curvature of the line is not too great.
 
-This may need to be two routines, one for each sensor
-
---A\+BD \mbox{\Hypertarget{Syringenator_8hpp_aa79e39c6ba7fdc4bd4c2f04668f0b1db}\label{Syringenator_8hpp_aa79e39c6ba7fdc4bd4c2f04668f0b1db}} 
+This may need to be two routines, one for each sensor --A\+BD \mbox{\Hypertarget{Syringenator_8hpp_aa79e39c6ba7fdc4bd4c2f04668f0b1db}\label{Syringenator_8hpp_aa79e39c6ba7fdc4bd4c2f04668f0b1db}} 
 \index{Syringenator.hpp@{Syringenator.hpp}!motorEncoder\_ISR@{motorEncoder\_ISR}}
 \index{motorEncoder\_ISR@{motorEncoder\_ISR}!Syringenator.hpp@{Syringenator.hpp}}
 \paragraph{\texorpdfstring{motorEncoder\_ISR()}{motorEncoder\_ISR()}}
@@ -129,9 +127,7 @@ This function assumes that we are already over the line \mbox{\Hypertarget{Syrin
 
 There may be two cases to handle\+: whether we are line following, or aproaching. If we are line following we need to ensure that we don\textquotesingle{}t lose the line while avoiding the obstacle.
 
-This may need to be multiple routines, one for each sensor
-
---A\+BD \mbox{\Hypertarget{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}\label{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}} 
+This may need to be multiple routines, one for each sensor --A\+BD \mbox{\Hypertarget{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}\label{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}} 
 \index{Syringenator.hpp@{Syringenator.hpp}!serialCommunication\_ISR@{serialCommunication\_ISR}}
 \index{serialCommunication\_ISR@{serialCommunication\_ISR}!Syringenator.hpp@{Syringenator.hpp}}
 \paragraph{\texorpdfstring{serialCommunication\_ISR()}{serialCommunication\_ISR()}}

@@ -1,6 +1,8 @@
-##	@package Syringenator.py The top-level Pi program.
+##	@package Syringenator The top-level Pi program.
+#	@file Syringenator.py
 #	This is the main control script. It will run on the Raspberry Pi and direct all
 #	robot operations.
+#	@todo TODO: how do we initialize the robot run? a button press?
 #	--ABD
 
 import constants
@@ -33,6 +35,7 @@ def arduinoReceive():
 #	The Computer vision routine must be able to handle multiple targets in the
 #	image. It would be best if all targets are reported. Then this routine will
 #	determine the closest one to pursue.
+#	--ABD
 #
 #	@return a target object
 def scan():
@@ -88,6 +91,7 @@ def moveCloser(t):
 #
 #	Once the values for x, y, and m have been determined they will have to pass
 #	through a calibration transform to determine the arm a, r, o values.
+#	--ABD
 #
 #	@param t a Target object containing the raw bitmap data
 #	@return None
@@ -100,10 +104,12 @@ def pickUp(t):
 
 ##	signl the arduino to return to the line.
 #
+#	@todo TODO: do we need to check that we actually returned? how do we recover if
+#	dead reckoning fails? --ABD
 #	@return None
 def returnToLine():
 	pass
-	# TODO: do we need to check that we actually returned? how do we recover if dead reckoning fails?
+	
 	
 
 ##	Follow the line.
@@ -133,7 +139,7 @@ def canBePicked(t):
 #==============================================================================#
 
 
-# TODO: how do we initialize the robot run? a button press?
+
 
 ## boolean indicating whether we are on the line
 onTheLine = True

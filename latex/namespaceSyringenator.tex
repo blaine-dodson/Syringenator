@@ -1,10 +1,10 @@
 \hypertarget{namespaceSyringenator}{}\subsection{Syringenator Namespace Reference}
 \label{namespaceSyringenator}\index{Syringenator@{Syringenator}}
-\subsubsection*{Namespaces}
-\begin{DoxyCompactItemize}
-\item 
- \mbox{\hyperlink{namespaceSyringenator_1_1py}{py}}
-\begin{DoxyCompactList}\small\item\em The top-\/level Pi program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The top-\/level Pi program.  
+
+
 \subsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -115,7 +115,7 @@ Divide the longer dimension of the bounding box by some constant divisor. Scan a
 
 The center can be estimated as the center of the bounding box, or the center of the points, the mean of both, etc.
 
-Once the values for x, y, and m have been determined they will have to pass through a calibration transform to determine the arm a, r, o values.
+Once the values for x, y, and m have been determined they will have to pass through a calibration transform to determine the arm a, r, o values. --A\+BD
 
 
 \begin{DoxyParams}{Parameters}
@@ -131,6 +131,8 @@ None
 \paragraph{\texorpdfstring{returnToLine()}{returnToLine()}}
 {\footnotesize\ttfamily def Syringenator.\+return\+To\+Line (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000002}{Todo}}]T\+O\+DO\+: do we need to check that we actually returned? how do we recover if dead reckoning fails? --A\+BD \end{DoxyRefDesc}
 \begin{DoxyReturn}{Returns}
 None 
 \end{DoxyReturn}
@@ -140,7 +142,7 @@ None
 \paragraph{\texorpdfstring{scan()}{scan()}}
 {\footnotesize\ttfamily def Syringenator.\+scan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-It would be best if all targets are reported. Then this routine will determine the closest one to pursue.
+It would be best if all targets are reported. Then this routine will determine the closest one to pursue. --A\+BD
 
 \begin{DoxyReturn}{Returns}
 a target object 

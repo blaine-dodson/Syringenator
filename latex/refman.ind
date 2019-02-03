@@ -13,9 +13,9 @@
   \item {ARDUINO\_NULL}
     \subitem {constants}, \hyperpage{6}
   \item {ARDUINO\_ROTATE}
-    \subitem {constants}, \hyperpage{7}
+    \subitem {constants}, \hyperpage{6}
   \item {ARDUINO\_STATUS\_ACK}
-    \subitem {constants}, \hyperpage{7}
+    \subitem {constants}, \hyperpage{6}
   \item {ARDUINO\_STATUS\_ARM\_FAULT}
     \subitem {constants}, \hyperpage{7}
   \item {ARDUINO\_STATUS\_OBSTACLE}
@@ -27,15 +27,15 @@
   \item {ARDUINO\_STATUS\_READY}
     \subitem {constants}, \hyperpage{7}
   \item {arduinoReceive}
-    \subitem {Syringenator}, \hyperpage{10}
+    \subitem {Syringenator}, \hyperpage{9}
   \item {arduinoSend}
-    \subitem {Syringenator}, \hyperpage{10}
+    \subitem {Syringenator}, \hyperpage{9}
   \item {ARM\_AZIMUTH\_MAX}
     \subitem {constants}, \hyperpage{7}
   \item {ARM\_AZIMUTH\_MIN}
-    \subitem {constants}, \hyperpage{8}
+    \subitem {constants}, \hyperpage{7}
   \item {ARM\_ORIENT\_MAX}
-    \subitem {constants}, \hyperpage{8}
+    \subitem {constants}, \hyperpage{7}
   \item {ARM\_ORIENT\_MIN}
     \subitem {constants}, \hyperpage{8}
   \item {ARM\_RANGE\_MAX}
@@ -60,23 +60,23 @@
     \subitem {ARDUINO\_LINE\_FOLLOW}, \hyperpage{6}
     \subitem {ARDUINO\_MOVE}, \hyperpage{6}
     \subitem {ARDUINO\_NULL}, \hyperpage{6}
-    \subitem {ARDUINO\_ROTATE}, \hyperpage{7}
-    \subitem {ARDUINO\_STATUS\_ACK}, \hyperpage{7}
+    \subitem {ARDUINO\_ROTATE}, \hyperpage{6}
+    \subitem {ARDUINO\_STATUS\_ACK}, \hyperpage{6}
     \subitem {ARDUINO\_STATUS\_ARM\_FAULT}, \hyperpage{7}
     \subitem {ARDUINO\_STATUS\_OBSTACLE}, \hyperpage{7}
     \subitem {ARDUINO\_STATUS\_PICK\_FAIL}, \hyperpage{7}
     \subitem {ARDUINO\_STATUS\_PICK\_SUCCESS}, \hyperpage{7}
     \subitem {ARDUINO\_STATUS\_READY}, \hyperpage{7}
     \subitem {ARM\_AZIMUTH\_MAX}, \hyperpage{7}
-    \subitem {ARM\_AZIMUTH\_MIN}, \hyperpage{8}
-    \subitem {ARM\_ORIENT\_MAX}, \hyperpage{8}
+    \subitem {ARM\_AZIMUTH\_MIN}, \hyperpage{7}
+    \subitem {ARM\_ORIENT\_MAX}, \hyperpage{7}
     \subitem {ARM\_ORIENT\_MIN}, \hyperpage{8}
     \subitem {ARM\_RANGE\_MAX}, \hyperpage{8}
     \subitem {ARM\_RANGE\_MIN}, \hyperpage{8}
     \subitem {PICKUP\_X\_MAX}, \hyperpage{8}
     \subitem {PICKUP\_X\_MIN}, \hyperpage{8}
     \subitem {PICKUP\_Y\_MAX}, \hyperpage{8}
-    \subitem {PICKUP\_Y\_MIN}, \hyperpage{9}
+    \subitem {PICKUP\_Y\_MIN}, \hyperpage{8}
 
   \indexspace
 
@@ -116,34 +116,35 @@
   \item {PICKUP\_Y\_MAX}
     \subitem {constants}, \hyperpage{8}
   \item {PICKUP\_Y\_MIN}
-    \subitem {constants}, \hyperpage{9}
+    \subitem {constants}, \hyperpage{8}
 
   \indexspace
 
   \item {README.md}, \hyperpage{13}
   \item {requirements.md}, \hyperpage{13}
   \item {returnToLine}
-    \subitem {Syringenator}, \hyperpage{12}
+    \subitem {Syringenator}, \hyperpage{11}
 
   \indexspace
 
   \item {scan}
-    \subitem {Syringenator}, \hyperpage{12}
+    \subitem {Syringenator}, \hyperpage{11}
   \item {serialCommunication\_ISR}
     \subitem {Syringenator.hpp}, \hyperpage{17}
+  \item {src/constants.dox}, \hyperpage{13}
   \item {src/constants.py}, \hyperpage{13}
   \item {src/Syringenator.hpp}, \hyperpage{14}
   \item {src/Syringenator.py}, \hyperpage{17}
   \item {Syringenator}, \hyperpage{9}
-    \subitem {arduinoReceive}, \hyperpage{10}
-    \subitem {arduinoSend}, \hyperpage{10}
+    \subitem {arduinoReceive}, \hyperpage{9}
+    \subitem {arduinoSend}, \hyperpage{9}
     \subitem {canBePicked}, \hyperpage{10}
     \subitem {lineFollow}, \hyperpage{10}
     \subitem {moveCloser}, \hyperpage{10}
     \subitem {onTheLine}, \hyperpage{12}
     \subitem {pickUp}, \hyperpage{11}
-    \subitem {returnToLine}, \hyperpage{12}
-    \subitem {scan}, \hyperpage{12}
+    \subitem {returnToLine}, \hyperpage{11}
+    \subitem {scan}, \hyperpage{11}
     \subitem {target}, \hyperpage{12}
   \item {Syringenator.hpp}
     \subitem {armDispose}, \hyperpage{15}
@@ -156,8 +157,7 @@
     \subitem {moveStraight}, \hyperpage{17}
     \subitem {obstacleDetector\_ISR}, \hyperpage{17}
     \subitem {serialCommunication\_ISR}, \hyperpage{17}
-  \item {Syringenator.py}, \hyperpage{12}
-  \item {Syringenator.Target}, \hyperpage{13}
+  \item {Syringenator.Target}, \hyperpage{12}
 
   \indexspace
 

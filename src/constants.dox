@@ -1,0 +1,5 @@
+/**	@file constants.py
+ *	Includes constants used by both the arduino sketch and the the python script.
+ *	The formatting used in this file is a quick and dirty hack. There are better ways
+ *	to do this.
+ */

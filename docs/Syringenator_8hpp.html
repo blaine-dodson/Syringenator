@@ -82,7 +82,7 @@ Include dependency graph for Syringenator.hpp:</div>
 <div class="center"><img src="Syringenator_8hpp__incl.png" border="0" usemap="#src_2Syringenator_8hpp" alt=""/></div>
 <map name="src_2Syringenator_8hpp" id="src_2Syringenator_8hpp">
 <area shape="rect" title="Arduino controller code." alt="" coords="5,5,148,32"/>
-<area shape="rect" href="constants_8py.html" title=" " alt="" coords="28,80,125,107"/>
+<area shape="rect" href="constants_8py.html" title="Includes constants used by both the arduino sketch and the the python script." alt="" coords="28,80,125,107"/>
 </map>
 </div>
 </div>
@@ -192,7 +192,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine should attempt to close the claw completely and detect if an object as actually been grabbed. parameters should be bytes because they will have to be transmitted over serial from the pi. Ranges on these values TBD as convenient for the arm software, but must be recorded in the system constants file.</p>
+<p>This routine should attempt to close the claw completely and detect if an object as actually been grabbed. parameters should be bytes because they will have to be transmitted over serial from the pi. Ranges on these values TBD as convenient for the arm software, but must be recorded in the system constants file. &ndash;ABD</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">azimuth</td><td>arm azimuth value </td></tr>
@@ -222,8 +222,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>The line detectors are mounted forward and inboard of the wheels. This function needs to reorient the robot to clear the sensor, but also to prevent the line from being hit again.</p>
 <p>The simplest way to do this is to rotate the opposite wheel forward until the sensor clears. Because the sensor is forward of the wheel it will rotate away from the line as the opposite wheel moves forward. This should work as long as the curvature of the line is not too great.</p>
-<p>This may need to be two routines, one for each sensor</p>
-<p>&ndash;ABD </p>
+<p>This may need to be two routines, one for each sensor &ndash;ABD </p>
 
 </div>
 </div>
@@ -328,8 +327,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>There may be two cases to handle: whether we are line following, or aproaching. If we are line following we need to ensure that we don't lose the line while avoiding the obstacle.</p>
-<p>This may need to be multiple routines, one for each sensor</p>
-<p>&ndash;ABD </p>
+<p>This may need to be multiple routines, one for each sensor &ndash;ABD </p>
 
 </div>
 </div>
@@ -354,7 +352,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 3 2019 06:00:58 for Syringenator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Feb 3 2019 06:36:53 for Syringenator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.16
 </small></address>

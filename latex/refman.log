@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.18)  3 FEB 2019 06:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.18)  3 FEB 2019 06:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1265,48 +1265,48 @@ LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 6.29996pt on input line 159.
  (./index.tex
-Underfull \vbox (badness 1810) has occurred while \output is active []
-
- [1]
+[1]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 5.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 5.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 10.79993pt on input line 5.
-LaTeX Font Info:    Try loading font information for TS1+phv on input line 8.
+LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
+(Font)              scaled to size 8.99994pt on input line 6.
+
+Underfull \hbox (badness 10000) detected at line 6
+[][][]
+ []
+
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 9.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)) (./autotoc_md3.tex
+LaTeX Font Info:    Try loading font information for TS1+phv on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2001/06/04 scalable font definitions for TS1/phv.
 )
 LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 8.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 9.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)) (./autotoc_md3.tex
-[2] [3]) (./namespaces.tex) (./annotated.tex [4]) (./files.tex)
-(./namespaceconstants.tex
-LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 8.99994pt on input line 3.
- [5]
+(Font)              scaled to size 8.99994pt on input line 4.
+ [2] [3]) (./todo.tex) (./namespaces.tex) (./annotated.tex [4]) (./files.tex)
+(./namespaceconstants.tex [5]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 7.19995pt on input line 59.
  [6] [7]) (./namespaceSyringenator.tex
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 7.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 17.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 7.
+(Font)              scaled to size 8.09995pt on input line 17.
  [8]
-[9]
 Underfull \hbox (badness 10000) detected at line 48
 [][][]
  []
 
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 55.
-
+[9]
 Underfull \hbox (badness 10000) detected at line 70
 [][][]
  []
@@ -1321,35 +1321,35 @@ Underfull \hbox (badness 10000) detected at line 103
 [][][]
  []
 
-[11]
+
 Underfull \hbox (badness 10000) detected at line 125
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 134
+Underfull \hbox (badness 10000) detected at line 136
 [][][]
  []
 
-
-Underfull \hbox (badness 10000) detected at line 145
+[11]
+Underfull \hbox (badness 10000) detected at line 147
 [][][]
  []
 
-) (./namespaceSyringenator_1_1py.tex) (./classSyringenator_1_1Target.tex)
-(./README_8md.tex [12]) (./requirements_8md.tex) (./constants_8py.tex <./consta
-nts_8py__dep__incl.pdf
+) (./classSyringenator_1_1Target.tex) (./README_8md.tex)
+(./requirements_8md.tex) (./constants_8dox.tex) (./constants_8py.tex <./constan
+ts_8py__dep__incl.pdf
 
 pdfTeX warning: pdflatex (file ./constants_8py__dep__incl.pdf): PDF inclusion: 
 multiple pdfs with page group included in a single page
-> <constants_8py__dep__incl.pdf, id=377, 187.70125pt x 156.585pt>
+> <constants_8py__dep__incl.pdf, id=382, 187.70125pt x 156.585pt>
 File: constants_8py__dep__incl.pdf Graphic file (type pdf)
 
 <use constants_8py__dep__incl.pdf>
-Package pdftex.def Info: constants_8py__dep__incl.pdf used on input line 8.
+Package pdftex.def Info: constants_8py__dep__incl.pdf used on input line 13.
 (pdftex.def)             Requested size: 187.0pt x 156.00879pt.
- [13]) (./Syringenator_8hpp.tex <./Syringenator_8hpp__incl.pdf>
-<Syringenator_8hpp__incl.pdf, id=419, 187.70125pt x 156.585pt>
+ [12] [13]) (./Syringenator_8hpp.tex <./Syringenator_8hpp__incl.pdf>
+<Syringenator_8hpp__incl.pdf, id=434, 187.70125pt x 156.585pt>
 File: Syringenator_8hpp__incl.pdf Graphic file (type pdf)
 
 <use Syringenator_8hpp__incl.pdf>
@@ -1370,19 +1370,19 @@ Underfull \hbox (badness 10000) detected at line 75
 ] [20
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 192.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 192.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 196.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 196.
  (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 192.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 192.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 196.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 196.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 882F0F0B5FC53E64C7B3C83C928E6077;5659.
+(rerunfilecheck)             Checksum: 75A2391C4F72010CCF2B646C9E553873;5953.
  ) 
 Here is how much of TeX's memory you used:
- 16407 strings out of 494953
- 235710 string characters out of 6180976
- 350406 words of memory out of 5000000
- 19217 multiletter control sequences out of 15000+600000
+ 16420 strings out of 494953
+ 235821 string characters out of 6180976
+ 349734 words of memory out of 5000000
+ 19222 multiletter control sequences out of 15000+600000
  50879 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  53i,15n,92p,881b,642s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1394,10 +1394,10 @@ w/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/u
 hvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (21 pages, 161414 bytes).
+Output written on refman.pdf (21 pages, 163503 bytes).
 PDF statistics:
- 672 PDF objects out of 1000 (max. 8388607)
- 625 compressed objects within 7 object streams
- 175 named destinations out of 1000 (max. 500000)
- 259 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 686 PDF objects out of 1000 (max. 8388607)
+ 637 compressed objects within 7 object streams
+ 179 named destinations out of 1000 (max. 500000)
+ 275 words of extra memory for PDF output out of 10000 (max. 10000000)
 

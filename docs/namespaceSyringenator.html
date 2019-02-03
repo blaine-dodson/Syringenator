@@ -63,7 +63,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -71,13 +70,10 @@ $(function() {
 <div class="title">Syringenator Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The top-level Pi program.  
+</p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespaceSyringenator_1_1py"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator_1_1py.html">py</a></td></tr>
-<tr class="memdesc:namespaceSyringenator_1_1py"><td class="mdescLeft">&#160;</td><td class="mdescRight">The top-level Pi program. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSyringenator_1_1Target.html">Target</a></td></tr>
@@ -247,7 +243,7 @@ Variables</h2></td></tr>
 <p>This routine must determine orientation of the target. If this is not done by some OpenCV magic we can attempt it here using the raw image data and the bounding box.</p>
 <p>Divide the longer dimension of the bounding box by some constant divisor. Scan along each of those raster lines twice. On the first pass calculate an average brightness (RGB values can be summed). The second pass will pick out points of greatest brightness. Find the centers of clustered bright pixeles. We now have a set of points in cartesian space. Have Jake find the slope of the line of best fit.</p>
 <p>The center can be estimated as the center of the bounding box, or the center of the points, the mean of both, etc.</p>
-<p>Once the values for x, y, and m have been determined they will have to pass through a calibration transform to determine the arm a, r, o values.</p>
+<p>Once the values for x, y, and m have been determined they will have to pass through a calibration transform to determine the arm a, r, o values. &ndash;ABD</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">t</td><td>a <a class="el" href="classSyringenator_1_1Target.html">Target</a> object containing the raw bitmap data </td></tr>
@@ -272,6 +268,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>TODO: do we need to check that we actually returned? how do we recover if dead reckoning fails? &ndash;ABD </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
 </div>
@@ -290,7 +287,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>It would be best if all targets are reported. Then this routine will determine the closest one to pursue.</p>
+<p>It would be best if all targets are reported. Then this routine will determine the closest one to pursue. &ndash;ABD</p>
 <dl class="section return"><dt>Returns</dt><dd>a target object </dd></dl>
 
 </div>
@@ -327,7 +324,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 3 2019 06:00:58 for Syringenator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Feb 3 2019 06:36:53 for Syringenator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.16
 </small></address>
