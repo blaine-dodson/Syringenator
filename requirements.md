@@ -1,6 +1,7 @@
 # Requirements
 
-## Terminology
+# Terminology
+
 The following terms are used in this specification:
 *	The term “autonomous”, in this case, means that no commands can be transmitted to your robot from any outside agency (especially from a human or computer or other controller) and all sensors used in the contest must be physically attached to your robot. No wired connections are allowed between any outside agency and your robot.
 *	The term “course” refers to the area in which the contest takes place.
@@ -17,7 +18,7 @@ Note: Your robot will have to leave the tape line to pick up targets, but it sho
 *	The term “dispose of a target” refers to your robot placing the target in container on your robot.
 *	A robot is “stationary” if its wheels are not rotating and its arm is not rotating about its vertical axis.
 
-## Rules of the Game
+# Rules of the Game
 
 *	You will be given two test runs, one per day over two class periods. The dates will be firmly established by midterm time.
 *	All tests will be conducted indoors.

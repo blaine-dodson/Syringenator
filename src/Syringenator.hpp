@@ -1,9 +1,11 @@
-/**	Arduino controller code
+/**	@file Syringenator.hpp 
+ *	
+ *	Arduino controller code
  *	
  *	--ABD
  */
 
-#include "arduinoConstants.hpp"
+#include "constants.py"
 
 
 /******************************************************************************/
@@ -45,6 +47,8 @@ void lineDetector_ISR(void){
  *	avoiding the obstacle.
  *	
  *	This may need to be multiple routines, one for each sensor
+ *
+ *	--ABD
  */
 void obstacleDetector_ISR(void){
 	
@@ -67,9 +71,30 @@ void serialCommunication_ISR(void){
 /******************************************************************************/
 
 
-/**	Routine to follow the guid-line for some fixed interval
+/**	Rotate the robot around central axis
+ *	rotate by running both motors at the same speed in opposite directions
+ *
+ *	@param ticks sign indicates direction of rotation: positive is rotation to
+ *	the right. magnitude indicates the number of encoder ticks on each motor.
  */
-void lineFollow(void){
+void moveRotate(int ticks){
+	
+}
+
+/** Move the robot forward or reverse
+ *
+ *	@param ticks number of encoder ticks to move. Sign indicates direction:
+ *	positive is forward.
+ */
+void moveStraight(int ticks){
+	
+}
+
+/**	Routine to follow the guide-line for some fixed interval
+ *
+ *	This function assumes that we are already over the line
+ */
+void moveLineFollow(void){
 	
 	// Enable line detector ISR
 	
@@ -78,14 +103,6 @@ void lineFollow(void){
 	
 }
 
-/**	Rotate the robot around central axis
- *	rotate by running both motors at the same speed in opposite directions
- *
- *	@parameter angle sign indicates direction of rotation positive is rotation to
- *	the right. magnitude indicates the number of encoder ticks on both motors.
- */
-void rotateCenter(int angle)
-
 
 /******************************************************************************/
 //                                 ARM CONTROLS
@@ -93,6 +110,7 @@ void rotateCenter(int angle)
 
 
 /**	Move the arm to its parking position
+ *
  *	The parking position needs to leave a clear view of the pickup area, but also
  *	should move the center of gravity as far forward as possible to reduce drive
  *	wheel slippage.
@@ -102,27 +120,32 @@ void armPark(void){
 }
 
 /** Routine to dispose of a syringe once it has been picked.
+ *
  */
 void armDispose(void){
 	
 }
 
 /**	Routine to attempt target pickup
+ *
  *	This routine should attempt to close the claw completely and detect if an
  *	object as actually been grabbed. parameters should be bytes because they will
  *	have to be transmitted over serial from the pi. Ranges on these values TBD as
  *	convenient for the arm software, but must be recorded in the system constants
  *	file.
  *
- *	@parameter azimuth 
- *	@parameter range
- *	@parameter rotation
+ *	@param azimuth arm azimuth value
+ *	@param range distance to the target
+ *	@param orientation rotation of the target
  *
  *	@return true on successful pick, false otherwise.
  */
 bool armPick(byte azimuth, byte range, byte orientation){
 	
 }
+
+
+
 
 
 
