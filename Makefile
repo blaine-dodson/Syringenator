@@ -3,6 +3,8 @@
 
 
 source:=$(wildcard src/*)
+source+=$(wildcard *.md)
+
 pdfman:=refman.pdf
 
 .PHONEY: all documentation super_clean
@@ -19,10 +21,10 @@ documentation: docs latex $(pdfman)
 $(pdfman): latex
 	$(MAKE) -C latex all
 	cp latex/refman.pdf ./
-	$(MAKE) -C latex clean
 
-docs latex: doxygen.cfg $(source) README.md
-	rm -fr docs latex
+
+docs latex: doxygen.cfg $(source)
+	rm -fr docs latex $(pdfman)
 	doxygen doxygen.cfg
 
 
