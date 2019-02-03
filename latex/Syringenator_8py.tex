@@ -11,18 +11,22 @@ class \mbox{\hyperlink{classSyringenator_1_1Target}{Syringenator.\+Target}}
  \mbox{\hyperlink{namespaceSyringenator}{Syringenator}}
 \item 
  \mbox{\hyperlink{namespaceSyringenator_1_1py}{Syringenator.\+py}}
-\begin{DoxyCompactList}\small\item\em An outline python script for robot control. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The top-\/level Pi program. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+def \mbox{\hyperlink{namespaceSyringenator_ae7978d5b84170226249d8de2e204e762}{Syringenator.\+arduino\+Send}} (bytes)
+\begin{DoxyCompactList}\small\item\em Send serial data to the arduino. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespaceSyringenator_a1c5a8cf020e400c8c0337977a5b6d921}{Syringenator.\+arduino\+Receive}} ()
+\begin{DoxyCompactList}\small\item\em Wait some fixed time for the arduino to send one or more bytes. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespaceSyringenator_aff01237d3ff3e33f0ffc32927d813df0}{Syringenator.\+scan}} ()
-\begin{DoxyCompactList}\small\item\em H\+E\+L\+P\+ER F\+U\+N\+C\+T\+I\+O\+NS. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A routine to take a picture and report back the closest target The Computer vision routine must be able to handle multiple targets in the image. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespaceSyringenator_a6aecf5518c352d012eb1422d9970146d}{Syringenator.\+move\+Closer}} (t)
-\item 
+\begin{DoxyCompactList}\small\item\em Move the robot closer to the given target. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespaceSyringenator_a9409dbfa8ede969288bb659ef23befb6}{Syringenator.\+pick\+Up}} (t)
-\item 
+\begin{DoxyCompactList}\small\item\em Attempt to pickup and dispose the target. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespaceSyringenator_afe04905c8a4a9d077457422866633203}{Syringenator.\+return\+To\+Line}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em signl the arduino to return to the line. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespaceSyringenator_a824ef6e71bc0975483435ffbdd58cb3e}{Syringenator.\+line\+Follow}} ()
 \begin{DoxyCompactList}\small\item\em Follow the line. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespaceSyringenator_acb08d40f080a03cb4e7a43ee3ab4854b}{Syringenator.\+can\+Be\+Picked}} (t)

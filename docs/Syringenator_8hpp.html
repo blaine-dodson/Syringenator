@@ -96,8 +96,11 @@ Functions</h2></td></tr>
 <tr class="memitem:a9e189084091b3c3bbee94b015c1a3257"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#a9e189084091b3c3bbee94b015c1a3257">obstacleDetector_ISR</a> (void)</td></tr>
 <tr class="memdesc:a9e189084091b3c3bbee94b015c1a3257"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to respond to a detected obstacle while under locamotion.  <a href="#a9e189084091b3c3bbee94b015c1a3257">More...</a><br /></td></tr>
 <tr class="separator:a9e189084091b3c3bbee94b015c1a3257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa79e39c6ba7fdc4bd4c2f04668f0b1db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#aa79e39c6ba7fdc4bd4c2f04668f0b1db">motorEncoder_ISR</a> (void)</td></tr>
+<tr class="memdesc:aa79e39c6ba7fdc4bd4c2f04668f0b1db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motor encoder ISR.  <a href="#aa79e39c6ba7fdc4bd4c2f04668f0b1db">More...</a><br /></td></tr>
+<tr class="separator:aa79e39c6ba7fdc4bd4c2f04668f0b1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a794c6d938a2f3689c46955eddb7bc93f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#a794c6d938a2f3689c46955eddb7bc93f">serialCommunication_ISR</a> (void)</td></tr>
-<tr class="memdesc:a794c6d938a2f3689c46955eddb7bc93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motor encoder ISR.  <a href="#a794c6d938a2f3689c46955eddb7bc93f">More...</a><br /></td></tr>
+<tr class="memdesc:a794c6d938a2f3689c46955eddb7bc93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to handle incomming communication from the pi.  <a href="#a794c6d938a2f3689c46955eddb7bc93f">More...</a><br /></td></tr>
 <tr class="separator:a794c6d938a2f3689c46955eddb7bc93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af385a70a6e85c3a48cc34be30ce82cdd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#af385a70a6e85c3a48cc34be30ce82cdd">moveRotate</a> (int ticks)</td></tr>
 <tr class="memdesc:af385a70a6e85c3a48cc34be30ce82cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the robot around central axis rotate by running both motors at the same speed in opposite directions.  <a href="#af385a70a6e85c3a48cc34be30ce82cdd">More...</a><br /></td></tr>
@@ -119,8 +122,7 @@ Functions</h2></td></tr>
 <tr class="separator:a7bce05d8cc8087b6256ac2d1ed0b83b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Arduino controller code. </p>
-<p>&ndash;ABD </p>
+<div class="textblock"><p>&ndash;ABD </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a4378f1f92482e766c7e5d0c41dc97ae6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4378f1f92482e766c7e5d0c41dc97ae6">&#9670;&nbsp;</a></span>armDispose()</h2>
@@ -137,8 +139,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Routine to dispose of a syringe once it has been picked. </p>
 
 </div>
 </div>
@@ -157,8 +157,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Move the arm to its parking position. </p>
 <p>The parking position needs to leave a clear view of the pickup area, but also should move the center of gravity as far forward as possible to reduce drive wheel slippage. </p>
 
 </div>
@@ -194,8 +192,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Routine to attempt target pickup. </p>
 <p>This routine should attempt to close the claw completely and detect if an object as actually been grabbed. parameters should be bytes because they will have to be transmitted over serial from the pi. Ranges on these values TBD as convenient for the arm software, but must be recorded in the system constants file.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -224,12 +220,28 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>A function to respond to a line detector being triggered. </p>
 <p>The line detectors are mounted forward and inboard of the wheels. This function needs to reorient the robot to clear the sensor, but also to prevent the line from being hit again.</p>
 <p>The simplest way to do this is to rotate the opposite wheel forward until the sensor clears. Because the sensor is forward of the wheel it will rotate away from the line as the opposite wheel moves forward. This should work as long as the curvature of the line is not too great.</p>
 <p>This may need to be two routines, one for each sensor</p>
 <p>&ndash;ABD </p>
+
+</div>
+</div>
+<a id="aa79e39c6ba7fdc4bd4c2f04668f0b1db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa79e39c6ba7fdc4bd4c2f04668f0b1db">&#9670;&nbsp;</a></span>motorEncoder_ISR()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void motorEncoder_ISR </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -248,8 +260,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Routine to follow the guide-line for some fixed interval. </p>
 <p>This function assumes that we are already over the line </p>
 
 </div>
@@ -269,8 +279,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Rotate the robot around central axis rotate by running both motors at the same speed in opposite directions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ticks</td><td>sign indicates direction of rotation: positive is rotation to the right. magnitude indicates the number of encoder ticks on each motor. </td></tr>
@@ -295,8 +303,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Move the robot forward or reverse. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ticks</td><td>number of encoder ticks to move. Sign indicates direction: positive is forward. </td></tr>
@@ -321,8 +327,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>A function to respond to a detected obstacle while under locamotion. </p>
 <p>There may be two cases to handle: whether we are line following, or aproaching. If we are line following we need to ensure that we don't lose the line while avoiding the obstacle.</p>
 <p>This may need to be multiple routines, one for each sensor</p>
 <p>&ndash;ABD </p>
@@ -345,15 +349,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Motor encoder ISR. </p>
-<p>A function to handle incomming communication from the pi. </p>
-
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 3 2019 03:32:25 for Syringenator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Feb 3 2019 06:00:58 for Syringenator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.16
 </small></address>

@@ -57,6 +57,9 @@ void obstacleDetector_ISR(void){
 /**	Motor encoder ISR
  *	
  */
+void motorEncoder_ISR(void){
+	
+}
 
 /**	A function to handle incomming communication from the pi.
  *	
