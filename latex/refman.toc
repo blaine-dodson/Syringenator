@@ -12,67 +12,39 @@
 \contentsline {subsection}{\numberline {5.1}Class List}{5}{subsection.5.1}
 \contentsline {section}{\numberline {6}File Index}{5}{section.6}
 \contentsline {subsection}{\numberline {6.1}File List}{5}{subsection.6.1}
-\contentsline {section}{\numberline {7}Namespace Documentation}{6}{section.7}
-\contentsline {subsection}{\numberline {7.1}constants Namespace Reference}{6}{subsection.7.1}
-\contentsline {subsubsection}{\numberline {7.1.1}Variable Documentation}{6}{subsubsection.7.1.1}
-\contentsline {paragraph}{\numberline {7.1.1.1}ARDUINO\_ARM\_DISPOSE}{6}{paragraph.7.1.1.1}
-\contentsline {paragraph}{\numberline {7.1.1.2}ARDUINO\_ARM\_PARK}{6}{paragraph.7.1.1.2}
-\contentsline {paragraph}{\numberline {7.1.1.3}ARDUINO\_ARM\_PICKUP}{7}{paragraph.7.1.1.3}
-\contentsline {paragraph}{\numberline {7.1.1.4}ARDUINO\_LINE\_FOLLOW}{7}{paragraph.7.1.1.4}
-\contentsline {paragraph}{\numberline {7.1.1.5}ARDUINO\_MOVE}{7}{paragraph.7.1.1.5}
-\contentsline {paragraph}{\numberline {7.1.1.6}ARDUINO\_NULL}{7}{paragraph.7.1.1.6}
-\contentsline {paragraph}{\numberline {7.1.1.7}ARDUINO\_ROTATE}{7}{paragraph.7.1.1.7}
-\contentsline {paragraph}{\numberline {7.1.1.8}ARDUINO\_STATUS\_ACK}{7}{paragraph.7.1.1.8}
-\contentsline {paragraph}{\numberline {7.1.1.9}ARDUINO\_STATUS\_ARM\_FAULT}{7}{paragraph.7.1.1.9}
-\contentsline {paragraph}{\numberline {7.1.1.10}ARDUINO\_STATUS\_OBSTACLE}{7}{paragraph.7.1.1.10}
-\contentsline {paragraph}{\numberline {7.1.1.11}ARDUINO\_STATUS\_PICK\_FAIL}{8}{paragraph.7.1.1.11}
-\contentsline {paragraph}{\numberline {7.1.1.12}ARDUINO\_STATUS\_PICK\_SUCCESS}{8}{paragraph.7.1.1.12}
-\contentsline {paragraph}{\numberline {7.1.1.13}ARDUINO\_STATUS\_READY}{8}{paragraph.7.1.1.13}
-\contentsline {paragraph}{\numberline {7.1.1.14}ARM\_AZIMUTH\_MAX}{8}{paragraph.7.1.1.14}
-\contentsline {paragraph}{\numberline {7.1.1.15}ARM\_AZIMUTH\_MIN}{8}{paragraph.7.1.1.15}
-\contentsline {paragraph}{\numberline {7.1.1.16}ARM\_ORIENT\_MAX}{8}{paragraph.7.1.1.16}
-\contentsline {paragraph}{\numberline {7.1.1.17}ARM\_ORIENT\_MIN}{8}{paragraph.7.1.1.17}
-\contentsline {paragraph}{\numberline {7.1.1.18}ARM\_RANGE\_MAX}{8}{paragraph.7.1.1.18}
-\contentsline {paragraph}{\numberline {7.1.1.19}ARM\_RANGE\_MIN}{9}{paragraph.7.1.1.19}
-\contentsline {paragraph}{\numberline {7.1.1.20}PICKUP\_X\_MAX}{9}{paragraph.7.1.1.20}
-\contentsline {paragraph}{\numberline {7.1.1.21}PICKUP\_X\_MIN}{9}{paragraph.7.1.1.21}
-\contentsline {paragraph}{\numberline {7.1.1.22}PICKUP\_Y\_MAX}{9}{paragraph.7.1.1.22}
-\contentsline {paragraph}{\numberline {7.1.1.23}PICKUP\_Y\_MIN}{9}{paragraph.7.1.1.23}
-\contentsline {subsection}{\numberline {7.2}Syringenator Namespace Reference}{9}{subsection.7.2}
-\contentsline {subsubsection}{\numberline {7.2.1}Function Documentation}{10}{subsubsection.7.2.1}
-\contentsline {paragraph}{\numberline {7.2.1.1}arduinoReceive()}{10}{paragraph.7.2.1.1}
-\contentsline {paragraph}{\numberline {7.2.1.2}arduinoSend()}{10}{paragraph.7.2.1.2}
-\contentsline {paragraph}{\numberline {7.2.1.3}canBePicked()}{11}{paragraph.7.2.1.3}
-\contentsline {paragraph}{\numberline {7.2.1.4}lineFollow()}{11}{paragraph.7.2.1.4}
-\contentsline {paragraph}{\numberline {7.2.1.5}log()}{11}{paragraph.7.2.1.5}
-\contentsline {paragraph}{\numberline {7.2.1.6}moveCloser()}{11}{paragraph.7.2.1.6}
-\contentsline {paragraph}{\numberline {7.2.1.7}pickUp()}{12}{paragraph.7.2.1.7}
-\contentsline {paragraph}{\numberline {7.2.1.8}returnToLine()}{12}{paragraph.7.2.1.8}
-\contentsline {paragraph}{\numberline {7.2.1.9}scan()}{13}{paragraph.7.2.1.9}
-\contentsline {subsubsection}{\numberline {7.2.2}Variable Documentation}{13}{subsubsection.7.2.2}
-\contentsline {paragraph}{\numberline {7.2.2.1}onTheLine}{13}{paragraph.7.2.2.1}
-\contentsline {paragraph}{\numberline {7.2.2.2}target}{13}{paragraph.7.2.2.2}
-\contentsline {section}{\numberline {8}Class Documentation}{13}{section.8}
-\contentsline {subsection}{\numberline {8.1}Syringenator.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Target Class Reference}{13}{subsection.8.1}
-\contentsline {section}{\numberline {9}File Documentation}{14}{section.9}
-\contentsline {subsection}{\numberline {9.1}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}M\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}md File Reference}{14}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}requirements.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}md File Reference}{14}{subsection.9.2}
-\contentsline {subsection}{\numberline {9.3}src/constants.dox File Reference}{14}{subsection.9.3}
-\contentsline {subsection}{\numberline {9.4}src/constants.py File Reference}{14}{subsection.9.4}
+\contentsline {section}{\numberline {7}Namespace Documentation}{5}{section.7}
+\contentsline {subsection}{\numberline {7.1}Syringenator Namespace Reference}{5}{subsection.7.1}
+\contentsline {subsubsection}{\numberline {7.1.1}Function Documentation}{6}{subsubsection.7.1.1}
+\contentsline {paragraph}{\numberline {7.1.1.1}arduinoReceive()}{6}{paragraph.7.1.1.1}
+\contentsline {paragraph}{\numberline {7.1.1.2}arduinoSend()}{6}{paragraph.7.1.1.2}
+\contentsline {paragraph}{\numberline {7.1.1.3}canBePicked()}{7}{paragraph.7.1.1.3}
+\contentsline {paragraph}{\numberline {7.1.1.4}lineFollow()}{7}{paragraph.7.1.1.4}
+\contentsline {paragraph}{\numberline {7.1.1.5}moveCloser()}{7}{paragraph.7.1.1.5}
+\contentsline {paragraph}{\numberline {7.1.1.6}pickUp()}{8}{paragraph.7.1.1.6}
+\contentsline {paragraph}{\numberline {7.1.1.7}returnToLine()}{8}{paragraph.7.1.1.7}
+\contentsline {paragraph}{\numberline {7.1.1.8}scan()}{9}{paragraph.7.1.1.8}
+\contentsline {section}{\numberline {8}Class Documentation}{9}{section.8}
+\contentsline {subsection}{\numberline {8.1}Syringenator.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Target Class Reference}{9}{subsection.8.1}
+\contentsline {section}{\numberline {9}File Documentation}{9}{section.9}
+\contentsline {subsection}{\numberline {9.1}src/constants.py File Reference}{9}{subsection.9.1}
+\contentsline {subsubsection}{\numberline {9.1.1}Detailed Description}{10}{subsubsection.9.1.1}
+\contentsline {subsubsection}{\numberline {9.1.2}Variable Documentation}{11}{subsubsection.9.1.2}
+\contentsline {paragraph}{\numberline {9.1.2.1}ARDUINO\_MOVE}{11}{paragraph.9.1.2.1}
+\contentsline {paragraph}{\numberline {9.1.2.2}ARDUINO\_ROTATE}{11}{paragraph.9.1.2.2}
+\contentsline {subsection}{\numberline {9.2}src/controller/constants.hpp File Reference}{11}{subsection.9.2}
+\contentsline {subsubsection}{\numberline {9.2.1}Detailed Description}{13}{subsubsection.9.2.1}
+\contentsline {subsection}{\numberline {9.3}src/controller/controller.ino File Reference}{13}{subsection.9.3}
+\contentsline {subsection}{\numberline {9.4}src/controller/\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Syringenator.hpp File Reference}{14}{subsection.9.4}
 \contentsline {subsubsection}{\numberline {9.4.1}Detailed Description}{15}{subsubsection.9.4.1}
-\contentsline {subsection}{\numberline {9.5}src/\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Syringenator.hpp File Reference}{15}{subsection.9.5}
-\contentsline {subsubsection}{\numberline {9.5.1}Detailed Description}{16}{subsubsection.9.5.1}
-\contentsline {subsubsection}{\numberline {9.5.2}Function Documentation}{16}{subsubsection.9.5.2}
-\contentsline {paragraph}{\numberline {9.5.2.1}armDispose()}{16}{paragraph.9.5.2.1}
-\contentsline {paragraph}{\numberline {9.5.2.2}armPark()}{16}{paragraph.9.5.2.2}
-\contentsline {paragraph}{\numberline {9.5.2.3}armPick()}{17}{paragraph.9.5.2.3}
-\contentsline {paragraph}{\numberline {9.5.2.4}lineDetector\_ISR()}{17}{paragraph.9.5.2.4}
-\contentsline {paragraph}{\numberline {9.5.2.5}motorEncoder\_ISR()}{17}{paragraph.9.5.2.5}
-\contentsline {paragraph}{\numberline {9.5.2.6}moveLineFollow()}{17}{paragraph.9.5.2.6}
-\contentsline {paragraph}{\numberline {9.5.2.7}moveRotate()}{17}{paragraph.9.5.2.7}
-\contentsline {paragraph}{\numberline {9.5.2.8}moveStraight()}{18}{paragraph.9.5.2.8}
-\contentsline {paragraph}{\numberline {9.5.2.9}obstacleDetector\_ISR()}{18}{paragraph.9.5.2.9}
-\contentsline {paragraph}{\numberline {9.5.2.10}serialCommunication\_ISR()}{18}{paragraph.9.5.2.10}
-\contentsline {subsection}{\numberline {9.6}src/\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Syringenator.py File Reference}{18}{subsection.9.6}
-\contentsline {subsubsection}{\numberline {9.6.1}Detailed Description}{19}{subsubsection.9.6.1}
-\contentsline {section}{Index}{21}{section*.14}
+\contentsline {subsubsection}{\numberline {9.4.2}Function Documentation}{15}{subsubsection.9.4.2}
+\contentsline {paragraph}{\numberline {9.4.2.1}armPark()}{15}{paragraph.9.4.2.1}
+\contentsline {paragraph}{\numberline {9.4.2.2}armPick()}{15}{paragraph.9.4.2.2}
+\contentsline {paragraph}{\numberline {9.4.2.3}lineDetector\_ISR()}{16}{paragraph.9.4.2.3}
+\contentsline {paragraph}{\numberline {9.4.2.4}motorEncoder\_ISR()}{16}{paragraph.9.4.2.4}
+\contentsline {paragraph}{\numberline {9.4.2.5}moveLineFollow()}{16}{paragraph.9.4.2.5}
+\contentsline {paragraph}{\numberline {9.4.2.6}moveRotate()}{16}{paragraph.9.4.2.6}
+\contentsline {paragraph}{\numberline {9.4.2.7}moveStraight()}{16}{paragraph.9.4.2.7}
+\contentsline {paragraph}{\numberline {9.4.2.8}obstacleDetector\_ISR()}{17}{paragraph.9.4.2.8}
+\contentsline {subsection}{\numberline {9.5}src/\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Syringenator.py File Reference}{17}{subsection.9.5}
+\contentsline {subsubsection}{\numberline {9.5.1}Detailed Description}{18}{subsubsection.9.5.1}
+\contentsline {section}{Index}{19}{section*.16}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.18)  3 FEB 2019 19:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.18)  4 FEB 2019 15:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1096,7 +1096,20 @@ Package: etoc 2015/08/29 v1.08g Completely customisable TOCs (jfB)
 \c@etoc@tocdepth=\count142
 \etoc@framed@titlebox=\box73
 \etoc@framed@contentsbox=\box74
-) (./refman.aux)
+) (./refman.aux
+
+LaTeX Warning: Label `namespaceSyringenator_a263a26fdb4da94f277fb51f3e740f30d' 
+multiply defined.
+
+
+LaTeX Warning: Label `namespaceSyringenator_a161fa877b77c9ebb120c1ed20739260b' 
+multiply defined.
+
+
+LaTeX Warning: Label `namespaceSyringenator_a66c7999289f77a4adce05169661f9660' 
+multiply defined.
+
+)
 \openout1 = `refman.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 135.
@@ -1114,8 +1127,7 @@ LaTeX Font Info:    ... okay on input line 135.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 135.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 135.
 
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 135.
@@ -1223,8 +1235,6 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 12.9599pt on input line 146.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 10.79993pt on input line 148.
-LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.09995pt on input line 150.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
@@ -1232,38 +1242,38 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 \openout6 = `refman.toc'.
 
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 155.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 153.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 8.99994pt on input line 155.
+(Font)              scaled to size 8.99994pt on input line 153.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 155.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 153.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 6.29996pt on input line 155.
-LaTeX Font Info:    Try loading font information for U+msa on input line 155.
+(Font)              scaled to size 6.29996pt on input line 153.
+LaTeX Font Info:    Try loading font information for U+msa on input line 153.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 155.
+LaTeX Font Info:    Try loading font information for U+msb on input line 153.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+wasy on input line 155.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 153.
 
 (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 6.29996pt on input line 155.
-Package hyperref Info: Option `pageanchor' set `true' on input line 156.
+(Font)              scaled to size 6.29996pt on input line 153.
+Package hyperref Info: Option `pageanchor' set `true' on input line 154.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 159.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 157.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 12.9599pt on input line 159.
+(Font)              scaled to size 12.9599pt on input line 157.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 12.9599pt on input line 159.
+(Font)              scaled to size 12.9599pt on input line 157.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 6.29996pt on input line 159.
+(Font)              scaled to size 6.29996pt on input line 157.
  (./index.tex
 [1]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
@@ -1297,116 +1307,161 @@ Underfull \hbox (badness 10000) detected at line 1
  []
 
 [3]) (./todo.tex) (./namespaces.tex [4]) (./annotated.tex) (./files.tex)
-(./namespaceconstants.tex [5]
+(./namespaceSyringenator.tex
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 59.
- [6] [7] [8]) (./namespaceSyringenator.tex
+(Font)              scaled to size 8.09995pt on input line 20.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 19.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 20.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 19.
+(Font)              scaled to size 8.09995pt on input line 20.
+ [5]
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 7.19995pt on input line 51.
 
-[9]
-Underfull \hbox (badness 10000) detected at line 50
-[][][]
- []
-
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 57.
-[10]
-Underfull \hbox (badness 10000) detected at line 72
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 83
-[][][]
- []
-
-[11]
-Underfull \hbox (badness 10000) detected at line 111
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 133
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 144
-[][][]
- []
-
-[12]
-Underfull \hbox (badness 10000) detected at line 155
-[][][]
- []
-
-) (./classSyringenator_1_1Target.tex) (./README_8md.tex)
-(./requirements_8md.tex) (./constants_8dox.tex) (./constants_8py.tex <./constan
-ts_8py__dep__incl.pdf
-
-pdfTeX warning: pdflatex (file ./constants_8py__dep__incl.pdf): PDF inclusion: 
-multiple pdfs with page group included in a single page
-> <constants_8py__dep__incl.pdf, id=398, 187.70125pt x 156.585pt>
-File: constants_8py__dep__incl.pdf Graphic file (type pdf)
-
-<use constants_8py__dep__incl.pdf>
-Package pdftex.def Info: constants_8py__dep__incl.pdf used on input line 13.
-(pdftex.def)             Requested size: 187.0pt x 156.00879pt.
- [13] [14]
-Underfull \hbox (badness 10000) detected at line 75
-[][][]
- []
-
-) (./Syringenator_8hpp.tex <./Syringenator_8hpp__incl.pdf>
-<Syringenator_8hpp__incl.pdf, id=448, 187.70125pt x 156.585pt>
-File: Syringenator_8hpp__incl.pdf Graphic file (type pdf)
-
-<use Syringenator_8hpp__incl.pdf>
-Package pdftex.def Info: Syringenator_8hpp__incl.pdf used on input line 14.
-(pdftex.def)             Requested size: 187.0pt x 156.00879pt.
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 25.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 6.29996pt on input line 25.
- [15]
-Underfull \hbox (badness 10000) detected at line 43
-[][][]
- []
-
-[16]
-Underfull \hbox (badness 10000) detected at line 78
-[][][]
- []
-
-[17]) (./Syringenator_8py.tex [18]
 Underfull \hbox (badness 10000) detected at line 53
 [][][]
  []
 
-) [19] [20
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 60.
+[6]
+Underfull \hbox (badness 10000) detected at line 75
+[][][]
+ []
 
-] (./refman.ind [21
 
-] [22
+Underfull \hbox (badness 10000) detected at line 86
+[][][]
+ []
+
+[7]
+Underfull \hbox (badness 10000) detected at line 108
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 130
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 141
+[][][]
+ []
+
+[8]
+Underfull \hbox (badness 10000) detected at line 152
+[][][]
+ []
+
+) (./classSyringenator_1_1Target.tex) (./constants_8py.tex [9]
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 77.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 6.29996pt on input line 77.
+
+Underfull \hbox (badness 10000) detected at line 124
+[][][]
+ []
+
+[10]) (./constants_8hpp.tex <./constants_8hpp__dep__incl.pdf
+
+pdfTeX warning: pdflatex (file ./constants_8hpp__dep__incl.pdf): PDF inclusion:
+ multiple pdfs with page group included in a single page
+> <constants_8hpp__dep__incl.pdf, id=356, 229.85875pt x 212.795pt>
+File: constants_8hpp__dep__incl.pdf Graphic file (type pdf)
+
+<use constants_8hpp__dep__incl.pdf>
+Package pdftex.def Info: constants_8hpp__dep__incl.pdf used on input line 13.
+(pdftex.def)             Requested size: 229.0pt x 212.01193pt.
+ [11] [12]
+Underfull \hbox (badness 10000) detected at line 134
+[][][]
+ []
+
+) (./controller_8ino.tex <./controller_8ino__incl.pdf
+
+pdfTeX warning: pdflatex (file ./controller_8ino__incl.pdf): PDF inclusion: mul
+tiple pdfs with page group included in a single page
+> <controller_8ino__incl.pdf, id=426, 211.79124pt x 212.795pt>
+File: controller_8ino__incl.pdf Graphic file (type pdf)
+
+<use controller_8ino__incl.pdf>
+Package pdftex.def Info: controller_8ino__incl.pdf used on input line 14.
+(pdftex.def)             Requested size: 211.0pt x 212.00868pt.
+) (./Syringenator_8hpp.tex <./Syringenator_8hpp__incl.pdf
+
+pdfTeX warning: pdflatex (file ./Syringenator_8hpp__incl.pdf): PDF inclusion: m
+ultiple pdfs with page group included in a single page
+> <Syringenator_8hpp__incl.pdf, id=432, 229.85875pt x 156.585pt>
+File: Syringenator_8hpp__incl.pdf Graphic file (type pdf)
+
+<use Syringenator_8hpp__incl.pdf>
+Package pdftex.def Info: Syringenator_8hpp__incl.pdf used on input line 14.
+(pdftex.def)             Requested size: 229.0pt x 156.00879pt.
+ [13] <./Syringenator_8hpp__dep__incl.pdf>
+<Syringenator_8hpp__dep__incl.pdf, id=447, 229.85875pt x 156.585pt>
+File: Syringenator_8hpp__dep__incl.pdf Graphic file (type pdf)
+
+<use Syringenator_8hpp__dep__incl.pdf>
+Package pdftex.def Info: Syringenator_8hpp__dep__incl.pdf used on input line 22
+.
+(pdftex.def)             Requested size: 229.0pt x 156.00879pt.
+ [14]
+Underfull \hbox (badness 10000) detected at line 53
+[][][]
+ []
+
+[15]
+Underfull \hbox (badness 10000) detected at line 82
+[][][]
+ []
+
+[16]) (./Syringenator_8py.texpdfTeX warning (ext4): destination with the same i
+dentifier (name{namespaceSyringenator_a263a26fdb4da94f277fb51f3e740f30d}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.21 ...enator_a263a26fdb4da94f277fb51f3e740f30d}}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{namespaceSyringenator_a161fa877b77c9ebb120
+c1ed20739260b}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.43 ...enator_a161fa877b77c9ebb120c1ed20739260b}}
+                                                   [17]pdfTeX warning (ext4): d
+estination with the same identifier (name{namespaceSyringenator_a66c7999289f77a
+4adce05169661f9660}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.46 ...enator_a66c7999289f77a4adce05169661f9660}}
+                                                  
+Underfull \hbox (badness 10000) detected at line 56
+[][][]
+ []
+
+) [18] (./refman.ind [19
+
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 196.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 196.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 192.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 192.
  (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 196.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 196.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 192.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 192.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: F6C858A496C0B7C5DE3FCD0BEDF5EC2B;5948.
+(rerunfilecheck)             Checksum: A7DEC62B4E49ABB4B48020FE1A1C7BD3;5679.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 16433 strings out of 494953
- 236047 string characters out of 6180976
- 352902 words of memory out of 5000000
- 19229 multiletter control sequences out of 15000+600000
- 50879 words of font info for 63 fonts, out of 8000000 for 9000
+ 16494 strings out of 494953
+ 240046 string characters out of 6180976
+ 353770 words of memory out of 5000000
+ 19280 multiletter control sequences out of 15000+600000
+ 49725 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  53i,15n,92p,881b,636s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -1417,10 +1472,10 @@ w/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/u
 hvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (23 pages, 164430 bytes).
+Output written on refman.pdf (20 pages, 164857 bytes).
 PDF statistics:
- 709 PDF objects out of 1000 (max. 8388607)
- 652 compressed objects within 7 object streams
- 184 named destinations out of 1000 (max. 500000)
- 275 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 645 PDF objects out of 1000 (max. 8388607)
+ 587 compressed objects within 6 object streams
+ 200 named destinations out of 1000 (max. 500000)
+ 269 words of extra memory for PDF output out of 10000 (max. 10000000)
 

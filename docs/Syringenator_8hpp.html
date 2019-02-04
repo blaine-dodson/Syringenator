@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Syringenator: src/Syringenator.hpp File Reference</title>
+<title>Syringenator: src/controller/Syringenator.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_41ef5d8a90b9cc03a02949a5c062e6f0.html">controller</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -75,14 +75,23 @@ $(function() {
 
 <p>Arduino controller code &ndash;ABD.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="constants_8py.html">constants.py</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="constants_8hpp_source.html">constants.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Syringenator.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="Syringenator_8hpp__incl.png" border="0" usemap="#src_2Syringenator_8hpp" alt=""/></div>
-<map name="src_2Syringenator_8hpp" id="src_2Syringenator_8hpp">
-<area shape="rect" title="Arduino controller code –ABD." alt="" coords="5,5,148,32"/>
-<area shape="rect" href="constants_8py.html" title="Includes constants used by both the arduino sketch and the the python script." alt="" coords="28,80,125,107"/>
+<div class="center"><img src="Syringenator_8hpp__incl.png" border="0" usemap="#src_2controller_2Syringenator_8hpp" alt=""/></div>
+<map name="src_2controller_2Syringenator_8hpp" id="src_2controller_2Syringenator_8hpp">
+<area shape="rect" title="Arduino controller code –ABD." alt="" coords="5,5,204,32"/>
+<area shape="rect" href="constants_8hpp.html" title="Constants shared across the whole system." alt="" coords="53,80,157,107"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="Syringenator_8hpp__dep__incl.png" border="0" usemap="#src_2controller_2Syringenator_8hppdep" alt=""/></div>
+<map name="src_2controller_2Syringenator_8hppdep" id="src_2controller_2Syringenator_8hppdep">
+<area shape="rect" title="Arduino controller code –ABD." alt="" coords="5,5,204,32"/>
+<area shape="rect" href="controller_8ino.html" title="The Arduino sketch." alt="" coords="17,80,192,107"/>
 </map>
 </div>
 </div>
@@ -99,8 +108,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aa79e39c6ba7fdc4bd4c2f04668f0b1db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#aa79e39c6ba7fdc4bd4c2f04668f0b1db">motorEncoder_ISR</a> (void)</td></tr>
 <tr class="memdesc:aa79e39c6ba7fdc4bd4c2f04668f0b1db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motor encoder ISR.  <a href="#aa79e39c6ba7fdc4bd4c2f04668f0b1db">More...</a><br /></td></tr>
 <tr class="separator:aa79e39c6ba7fdc4bd4c2f04668f0b1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a794c6d938a2f3689c46955eddb7bc93f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#a794c6d938a2f3689c46955eddb7bc93f">serialCommunication_ISR</a> (void)</td></tr>
-<tr class="memdesc:a794c6d938a2f3689c46955eddb7bc93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to handle incomming communication from the pi.  <a href="#a794c6d938a2f3689c46955eddb7bc93f">More...</a><br /></td></tr>
+<tr class="memitem:a794c6d938a2f3689c46955eddb7bc93f"><td class="memItemLeft" align="right" valign="top"><a id="a794c6d938a2f3689c46955eddb7bc93f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#a794c6d938a2f3689c46955eddb7bc93f">serialCommunication_ISR</a> (void)</td></tr>
+<tr class="memdesc:a794c6d938a2f3689c46955eddb7bc93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to handle incomming communication from the pi. <br /></td></tr>
 <tr class="separator:a794c6d938a2f3689c46955eddb7bc93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af385a70a6e85c3a48cc34be30ce82cdd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#af385a70a6e85c3a48cc34be30ce82cdd">moveRotate</a> (int ticks)</td></tr>
 <tr class="memdesc:af385a70a6e85c3a48cc34be30ce82cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the robot around central axis rotate by running both motors at the same speed in opposite directions.  <a href="#af385a70a6e85c3a48cc34be30ce82cdd">More...</a><br /></td></tr>
@@ -114,8 +124,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a9ec347be5f02ccfe7e4c03fbce6a4d9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#a9ec347be5f02ccfe7e4c03fbce6a4d9d">armPark</a> (void)</td></tr>
 <tr class="memdesc:a9ec347be5f02ccfe7e4c03fbce6a4d9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the arm to its parking position.  <a href="#a9ec347be5f02ccfe7e4c03fbce6a4d9d">More...</a><br /></td></tr>
 <tr class="separator:a9ec347be5f02ccfe7e4c03fbce6a4d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4378f1f92482e766c7e5d0c41dc97ae6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#a4378f1f92482e766c7e5d0c41dc97ae6">armDispose</a> (void)</td></tr>
-<tr class="memdesc:a4378f1f92482e766c7e5d0c41dc97ae6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to dispose of a syringe once it has been picked.  <a href="#a4378f1f92482e766c7e5d0c41dc97ae6">More...</a><br /></td></tr>
+<tr class="memitem:a4378f1f92482e766c7e5d0c41dc97ae6"><td class="memItemLeft" align="right" valign="top"><a id="a4378f1f92482e766c7e5d0c41dc97ae6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#a4378f1f92482e766c7e5d0c41dc97ae6">armDispose</a> (void)</td></tr>
+<tr class="memdesc:a4378f1f92482e766c7e5d0c41dc97ae6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to dispose of a syringe once it has been picked. <br /></td></tr>
 <tr class="separator:a4378f1f92482e766c7e5d0c41dc97ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bce05d8cc8087b6256ac2d1ed0b83b0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Syringenator_8hpp.html#a7bce05d8cc8087b6256ac2d1ed0b83b0">armPick</a> (byte azimuth, byte range, byte orientation)</td></tr>
 <tr class="memdesc:a7bce05d8cc8087b6256ac2d1ed0b83b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to attempt target pickup.  <a href="#a7bce05d8cc8087b6256ac2d1ed0b83b0">More...</a><br /></td></tr>
@@ -124,24 +135,6 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section copyright"><dt>Copyright</dt><dd>Copyright &copy; 2019 by the authors. All rights reserved. </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a4378f1f92482e766c7e5d0c41dc97ae6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4378f1f92482e766c7e5d0c41dc97ae6">&#9670;&nbsp;</a></span>armDispose()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void armDispose </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a9ec347be5f02ccfe7e4c03fbce6a4d9d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9ec347be5f02ccfe7e4c03fbce6a4d9d">&#9670;&nbsp;</a></span>armPark()</h2>
 
@@ -331,28 +324,10 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a794c6d938a2f3689c46955eddb7bc93f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a794c6d938a2f3689c46955eddb7bc93f">&#9670;&nbsp;</a></span>serialCommunication_ISR()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void serialCommunication_ISR </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 3 2019 19:06:05 for Syringenator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.16
 </small></address>

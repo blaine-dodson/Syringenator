@@ -1,4 +1,4 @@
-<map id="src/Syringenator.hpp" name="src/Syringenator.hpp">
-<area shape="rect" id="node1" title="Arduino controller code –ABD." alt="" coords="5,5,148,32"/>
-<area shape="rect" id="node2" href="$constants_8py.html" title="Includes constants used by both the arduino sketch and the the python script." alt="" coords="28,80,125,107"/>
+<map id="src/controller/Syringenator.hpp" name="src/controller/Syringenator.hpp">
+<area shape="rect" id="node1" title="Arduino controller code –ABD." alt="" coords="5,5,204,32"/>
+<area shape="rect" id="node2" href="$constants_8hpp.html" title="Constants shared across the whole system." alt="" coords="53,80,157,107"/>
 </map>

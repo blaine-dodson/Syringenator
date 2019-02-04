@@ -6,7 +6,7 @@
  *	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
  */
 
-#include "constants.py"
+#include "constants.hpp"
 
 
 /******************************************************************************/
@@ -144,7 +144,7 @@ void armDispose(void){
  *	@return true on successful pick, false otherwise.
  */
 bool armPick(byte azimuth, byte range, byte orientation){
-	
+  return false;
 }
 
 
