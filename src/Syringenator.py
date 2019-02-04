@@ -4,6 +4,9 @@
 #	robot operations.
 #	@todo TODO: how do we initialize the robot run? a button press?
 #	--ABD
+#
+#	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
+
 
 import constants
 
@@ -27,7 +30,7 @@ def arduinoSend(bytes):
 
 ##	Wait some fixed time for the arduino to send one or more bytes
 #
-#	@return an list of bytes
+#	@return a list of bytes
 def arduinoReceive():
 	pass
 

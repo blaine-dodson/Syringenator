@@ -1,8 +1,9 @@
 /**	@file Syringenator.hpp 
  *	
  *	Arduino controller code
- *	
  *	--ABD
+ *
+ *	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
  */
 
 #include "constants.py"

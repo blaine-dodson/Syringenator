@@ -14,6 +14,7 @@ Winter 2019
 @author Jake McKenzie, jake314@uw.edu
 @author Brooke Stevenson
 
+@copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
 # HypoRobot Assignment
 If you’ve been paying any attention at all to current events you know that a major plague has descended on cities and counties throughout the country in the form of used and discarded hypodermic needles. Countless hours are spent cleaning up this mess. For instance, some schools are forced, for safety reasons, to send staff out to scour the playgrounds prior to children showing up.
