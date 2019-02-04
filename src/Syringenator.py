@@ -11,14 +11,20 @@
 import constants
 
 
-class Target: pass
-	# bounding box data
-	# bounding box center
-	# raw image data
+#==============================================================================#
+#                               DATA LOGGING
+#==============================================================================#
+
+
+def log(arg):
+	if arg is string:
+		pass # log the string
+	if arg is Target:
+		pass # log target aquired
 
 
 #==============================================================================#
-#                               HELPER FUNCTIONS
+#                             ARDUINO COMMUNICATION
 #==============================================================================#
 
 
@@ -33,6 +39,17 @@ def arduinoSend(bytes):
 #	@return a list of bytes
 def arduinoReceive():
 	pass
+
+
+#==============================================================================#
+#                                MAIN ROUTINES
+#==============================================================================#
+
+
+class Target: pass
+	# bounding box data
+	# bounding box center
+	# raw image data
 
 ##	A routine to take a picture and report back the closest target
 #	The Computer vision routine must be able to handle multiple targets in the
@@ -131,7 +148,7 @@ def canBePicked(t):
 	
 	
 	# is the target within the pick area?
-	if t.x>PICKUP_X_MIN and t.x<PICKUP_X_MAX and y>PICKUP_Y_MIN and y<PICKUP_Y_MAX:
+	if t.x > PICKUP_X_MIN and t.x < PICKUP_X_MAX and y > PICKUP_Y_MIN and y < PICKUP_Y_MAX:
 		return True
 	else:
 		return False

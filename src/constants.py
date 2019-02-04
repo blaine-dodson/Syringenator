@@ -75,3 +75,23 @@ ARDUINO_ARM_PICKUP          =0x22
 #endif
 
 
+
+
+#define __SOMETHING /// Defines arduino pins
+#define PORT_MOTOR_FWD
+#define PORT_MOTOR_AFT
+#define STBD_MOTOR_FWD
+#define STBD_MOTOR_AFT
+
+#define PORT_LINE_SENSE
+#define STBD_LINE_SENSE
+
+#define PORT_FWD_OBSTACLE
+#define PORT_AFT_OBSTACLE
+#define STBD_FWD_OBSTACLE
+#define STBD_AFT_OBSTACLE
+
+#define ARM_CONTROL
+
+
+

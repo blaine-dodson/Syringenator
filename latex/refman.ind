@@ -52,7 +52,7 @@
   \indexspace
 
   \item {canBePicked}
-    \subitem {Syringenator}, \hyperpage{10}
+    \subitem {Syringenator}, \hyperpage{11}
   \item {constants}, \hyperpage{6}
     \subitem {ARDUINO\_ARM\_DISPOSE}, \hyperpage{6}
     \subitem {ARDUINO\_ARM\_PARK}, \hyperpage{6}
@@ -83,7 +83,9 @@
   \item {lineDetector\_ISR}
     \subitem {Syringenator.hpp}, \hyperpage{17}
   \item {lineFollow}
-    \subitem {Syringenator}, \hyperpage{10}
+    \subitem {Syringenator}, \hyperpage{11}
+  \item {log}
+    \subitem {Syringenator}, \hyperpage{11}
 
   \indexspace
 
@@ -108,7 +110,7 @@
   \indexspace
 
   \item {pickUp}
-    \subitem {Syringenator}, \hyperpage{11}
+    \subitem {Syringenator}, \hyperpage{12}
   \item {PICKUP\_X\_MAX}
     \subitem {constants}, \hyperpage{9}
   \item {PICKUP\_X\_MIN}
@@ -123,12 +125,12 @@
   \item {README.md}, \hyperpage{14}
   \item {requirements.md}, \hyperpage{14}
   \item {returnToLine}
-    \subitem {Syringenator}, \hyperpage{13}
+    \subitem {Syringenator}, \hyperpage{12}
 
   \indexspace
 
   \item {scan}
-    \subitem {Syringenator}, \hyperpage{13}
+    \subitem {Syringenator}, \hyperpage{12}
   \item {serialCommunication\_ISR}
     \subitem {Syringenator.hpp}, \hyperpage{18}
   \item {src/constants.dox}, \hyperpage{14}
@@ -138,13 +140,14 @@
   \item {Syringenator}, \hyperpage{9}
     \subitem {arduinoReceive}, \hyperpage{10}
     \subitem {arduinoSend}, \hyperpage{10}
-    \subitem {canBePicked}, \hyperpage{10}
-    \subitem {lineFollow}, \hyperpage{10}
+    \subitem {canBePicked}, \hyperpage{11}
+    \subitem {lineFollow}, \hyperpage{11}
+    \subitem {log}, \hyperpage{11}
     \subitem {moveCloser}, \hyperpage{11}
     \subitem {onTheLine}, \hyperpage{13}
-    \subitem {pickUp}, \hyperpage{11}
-    \subitem {returnToLine}, \hyperpage{13}
-    \subitem {scan}, \hyperpage{13}
+    \subitem {pickUp}, \hyperpage{12}
+    \subitem {returnToLine}, \hyperpage{12}
+    \subitem {scan}, \hyperpage{12}
     \subitem {target}, \hyperpage{13}
   \item {Syringenator.hpp}
     \subitem {armDispose}, \hyperpage{16}
@@ -157,7 +160,7 @@
     \subitem {moveStraight}, \hyperpage{18}
     \subitem {obstacleDetector\_ISR}, \hyperpage{18}
     \subitem {serialCommunication\_ISR}, \hyperpage{18}
-  \item {Syringenator.Target}, \hyperpage{14}
+  \item {Syringenator.Target}, \hyperpage{13}
 
   \indexspace
 

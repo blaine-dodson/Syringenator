@@ -1,5 +1,7 @@
 # Requirements
 
+@author Robert Gutmann, Ph.D.
+
 # Terminology
 
 The following terms are used in this specification:

@@ -7,12 +7,17 @@ TCES 460
 Winter 2019
 
 
-# Development Team:
-@author Alex Boyle
-@author Ammon Dodson,  ammon0@uw.edu
-@author Alex Marlow, alexmarlow117@gmail.com
-@author Jake McKenzie, jake314@uw.edu
-@author Brooke Stevenson
+# Development Team
+@authors
+
+Name             | Email
+---------------- | -----------------------
+Alex Boyle       | ???
+Ammon Dodson     | ammon0@uw.edu
+Alex Marlow      | alexmarlow117@gmail.com
+Jake McKenzie    | jake314@uw.edu
+Brooke Stevenson | ???
+
 
 @copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
@@ -27,3 +32,4 @@ A second point is that we will be dealing with industrial (i.e. dull) syringes. 
 
 All testing will be done indoors on a flat surface.
 
+--Robert Gutmann, Ph.D.
