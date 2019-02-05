@@ -2,74 +2,74 @@
 
   \item {ARDUINO\_ARM\_DISPOSE}
     \subitem {constants}, \hyperpage{6}
-    \subitem {constants.hpp}, \hyperpage{19}
+    \subitem {constants.hpp}, \hyperpage{18}
   \item {ARDUINO\_ARM\_PARK}
     \subitem {constants}, \hyperpage{6}
-    \subitem {constants.hpp}, \hyperpage{19}
+    \subitem {constants.hpp}, \hyperpage{18}
   \item {ARDUINO\_ARM\_PICKUP}
     \subitem {constants}, \hyperpage{6}
-    \subitem {constants.hpp}, \hyperpage{19}
+    \subitem {constants.hpp}, \hyperpage{18}
   \item {ARDUINO\_LINE\_FOLLOW}
     \subitem {constants}, \hyperpage{6}
-    \subitem {constants.hpp}, \hyperpage{19}
+    \subitem {constants.hpp}, \hyperpage{18}
   \item {ARDUINO\_MOVE}
     \subitem {constants}, \hyperpage{7}
-    \subitem {constants.hpp}, \hyperpage{20}
+    \subitem {constants.hpp}, \hyperpage{18}
   \item {ARDUINO\_NULL}
     \subitem {constants}, \hyperpage{7}
-    \subitem {constants.hpp}, \hyperpage{20}
+    \subitem {constants.hpp}, \hyperpage{18}
   \item {ARDUINO\_ROTATE}
     \subitem {constants}, \hyperpage{7}
-    \subitem {constants.hpp}, \hyperpage{20}
+    \subitem {constants.hpp}, \hyperpage{18}
   \item {ARDUINO\_STATUS\_ACK}
     \subitem {constants}, \hyperpage{7}
-    \subitem {constants.hpp}, \hyperpage{20}
+    \subitem {constants.hpp}, \hyperpage{19}
   \item {ARDUINO\_STATUS\_ARM\_FAULT}
     \subitem {constants}, \hyperpage{7}
-    \subitem {constants.hpp}, \hyperpage{20}
+    \subitem {constants.hpp}, \hyperpage{19}
   \item {ARDUINO\_STATUS\_OBSTACLE}
     \subitem {constants}, \hyperpage{7}
-    \subitem {constants.hpp}, \hyperpage{20}
+    \subitem {constants.hpp}, \hyperpage{19}
   \item {ARDUINO\_STATUS\_PICK\_FAIL}
     \subitem {constants}, \hyperpage{8}
-    \subitem {constants.hpp}, \hyperpage{21}
+    \subitem {constants.hpp}, \hyperpage{19}
   \item {ARDUINO\_STATUS\_PICK\_SUCCESS}
     \subitem {constants}, \hyperpage{8}
-    \subitem {constants.hpp}, \hyperpage{21}
+    \subitem {constants.hpp}, \hyperpage{19}
   \item {ARDUINO\_STATUS\_READY}
     \subitem {constants}, \hyperpage{8}
-    \subitem {constants.hpp}, \hyperpage{21}
+    \subitem {constants.hpp}, \hyperpage{19}
   \item {arduinoReceive}
     \subitem {Syringenator}, \hyperpage{12}
   \item {arduinoSend}
     \subitem {Syringenator}, \hyperpage{12}
   \item {ARM\_AZIMUTH\_MAX}
     \subitem {constants}, \hyperpage{8}
-    \subitem {constants.hpp}, \hyperpage{21}
+    \subitem {constants.hpp}, \hyperpage{20}
   \item {ARM\_AZIMUTH\_MIN}
     \subitem {constants}, \hyperpage{8}
-    \subitem {constants.hpp}, \hyperpage{21}
+    \subitem {constants.hpp}, \hyperpage{20}
   \item {ARM\_CONTROL}
     \subitem {constants}, \hyperpage{8}
-    \subitem {constants.hpp}, \hyperpage{21}
+    \subitem {constants.hpp}, \hyperpage{20}
   \item {ARM\_ORIENT\_MAX}
     \subitem {constants}, \hyperpage{8}
-    \subitem {constants.hpp}, \hyperpage{21}
+    \subitem {constants.hpp}, \hyperpage{20}
   \item {ARM\_ORIENT\_MIN}
     \subitem {constants}, \hyperpage{9}
-    \subitem {constants.hpp}, \hyperpage{22}
+    \subitem {constants.hpp}, \hyperpage{20}
   \item {ARM\_RANGE\_MAX}
     \subitem {constants}, \hyperpage{9}
-    \subitem {constants.hpp}, \hyperpage{22}
+    \subitem {constants.hpp}, \hyperpage{20}
   \item {ARM\_RANGE\_MIN}
     \subitem {constants}, \hyperpage{9}
-    \subitem {constants.hpp}, \hyperpage{22}
+    \subitem {constants.hpp}, \hyperpage{20}
   \item {armDispose}
-    \subitem {Syringenator.hpp}, \hyperpage{26}
+    \subitem {Syringenator.hpp}, \hyperpage{25}
   \item {armPark}
-    \subitem {Syringenator.hpp}, \hyperpage{26}
+    \subitem {Syringenator.hpp}, \hyperpage{25}
   \item {armPick}
-    \subitem {Syringenator.hpp}, \hyperpage{27}
+    \subitem {Syringenator.hpp}, \hyperpage{25}
 
   \indexspace
 
@@ -111,72 +111,72 @@
     \subitem {STBD\_MOTOR\_AFT}, \hyperpage{10}
     \subitem {STBD\_MOTOR\_FWD}, \hyperpage{11}
   \item {constants.hpp}
-    \subitem {ARDUINO\_ARM\_DISPOSE}, \hyperpage{19}
-    \subitem {ARDUINO\_ARM\_PARK}, \hyperpage{19}
-    \subitem {ARDUINO\_ARM\_PICKUP}, \hyperpage{19}
-    \subitem {ARDUINO\_LINE\_FOLLOW}, \hyperpage{19}
-    \subitem {ARDUINO\_MOVE}, \hyperpage{20}
-    \subitem {ARDUINO\_NULL}, \hyperpage{20}
-    \subitem {ARDUINO\_ROTATE}, \hyperpage{20}
-    \subitem {ARDUINO\_STATUS\_ACK}, \hyperpage{20}
-    \subitem {ARDUINO\_STATUS\_ARM\_FAULT}, \hyperpage{20}
-    \subitem {ARDUINO\_STATUS\_OBSTACLE}, \hyperpage{20}
-    \subitem {ARDUINO\_STATUS\_PICK\_FAIL}, \hyperpage{21}
-    \subitem {ARDUINO\_STATUS\_PICK\_SUCCESS}, \hyperpage{21}
-    \subitem {ARDUINO\_STATUS\_READY}, \hyperpage{21}
-    \subitem {ARM\_AZIMUTH\_MAX}, \hyperpage{21}
-    \subitem {ARM\_AZIMUTH\_MIN}, \hyperpage{21}
-    \subitem {ARM\_CONTROL}, \hyperpage{21}
-    \subitem {ARM\_ORIENT\_MAX}, \hyperpage{21}
-    \subitem {ARM\_ORIENT\_MIN}, \hyperpage{22}
-    \subitem {ARM\_RANGE\_MAX}, \hyperpage{22}
-    \subitem {ARM\_RANGE\_MIN}, \hyperpage{22}
-    \subitem {PICKUP\_X\_MAX}, \hyperpage{22}
-    \subitem {PICKUP\_X\_MIN}, \hyperpage{22}
-    \subitem {PICKUP\_Y\_MAX}, \hyperpage{22}
-    \subitem {PICKUP\_Y\_MIN}, \hyperpage{22}
-    \subitem {PORT\_AFT\_OBSTACLE}, \hyperpage{22}
-    \subitem {PORT\_FWD\_OBSTACLE}, \hyperpage{23}
-    \subitem {PORT\_LINE\_SENSE}, \hyperpage{23}
-    \subitem {PORT\_MOTOR\_AFT}, \hyperpage{23}
-    \subitem {PORT\_MOTOR\_FWD}, \hyperpage{23}
-    \subitem {STBD\_AFT\_OBSTACLE}, \hyperpage{23}
-    \subitem {STBD\_FWD\_OBSTACLE}, \hyperpage{23}
-    \subitem {STBD\_LINE\_SENSE}, \hyperpage{23}
-    \subitem {STBD\_MOTOR\_AFT}, \hyperpage{23}
-    \subitem {STBD\_MOTOR\_FWD}, \hyperpage{24}
+    \subitem {ARDUINO\_ARM\_DISPOSE}, \hyperpage{18}
+    \subitem {ARDUINO\_ARM\_PARK}, \hyperpage{18}
+    \subitem {ARDUINO\_ARM\_PICKUP}, \hyperpage{18}
+    \subitem {ARDUINO\_LINE\_FOLLOW}, \hyperpage{18}
+    \subitem {ARDUINO\_MOVE}, \hyperpage{18}
+    \subitem {ARDUINO\_NULL}, \hyperpage{18}
+    \subitem {ARDUINO\_ROTATE}, \hyperpage{18}
+    \subitem {ARDUINO\_STATUS\_ACK}, \hyperpage{19}
+    \subitem {ARDUINO\_STATUS\_ARM\_FAULT}, \hyperpage{19}
+    \subitem {ARDUINO\_STATUS\_OBSTACLE}, \hyperpage{19}
+    \subitem {ARDUINO\_STATUS\_PICK\_FAIL}, \hyperpage{19}
+    \subitem {ARDUINO\_STATUS\_PICK\_SUCCESS}, \hyperpage{19}
+    \subitem {ARDUINO\_STATUS\_READY}, \hyperpage{19}
+    \subitem {ARM\_AZIMUTH\_MAX}, \hyperpage{20}
+    \subitem {ARM\_AZIMUTH\_MIN}, \hyperpage{20}
+    \subitem {ARM\_CONTROL}, \hyperpage{20}
+    \subitem {ARM\_ORIENT\_MAX}, \hyperpage{20}
+    \subitem {ARM\_ORIENT\_MIN}, \hyperpage{20}
+    \subitem {ARM\_RANGE\_MAX}, \hyperpage{20}
+    \subitem {ARM\_RANGE\_MIN}, \hyperpage{20}
+    \subitem {PICKUP\_X\_MAX}, \hyperpage{20}
+    \subitem {PICKUP\_X\_MIN}, \hyperpage{21}
+    \subitem {PICKUP\_Y\_MAX}, \hyperpage{21}
+    \subitem {PICKUP\_Y\_MIN}, \hyperpage{21}
+    \subitem {PORT\_AFT\_OBSTACLE}, \hyperpage{21}
+    \subitem {PORT\_FWD\_OBSTACLE}, \hyperpage{21}
+    \subitem {PORT\_LINE\_SENSE}, \hyperpage{21}
+    \subitem {PORT\_MOTOR\_AFT}, \hyperpage{21}
+    \subitem {PORT\_MOTOR\_FWD}, \hyperpage{21}
+    \subitem {STBD\_AFT\_OBSTACLE}, \hyperpage{22}
+    \subitem {STBD\_FWD\_OBSTACLE}, \hyperpage{22}
+    \subitem {STBD\_LINE\_SENSE}, \hyperpage{22}
+    \subitem {STBD\_MOTOR\_AFT}, \hyperpage{22}
+    \subitem {STBD\_MOTOR\_FWD}, \hyperpage{22}
   \item {controller.ino}
-    \subitem {loop}, \hyperpage{25}
-    \subitem {setup}, \hyperpage{25}
+    \subitem {loop}, \hyperpage{23}
+    \subitem {setup}, \hyperpage{23}
 
   \indexspace
 
   \item {lineDetector\_ISR}
-    \subitem {Syringenator.hpp}, \hyperpage{27}
+    \subitem {Syringenator.hpp}, \hyperpage{25}
   \item {lineFollow}
     \subitem {Syringenator}, \hyperpage{12}
   \item {log}
     \subitem {Syringenator}, \hyperpage{13}
   \item {loop}
-    \subitem {controller.ino}, \hyperpage{25}
+    \subitem {controller.ino}, \hyperpage{23}
 
   \indexspace
 
   \item {motorEncoder\_ISR}
-    \subitem {Syringenator.hpp}, \hyperpage{27}
+    \subitem {Syringenator.hpp}, \hyperpage{26}
   \item {moveCloser}
     \subitem {Syringenator}, \hyperpage{13}
   \item {moveLineFollow}
-    \subitem {Syringenator.hpp}, \hyperpage{28}
+    \subitem {Syringenator.hpp}, \hyperpage{26}
   \item {moveRotate}
-    \subitem {Syringenator.hpp}, \hyperpage{28}
+    \subitem {Syringenator.hpp}, \hyperpage{26}
   \item {moveStraight}
-    \subitem {Syringenator.hpp}, \hyperpage{28}
+    \subitem {Syringenator.hpp}, \hyperpage{26}
 
   \indexspace
 
   \item {obstacleDetector\_ISR}
-    \subitem {Syringenator.hpp}, \hyperpage{28}
+    \subitem {Syringenator.hpp}, \hyperpage{27}
   \item {onTheLine}
     \subitem {Syringenator}, \hyperpage{15}
 
@@ -186,36 +186,36 @@
     \subitem {Syringenator}, \hyperpage{13}
   \item {PICKUP\_X\_MAX}
     \subitem {constants}, \hyperpage{9}
-    \subitem {constants.hpp}, \hyperpage{22}
+    \subitem {constants.hpp}, \hyperpage{20}
   \item {PICKUP\_X\_MIN}
     \subitem {constants}, \hyperpage{9}
-    \subitem {constants.hpp}, \hyperpage{22}
+    \subitem {constants.hpp}, \hyperpage{21}
   \item {PICKUP\_Y\_MAX}
     \subitem {constants}, \hyperpage{9}
-    \subitem {constants.hpp}, \hyperpage{22}
+    \subitem {constants.hpp}, \hyperpage{21}
   \item {PICKUP\_Y\_MIN}
     \subitem {constants}, \hyperpage{9}
-    \subitem {constants.hpp}, \hyperpage{22}
+    \subitem {constants.hpp}, \hyperpage{21}
   \item {PORT\_AFT\_OBSTACLE}
     \subitem {constants}, \hyperpage{9}
-    \subitem {constants.hpp}, \hyperpage{22}
+    \subitem {constants.hpp}, \hyperpage{21}
   \item {PORT\_FWD\_OBSTACLE}
     \subitem {constants}, \hyperpage{10}
-    \subitem {constants.hpp}, \hyperpage{23}
+    \subitem {constants.hpp}, \hyperpage{21}
   \item {PORT\_LINE\_SENSE}
     \subitem {constants}, \hyperpage{10}
-    \subitem {constants.hpp}, \hyperpage{23}
+    \subitem {constants.hpp}, \hyperpage{21}
   \item {PORT\_MOTOR\_AFT}
     \subitem {constants}, \hyperpage{10}
-    \subitem {constants.hpp}, \hyperpage{23}
+    \subitem {constants.hpp}, \hyperpage{21}
   \item {PORT\_MOTOR\_FWD}
     \subitem {constants}, \hyperpage{10}
-    \subitem {constants.hpp}, \hyperpage{23}
+    \subitem {constants.hpp}, \hyperpage{21}
 
   \indexspace
 
-  \item {README.md}, \hyperpage{15}
-  \item {requirements.md}, \hyperpage{15}
+  \item {README.md}, \hyperpage{16}
+  \item {requirements.md}, \hyperpage{16}
   \item {returnToLine}
     \subitem {Syringenator}, \hyperpage{14}
 
@@ -224,29 +224,29 @@
   \item {scan}
     \subitem {Syringenator}, \hyperpage{14}
   \item {serialCommunication\_ISR}
-    \subitem {Syringenator.hpp}, \hyperpage{29}
+    \subitem {Syringenator.hpp}, \hyperpage{27}
   \item {setup}
-    \subitem {controller.ino}, \hyperpage{25}
-  \item {src/constants.py}, \hyperpage{15}
-  \item {src/controller/constants.hpp}, \hyperpage{17}
-  \item {src/controller/controller.ino}, \hyperpage{24}
-  \item {src/controller/Syringenator.hpp}, \hyperpage{25}
-  \item {src/Syringenator.py}, \hyperpage{29}
+    \subitem {controller.ino}, \hyperpage{23}
+  \item {src/controller/constants.hpp}, \hyperpage{16}
+  \item {src/controller/controller.ino}, \hyperpage{22}
+  \item {src/controller/Syringenator.hpp}, \hyperpage{23}
+  \item {src/pi/constants.py}, \hyperpage{27}
+  \item {src/pi/Syringenator.py}, \hyperpage{29}
   \item {STBD\_AFT\_OBSTACLE}
     \subitem {constants}, \hyperpage{10}
-    \subitem {constants.hpp}, \hyperpage{23}
+    \subitem {constants.hpp}, \hyperpage{22}
   \item {STBD\_FWD\_OBSTACLE}
     \subitem {constants}, \hyperpage{10}
-    \subitem {constants.hpp}, \hyperpage{23}
+    \subitem {constants.hpp}, \hyperpage{22}
   \item {STBD\_LINE\_SENSE}
     \subitem {constants}, \hyperpage{10}
-    \subitem {constants.hpp}, \hyperpage{23}
+    \subitem {constants.hpp}, \hyperpage{22}
   \item {STBD\_MOTOR\_AFT}
     \subitem {constants}, \hyperpage{10}
-    \subitem {constants.hpp}, \hyperpage{23}
+    \subitem {constants.hpp}, \hyperpage{22}
   \item {STBD\_MOTOR\_FWD}
     \subitem {constants}, \hyperpage{11}
-    \subitem {constants.hpp}, \hyperpage{24}
+    \subitem {constants.hpp}, \hyperpage{22}
   \item {Syringenator}, \hyperpage{11}
     \subitem {arduinoReceive}, \hyperpage{12}
     \subitem {arduinoSend}, \hyperpage{12}
@@ -260,16 +260,16 @@
     \subitem {scan}, \hyperpage{14}
     \subitem {target}, \hyperpage{15}
   \item {Syringenator.hpp}
-    \subitem {armDispose}, \hyperpage{26}
-    \subitem {armPark}, \hyperpage{26}
-    \subitem {armPick}, \hyperpage{27}
-    \subitem {lineDetector\_ISR}, \hyperpage{27}
-    \subitem {motorEncoder\_ISR}, \hyperpage{27}
-    \subitem {moveLineFollow}, \hyperpage{28}
-    \subitem {moveRotate}, \hyperpage{28}
-    \subitem {moveStraight}, \hyperpage{28}
-    \subitem {obstacleDetector\_ISR}, \hyperpage{28}
-    \subitem {serialCommunication\_ISR}, \hyperpage{29}
+    \subitem {armDispose}, \hyperpage{25}
+    \subitem {armPark}, \hyperpage{25}
+    \subitem {armPick}, \hyperpage{25}
+    \subitem {lineDetector\_ISR}, \hyperpage{25}
+    \subitem {motorEncoder\_ISR}, \hyperpage{26}
+    \subitem {moveLineFollow}, \hyperpage{26}
+    \subitem {moveRotate}, \hyperpage{26}
+    \subitem {moveStraight}, \hyperpage{26}
+    \subitem {obstacleDetector\_ISR}, \hyperpage{27}
+    \subitem {serialCommunication\_ISR}, \hyperpage{27}
   \item {Syringenator.Target}, \hyperpage{15}
 
   \indexspace

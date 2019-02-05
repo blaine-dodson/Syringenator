@@ -1,4 +1,4 @@
-##	@file src/constants.py
+##	@file src/pi/constants.py
 #	Constants shared across the whole system.
 #	Includes constants used by both the arduino sketch and the the python script.
 #	The format of `constants.in` is three whitespace sparated columns:
