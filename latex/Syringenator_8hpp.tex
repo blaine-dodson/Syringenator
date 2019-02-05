@@ -31,6 +31,7 @@ void \mbox{\hyperlink{Syringenator_8hpp_a9e189084091b3c3bbee94b015c1a3257}{obsta
 \begin{DoxyCompactList}\small\item\em A function to respond to a detected obstacle while under locamotion. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Syringenator_8hpp_aa79e39c6ba7fdc4bd4c2f04668f0b1db}{motor\+Encoder\+\_\+\+I\+SR}} (void)
 \begin{DoxyCompactList}\small\item\em Motor encoder I\+SR. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}\label{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}} 
 void \mbox{\hyperlink{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}{serial\+Communication\+\_\+\+I\+SR}} (void)
 \begin{DoxyCompactList}\small\item\em A function to handle incomming communication from the pi. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Syringenator_8hpp_af385a70a6e85c3a48cc34be30ce82cdd}{move\+Rotate}} (int ticks)
@@ -41,6 +42,7 @@ void \mbox{\hyperlink{Syringenator_8hpp_a329dc12ddbc9d24c02724b380a041b04}{move\
 \begin{DoxyCompactList}\small\item\em Routine to follow the guide-\/line for some fixed interval. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Syringenator_8hpp_a9ec347be5f02ccfe7e4c03fbce6a4d9d}{arm\+Park}} (void)
 \begin{DoxyCompactList}\small\item\em Move the arm to its parking position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{Syringenator_8hpp_a4378f1f92482e766c7e5d0c41dc97ae6}\label{Syringenator_8hpp_a4378f1f92482e766c7e5d0c41dc97ae6}} 
 void \mbox{\hyperlink{Syringenator_8hpp_a4378f1f92482e766c7e5d0c41dc97ae6}{arm\+Dispose}} (void)
 \begin{DoxyCompactList}\small\item\em Routine to dispose of a syringe once it has been picked. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{Syringenator_8hpp_a7bce05d8cc8087b6256ac2d1ed0b83b0}{arm\+Pick}} (byte azimuth, byte range, byte orientation)
@@ -56,16 +58,6 @@ Copyright \copyright{} 2019 by the authors. All rights reserved.
 
 
 \subsubsection{Function Documentation}
-\mbox{\Hypertarget{Syringenator_8hpp_a4378f1f92482e766c7e5d0c41dc97ae6}\label{Syringenator_8hpp_a4378f1f92482e766c7e5d0c41dc97ae6}} 
-\index{Syringenator.hpp@{Syringenator.hpp}!armDispose@{armDispose}}
-\index{armDispose@{armDispose}!Syringenator.hpp@{Syringenator.hpp}}
-\paragraph{\texorpdfstring{armDispose()}{armDispose()}}
-{\footnotesize\ttfamily void arm\+Dispose (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
-
-
-
-Routine to dispose of a syringe once it has been picked. 
-
 \mbox{\Hypertarget{Syringenator_8hpp_a9ec347be5f02ccfe7e4c03fbce6a4d9d}\label{Syringenator_8hpp_a9ec347be5f02ccfe7e4c03fbce6a4d9d}} 
 \index{Syringenator.hpp@{Syringenator.hpp}!armPark@{armPark}}
 \index{armPark@{armPark}!Syringenator.hpp@{Syringenator.hpp}}
@@ -176,13 +168,4 @@ A function to respond to a detected obstacle while under locamotion.
 
 There may be two cases to handle\+: whether we are line following, or aproaching. If we are line following we need to ensure that we don\textquotesingle{}t lose the line while avoiding the obstacle.
 
-This may need to be multiple routines, one for each sensor --A\+BD \mbox{\Hypertarget{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}\label{Syringenator_8hpp_a794c6d938a2f3689c46955eddb7bc93f}} 
-\index{Syringenator.hpp@{Syringenator.hpp}!serialCommunication\_ISR@{serialCommunication\_ISR}}
-\index{serialCommunication\_ISR@{serialCommunication\_ISR}!Syringenator.hpp@{Syringenator.hpp}}
-\paragraph{\texorpdfstring{serialCommunication\_ISR()}{serialCommunication\_ISR()}}
-{\footnotesize\ttfamily void serial\+Communication\+\_\+\+I\+SR (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
-
-
-
-A function to handle incomming communication from the pi. 
-
+This may need to be multiple routines, one for each sensor --A\+BD 

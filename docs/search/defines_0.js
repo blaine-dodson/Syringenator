@@ -12,12 +12,5 @@ var searchData=
   ['arduino_5fstatus_5fobstacle',['ARDUINO_STATUS_OBSTACLE',['../constants_8hpp.html#acbabce6073764e54fdcdd7f090ae16cb',1,'constants.hpp']]],
   ['arduino_5fstatus_5fpick_5ffail',['ARDUINO_STATUS_PICK_FAIL',['../constants_8hpp.html#a97bff3260d3af7221b83b93b708fedc3',1,'constants.hpp']]],
   ['arduino_5fstatus_5fpick_5fsuccess',['ARDUINO_STATUS_PICK_SUCCESS',['../constants_8hpp.html#ad0229756653e38cf04e02d62f6e1ad4e',1,'constants.hpp']]],
-  ['arduino_5fstatus_5fready',['ARDUINO_STATUS_READY',['../constants_8hpp.html#aea3ae5f1aae26a9773db867e7734b59a',1,'constants.hpp']]],
-  ['arm_5fazimuth_5fmax',['ARM_AZIMUTH_MAX',['../constants_8hpp.html#ac3eb154d603dad3e7179bb2626af59ea',1,'constants.hpp']]],
-  ['arm_5fazimuth_5fmin',['ARM_AZIMUTH_MIN',['../constants_8hpp.html#a2ce0dcdbd795d3528d9d8e648c5625e9',1,'constants.hpp']]],
-  ['arm_5fcontrol',['ARM_CONTROL',['../constants_8hpp.html#a4ca4ed01391e5ed00ed1a9a3d4bfd920',1,'constants.hpp']]],
-  ['arm_5forient_5fmax',['ARM_ORIENT_MAX',['../constants_8hpp.html#a65e605f70eb537d7e2107cdebdb80d70',1,'constants.hpp']]],
-  ['arm_5forient_5fmin',['ARM_ORIENT_MIN',['../constants_8hpp.html#aaba84cc92cb4191e49df1292f4982ea1',1,'constants.hpp']]],
-  ['arm_5frange_5fmax',['ARM_RANGE_MAX',['../constants_8hpp.html#a86d7c71ba2e6c88d69ee4aeeb936f7e0',1,'constants.hpp']]],
-  ['arm_5frange_5fmin',['ARM_RANGE_MIN',['../constants_8hpp.html#a4759bb57bec1d5d93ecddbf5384f3edc',1,'constants.hpp']]]
+  ['arduino_5fstatus_5fready',['ARDUINO_STATUS_READY',['../constants_8hpp.html#aea3ae5f1aae26a9773db867e7734b59a',1,'constants.hpp']]]
 ];
