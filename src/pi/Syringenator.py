@@ -15,7 +15,9 @@ import constants
 #                               DATA LOGGING
 #==============================================================================#
 
-
+## Record system events for later analysis
+#
+# @returns None
 def log(arg):
 	if arg is string:
 		pass # log the string
@@ -31,12 +33,13 @@ def log(arg):
 ##	Send serial data to the arduino
 #
 #	@param bytes one or more bytes of data to send to the arduino
+#	@returns None
 def arduinoSend(bytes):
 	pass
 
 ##	Wait some fixed time for the arduino to send one or more bytes
 #
-#	@return a list of bytes
+#	@returns a list of bytes
 def arduinoReceive():
 	pass
 
@@ -46,6 +49,7 @@ def arduinoReceive():
 #==============================================================================#
 
 
+## A class to contain everything we know about an aquired target
 class Target: pass
 	# bounding box data
 	# bounding box center
@@ -57,7 +61,7 @@ class Target: pass
 #	determine the closest one to pursue.
 #	--ABD
 #
-#	@return a target object
+#	@returns a target object
 def scan():
 	# get a picture from librealsense
 	
@@ -87,7 +91,7 @@ def scan():
 #	--ABD
 #
 #	@param t a Target object containing the location of the target to be approched
-#	@return None
+#	@returns None
 def moveCloser(t):
 	
 	# face the target if necessary
@@ -114,7 +118,7 @@ def moveCloser(t):
 #	--ABD
 #
 #	@param t a Target object containing the raw bitmap data
-#	@return None
+#	@returns None
 def pickUp(t):
 	# find the center and orientation of the target
 	
@@ -126,7 +130,8 @@ def pickUp(t):
 #
 #	@todo TODO: do we need to check that we actually returned? how do we recover if
 #	dead reckoning fails? --ABD
-#	@return None
+#
+#	@returns None
 def returnToLine():
 	pass
 	
@@ -136,14 +141,14 @@ def returnToLine():
 #
 #	this routine simply signals the arduino to execute its lineFollow() routine
 #
-#	@return None
+#	@returns None
 def lineFollow(): pass
 
 ##	A routine to determine if the target is in position to be picked up.
 #
 #	Calculates whether the center of the target bounding box is in the pickup area.
 #
-#	@return a boolean
+#	@returns a boolean
 def canBePicked(t):
 	
 	
@@ -163,6 +168,8 @@ def canBePicked(t):
 
 ## boolean indicating whether we are on the line
 onTheLine = True
+## The currently aquired target
+target = None
 
 while True:
 	target = scan()

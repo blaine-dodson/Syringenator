@@ -23,7 +23,7 @@ Brooke Stevenson | brooks04@uw.edu
 # Using Git
 Git is a command-line tool for managing source code. Github is an on-line service that provides git remotes. A git remote is a remote copy of a git repository. Multiple people work in the same repository through the use of a single remote. The trick is to manage version conflicts intelligently.
 
-Each team member should periodically merge master into their own branch to ensure that we are synced up. The master branch should only ever have merge commits and working code. I will try to enforce this with github so that we don't make a mess.
+Each team member should periodically merge master into their own branch to ensure that we are synced up. The master branch should only ever have merge commits and working code. I will try to enforce this with Github so that we don't make a mess.
 --ABD
 
 ## Work in Your Own Branch
@@ -37,7 +37,7 @@ $ git checkout <branch-name>
 ```
 
 ## Commit Your Work
-Commits are a permanent record of your work. They should be as small and purpose-driven as possible. Think: "cna I write a couple lines that explains what I did?" To check for uncommitted changes, or check your status in general do:
+Commits are a permanent record of your work. They should be as small and purpose-driven as possible. Think: "can I write a couple lines that explains what I did?" To check for uncommitted changes, or check your status in general do:
 ```
 $ git status
 On branch ammon

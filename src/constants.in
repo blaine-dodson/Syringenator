@@ -13,17 +13,17 @@ Any changes must be made in `constants.in` and followed by running:
 @copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
 %%
-ARM_AZIMUTH_MIN 0
-ARM_AZIMUTH_MAX 0
-ARM_RANGE_MIN   0
-ARM_RANGE_MAX   0
-ARM_ORIENT_MIN  0
-ARM_ORIENT_MAX  0
+ARM_AZIMUTH_MIN 0 The minimum azimuth byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+ARM_AZIMUTH_MAX 0 The maximum azimuth byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+ARM_RANGE_MIN   0 The minimum range byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+ARM_RANGE_MAX   0 The maximum range byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+ARM_ORIENT_MIN  0 The minimum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+ARM_ORIENT_MAX  0 The maximum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
 
-PICKUP_X_MIN  0
-PICKUP_X_MAX  0
-PICKUP_Y_MIN 0
-PICKUP_Y_MAX  0
+PICKUP_X_MIN 0 The minimum target center x-value that allows a pickup
+PICKUP_X_MAX 0 The maximum target center x-value that allows a pickup
+PICKUP_Y_MIN 0 The minimum target center y-value that allows a pickup
+PICKUP_Y_MAX 0 The maximum target center y-value that allows a pickup
 
 
 ARDUINO_NULL                0x00 A place holder for troubleshooting etc.
@@ -34,30 +34,30 @@ ARDUINO_STATUS_PICK_SUCCESS 0x04 Report that the pick succeded
 ARDUINO_STATUS_ARM_FAULT    0x05 Report a general arm failure
 ARDUINO_STATUS_OBSTACLE     0x06 Report an obstacle detected
 
-ARDUINO_ROTATE              0x10 command the arduino to rotate the robot. This byte is followed by a signed byte indicating magnitude and direction
-ARDUINO_MOVE                0x11 command the arduino to advance the robot. This byte is followed by a signed byte indicating magnitude and direction
-ARDUINO_LINE_FOLLOW         0x12 command the arduino to follow the line
+ARDUINO_ROTATE              0x10 serial command the arduino to rotate the robot, followed by one signed byte indicating magnitude and direction
+ARDUINO_MOVE                0x11 serial command the arduino to advance the robot, followed by one signed byte indicating magnitude and direction
+ARDUINO_LINE_FOLLOW         0x12 serial command the arduino to follow the line
 
-ARDUINO_ARM_PARK            0x20 call the park action sequence 
-ARDUINO_ARM_DISPOSE         0x21 call the dispose action sequence
-ARDUINO_ARM_PICKUP          0x22 attempt a pick, followed by three bytes: azimuth, range, and orientation
+ARDUINO_ARM_PARK            0x20 serial command the arduino to call the park action sequence
+ARDUINO_ARM_DISPOSE         0x21 serial command the arduino to call the dispose action sequence
+ARDUINO_ARM_PICKUP          0x22 serial command the arduino to attempt a pick, followed by three bytes: azimuth, range, and orientation
 
 
 
-PORT_MOTOR_FWD   None
-PORT_MOTOR_AFT   None
-STBD_MOTOR_FWD   None
-STBD_MOTOR_AFT   None
+PORT_MOTOR_FWD   None Arduino pin for port motor forward
+PORT_MOTOR_REV   None Arduino pin for port motor reverse
+STBD_MOTOR_FWD   None Arduino pin for starboard motor forward
+STBD_MOTOR_REV   None Arduino pin for starboard motor reverse
 
-PORT_LINE_SENSE  None
-STBD_LINE_SENSE  None
+PORT_LINE_SENSE  None Arduino pin for the port line sensor
+STBD_LINE_SENSE  None Arduino pin for the starboard line sensor
 
-PORT_FWD_OBSTACLE None
-PORT_AFT_OBSTACLE None
-STBD_FWD_OBSTACLE None
-STBD_AFT_OBSTACLE None
+PORT_FWD_OBSTACLE None Arduino pin for the port forward obstacle sensor
+PORT_AFT_OBSTACLE None Arduino pin for the port aft obstacle sensor
+STBD_FWD_OBSTACLE None Arduino pin for the starboard forward obstacle sensor
+STBD_AFT_OBSTACLE None Arduino pin for the starboard aft obstacle sensor
 
-ARM_CONTROL       None
+ARM_CONTROL       None Arduino pin for communication with the xArm
 
 
 

@@ -15,6 +15,13 @@ var searchData=
   ['arduino_5fstatus_5fready',['ARDUINO_STATUS_READY',['../constants_8hpp.html#aea3ae5f1aae26a9773db867e7734b59a',1,'ARDUINO_STATUS_READY():&#160;constants.hpp'],['../constants_8py.html#a92e64e2f09948e66a5c52e4bb6d0b1c3',1,'constants.ARDUINO_STATUS_READY()']]],
   ['arduinoreceive',['arduinoReceive',['../namespaceSyringenator.html#a1c5a8cf020e400c8c0337977a5b6d921',1,'Syringenator']]],
   ['arduinosend',['arduinoSend',['../namespaceSyringenator.html#ae7978d5b84170226249d8de2e204e762',1,'Syringenator']]],
+  ['arm_5fazimuth_5fmax',['ARM_AZIMUTH_MAX',['../constants_8hpp.html#ac3eb154d603dad3e7179bb2626af59ea',1,'ARM_AZIMUTH_MAX():&#160;constants.hpp'],['../constants_8py.html#a32e0792803d2cda1bfc22b90f37f3e3d',1,'constants.ARM_AZIMUTH_MAX()']]],
+  ['arm_5fazimuth_5fmin',['ARM_AZIMUTH_MIN',['../constants_8hpp.html#a2ce0dcdbd795d3528d9d8e648c5625e9',1,'ARM_AZIMUTH_MIN():&#160;constants.hpp'],['../constants_8py.html#a8112376fe415e03687dcfcf32508ff5b',1,'constants.ARM_AZIMUTH_MIN()']]],
+  ['arm_5fcontrol',['ARM_CONTROL',['../constants_8hpp.html#a4ca4ed01391e5ed00ed1a9a3d4bfd920',1,'ARM_CONTROL():&#160;constants.hpp'],['../constants_8py.html#a6cd44c39def90b88882aeabde2c27957',1,'constants.ARM_CONTROL()']]],
+  ['arm_5forient_5fmax',['ARM_ORIENT_MAX',['../constants_8hpp.html#a65e605f70eb537d7e2107cdebdb80d70',1,'ARM_ORIENT_MAX():&#160;constants.hpp'],['../constants_8py.html#a8d807b2016ecbfc6475116fd0a076e71',1,'constants.ARM_ORIENT_MAX()']]],
+  ['arm_5forient_5fmin',['ARM_ORIENT_MIN',['../constants_8hpp.html#aaba84cc92cb4191e49df1292f4982ea1',1,'ARM_ORIENT_MIN():&#160;constants.hpp'],['../constants_8py.html#a04a3b80c0f1a2b5dbb41e8e67d1388ff',1,'constants.ARM_ORIENT_MIN()']]],
+  ['arm_5frange_5fmax',['ARM_RANGE_MAX',['../constants_8hpp.html#a86d7c71ba2e6c88d69ee4aeeb936f7e0',1,'ARM_RANGE_MAX():&#160;constants.hpp'],['../constants_8py.html#ac7dbe3d17e1603a0dec2f32acb4adb29',1,'constants.ARM_RANGE_MAX()']]],
+  ['arm_5frange_5fmin',['ARM_RANGE_MIN',['../constants_8hpp.html#a4759bb57bec1d5d93ecddbf5384f3edc',1,'ARM_RANGE_MIN():&#160;constants.hpp'],['../constants_8py.html#a185349fe1a4462c42310332cc79acacb',1,'constants.ARM_RANGE_MIN()']]],
   ['armdispose',['armDispose',['../Syringenator_8hpp.html#a4378f1f92482e766c7e5d0c41dc97ae6',1,'Syringenator.hpp']]],
   ['armpark',['armPark',['../Syringenator_8hpp.html#a9ec347be5f02ccfe7e4c03fbce6a4d9d',1,'Syringenator.hpp']]],
   ['armpick',['armPick',['../Syringenator_8hpp.html#a7bce05d8cc8087b6256ac2d1ed0b83b0',1,'Syringenator.hpp']]]

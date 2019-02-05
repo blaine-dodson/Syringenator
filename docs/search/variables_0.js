@@ -12,5 +12,12 @@ var searchData=
   ['arduino_5fstatus_5fobstacle',['ARDUINO_STATUS_OBSTACLE',['../constants_8py.html#abc0b60b03096dc294325d894c7418ae2',1,'constants']]],
   ['arduino_5fstatus_5fpick_5ffail',['ARDUINO_STATUS_PICK_FAIL',['../constants_8py.html#ad2f83c4703b56c7856164f300c88a266',1,'constants']]],
   ['arduino_5fstatus_5fpick_5fsuccess',['ARDUINO_STATUS_PICK_SUCCESS',['../constants_8py.html#a5567eabdcef157ce5b607bab1ad6e5af',1,'constants']]],
-  ['arduino_5fstatus_5fready',['ARDUINO_STATUS_READY',['../constants_8py.html#a92e64e2f09948e66a5c52e4bb6d0b1c3',1,'constants']]]
+  ['arduino_5fstatus_5fready',['ARDUINO_STATUS_READY',['../constants_8py.html#a92e64e2f09948e66a5c52e4bb6d0b1c3',1,'constants']]],
+  ['arm_5fazimuth_5fmax',['ARM_AZIMUTH_MAX',['../constants_8py.html#a32e0792803d2cda1bfc22b90f37f3e3d',1,'constants']]],
+  ['arm_5fazimuth_5fmin',['ARM_AZIMUTH_MIN',['../constants_8py.html#a8112376fe415e03687dcfcf32508ff5b',1,'constants']]],
+  ['arm_5fcontrol',['ARM_CONTROL',['../constants_8py.html#a6cd44c39def90b88882aeabde2c27957',1,'constants']]],
+  ['arm_5forient_5fmax',['ARM_ORIENT_MAX',['../constants_8py.html#a8d807b2016ecbfc6475116fd0a076e71',1,'constants']]],
+  ['arm_5forient_5fmin',['ARM_ORIENT_MIN',['../constants_8py.html#a04a3b80c0f1a2b5dbb41e8e67d1388ff',1,'constants']]],
+  ['arm_5frange_5fmax',['ARM_RANGE_MAX',['../constants_8py.html#ac7dbe3d17e1603a0dec2f32acb4adb29',1,'constants']]],
+  ['arm_5frange_5fmin',['ARM_RANGE_MIN',['../constants_8py.html#a185349fe1a4462c42310332cc79acacb',1,'constants']]]
 ];
