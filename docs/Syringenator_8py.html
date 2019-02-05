@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Syringenator: src/Syringenator.py File Reference</title>
+<title>Syringenator: src/pi/Syringenator.py File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1be77ebbc67ee0355cd049807faa77cd.html">pi</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -82,6 +82,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSyringenator_1_1Target.html">Syringenator.Target</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class to contain everything we know about an aquired target.  <a href="classSyringenator_1_1Target.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -93,6 +94,7 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a263a26fdb4da94f277fb51f3e740f30d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a263a26fdb4da94f277fb51f3e740f30d">Syringenator.log</a> (arg)</td></tr>
+<tr class="memdesc:a263a26fdb4da94f277fb51f3e740f30d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Record system events for later analysis.  <a href="namespaceSyringenator.html#a263a26fdb4da94f277fb51f3e740f30d">More...</a><br /></td></tr>
 <tr class="separator:a263a26fdb4da94f277fb51f3e740f30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7978d5b84170226249d8de2e204e762"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#ae7978d5b84170226249d8de2e204e762">Syringenator.arduinoSend</a> (bytes)</td></tr>
 <tr class="memdesc:ae7978d5b84170226249d8de2e204e762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send serial data to the arduino.  <a href="namespaceSyringenator.html#ae7978d5b84170226249d8de2e204e762">More...</a><br /></td></tr>
@@ -121,11 +123,14 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a161fa877b77c9ebb120c1ed20739260b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a161fa877b77c9ebb120c1ed20739260b">Syringenator.onTheLine</a> = True</td></tr>
-<tr class="memdesc:a161fa877b77c9ebb120c1ed20739260b"><td class="mdescLeft">&#160;</td><td class="mdescRight">boolean indicating whether we are on the line  <a href="namespaceSyringenator.html#a161fa877b77c9ebb120c1ed20739260b">More...</a><br /></td></tr>
+<tr class="memitem:a161fa877b77c9ebb120c1ed20739260b"><td class="memItemLeft" align="right" valign="top"><a id="a161fa877b77c9ebb120c1ed20739260b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a161fa877b77c9ebb120c1ed20739260b">Syringenator.onTheLine</a> = True</td></tr>
+<tr class="memdesc:a161fa877b77c9ebb120c1ed20739260b"><td class="mdescLeft">&#160;</td><td class="mdescRight">boolean indicating whether we are on the line <br /></td></tr>
 <tr class="separator:a161fa877b77c9ebb120c1ed20739260b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66c7999289f77a4adce05169661f9660"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a66c7999289f77a4adce05169661f9660">Syringenator.target</a> = scan()</td></tr>
-<tr class="separator:a66c7999289f77a4adce05169661f9660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa574be83d026c46beac3e2391b26ffc6"><td class="memItemLeft" align="right" valign="top"><a id="aa574be83d026c46beac3e2391b26ffc6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#aa574be83d026c46beac3e2391b26ffc6">Syringenator.target</a> = None</td></tr>
+<tr class="memdesc:aa574be83d026c46beac3e2391b26ffc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The currently aquired target. <br /></td></tr>
+<tr class="separator:aa574be83d026c46beac3e2391b26ffc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This is the main control script. </p>

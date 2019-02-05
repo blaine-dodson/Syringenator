@@ -20,9 +20,96 @@ Brooke Stevenson | brooks04@uw.edu
 
 @copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
-# Contributing
-Each team member should create their own branch to work in. Each team member should periodically merge master into their own branch to ensure that we are synced up. The master branch should only ever have merge commits and working code. I will try to enforce this with github so that we don't make a mess.
+# Using Git
+Git is a command-line tool for managing source code. Github is an on-line service that provides git remotes. A git remote is a remote copy of a git repository. Multiple people work in the same repository through the use of a single remote. The trick is to manage version conflicts intelligently.
+
+Each team member should periodically merge master into their own branch to ensure that we are synced up. The master branch should only ever have merge commits and working code. I will try to enforce this with Github so that we don't make a mess.
 --ABD
+
+## Work in Your Own Branch
+Each team member should create their own branch to work in. You may make as many branches as you like, just make sure you have one. You can create branches on the command line with:
+```
+$ git branch <branch-name>
+```
+To switch to your branch do:
+```
+$ git checkout <branch-name>
+```
+
+## Commit Your Work
+Commits are a permanent record of your work. They should be as small and purpose-driven as possible. Think: "can I write a couple lines that explains what I did?" To check for uncommitted changes, or check your status in general do:
+```
+$ git status
+On branch ammon
+Your branch is up-to-date with 'github/ammon'.	<- this is the remote
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   README.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	docs/autotoc_md6.html
+	latex/autotoc_md6.tex
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+```
+You make a commit in two steps: first you stage the changed files that you want to include in this next commit.
+```
+$ git add <filename> <anotherfile>
+```
+Once you have staged a bunch of changes you can check your status again:
+```
+$ git status
+On branch ammon
+Your branch is up-to-date with 'github/ammon'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   README.md
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   Makefile
+	deleted:    refman.pdf
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	docs/autotoc_md7.html
+	latex/autotoc_md7.tex
+```
+Once you are satisfied with what is currently staged you finish the commit by doing:
+```
+$ git commit
+```
+Git will open a text editor where you can describe what the changes are. Make this a meaningful message since it will be the only thing that distinguishes this commit from hundreds of others.
+
+## Merge All the Latest Changes
+The magic of git is being able to merge conflicting changes. Before you share your changes (pushing), you must pull the latest changes and merge them with yours. First pull the master branch:
+```
+$ git pull origin master
+```
+You will need to enter your password and git will tell you if there have been any changes. Then you will merge:
+```
+$ git merge master
+```
+Git will attempt to merge the master branch into yours. If there are any conflicts it will tell you. Git will rewrite your files to include both versions of the conflicting code. To see which files are in conflict do:
+```
+$ git status
+```
+You have to open those files, find, and fix the conflicting versions. Once you think you are done, rebuild and test all the code. Look for any new errors and fix them. Once you are satisfied that the merge has been completed successfully add and commit your changes as usual.
+
+## Push Your Branch
+Pushing your work to the remote allows everyone else to see it. You should merge master before pushing. To push do:
+```
+$ git push origin <your-branch>
+```
 
 # HypoRobot Assignment
 If you’ve been paying any attention at all to current events you know that a major plague has descended on cities and counties throughout the country in the form of used and discarded hypodermic needles. Countless hours are spent cleaning up this mess. For instance, some schools are forced, for safety reasons, to send staff out to scour the playgrounds prior to children showing up.

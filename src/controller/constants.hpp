@@ -17,16 +17,16 @@
  */
 
 
-#define ARM_AZIMUTH_MIN 0 ///< 
-#define ARM_AZIMUTH_MAX 0 ///< 
-#define ARM_RANGE_MIN 0 ///< 
-#define ARM_RANGE_MAX 0 ///< 
-#define ARM_ORIENT_MIN 0 ///< 
-#define ARM_ORIENT_MAX 0 ///< 
-#define PICKUP_X_MIN 0 ///< 
-#define PICKUP_X_MAX 0 ///< 
-#define PICKUP_Y_MIN 0 ///< 
-#define PICKUP_Y_MAX 0 ///< 
+#define ARM_AZIMUTH_MIN 0 ///< The minimum azimuth byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+#define ARM_AZIMUTH_MAX 0 ///< The maximum azimuth byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+#define ARM_RANGE_MIN 0 ///< The minimum range byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+#define ARM_RANGE_MAX 0 ///< The maximum range byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+#define ARM_ORIENT_MIN 0 ///< The minimum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+#define ARM_ORIENT_MAX 0 ///< The maximum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
+#define PICKUP_X_MIN 0 ///< The minimum target center x-value that allows a pickup
+#define PICKUP_X_MAX 0 ///< The maximum target center x-value that allows a pickup
+#define PICKUP_Y_MIN 0 ///< The minimum target center y-value that allows a pickup
+#define PICKUP_Y_MAX 0 ///< The maximum target center y-value that allows a pickup
 #define ARDUINO_NULL 0x00 ///< A place holder for troubleshooting etc.
 #define ARDUINO_STATUS_ACK 0x01 ///< If the arduino needs to acknowledge something
 #define ARDUINO_STATUS_READY 0x02 ///< If the arduino needs to indicate it is ready
@@ -34,20 +34,20 @@
 #define ARDUINO_STATUS_PICK_SUCCESS 0x04 ///< Report that the pick succeded
 #define ARDUINO_STATUS_ARM_FAULT 0x05 ///< Report a general arm failure
 #define ARDUINO_STATUS_OBSTACLE 0x06 ///< Report an obstacle detected
-#define ARDUINO_ROTATE 0x10 ///< command the arduino to rotate the robot. This byte is followed by a signed byte indicating magnitude and direction
-#define ARDUINO_MOVE 0x11 ///< command the arduino to advance the robot. This byte is followed by a signed byte indicating magnitude and direction
-#define ARDUINO_LINE_FOLLOW 0x12 ///< command the arduino to follow the line
-#define ARDUINO_ARM_PARK 0x20 ///< call the park action sequence
-#define ARDUINO_ARM_DISPOSE 0x21 ///< call the dispose action sequence
-#define ARDUINO_ARM_PICKUP 0x22 ///< attempt a pick, followed by three bytes: azimuth, range, and orientation
-#define PORT_MOTOR_FWD None ///< 
-#define PORT_MOTOR_AFT None ///< 
-#define STBD_MOTOR_FWD None ///< 
-#define STBD_MOTOR_AFT None ///< 
-#define PORT_LINE_SENSE None ///< 
-#define STBD_LINE_SENSE None ///< 
-#define PORT_FWD_OBSTACLE None ///< 
-#define PORT_AFT_OBSTACLE None ///< 
-#define STBD_FWD_OBSTACLE None ///< 
-#define STBD_AFT_OBSTACLE None ///< 
-#define ARM_CONTROL None ///< 
+#define ARDUINO_ROTATE 0x10 ///< serial command the arduino to rotate the robot, followed by one signed byte indicating magnitude and direction
+#define ARDUINO_MOVE 0x11 ///< serial command the arduino to advance the robot, followed by one signed byte indicating magnitude and direction
+#define ARDUINO_LINE_FOLLOW 0x12 ///< serial command the arduino to follow the line
+#define ARDUINO_ARM_PARK 0x20 ///< serial command the arduino to call the park action sequence
+#define ARDUINO_ARM_DISPOSE 0x21 ///< serial command the arduino to call the dispose action sequence
+#define ARDUINO_ARM_PICKUP 0x22 ///< serial command the arduino to attempt a pick, followed by three bytes: azimuth, range, and orientation
+#define PORT_MOTOR_FWD None ///< Arduino pin for port motor forward
+#define PORT_MOTOR_REV None ///< Arduino pin for port motor reverse
+#define STBD_MOTOR_FWD None ///< Arduino pin for starboard motor forward
+#define STBD_MOTOR_REV None ///< Arduino pin for starboard motor reverse
+#define PORT_LINE_SENSE None ///< Arduino pin for the port line sensor
+#define STBD_LINE_SENSE None ///< Arduino pin for the starboard line sensor
+#define PORT_FWD_OBSTACLE None ///< Arduino pin for the port forward obstacle sensor
+#define PORT_AFT_OBSTACLE None ///< Arduino pin for the port aft obstacle sensor
+#define STBD_FWD_OBSTACLE None ///< Arduino pin for the starboard forward obstacle sensor
+#define STBD_AFT_OBSTACLE None ///< Arduino pin for the starboard aft obstacle sensor
+#define ARM_CONTROL None ///< Arduino pin for communication with the xArm
