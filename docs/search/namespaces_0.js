@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['syringenator',['Syringenator',['../namespaceSyringenator.html',1,'']]]
+  ['constants',['constants',['../namespaceconstants.html',1,'']]]
 ];

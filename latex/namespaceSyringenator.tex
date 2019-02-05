@@ -13,8 +13,7 @@ class \mbox{\hyperlink{classSyringenator_1_1Target}{Target}}
 \subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{namespaceSyringenator_a263a26fdb4da94f277fb51f3e740f30d}\label{namespaceSyringenator_a263a26fdb4da94f277fb51f3e740f30d}} 
-def {\bfseries log} (arg)
+def \mbox{\hyperlink{namespaceSyringenator_a263a26fdb4da94f277fb51f3e740f30d}{log}} (arg)
 \item 
 def \mbox{\hyperlink{namespaceSyringenator_ae7978d5b84170226249d8de2e204e762}{arduino\+Send}} (bytes)
 \begin{DoxyCompactList}\small\item\em Send serial data to the arduino. \end{DoxyCompactList}\item 
@@ -35,13 +34,14 @@ def \mbox{\hyperlink{namespaceSyringenator_acb08d40f080a03cb4e7a43ee3ab4854b}{ca
 \subsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{namespaceSyringenator_a161fa877b77c9ebb120c1ed20739260b}\label{namespaceSyringenator_a161fa877b77c9ebb120c1ed20739260b}} 
 bool \mbox{\hyperlink{namespaceSyringenator_a161fa877b77c9ebb120c1ed20739260b}{on\+The\+Line}} = True
 \begin{DoxyCompactList}\small\item\em boolean indicating whether we are on the line \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{namespaceSyringenator_a66c7999289f77a4adce05169661f9660}\label{namespaceSyringenator_a66c7999289f77a4adce05169661f9660}} 
-def {\bfseries target} = \mbox{\hyperlink{namespaceSyringenator_aff01237d3ff3e33f0ffc32927d813df0}{scan}}()
+def \mbox{\hyperlink{namespaceSyringenator_a66c7999289f77a4adce05169661f9660}{target}} = \mbox{\hyperlink{namespaceSyringenator_aff01237d3ff3e33f0ffc32927d813df0}{scan}}()
 \end{DoxyCompactItemize}
 
+
+\subsubsection{Detailed Description}
+The top-\/level Pi program. 
 
 \subsubsection{Function Documentation}
 \mbox{\Hypertarget{namespaceSyringenator_a1c5a8cf020e400c8c0337977a5b6d921}\label{namespaceSyringenator_a1c5a8cf020e400c8c0337977a5b6d921}} 
@@ -49,6 +49,10 @@ def {\bfseries target} = \mbox{\hyperlink{namespaceSyringenator_aff01237d3ff3e33
 \index{arduinoReceive@{arduinoReceive}!Syringenator@{Syringenator}}
 \paragraph{\texorpdfstring{arduinoReceive()}{arduinoReceive()}}
 {\footnotesize\ttfamily def Syringenator.\+arduino\+Receive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Wait some fixed time for the arduino to send one or more bytes. 
 
 \begin{DoxyReturn}{Returns}
 a list of bytes 
@@ -58,6 +62,10 @@ a list of bytes
 \index{arduinoSend@{arduinoSend}!Syringenator@{Syringenator}}
 \paragraph{\texorpdfstring{arduinoSend()}{arduinoSend()}}
 {\footnotesize\ttfamily def Syringenator.\+arduino\+Send (\begin{DoxyParamCaption}\item[{}]{bytes }\end{DoxyParamCaption})}
+
+
+
+Send serial data to the arduino. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -70,6 +78,10 @@ a list of bytes
 \paragraph{\texorpdfstring{canBePicked()}{canBePicked()}}
 {\footnotesize\ttfamily def Syringenator.\+can\+Be\+Picked (\begin{DoxyParamCaption}\item[{}]{t }\end{DoxyParamCaption})}
 
+
+
+A routine to determine if the target is in position to be picked up. 
+
 Calculates whether the center of the target bounding box is in the pickup area.
 
 \begin{DoxyReturn}{Returns}
@@ -81,16 +93,30 @@ a boolean
 \paragraph{\texorpdfstring{lineFollow()}{lineFollow()}}
 {\footnotesize\ttfamily def Syringenator.\+line\+Follow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Follow the line. 
+
 this routine simply signals the arduino to execute its \mbox{\hyperlink{namespaceSyringenator_a824ef6e71bc0975483435ffbdd58cb3e}{line\+Follow()}} routine
 
 \begin{DoxyReturn}{Returns}
 None 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespaceSyringenator_a263a26fdb4da94f277fb51f3e740f30d}\label{namespaceSyringenator_a263a26fdb4da94f277fb51f3e740f30d}} 
+\index{Syringenator@{Syringenator}!log@{log}}
+\index{log@{log}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{log()}{log()}}
+{\footnotesize\ttfamily def Syringenator.\+log (\begin{DoxyParamCaption}\item[{}]{arg }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{namespaceSyringenator_a6aecf5518c352d012eb1422d9970146d}\label{namespaceSyringenator_a6aecf5518c352d012eb1422d9970146d}} 
 \index{Syringenator@{Syringenator}!moveCloser@{moveCloser}}
 \index{moveCloser@{moveCloser}!Syringenator@{Syringenator}}
 \paragraph{\texorpdfstring{moveCloser()}{moveCloser()}}
 {\footnotesize\ttfamily def Syringenator.\+move\+Closer (\begin{DoxyParamCaption}\item[{}]{t }\end{DoxyParamCaption})}
+
+
+
+Move the robot closer to the given target. 
 
 The \mbox{\hyperlink{namespaceSyringenator_a6aecf5518c352d012eb1422d9970146d}{move\+Closer()}} routine attempts to aproach the target by relatively small increments. Because the move routines may be interrupted by the obstacle avoidance I\+S\+Rs and the risk of jambing the wheels etc. we cannot expect to be able to approch successfully on the first try. Hence \mbox{\hyperlink{namespaceSyringenator_a6aecf5518c352d012eb1422d9970146d}{move\+Closer()}} should only move a relatively short distance before exiting to allow another loop through the scan cycle.
 
@@ -114,6 +140,10 @@ None
 \paragraph{\texorpdfstring{pickUp()}{pickUp()}}
 {\footnotesize\ttfamily def Syringenator.\+pick\+Up (\begin{DoxyParamCaption}\item[{}]{t }\end{DoxyParamCaption})}
 
+
+
+Attempt to pickup and dispose the target. 
+
 This routine must determine orientation of the target. If this is not done by some Open\+CV magic we can attempt it here using the raw image data and the bounding box.
 
 Divide the longer dimension of the bounding box by some constant divisor. Scan along each of those raster lines twice. On the first pass calculate an average brightness (R\+GB values can be summed). The second pass will pick out points of greatest brightness. Find the centers of clustered bright pixeles. We now have a set of points in cartesian space. Have Jake find the slope of the line of best fit.
@@ -136,6 +166,10 @@ None
 \paragraph{\texorpdfstring{returnToLine()}{returnToLine()}}
 {\footnotesize\ttfamily def Syringenator.\+return\+To\+Line (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+signl the arduino to return to the line. 
+
 \begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{todo__todo000002}{Todo}}]T\+O\+DO\+: do we need to check that we actually returned? how do we recover if dead reckoning fails? --A\+BD \end{DoxyRefDesc}
 \begin{DoxyReturn}{Returns}
@@ -147,8 +181,31 @@ None
 \paragraph{\texorpdfstring{scan()}{scan()}}
 {\footnotesize\ttfamily def Syringenator.\+scan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+A routine to take a picture and report back the closest target The Computer vision routine must be able to handle multiple targets in the image. 
+
 It would be best if all targets are reported. Then this routine will determine the closest one to pursue. --A\+BD
 
 \begin{DoxyReturn}{Returns}
 a target object 
 \end{DoxyReturn}
+
+
+\subsubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceSyringenator_a161fa877b77c9ebb120c1ed20739260b}\label{namespaceSyringenator_a161fa877b77c9ebb120c1ed20739260b}} 
+\index{Syringenator@{Syringenator}!onTheLine@{onTheLine}}
+\index{onTheLine@{onTheLine}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{onTheLine}{onTheLine}}
+{\footnotesize\ttfamily bool Syringenator.\+on\+The\+Line = True}
+
+
+
+boolean indicating whether we are on the line 
+
+\mbox{\Hypertarget{namespaceSyringenator_a66c7999289f77a4adce05169661f9660}\label{namespaceSyringenator_a66c7999289f77a4adce05169661f9660}} 
+\index{Syringenator@{Syringenator}!target@{target}}
+\index{target@{target}!Syringenator@{Syringenator}}
+\paragraph{\texorpdfstring{target}{target}}
+{\footnotesize\ttfamily def Syringenator.\+target = \mbox{\hyperlink{namespaceSyringenator_aff01237d3ff3e33f0ffc32927d813df0}{scan}}()}
+
