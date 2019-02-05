@@ -7,8 +7,8 @@
 \indexentry{ARDUINO\_ARM\_PICKUP@{ARDUINO\_ARM\_PICKUP}!constants@{constants}|hyperpage}{6}
 \indexentry{constants@{constants}!ARDUINO\_LINE\_FOLLOW@{ARDUINO\_LINE\_FOLLOW}|hyperpage}{6}
 \indexentry{ARDUINO\_LINE\_FOLLOW@{ARDUINO\_LINE\_FOLLOW}!constants@{constants}|hyperpage}{6}
-\indexentry{constants@{constants}!ARDUINO\_MOVE@{ARDUINO\_MOVE}|hyperpage}{6}
-\indexentry{ARDUINO\_MOVE@{ARDUINO\_MOVE}!constants@{constants}|hyperpage}{6}
+\indexentry{constants@{constants}!ARDUINO\_MOVE@{ARDUINO\_MOVE}|hyperpage}{7}
+\indexentry{ARDUINO\_MOVE@{ARDUINO\_MOVE}!constants@{constants}|hyperpage}{7}
 \indexentry{constants@{constants}!ARDUINO\_NULL@{ARDUINO\_NULL}|hyperpage}{7}
 \indexentry{ARDUINO\_NULL@{ARDUINO\_NULL}!constants@{constants}|hyperpage}{7}
 \indexentry{constants@{constants}!ARDUINO\_ROTATE@{ARDUINO\_ROTATE}|hyperpage}{7}
@@ -19,8 +19,8 @@
 \indexentry{ARDUINO\_STATUS\_ARM\_FAULT@{ARDUINO\_STATUS\_ARM\_FAULT}!constants@{constants}|hyperpage}{7}
 \indexentry{constants@{constants}!ARDUINO\_STATUS\_OBSTACLE@{ARDUINO\_STATUS\_OBSTACLE}|hyperpage}{7}
 \indexentry{ARDUINO\_STATUS\_OBSTACLE@{ARDUINO\_STATUS\_OBSTACLE}!constants@{constants}|hyperpage}{7}
-\indexentry{constants@{constants}!ARDUINO\_STATUS\_PICK\_FAIL@{ARDUINO\_STATUS\_PICK\_FAIL}|hyperpage}{7}
-\indexentry{ARDUINO\_STATUS\_PICK\_FAIL@{ARDUINO\_STATUS\_PICK\_FAIL}!constants@{constants}|hyperpage}{7}
+\indexentry{constants@{constants}!ARDUINO\_STATUS\_PICK\_FAIL@{ARDUINO\_STATUS\_PICK\_FAIL}|hyperpage}{8}
+\indexentry{ARDUINO\_STATUS\_PICK\_FAIL@{ARDUINO\_STATUS\_PICK\_FAIL}!constants@{constants}|hyperpage}{8}
 \indexentry{constants@{constants}!ARDUINO\_STATUS\_PICK\_SUCCESS@{ARDUINO\_STATUS\_PICK\_SUCCESS}|hyperpage}{8}
 \indexentry{ARDUINO\_STATUS\_PICK\_SUCCESS@{ARDUINO\_STATUS\_PICK\_SUCCESS}!constants@{constants}|hyperpage}{8}
 \indexentry{constants@{constants}!ARDUINO\_STATUS\_READY@{ARDUINO\_STATUS\_READY}|hyperpage}{8}
@@ -33,8 +33,8 @@
 \indexentry{ARM\_CONTROL@{ARM\_CONTROL}!constants@{constants}|hyperpage}{8}
 \indexentry{constants@{constants}!ARM\_ORIENT\_MAX@{ARM\_ORIENT\_MAX}|hyperpage}{8}
 \indexentry{ARM\_ORIENT\_MAX@{ARM\_ORIENT\_MAX}!constants@{constants}|hyperpage}{8}
-\indexentry{constants@{constants}!ARM\_ORIENT\_MIN@{ARM\_ORIENT\_MIN}|hyperpage}{8}
-\indexentry{ARM\_ORIENT\_MIN@{ARM\_ORIENT\_MIN}!constants@{constants}|hyperpage}{8}
+\indexentry{constants@{constants}!ARM\_ORIENT\_MIN@{ARM\_ORIENT\_MIN}|hyperpage}{9}
+\indexentry{ARM\_ORIENT\_MIN@{ARM\_ORIENT\_MIN}!constants@{constants}|hyperpage}{9}
 \indexentry{constants@{constants}!ARM\_RANGE\_MAX@{ARM\_RANGE\_MAX}|hyperpage}{9}
 \indexentry{ARM\_RANGE\_MAX@{ARM\_RANGE\_MAX}!constants@{constants}|hyperpage}{9}
 \indexentry{constants@{constants}!ARM\_RANGE\_MIN@{ARM\_RANGE\_MIN}|hyperpage}{9}
@@ -49,8 +49,8 @@
 \indexentry{PICKUP\_Y\_MIN@{PICKUP\_Y\_MIN}!constants@{constants}|hyperpage}{9}
 \indexentry{constants@{constants}!PORT\_AFT\_OBSTACLE@{PORT\_AFT\_OBSTACLE}|hyperpage}{9}
 \indexentry{PORT\_AFT\_OBSTACLE@{PORT\_AFT\_OBSTACLE}!constants@{constants}|hyperpage}{9}
-\indexentry{constants@{constants}!PORT\_FWD\_OBSTACLE@{PORT\_FWD\_OBSTACLE}|hyperpage}{9}
-\indexentry{PORT\_FWD\_OBSTACLE@{PORT\_FWD\_OBSTACLE}!constants@{constants}|hyperpage}{9}
+\indexentry{constants@{constants}!PORT\_FWD\_OBSTACLE@{PORT\_FWD\_OBSTACLE}|hyperpage}{10}
+\indexentry{PORT\_FWD\_OBSTACLE@{PORT\_FWD\_OBSTACLE}!constants@{constants}|hyperpage}{10}
 \indexentry{constants@{constants}!PORT\_LINE\_SENSE@{PORT\_LINE\_SENSE}|hyperpage}{10}
 \indexentry{PORT\_LINE\_SENSE@{PORT\_LINE\_SENSE}!constants@{constants}|hyperpage}{10}
 \indexentry{constants@{constants}!PORT\_MOTOR\_AFT@{PORT\_MOTOR\_AFT}|hyperpage}{10}
@@ -65,8 +65,8 @@
 \indexentry{STBD\_LINE\_SENSE@{STBD\_LINE\_SENSE}!constants@{constants}|hyperpage}{10}
 \indexentry{constants@{constants}!STBD\_MOTOR\_AFT@{STBD\_MOTOR\_AFT}|hyperpage}{10}
 \indexentry{STBD\_MOTOR\_AFT@{STBD\_MOTOR\_AFT}!constants@{constants}|hyperpage}{10}
-\indexentry{constants@{constants}!STBD\_MOTOR\_FWD@{STBD\_MOTOR\_FWD}|hyperpage}{10}
-\indexentry{STBD\_MOTOR\_FWD@{STBD\_MOTOR\_FWD}!constants@{constants}|hyperpage}{10}
+\indexentry{constants@{constants}!STBD\_MOTOR\_FWD@{STBD\_MOTOR\_FWD}|hyperpage}{11}
+\indexentry{STBD\_MOTOR\_FWD@{STBD\_MOTOR\_FWD}!constants@{constants}|hyperpage}{11}
 \indexentry{Syringenator@{Syringenator}|hyperpage}{11}
 \indexentry{Syringenator@{Syringenator}!arduinoReceive@{arduinoReceive}|hyperpage}{12}
 \indexentry{arduinoReceive@{arduinoReceive}!Syringenator@{Syringenator}|hyperpage}{12}
