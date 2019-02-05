@@ -1,132 +1,136 @@
 \@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble }{}
 \contentsline {section}{\numberline {1}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}ME}{1}{section.1}
 \contentsline {subsection}{\numberline {1.1}Development Team Vulcan}{1}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Contributing}{1}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}Hypo\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Robot Assignment}{1}{subsection.1.3}
-\contentsline {section}{\numberline {2}Requirements}{2}{section.2}
-\contentsline {subsection}{\numberline {2.1}Terminology}{2}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Rules of the Game}{3}{subsection.2.2}
-\contentsline {section}{\numberline {3}Todo List}{4}{section.3}
-\contentsline {section}{\numberline {4}Namespace Index}{4}{section.4}
-\contentsline {subsection}{\numberline {4.1}Namespace List}{4}{subsection.4.1}
-\contentsline {section}{\numberline {5}Class Index}{4}{section.5}
-\contentsline {subsection}{\numberline {5.1}Class List}{4}{subsection.5.1}
-\contentsline {section}{\numberline {6}File Index}{4}{section.6}
-\contentsline {subsection}{\numberline {6.1}File List}{4}{subsection.6.1}
-\contentsline {section}{\numberline {7}Namespace Documentation}{5}{section.7}
-\contentsline {subsection}{\numberline {7.1}constants Namespace Reference}{5}{subsection.7.1}
-\contentsline {subsubsection}{\numberline {7.1.1}Variable Documentation}{6}{subsubsection.7.1.1}
-\contentsline {paragraph}{\numberline {7.1.1.1}ARDUINO\_ARM\_DISPOSE}{6}{paragraph.7.1.1.1}
-\contentsline {paragraph}{\numberline {7.1.1.2}ARDUINO\_ARM\_PARK}{6}{paragraph.7.1.1.2}
-\contentsline {paragraph}{\numberline {7.1.1.3}ARDUINO\_ARM\_PICKUP}{6}{paragraph.7.1.1.3}
-\contentsline {paragraph}{\numberline {7.1.1.4}ARDUINO\_LINE\_FOLLOW}{7}{paragraph.7.1.1.4}
-\contentsline {paragraph}{\numberline {7.1.1.5}ARDUINO\_MOVE}{7}{paragraph.7.1.1.5}
-\contentsline {paragraph}{\numberline {7.1.1.6}ARDUINO\_NULL}{7}{paragraph.7.1.1.6}
-\contentsline {paragraph}{\numberline {7.1.1.7}ARDUINO\_ROTATE}{7}{paragraph.7.1.1.7}
-\contentsline {paragraph}{\numberline {7.1.1.8}ARDUINO\_STATUS\_ACK}{7}{paragraph.7.1.1.8}
-\contentsline {paragraph}{\numberline {7.1.1.9}ARDUINO\_STATUS\_ARM\_FAULT}{7}{paragraph.7.1.1.9}
-\contentsline {paragraph}{\numberline {7.1.1.10}ARDUINO\_STATUS\_OBSTACLE}{8}{paragraph.7.1.1.10}
-\contentsline {paragraph}{\numberline {7.1.1.11}ARDUINO\_STATUS\_PICK\_FAIL}{8}{paragraph.7.1.1.11}
-\contentsline {paragraph}{\numberline {7.1.1.12}ARDUINO\_STATUS\_PICK\_SUCCESS}{8}{paragraph.7.1.1.12}
-\contentsline {paragraph}{\numberline {7.1.1.13}ARDUINO\_STATUS\_READY}{8}{paragraph.7.1.1.13}
-\contentsline {paragraph}{\numberline {7.1.1.14}ARM\_AZIMUTH\_MAX}{8}{paragraph.7.1.1.14}
-\contentsline {paragraph}{\numberline {7.1.1.15}ARM\_AZIMUTH\_MIN}{8}{paragraph.7.1.1.15}
-\contentsline {paragraph}{\numberline {7.1.1.16}ARM\_CONTROL}{8}{paragraph.7.1.1.16}
-\contentsline {paragraph}{\numberline {7.1.1.17}ARM\_ORIENT\_MAX}{9}{paragraph.7.1.1.17}
-\contentsline {paragraph}{\numberline {7.1.1.18}ARM\_ORIENT\_MIN}{9}{paragraph.7.1.1.18}
-\contentsline {paragraph}{\numberline {7.1.1.19}ARM\_RANGE\_MAX}{9}{paragraph.7.1.1.19}
-\contentsline {paragraph}{\numberline {7.1.1.20}ARM\_RANGE\_MIN}{9}{paragraph.7.1.1.20}
-\contentsline {paragraph}{\numberline {7.1.1.21}PICKUP\_X\_MAX}{9}{paragraph.7.1.1.21}
-\contentsline {paragraph}{\numberline {7.1.1.22}PICKUP\_X\_MIN}{9}{paragraph.7.1.1.22}
-\contentsline {paragraph}{\numberline {7.1.1.23}PICKUP\_Y\_MAX}{9}{paragraph.7.1.1.23}
-\contentsline {paragraph}{\numberline {7.1.1.24}PICKUP\_Y\_MIN}{9}{paragraph.7.1.1.24}
-\contentsline {paragraph}{\numberline {7.1.1.25}PORT\_AFT\_OBSTACLE}{10}{paragraph.7.1.1.25}
-\contentsline {paragraph}{\numberline {7.1.1.26}PORT\_FWD\_OBSTACLE}{10}{paragraph.7.1.1.26}
-\contentsline {paragraph}{\numberline {7.1.1.27}PORT\_LINE\_SENSE}{10}{paragraph.7.1.1.27}
-\contentsline {paragraph}{\numberline {7.1.1.28}PORT\_MOTOR\_AFT}{10}{paragraph.7.1.1.28}
-\contentsline {paragraph}{\numberline {7.1.1.29}PORT\_MOTOR\_FWD}{10}{paragraph.7.1.1.29}
-\contentsline {paragraph}{\numberline {7.1.1.30}STBD\_AFT\_OBSTACLE}{10}{paragraph.7.1.1.30}
-\contentsline {paragraph}{\numberline {7.1.1.31}STBD\_FWD\_OBSTACLE}{10}{paragraph.7.1.1.31}
-\contentsline {paragraph}{\numberline {7.1.1.32}STBD\_LINE\_SENSE}{10}{paragraph.7.1.1.32}
-\contentsline {paragraph}{\numberline {7.1.1.33}STBD\_MOTOR\_AFT}{11}{paragraph.7.1.1.33}
-\contentsline {paragraph}{\numberline {7.1.1.34}STBD\_MOTOR\_FWD}{11}{paragraph.7.1.1.34}
-\contentsline {subsection}{\numberline {7.2}Syringenator Namespace Reference}{11}{subsection.7.2}
-\contentsline {subsubsection}{\numberline {7.2.1}Detailed Description}{12}{subsubsection.7.2.1}
-\contentsline {subsubsection}{\numberline {7.2.2}Function Documentation}{12}{subsubsection.7.2.2}
-\contentsline {paragraph}{\numberline {7.2.2.1}arduinoReceive()}{12}{paragraph.7.2.2.1}
-\contentsline {paragraph}{\numberline {7.2.2.2}arduinoSend()}{12}{paragraph.7.2.2.2}
-\contentsline {paragraph}{\numberline {7.2.2.3}canBePicked()}{12}{paragraph.7.2.2.3}
-\contentsline {paragraph}{\numberline {7.2.2.4}lineFollow()}{13}{paragraph.7.2.2.4}
-\contentsline {paragraph}{\numberline {7.2.2.5}log()}{13}{paragraph.7.2.2.5}
-\contentsline {paragraph}{\numberline {7.2.2.6}moveCloser()}{13}{paragraph.7.2.2.6}
-\contentsline {paragraph}{\numberline {7.2.2.7}pickUp()}{14}{paragraph.7.2.2.7}
-\contentsline {paragraph}{\numberline {7.2.2.8}returnToLine()}{14}{paragraph.7.2.2.8}
-\contentsline {paragraph}{\numberline {7.2.2.9}scan()}{15}{paragraph.7.2.2.9}
-\contentsline {subsubsection}{\numberline {7.2.3}Variable Documentation}{15}{subsubsection.7.2.3}
-\contentsline {paragraph}{\numberline {7.2.3.1}onTheLine}{15}{paragraph.7.2.3.1}
-\contentsline {paragraph}{\numberline {7.2.3.2}target}{15}{paragraph.7.2.3.2}
-\contentsline {section}{\numberline {8}Class Documentation}{15}{section.8}
-\contentsline {subsection}{\numberline {8.1}Syringenator.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Target Class Reference}{15}{subsection.8.1}
-\contentsline {section}{\numberline {9}File Documentation}{16}{section.9}
-\contentsline {subsection}{\numberline {9.1}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}M\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}md File Reference}{16}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}requirements.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}md File Reference}{16}{subsection.9.2}
-\contentsline {subsection}{\numberline {9.3}src/controller/constants.hpp File Reference}{16}{subsection.9.3}
-\contentsline {subsubsection}{\numberline {9.3.1}Detailed Description}{17}{subsubsection.9.3.1}
-\contentsline {subsubsection}{\numberline {9.3.2}Macro Definition Documentation}{18}{subsubsection.9.3.2}
-\contentsline {paragraph}{\numberline {9.3.2.1}ARDUINO\_ARM\_DISPOSE}{18}{paragraph.9.3.2.1}
-\contentsline {paragraph}{\numberline {9.3.2.2}ARDUINO\_ARM\_PARK}{18}{paragraph.9.3.2.2}
-\contentsline {paragraph}{\numberline {9.3.2.3}ARDUINO\_ARM\_PICKUP}{18}{paragraph.9.3.2.3}
-\contentsline {paragraph}{\numberline {9.3.2.4}ARDUINO\_LINE\_FOLLOW}{18}{paragraph.9.3.2.4}
-\contentsline {paragraph}{\numberline {9.3.2.5}ARDUINO\_MOVE}{18}{paragraph.9.3.2.5}
-\contentsline {paragraph}{\numberline {9.3.2.6}ARDUINO\_NULL}{18}{paragraph.9.3.2.6}
-\contentsline {paragraph}{\numberline {9.3.2.7}ARDUINO\_ROTATE}{19}{paragraph.9.3.2.7}
-\contentsline {paragraph}{\numberline {9.3.2.8}ARDUINO\_STATUS\_ACK}{19}{paragraph.9.3.2.8}
-\contentsline {paragraph}{\numberline {9.3.2.9}ARDUINO\_STATUS\_ARM\_FAULT}{19}{paragraph.9.3.2.9}
-\contentsline {paragraph}{\numberline {9.3.2.10}ARDUINO\_STATUS\_OBSTACLE}{19}{paragraph.9.3.2.10}
-\contentsline {paragraph}{\numberline {9.3.2.11}ARDUINO\_STATUS\_PICK\_FAIL}{19}{paragraph.9.3.2.11}
-\contentsline {paragraph}{\numberline {9.3.2.12}ARDUINO\_STATUS\_PICK\_SUCCESS}{19}{paragraph.9.3.2.12}
-\contentsline {paragraph}{\numberline {9.3.2.13}ARDUINO\_STATUS\_READY}{20}{paragraph.9.3.2.13}
-\contentsline {paragraph}{\numberline {9.3.2.14}ARM\_AZIMUTH\_MAX}{20}{paragraph.9.3.2.14}
-\contentsline {paragraph}{\numberline {9.3.2.15}ARM\_AZIMUTH\_MIN}{20}{paragraph.9.3.2.15}
-\contentsline {paragraph}{\numberline {9.3.2.16}ARM\_CONTROL}{20}{paragraph.9.3.2.16}
-\contentsline {paragraph}{\numberline {9.3.2.17}ARM\_ORIENT\_MAX}{20}{paragraph.9.3.2.17}
-\contentsline {paragraph}{\numberline {9.3.2.18}ARM\_ORIENT\_MIN}{20}{paragraph.9.3.2.18}
-\contentsline {paragraph}{\numberline {9.3.2.19}ARM\_RANGE\_MAX}{20}{paragraph.9.3.2.19}
-\contentsline {paragraph}{\numberline {9.3.2.20}ARM\_RANGE\_MIN}{20}{paragraph.9.3.2.20}
-\contentsline {paragraph}{\numberline {9.3.2.21}PICKUP\_X\_MAX}{21}{paragraph.9.3.2.21}
-\contentsline {paragraph}{\numberline {9.3.2.22}PICKUP\_X\_MIN}{21}{paragraph.9.3.2.22}
-\contentsline {paragraph}{\numberline {9.3.2.23}PICKUP\_Y\_MAX}{21}{paragraph.9.3.2.23}
-\contentsline {paragraph}{\numberline {9.3.2.24}PICKUP\_Y\_MIN}{21}{paragraph.9.3.2.24}
-\contentsline {paragraph}{\numberline {9.3.2.25}PORT\_AFT\_OBSTACLE}{21}{paragraph.9.3.2.25}
-\contentsline {paragraph}{\numberline {9.3.2.26}PORT\_FWD\_OBSTACLE}{21}{paragraph.9.3.2.26}
-\contentsline {paragraph}{\numberline {9.3.2.27}PORT\_LINE\_SENSE}{21}{paragraph.9.3.2.27}
-\contentsline {paragraph}{\numberline {9.3.2.28}PORT\_MOTOR\_AFT}{21}{paragraph.9.3.2.28}
-\contentsline {paragraph}{\numberline {9.3.2.29}PORT\_MOTOR\_FWD}{22}{paragraph.9.3.2.29}
-\contentsline {paragraph}{\numberline {9.3.2.30}STBD\_AFT\_OBSTACLE}{22}{paragraph.9.3.2.30}
-\contentsline {paragraph}{\numberline {9.3.2.31}STBD\_FWD\_OBSTACLE}{22}{paragraph.9.3.2.31}
-\contentsline {paragraph}{\numberline {9.3.2.32}STBD\_LINE\_SENSE}{22}{paragraph.9.3.2.32}
-\contentsline {paragraph}{\numberline {9.3.2.33}STBD\_MOTOR\_AFT}{22}{paragraph.9.3.2.33}
-\contentsline {paragraph}{\numberline {9.3.2.34}STBD\_MOTOR\_FWD}{22}{paragraph.9.3.2.34}
-\contentsline {subsection}{\numberline {9.4}src/controller/controller.ino File Reference}{22}{subsection.9.4}
-\contentsline {subsubsection}{\numberline {9.4.1}Detailed Description}{23}{subsubsection.9.4.1}
-\contentsline {subsubsection}{\numberline {9.4.2}Function Documentation}{23}{subsubsection.9.4.2}
-\contentsline {paragraph}{\numberline {9.4.2.1}loop()}{23}{paragraph.9.4.2.1}
-\contentsline {paragraph}{\numberline {9.4.2.2}setup()}{23}{paragraph.9.4.2.2}
-\contentsline {subsection}{\numberline {9.5}src/controller/\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Syringenator.hpp File Reference}{23}{subsection.9.5}
-\contentsline {subsubsection}{\numberline {9.5.1}Detailed Description}{24}{subsubsection.9.5.1}
-\contentsline {subsubsection}{\numberline {9.5.2}Function Documentation}{25}{subsubsection.9.5.2}
-\contentsline {paragraph}{\numberline {9.5.2.1}armDispose()}{25}{paragraph.9.5.2.1}
-\contentsline {paragraph}{\numberline {9.5.2.2}armPark()}{25}{paragraph.9.5.2.2}
-\contentsline {paragraph}{\numberline {9.5.2.3}armPick()}{25}{paragraph.9.5.2.3}
-\contentsline {paragraph}{\numberline {9.5.2.4}lineDetector\_ISR()}{26}{paragraph.9.5.2.4}
-\contentsline {paragraph}{\numberline {9.5.2.5}motorEncoder\_ISR()}{26}{paragraph.9.5.2.5}
-\contentsline {paragraph}{\numberline {9.5.2.6}moveLineFollow()}{26}{paragraph.9.5.2.6}
-\contentsline {paragraph}{\numberline {9.5.2.7}moveRotate()}{26}{paragraph.9.5.2.7}
-\contentsline {paragraph}{\numberline {9.5.2.8}moveStraight()}{27}{paragraph.9.5.2.8}
-\contentsline {paragraph}{\numberline {9.5.2.9}obstacleDetector\_ISR()}{27}{paragraph.9.5.2.9}
-\contentsline {paragraph}{\numberline {9.5.2.10}serialCommunication\_ISR()}{27}{paragraph.9.5.2.10}
-\contentsline {subsection}{\numberline {9.6}src/pi/constants.py File Reference}{27}{subsection.9.6}
-\contentsline {subsubsection}{\numberline {9.6.1}Detailed Description}{29}{subsubsection.9.6.1}
-\contentsline {subsection}{\numberline {9.7}src/pi/\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Syringenator.py File Reference}{29}{subsection.9.7}
-\contentsline {subsubsection}{\numberline {9.7.1}Detailed Description}{30}{subsubsection.9.7.1}
-\contentsline {section}{Index}{31}{section*.18}
+\contentsline {subsection}{\numberline {1.2}Using Git}{1}{subsection.1.2}
+\contentsline {subsubsection}{\numberline {1.2.1}Work in Your Own Branch}{2}{subsubsection.1.2.1}
+\contentsline {subsubsection}{\numberline {1.2.2}Commit Your Work}{2}{subsubsection.1.2.2}
+\contentsline {subsubsection}{\numberline {1.2.3}Merging Other People\textquotesingle {}s Work}{3}{subsubsection.1.2.3}
+\contentsline {subsubsection}{\numberline {1.2.4}Push Your Branch}{3}{subsubsection.1.2.4}
+\contentsline {subsection}{\numberline {1.3}Hypo\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Robot Assignment}{3}{subsection.1.3}
+\contentsline {section}{\numberline {2}Requirements}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Terminology}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Rules of the Game}{4}{subsection.2.2}
+\contentsline {section}{\numberline {3}Todo List}{5}{section.3}
+\contentsline {section}{\numberline {4}Namespace Index}{6}{section.4}
+\contentsline {subsection}{\numberline {4.1}Namespace List}{6}{subsection.4.1}
+\contentsline {section}{\numberline {5}Class Index}{6}{section.5}
+\contentsline {subsection}{\numberline {5.1}Class List}{6}{subsection.5.1}
+\contentsline {section}{\numberline {6}File Index}{6}{section.6}
+\contentsline {subsection}{\numberline {6.1}File List}{6}{subsection.6.1}
+\contentsline {section}{\numberline {7}Namespace Documentation}{7}{section.7}
+\contentsline {subsection}{\numberline {7.1}constants Namespace Reference}{7}{subsection.7.1}
+\contentsline {subsubsection}{\numberline {7.1.1}Variable Documentation}{8}{subsubsection.7.1.1}
+\contentsline {paragraph}{\numberline {7.1.1.1}ARDUINO\_ARM\_DISPOSE}{8}{paragraph.7.1.1.1}
+\contentsline {paragraph}{\numberline {7.1.1.2}ARDUINO\_ARM\_PARK}{8}{paragraph.7.1.1.2}
+\contentsline {paragraph}{\numberline {7.1.1.3}ARDUINO\_ARM\_PICKUP}{8}{paragraph.7.1.1.3}
+\contentsline {paragraph}{\numberline {7.1.1.4}ARDUINO\_LINE\_FOLLOW}{8}{paragraph.7.1.1.4}
+\contentsline {paragraph}{\numberline {7.1.1.5}ARDUINO\_MOVE}{8}{paragraph.7.1.1.5}
+\contentsline {paragraph}{\numberline {7.1.1.6}ARDUINO\_NULL}{9}{paragraph.7.1.1.6}
+\contentsline {paragraph}{\numberline {7.1.1.7}ARDUINO\_ROTATE}{9}{paragraph.7.1.1.7}
+\contentsline {paragraph}{\numberline {7.1.1.8}ARDUINO\_STATUS\_ACK}{9}{paragraph.7.1.1.8}
+\contentsline {paragraph}{\numberline {7.1.1.9}ARDUINO\_STATUS\_ARM\_FAULT}{9}{paragraph.7.1.1.9}
+\contentsline {paragraph}{\numberline {7.1.1.10}ARDUINO\_STATUS\_OBSTACLE}{9}{paragraph.7.1.1.10}
+\contentsline {paragraph}{\numberline {7.1.1.11}ARDUINO\_STATUS\_PICK\_FAIL}{9}{paragraph.7.1.1.11}
+\contentsline {paragraph}{\numberline {7.1.1.12}ARDUINO\_STATUS\_PICK\_SUCCESS}{10}{paragraph.7.1.1.12}
+\contentsline {paragraph}{\numberline {7.1.1.13}ARDUINO\_STATUS\_READY}{10}{paragraph.7.1.1.13}
+\contentsline {paragraph}{\numberline {7.1.1.14}ARM\_AZIMUTH\_MAX}{10}{paragraph.7.1.1.14}
+\contentsline {paragraph}{\numberline {7.1.1.15}ARM\_AZIMUTH\_MIN}{10}{paragraph.7.1.1.15}
+\contentsline {paragraph}{\numberline {7.1.1.16}ARM\_CONTROL}{10}{paragraph.7.1.1.16}
+\contentsline {paragraph}{\numberline {7.1.1.17}ARM\_ORIENT\_MAX}{10}{paragraph.7.1.1.17}
+\contentsline {paragraph}{\numberline {7.1.1.18}ARM\_ORIENT\_MIN}{10}{paragraph.7.1.1.18}
+\contentsline {paragraph}{\numberline {7.1.1.19}ARM\_RANGE\_MAX}{10}{paragraph.7.1.1.19}
+\contentsline {paragraph}{\numberline {7.1.1.20}ARM\_RANGE\_MIN}{11}{paragraph.7.1.1.20}
+\contentsline {paragraph}{\numberline {7.1.1.21}PICKUP\_X\_MAX}{11}{paragraph.7.1.1.21}
+\contentsline {paragraph}{\numberline {7.1.1.22}PICKUP\_X\_MIN}{11}{paragraph.7.1.1.22}
+\contentsline {paragraph}{\numberline {7.1.1.23}PICKUP\_Y\_MAX}{11}{paragraph.7.1.1.23}
+\contentsline {paragraph}{\numberline {7.1.1.24}PICKUP\_Y\_MIN}{11}{paragraph.7.1.1.24}
+\contentsline {paragraph}{\numberline {7.1.1.25}PORT\_AFT\_OBSTACLE}{11}{paragraph.7.1.1.25}
+\contentsline {paragraph}{\numberline {7.1.1.26}PORT\_FWD\_OBSTACLE}{11}{paragraph.7.1.1.26}
+\contentsline {paragraph}{\numberline {7.1.1.27}PORT\_LINE\_SENSE}{11}{paragraph.7.1.1.27}
+\contentsline {paragraph}{\numberline {7.1.1.28}PORT\_MOTOR\_AFT}{12}{paragraph.7.1.1.28}
+\contentsline {paragraph}{\numberline {7.1.1.29}PORT\_MOTOR\_FWD}{12}{paragraph.7.1.1.29}
+\contentsline {paragraph}{\numberline {7.1.1.30}STBD\_AFT\_OBSTACLE}{12}{paragraph.7.1.1.30}
+\contentsline {paragraph}{\numberline {7.1.1.31}STBD\_FWD\_OBSTACLE}{12}{paragraph.7.1.1.31}
+\contentsline {paragraph}{\numberline {7.1.1.32}STBD\_LINE\_SENSE}{12}{paragraph.7.1.1.32}
+\contentsline {paragraph}{\numberline {7.1.1.33}STBD\_MOTOR\_AFT}{12}{paragraph.7.1.1.33}
+\contentsline {paragraph}{\numberline {7.1.1.34}STBD\_MOTOR\_FWD}{12}{paragraph.7.1.1.34}
+\contentsline {subsection}{\numberline {7.2}Syringenator Namespace Reference}{12}{subsection.7.2}
+\contentsline {subsubsection}{\numberline {7.2.1}Detailed Description}{13}{subsubsection.7.2.1}
+\contentsline {subsubsection}{\numberline {7.2.2}Function Documentation}{13}{subsubsection.7.2.2}
+\contentsline {paragraph}{\numberline {7.2.2.1}arduinoReceive()}{13}{paragraph.7.2.2.1}
+\contentsline {paragraph}{\numberline {7.2.2.2}arduinoSend()}{13}{paragraph.7.2.2.2}
+\contentsline {paragraph}{\numberline {7.2.2.3}canBePicked()}{14}{paragraph.7.2.2.3}
+\contentsline {paragraph}{\numberline {7.2.2.4}lineFollow()}{14}{paragraph.7.2.2.4}
+\contentsline {paragraph}{\numberline {7.2.2.5}log()}{14}{paragraph.7.2.2.5}
+\contentsline {paragraph}{\numberline {7.2.2.6}moveCloser()}{14}{paragraph.7.2.2.6}
+\contentsline {paragraph}{\numberline {7.2.2.7}pickUp()}{15}{paragraph.7.2.2.7}
+\contentsline {paragraph}{\numberline {7.2.2.8}returnToLine()}{15}{paragraph.7.2.2.8}
+\contentsline {paragraph}{\numberline {7.2.2.9}scan()}{16}{paragraph.7.2.2.9}
+\contentsline {subsubsection}{\numberline {7.2.3}Variable Documentation}{16}{subsubsection.7.2.3}
+\contentsline {paragraph}{\numberline {7.2.3.1}onTheLine}{16}{paragraph.7.2.3.1}
+\contentsline {paragraph}{\numberline {7.2.3.2}target}{16}{paragraph.7.2.3.2}
+\contentsline {section}{\numberline {8}Class Documentation}{16}{section.8}
+\contentsline {subsection}{\numberline {8.1}Syringenator.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Target Class Reference}{16}{subsection.8.1}
+\contentsline {section}{\numberline {9}File Documentation}{17}{section.9}
+\contentsline {subsection}{\numberline {9.1}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}M\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}md File Reference}{17}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}requirements.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}md File Reference}{17}{subsection.9.2}
+\contentsline {subsection}{\numberline {9.3}src/controller/constants.hpp File Reference}{17}{subsection.9.3}
+\contentsline {subsubsection}{\numberline {9.3.1}Detailed Description}{18}{subsubsection.9.3.1}
+\contentsline {subsubsection}{\numberline {9.3.2}Macro Definition Documentation}{19}{subsubsection.9.3.2}
+\contentsline {paragraph}{\numberline {9.3.2.1}ARDUINO\_ARM\_DISPOSE}{19}{paragraph.9.3.2.1}
+\contentsline {paragraph}{\numberline {9.3.2.2}ARDUINO\_ARM\_PARK}{19}{paragraph.9.3.2.2}
+\contentsline {paragraph}{\numberline {9.3.2.3}ARDUINO\_ARM\_PICKUP}{19}{paragraph.9.3.2.3}
+\contentsline {paragraph}{\numberline {9.3.2.4}ARDUINO\_LINE\_FOLLOW}{19}{paragraph.9.3.2.4}
+\contentsline {paragraph}{\numberline {9.3.2.5}ARDUINO\_MOVE}{19}{paragraph.9.3.2.5}
+\contentsline {paragraph}{\numberline {9.3.2.6}ARDUINO\_NULL}{19}{paragraph.9.3.2.6}
+\contentsline {paragraph}{\numberline {9.3.2.7}ARDUINO\_ROTATE}{20}{paragraph.9.3.2.7}
+\contentsline {paragraph}{\numberline {9.3.2.8}ARDUINO\_STATUS\_ACK}{20}{paragraph.9.3.2.8}
+\contentsline {paragraph}{\numberline {9.3.2.9}ARDUINO\_STATUS\_ARM\_FAULT}{20}{paragraph.9.3.2.9}
+\contentsline {paragraph}{\numberline {9.3.2.10}ARDUINO\_STATUS\_OBSTACLE}{20}{paragraph.9.3.2.10}
+\contentsline {paragraph}{\numberline {9.3.2.11}ARDUINO\_STATUS\_PICK\_FAIL}{20}{paragraph.9.3.2.11}
+\contentsline {paragraph}{\numberline {9.3.2.12}ARDUINO\_STATUS\_PICK\_SUCCESS}{20}{paragraph.9.3.2.12}
+\contentsline {paragraph}{\numberline {9.3.2.13}ARDUINO\_STATUS\_READY}{21}{paragraph.9.3.2.13}
+\contentsline {paragraph}{\numberline {9.3.2.14}ARM\_AZIMUTH\_MAX}{21}{paragraph.9.3.2.14}
+\contentsline {paragraph}{\numberline {9.3.2.15}ARM\_AZIMUTH\_MIN}{21}{paragraph.9.3.2.15}
+\contentsline {paragraph}{\numberline {9.3.2.16}ARM\_CONTROL}{21}{paragraph.9.3.2.16}
+\contentsline {paragraph}{\numberline {9.3.2.17}ARM\_ORIENT\_MAX}{21}{paragraph.9.3.2.17}
+\contentsline {paragraph}{\numberline {9.3.2.18}ARM\_ORIENT\_MIN}{21}{paragraph.9.3.2.18}
+\contentsline {paragraph}{\numberline {9.3.2.19}ARM\_RANGE\_MAX}{21}{paragraph.9.3.2.19}
+\contentsline {paragraph}{\numberline {9.3.2.20}ARM\_RANGE\_MIN}{21}{paragraph.9.3.2.20}
+\contentsline {paragraph}{\numberline {9.3.2.21}PICKUP\_X\_MAX}{22}{paragraph.9.3.2.21}
+\contentsline {paragraph}{\numberline {9.3.2.22}PICKUP\_X\_MIN}{22}{paragraph.9.3.2.22}
+\contentsline {paragraph}{\numberline {9.3.2.23}PICKUP\_Y\_MAX}{22}{paragraph.9.3.2.23}
+\contentsline {paragraph}{\numberline {9.3.2.24}PICKUP\_Y\_MIN}{22}{paragraph.9.3.2.24}
+\contentsline {paragraph}{\numberline {9.3.2.25}PORT\_AFT\_OBSTACLE}{22}{paragraph.9.3.2.25}
+\contentsline {paragraph}{\numberline {9.3.2.26}PORT\_FWD\_OBSTACLE}{22}{paragraph.9.3.2.26}
+\contentsline {paragraph}{\numberline {9.3.2.27}PORT\_LINE\_SENSE}{22}{paragraph.9.3.2.27}
+\contentsline {paragraph}{\numberline {9.3.2.28}PORT\_MOTOR\_AFT}{22}{paragraph.9.3.2.28}
+\contentsline {paragraph}{\numberline {9.3.2.29}PORT\_MOTOR\_FWD}{23}{paragraph.9.3.2.29}
+\contentsline {paragraph}{\numberline {9.3.2.30}STBD\_AFT\_OBSTACLE}{23}{paragraph.9.3.2.30}
+\contentsline {paragraph}{\numberline {9.3.2.31}STBD\_FWD\_OBSTACLE}{23}{paragraph.9.3.2.31}
+\contentsline {paragraph}{\numberline {9.3.2.32}STBD\_LINE\_SENSE}{23}{paragraph.9.3.2.32}
+\contentsline {paragraph}{\numberline {9.3.2.33}STBD\_MOTOR\_AFT}{23}{paragraph.9.3.2.33}
+\contentsline {paragraph}{\numberline {9.3.2.34}STBD\_MOTOR\_FWD}{23}{paragraph.9.3.2.34}
+\contentsline {subsection}{\numberline {9.4}src/controller/controller.ino File Reference}{23}{subsection.9.4}
+\contentsline {subsubsection}{\numberline {9.4.1}Detailed Description}{24}{subsubsection.9.4.1}
+\contentsline {subsubsection}{\numberline {9.4.2}Function Documentation}{24}{subsubsection.9.4.2}
+\contentsline {paragraph}{\numberline {9.4.2.1}loop()}{24}{paragraph.9.4.2.1}
+\contentsline {paragraph}{\numberline {9.4.2.2}setup()}{24}{paragraph.9.4.2.2}
+\contentsline {subsection}{\numberline {9.5}src/controller/\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Syringenator.hpp File Reference}{24}{subsection.9.5}
+\contentsline {subsubsection}{\numberline {9.5.1}Detailed Description}{25}{subsubsection.9.5.1}
+\contentsline {subsubsection}{\numberline {9.5.2}Function Documentation}{26}{subsubsection.9.5.2}
+\contentsline {paragraph}{\numberline {9.5.2.1}armDispose()}{26}{paragraph.9.5.2.1}
+\contentsline {paragraph}{\numberline {9.5.2.2}armPark()}{26}{paragraph.9.5.2.2}
+\contentsline {paragraph}{\numberline {9.5.2.3}armPick()}{26}{paragraph.9.5.2.3}
+\contentsline {paragraph}{\numberline {9.5.2.4}lineDetector\_ISR()}{27}{paragraph.9.5.2.4}
+\contentsline {paragraph}{\numberline {9.5.2.5}motorEncoder\_ISR()}{27}{paragraph.9.5.2.5}
+\contentsline {paragraph}{\numberline {9.5.2.6}moveLineFollow()}{27}{paragraph.9.5.2.6}
+\contentsline {paragraph}{\numberline {9.5.2.7}moveRotate()}{27}{paragraph.9.5.2.7}
+\contentsline {paragraph}{\numberline {9.5.2.8}moveStraight()}{28}{paragraph.9.5.2.8}
+\contentsline {paragraph}{\numberline {9.5.2.9}obstacleDetector\_ISR()}{28}{paragraph.9.5.2.9}
+\contentsline {paragraph}{\numberline {9.5.2.10}serialCommunication\_ISR()}{28}{paragraph.9.5.2.10}
+\contentsline {subsection}{\numberline {9.6}src/pi/constants.py File Reference}{28}{subsection.9.6}
+\contentsline {subsubsection}{\numberline {9.6.1}Detailed Description}{30}{subsubsection.9.6.1}
+\contentsline {subsection}{\numberline {9.7}src/pi/\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Syringenator.py File Reference}{30}{subsection.9.7}
+\contentsline {subsubsection}{\numberline {9.7.1}Detailed Description}{31}{subsubsection.9.7.1}
+\contentsline {section}{Index}{33}{section*.18}

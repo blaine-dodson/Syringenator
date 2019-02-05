@@ -82,6 +82,6 @@ docs: doxygen.cfg $(docsource) $(PYCONST)
 
 
 super_clean:
-	rm -fr docs latex $(pdfman) $(ARDCONST) $(PYCONST)
+	rm -fr docs latex $(pdfman) $(ARDCONST) $(PYCONST) *.pyc
 
 
