@@ -1,7 +1,8 @@
 \@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble }{}
 \contentsline {section}{\numberline {1}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}ME}{1}{section.1}
-\contentsline {subsection}{\numberline {1.1}Development Team Hephaestus}{1}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Hypo\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Robot Assignment}{1}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.1}Development Team Vulcan}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Contributing}{1}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Hypo\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Robot Assignment}{1}{subsection.1.3}
 \contentsline {section}{\numberline {2}Requirements}{2}{section.2}
 \contentsline {subsection}{\numberline {2.1}Terminology}{2}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Rules of the Game}{3}{subsection.2.2}
@@ -18,20 +19,20 @@
 \contentsline {paragraph}{\numberline {7.1.1.1}ARDUINO\_ARM\_DISPOSE}{6}{paragraph.7.1.1.1}
 \contentsline {paragraph}{\numberline {7.1.1.2}ARDUINO\_ARM\_PARK}{6}{paragraph.7.1.1.2}
 \contentsline {paragraph}{\numberline {7.1.1.3}ARDUINO\_ARM\_PICKUP}{6}{paragraph.7.1.1.3}
-\contentsline {paragraph}{\numberline {7.1.1.4}ARDUINO\_LINE\_FOLLOW}{6}{paragraph.7.1.1.4}
+\contentsline {paragraph}{\numberline {7.1.1.4}ARDUINO\_LINE\_FOLLOW}{7}{paragraph.7.1.1.4}
 \contentsline {paragraph}{\numberline {7.1.1.5}ARDUINO\_MOVE}{7}{paragraph.7.1.1.5}
 \contentsline {paragraph}{\numberline {7.1.1.6}ARDUINO\_NULL}{7}{paragraph.7.1.1.6}
 \contentsline {paragraph}{\numberline {7.1.1.7}ARDUINO\_ROTATE}{7}{paragraph.7.1.1.7}
 \contentsline {paragraph}{\numberline {7.1.1.8}ARDUINO\_STATUS\_ACK}{7}{paragraph.7.1.1.8}
 \contentsline {paragraph}{\numberline {7.1.1.9}ARDUINO\_STATUS\_ARM\_FAULT}{7}{paragraph.7.1.1.9}
-\contentsline {paragraph}{\numberline {7.1.1.10}ARDUINO\_STATUS\_OBSTACLE}{7}{paragraph.7.1.1.10}
+\contentsline {paragraph}{\numberline {7.1.1.10}ARDUINO\_STATUS\_OBSTACLE}{8}{paragraph.7.1.1.10}
 \contentsline {paragraph}{\numberline {7.1.1.11}ARDUINO\_STATUS\_PICK\_FAIL}{8}{paragraph.7.1.1.11}
 \contentsline {paragraph}{\numberline {7.1.1.12}ARDUINO\_STATUS\_PICK\_SUCCESS}{8}{paragraph.7.1.1.12}
 \contentsline {paragraph}{\numberline {7.1.1.13}ARDUINO\_STATUS\_READY}{8}{paragraph.7.1.1.13}
 \contentsline {paragraph}{\numberline {7.1.1.14}ARM\_AZIMUTH\_MAX}{8}{paragraph.7.1.1.14}
 \contentsline {paragraph}{\numberline {7.1.1.15}ARM\_AZIMUTH\_MIN}{8}{paragraph.7.1.1.15}
 \contentsline {paragraph}{\numberline {7.1.1.16}ARM\_CONTROL}{8}{paragraph.7.1.1.16}
-\contentsline {paragraph}{\numberline {7.1.1.17}ARM\_ORIENT\_MAX}{8}{paragraph.7.1.1.17}
+\contentsline {paragraph}{\numberline {7.1.1.17}ARM\_ORIENT\_MAX}{9}{paragraph.7.1.1.17}
 \contentsline {paragraph}{\numberline {7.1.1.18}ARM\_ORIENT\_MIN}{9}{paragraph.7.1.1.18}
 \contentsline {paragraph}{\numberline {7.1.1.19}ARM\_RANGE\_MAX}{9}{paragraph.7.1.1.19}
 \contentsline {paragraph}{\numberline {7.1.1.20}ARM\_RANGE\_MIN}{9}{paragraph.7.1.1.20}
@@ -39,7 +40,7 @@
 \contentsline {paragraph}{\numberline {7.1.1.22}PICKUP\_X\_MIN}{9}{paragraph.7.1.1.22}
 \contentsline {paragraph}{\numberline {7.1.1.23}PICKUP\_Y\_MAX}{9}{paragraph.7.1.1.23}
 \contentsline {paragraph}{\numberline {7.1.1.24}PICKUP\_Y\_MIN}{9}{paragraph.7.1.1.24}
-\contentsline {paragraph}{\numberline {7.1.1.25}PORT\_AFT\_OBSTACLE}{9}{paragraph.7.1.1.25}
+\contentsline {paragraph}{\numberline {7.1.1.25}PORT\_AFT\_OBSTACLE}{10}{paragraph.7.1.1.25}
 \contentsline {paragraph}{\numberline {7.1.1.26}PORT\_FWD\_OBSTACLE}{10}{paragraph.7.1.1.26}
 \contentsline {paragraph}{\numberline {7.1.1.27}PORT\_LINE\_SENSE}{10}{paragraph.7.1.1.27}
 \contentsline {paragraph}{\numberline {7.1.1.28}PORT\_MOTOR\_AFT}{10}{paragraph.7.1.1.28}
@@ -47,10 +48,10 @@
 \contentsline {paragraph}{\numberline {7.1.1.30}STBD\_AFT\_OBSTACLE}{10}{paragraph.7.1.1.30}
 \contentsline {paragraph}{\numberline {7.1.1.31}STBD\_FWD\_OBSTACLE}{10}{paragraph.7.1.1.31}
 \contentsline {paragraph}{\numberline {7.1.1.32}STBD\_LINE\_SENSE}{10}{paragraph.7.1.1.32}
-\contentsline {paragraph}{\numberline {7.1.1.33}STBD\_MOTOR\_AFT}{10}{paragraph.7.1.1.33}
+\contentsline {paragraph}{\numberline {7.1.1.33}STBD\_MOTOR\_AFT}{11}{paragraph.7.1.1.33}
 \contentsline {paragraph}{\numberline {7.1.1.34}STBD\_MOTOR\_FWD}{11}{paragraph.7.1.1.34}
 \contentsline {subsection}{\numberline {7.2}Syringenator Namespace Reference}{11}{subsection.7.2}
-\contentsline {subsubsection}{\numberline {7.2.1}Detailed Description}{11}{subsubsection.7.2.1}
+\contentsline {subsubsection}{\numberline {7.2.1}Detailed Description}{12}{subsubsection.7.2.1}
 \contentsline {subsubsection}{\numberline {7.2.2}Function Documentation}{12}{subsubsection.7.2.2}
 \contentsline {paragraph}{\numberline {7.2.2.1}arduinoReceive()}{12}{paragraph.7.2.2.1}
 \contentsline {paragraph}{\numberline {7.2.2.2}arduinoSend()}{12}{paragraph.7.2.2.2}

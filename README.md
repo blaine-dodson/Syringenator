@@ -7,7 +7,7 @@ TCES 460
 Winter 2019
 
 
-# Development Team Hephaestus
+# Development Team Vulcan
 @authors
 
 Name             | Email
@@ -18,8 +18,11 @@ Alex Marlow      | alexmarlow117@gmail.com
 Jake McKenzie    | jake314@uw.edu
 Brooke Stevenson | brooks04@uw.edu
 
-
 @copyright Copyright &copy; 2019 by the authors. All rights reserved.
+
+# Contributing
+Each team member should create their own branch to work in. Each team member should periodically merge master into their own branch to ensure that we are synced up. The master branch should only ever have merge commits and working code. I will try to enforce this with github so that we don't make a mess.
+--ABD
 
 # HypoRobot Assignment
 If you’ve been paying any attention at all to current events you know that a major plague has descended on cities and counties throughout the country in the form of used and discarded hypodermic needles. Countless hours are spent cleaning up this mess. For instance, some schools are forced, for safety reasons, to send staff out to scour the playgrounds prior to children showing up.

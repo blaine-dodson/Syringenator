@@ -13,7 +13,7 @@
     \subitem {constants}, \hyperpage{6}
     \subitem {constants.hpp}, \hyperpage{19}
   \item {ARDUINO\_MOVE}
-    \subitem {constants}, \hyperpage{6}
+    \subitem {constants}, \hyperpage{7}
     \subitem {constants.hpp}, \hyperpage{20}
   \item {ARDUINO\_NULL}
     \subitem {constants}, \hyperpage{7}
@@ -31,7 +31,7 @@
     \subitem {constants}, \hyperpage{7}
     \subitem {constants.hpp}, \hyperpage{20}
   \item {ARDUINO\_STATUS\_PICK\_FAIL}
-    \subitem {constants}, \hyperpage{7}
+    \subitem {constants}, \hyperpage{8}
     \subitem {constants.hpp}, \hyperpage{21}
   \item {ARDUINO\_STATUS\_PICK\_SUCCESS}
     \subitem {constants}, \hyperpage{8}
@@ -56,7 +56,7 @@
     \subitem {constants}, \hyperpage{8}
     \subitem {constants.hpp}, \hyperpage{21}
   \item {ARM\_ORIENT\_MIN}
-    \subitem {constants}, \hyperpage{8}
+    \subitem {constants}, \hyperpage{9}
     \subitem {constants.hpp}, \hyperpage{22}
   \item {ARM\_RANGE\_MAX}
     \subitem {constants}, \hyperpage{9}
@@ -80,20 +80,20 @@
     \subitem {ARDUINO\_ARM\_PARK}, \hyperpage{6}
     \subitem {ARDUINO\_ARM\_PICKUP}, \hyperpage{6}
     \subitem {ARDUINO\_LINE\_FOLLOW}, \hyperpage{6}
-    \subitem {ARDUINO\_MOVE}, \hyperpage{6}
+    \subitem {ARDUINO\_MOVE}, \hyperpage{7}
     \subitem {ARDUINO\_NULL}, \hyperpage{7}
     \subitem {ARDUINO\_ROTATE}, \hyperpage{7}
     \subitem {ARDUINO\_STATUS\_ACK}, \hyperpage{7}
     \subitem {ARDUINO\_STATUS\_ARM\_FAULT}, \hyperpage{7}
     \subitem {ARDUINO\_STATUS\_OBSTACLE}, \hyperpage{7}
-    \subitem {ARDUINO\_STATUS\_PICK\_FAIL}, \hyperpage{7}
+    \subitem {ARDUINO\_STATUS\_PICK\_FAIL}, \hyperpage{8}
     \subitem {ARDUINO\_STATUS\_PICK\_SUCCESS}, \hyperpage{8}
     \subitem {ARDUINO\_STATUS\_READY}, \hyperpage{8}
     \subitem {ARM\_AZIMUTH\_MAX}, \hyperpage{8}
     \subitem {ARM\_AZIMUTH\_MIN}, \hyperpage{8}
     \subitem {ARM\_CONTROL}, \hyperpage{8}
     \subitem {ARM\_ORIENT\_MAX}, \hyperpage{8}
-    \subitem {ARM\_ORIENT\_MIN}, \hyperpage{8}
+    \subitem {ARM\_ORIENT\_MIN}, \hyperpage{9}
     \subitem {ARM\_RANGE\_MAX}, \hyperpage{9}
     \subitem {ARM\_RANGE\_MIN}, \hyperpage{9}
     \subitem {PICKUP\_X\_MAX}, \hyperpage{9}
@@ -101,7 +101,7 @@
     \subitem {PICKUP\_Y\_MAX}, \hyperpage{9}
     \subitem {PICKUP\_Y\_MIN}, \hyperpage{9}
     \subitem {PORT\_AFT\_OBSTACLE}, \hyperpage{9}
-    \subitem {PORT\_FWD\_OBSTACLE}, \hyperpage{9}
+    \subitem {PORT\_FWD\_OBSTACLE}, \hyperpage{10}
     \subitem {PORT\_LINE\_SENSE}, \hyperpage{10}
     \subitem {PORT\_MOTOR\_AFT}, \hyperpage{10}
     \subitem {PORT\_MOTOR\_FWD}, \hyperpage{10}
@@ -109,7 +109,7 @@
     \subitem {STBD\_FWD\_OBSTACLE}, \hyperpage{10}
     \subitem {STBD\_LINE\_SENSE}, \hyperpage{10}
     \subitem {STBD\_MOTOR\_AFT}, \hyperpage{10}
-    \subitem {STBD\_MOTOR\_FWD}, \hyperpage{10}
+    \subitem {STBD\_MOTOR\_FWD}, \hyperpage{11}
   \item {constants.hpp}
     \subitem {ARDUINO\_ARM\_DISPOSE}, \hyperpage{19}
     \subitem {ARDUINO\_ARM\_PARK}, \hyperpage{19}
@@ -200,7 +200,7 @@
     \subitem {constants}, \hyperpage{9}
     \subitem {constants.hpp}, \hyperpage{22}
   \item {PORT\_FWD\_OBSTACLE}
-    \subitem {constants}, \hyperpage{9}
+    \subitem {constants}, \hyperpage{10}
     \subitem {constants.hpp}, \hyperpage{23}
   \item {PORT\_LINE\_SENSE}
     \subitem {constants}, \hyperpage{10}
@@ -245,7 +245,7 @@
     \subitem {constants}, \hyperpage{10}
     \subitem {constants.hpp}, \hyperpage{23}
   \item {STBD\_MOTOR\_FWD}
-    \subitem {constants}, \hyperpage{10}
+    \subitem {constants}, \hyperpage{11}
     \subitem {constants.hpp}, \hyperpage{24}
   \item {Syringenator}, \hyperpage{11}
     \subitem {arduinoReceive}, \hyperpage{12}
