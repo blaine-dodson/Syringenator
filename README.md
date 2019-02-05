@@ -90,7 +90,7 @@ $ git commit
 ```
 Git will open a text editor where you can describe what the changes are. Make this a meaningful message since it will be the only thing that distinguishes this commit from hundreds of others.
 
-## Merging Other People's Work
+## Merge All the Latest Changes
 The magic of git is being able to merge conflicting changes. Before you share your changes (pushing), you must pull the latest changes and merge them with yours. First pull the master branch:
 ```
 $ git pull origin master
