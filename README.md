@@ -86,8 +86,9 @@ Untracked files:
 ```
 Once you are satisfied with what is currently staged you finish the commit by doing:
 ```
-$ git commit
+$ git commit -m "brief comment describing the nature of the commit"
 ```
+(-m is shorthand for --messages command which tells other collaborators (and your future self) the nature of the change you just made.
 Git will open a text editor where you can describe what the changes are. Make this a meaningful message since it will be the only thing that distinguishes this commit from hundreds of others.
 
 ## Merge All the Latest Changes
