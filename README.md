@@ -12,11 +12,11 @@ Winter 2019
 
 Name             | Email
 ---------------- | -----------------------
-Alex Boyle       | ???
+Alex Boyle       | boylea4@uw.edu
 Ammon Dodson     | ammon0@uw.edu
 Alex Marlow      | alexmarlow117@gmail.com
 Jake McKenzie    | jake314@uw.edu
-Brooke Stevenson | ???
+Brooke Stevenson | brooks04@uw.edu
 
 
 @copyright Copyright &copy; 2019 by the authors. All rights reserved.

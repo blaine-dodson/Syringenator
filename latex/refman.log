@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.18)  4 FEB 2019 16:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.18)  4 FEB 2019 16:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1356,7 +1356,7 @@ Underfull \hbox (badness 10000) detected at line 99
 
 pdfTeX warning: pdflatex (file ./constants_8hpp__dep__incl.pdf): PDF inclusion:
  multiple pdfs with page group included in a single page
-> <constants_8hpp__dep__incl.pdf, id=529, 229.85875pt x 212.795pt>
+> <constants_8hpp__dep__incl.pdf, id=535, 229.85875pt x 212.795pt>
 File: constants_8hpp__dep__incl.pdf Graphic file (type pdf)
 
 <use constants_8hpp__dep__incl.pdf>
@@ -1371,14 +1371,14 @@ Underfull \hbox (badness 10000) detected at line 102
 
 pdfTeX warning: pdflatex (file ./controller_8ino__incl.pdf): PDF inclusion: mul
 tiple pdfs with page group included in a single page
-> <controller_8ino__incl.pdf, id=658, 211.79124pt x 212.795pt>
+> <controller_8ino__incl.pdf, id=664, 211.79124pt x 212.795pt>
 File: controller_8ino__incl.pdf Graphic file (type pdf)
 
 <use controller_8ino__incl.pdf>
 Package pdftex.def Info: controller_8ino__incl.pdf used on input line 14.
 (pdftex.def)             Requested size: 211.0pt x 212.00868pt.
  [23]) (./Syringenator_8hpp.tex [24] <./Syringenator_8hpp__incl.pdf>
-<Syringenator_8hpp__incl.pdf, id=690, 229.85875pt x 156.585pt>
+<Syringenator_8hpp__incl.pdf, id=696, 229.85875pt x 156.585pt>
 File: Syringenator_8hpp__incl.pdf Graphic file (type pdf)
 
 <use Syringenator_8hpp__incl.pdf>
@@ -1388,7 +1388,7 @@ Package pdftex.def Info: Syringenator_8hpp__incl.pdf used on input line 14.
 
 pdfTeX warning: pdflatex (file ./Syringenator_8hpp__dep__incl.pdf): PDF inclusi
 on: multiple pdfs with page group included in a single page
-> <Syringenator_8hpp__dep__incl.pdf, id=696, 229.85875pt x 156.585pt>
+> <Syringenator_8hpp__dep__incl.pdf, id=702, 229.85875pt x 156.585pt>
 File: Syringenator_8hpp__dep__incl.pdf Graphic file (type pdf)
 
 <use Syringenator_8hpp__dep__incl.pdf>
@@ -1427,7 +1427,7 @@ Package rerunfilecheck Info: File `refman.out' has not changed.
 Here is how much of TeX's memory you used:
  16613 strings out of 494953
  242323 string characters out of 6180976
- 373909 words of memory out of 5000000
+ 372909 words of memory out of 5000000
  19291 multiletter control sequences out of 15000+600000
  49725 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1440,10 +1440,10 @@ w/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/u
 hvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (35 pages, 190458 bytes).
+Output written on refman.pdf (35 pages, 190486 bytes).
 PDF statistics:
- 1085 PDF objects out of 1200 (max. 8388607)
- 1007 compressed objects within 11 object streams
+ 1091 PDF objects out of 1200 (max. 8388607)
+ 1009 compressed objects within 11 object streams
  300 named destinations out of 1000 (max. 500000)
  333 words of extra memory for PDF output out of 10000 (max. 10000000)
 
