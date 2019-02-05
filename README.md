@@ -20,6 +20,10 @@ Brooke Stevenson | brooks04@uw.edu
 
 @copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
+# Project Pages
+*	[The github repo] (https://github.com/ammon0/Syringenator)
+*	[documentation site] (https://ammon0.github.io/Syringenator/index.html)
+
 # Using Git
 Git is a command-line tool for managing source code. Github is an on-line service that provides git remotes. A git remote is a remote copy of a git repository. Multiple people work in the same repository through the use of a single remote. The trick is to manage version conflicts intelligently.
 
