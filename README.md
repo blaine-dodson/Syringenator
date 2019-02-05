@@ -21,8 +21,8 @@ Brooke Stevenson | brooks04@uw.edu
 @copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
 # Project Pages
-*	[The github repo] (https://github.com/ammon0/Syringenator)
-*	[documentation site] (https://ammon0.github.io/Syringenator/index.html)
+*	[The Github Repo] (https://github.com/ammon0/Syringenator)
+*	[Documentation Website] (https://ammon0.github.io/Syringenator/index.html)
 
 # Using Git
 Git is a command-line tool for managing source code. Github is an on-line service that provides git remotes. A git remote is a remote copy of a git repository. Multiple people work in the same repository through the use of a single remote. The trick is to manage version conflicts intelligently.
@@ -100,11 +100,7 @@ The magic of git is being able to merge conflicting changes. Before you share yo
 ```
 $ git pull origin master
 ```
-You will need to enter your password and git will tell you if there have been any changes. Then you will merge:
-```
-$ git merge master
-```
-Git will attempt to merge the master branch into yours. If there are any conflicts it will tell you. Git will rewrite your files to include both versions of the conflicting code. To see which files are in conflict do:
+You will need to enter your password and git will tell you if there have been any changes. Git will attempt to merge the master branch into yours. If there are any conflicts it will tell you. Git will rewrite your files to include both versions of the conflicting code. To see which files are in conflict do:
 ```
 $ git status
 ```
