@@ -7,7 +7,7 @@ TCES 460
 Winter 2019
 
 
-# Development Team Hephaestus
+# Development Team Vulcan
 @authors
 
 Name             | Email
