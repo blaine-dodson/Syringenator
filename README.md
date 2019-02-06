@@ -24,6 +24,13 @@ Brooke Stevenson | brooks04@uw.edu
 *	[The Github Repo](https://github.com/ammon0/Syringenator)
 *	[Documentation Website](https://ammon0.github.io/Syringenator/index.html)
 
+# Communication
+## Don't Clobber Other People's Work
+Since we're all working in the same space it is important to be courteous. Pretty much this comes down to not overwriting other people's work. If there is some real need to change something that already exists there should be a discussion between everyone involved.
+
+## Comment Your Work
+Not everything will be obvious to everyone else. Write a paragraph for every non-trivial function. Write a detailed explanation any time you want to get clever with the code. Always put your name or initials on larger comments and blocks of code that you have written. That way it's easy to know who to talk to if there are questions.
+
 # Using Git
 Git is a command-line tool for managing source code. Github is an on-line service that provides git remotes. A git remote is a remote copy of a git repository. Multiple people work in the same repository through the use of a single remote. The trick is to manage version conflicts intelligently.
 
@@ -117,6 +124,13 @@ Pushing your work to the remote allows everyone else to see it. You should merge
 ```
 $ git push origin <your-branch>
 ```
+
+## Make a Pull Request
+The master branch is where we integrate all the changes everyone is making. This is done through "pull requests". A pull request is a way for everyone to see and comment on new code. It will also allow us to only make merge commits to the master branch. If we work this way the master branch will always be clean and there will be less errors, lost work, and wasted time.
+
+## What not to do
+*	**Don't commit directly to master**. I've tried to setup Github to make this difficult or impossible, but in any case that it isn't protected properly nobody should be trying this anyway.
+*	**Don't --force** Read your error messages, they are usually very helpful. The force tag overwrites history and can easily erase work already done. If git complains there is a reason for it.
 
 # HypoRobot Assignment
 If you’ve been paying any attention at all to current events you know that a major plague has descended on cities and counties throughout the country in the form of used and discarded hypodermic needles. Countless hours are spent cleaning up this mess. For instance, some schools are forced, for safety reasons, to send staff out to scour the playgrounds prior to children showing up.
