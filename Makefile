@@ -14,9 +14,9 @@ ARDDIR:=$(srcdir)/controller
 PIDIR :=$(srcdir)/pi
 
 
-.PHONEY: all pfd super_clean constants
+.PHONEY: all all_docs super_clean constants
 
-all: constants pdf
+all: constants all_docs
 
 
 ################################################################################
@@ -64,11 +64,11 @@ docsource+=$(wildcard $(ARDDIR)/*)
 docsource+=$(wildcard $(PIDIR)/*)
 pdfman   :=refman.pdf
 
-pdf: $(pdfman)
+all_docs: $(pdfman)
 
 $(pdfman): docs
 	$(MAKE) -C latex all
-	mv latex/refman.pdf ./
+	mv latex/refman.pdf ./$(pdfman)
 
 # also produces latex file
 docs: doxygen.cfg $(docsource) $(PYCONST)
