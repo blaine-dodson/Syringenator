@@ -92,7 +92,7 @@ Refering to [issue #10442](https://github.com/opencv/opencv/issues/10442) I did:
 sudo apt install liblapacke-dev
 ```
 
-## Python Virtual environment
+## Python Virtual Environment
 I wanted to include the python virtual environment in the git repo so that it can be used by anyone. I am not sure if this is the prefered way to share virtual environments. We also won't lose it if the pi has to be rebuilt. so the .bashrc script reads:
 ```
 export WORKON_HOME=$HOME/Desktop/Syringenator/src/pi/pyVirtEnv
