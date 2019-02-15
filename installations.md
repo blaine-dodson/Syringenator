@@ -1,3 +1,6 @@
+# Installations
+
+# librealsense
 
 ## Downloads
 
@@ -36,6 +39,7 @@ extract it
 
 ## Kernel source patching
 
+~~~bash
 `LINUX_BRANCH=$(uname -r)
 
 
@@ -49,7 +53,7 @@ then
 fi
 kernel_branch=$(choose_kernel_branch ${LINUX_BRANCH} ${ubuntu_codename})
 kernel_name="ubuntu-${ubuntu_codename}-$kernel_branch"`
-
+~~~
 
 
 ## Kernel Configuration
