@@ -1,8 +1,9 @@
 ##	@package Syringenator The top-level Pi program.
 #	@file Syringenator.py
-#	This is the main control script. It will run on the Raspberry Pi and direct all
-#	robot operations.
-#	@todo TODO: how do we initialize the robot run? a button press?
+#	This is the main control script. It will run on the Raspberry Pi and direct
+#	all robot operations.
+#
+#	@todo how do we initialize the robot run? a button press?
 #	--ABD
 #
 #	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
@@ -41,6 +42,61 @@ def arduinoSend(bytes):
 #
 #	@returns a list of bytes
 def arduinoReceive():
+	pass
+
+
+#==============================================================================#
+#                           GEOMETRIC TRANSFORMATIONS
+#==============================================================================#
+
+
+##	@page calibration Calibration
+#
+#	# Coordinate Systems
+#	This robot, of necessity uses multiple sets of coordinates.
+#
+#	## Image Cartesian
+#	This coordinate system is used to locate pixels and distance measurements in
+#	the images generated from the camera. It consists of a positive integer tuple
+#	horizontal and vertical. Its axes are at right angles, and its origin is in
+#	the upper left corner of the image. Its values are always positive and its
+#	units are pixels.
+#
+#	We may also consider the camera's depth value as the third member of the
+#	image coordinates. Its units should be meters.
+#
+#	## Floor Cartesian
+#	This coordinate system is used to locate targets around the robot. It
+#	consists of a signed integer tuple fore-aft and port-starboard. Positive
+#	values are forward and starboard. Its axes are at right angles and its origin
+#	is directly below the origin of Image Cartesian.
+#	Its units of length are centimeters. Smaller units introduce unecessary and
+#	likely unrealistic precision. Larger units would require this system to use
+#	floats.
+#
+#	## Arm Cylindrical
+#	This coordinate system is used to locate targets around the xArm. It consists
+#	of an unsigned integer tuple azimuth and range. Its origin is at the level of
+#	the floor and directly below the xArm axis of rotation. Its units are those
+#	convenient for the use of the arm, and its range of values is recorded in
+#	constants.in
+
+##	Derive floor position from image data
+#
+#	@param x the x-value of the point of interest in the image
+#	@param y the y-value of the point of interest in the image
+#	@param d the distance value of the point of interest in the image
+#	@returns a tuple (x, y)
+def imageCart2floorCart(x, y, d):
+	pass
+
+##	Derive cylindrical coordinates, centered on the arm from cartesian
+#	coordinates centered on the camera.
+#	
+#	@param x the x-value of the point of interest on the floor
+#	@param y the y-value of the point of interest on the floor
+#	@returns a tuple (Azimuth, Range)
+def floorCart2armCylinder(x, y):
 	pass
 
 
@@ -128,7 +184,7 @@ def pickUp(t):
 
 ##	signl the arduino to return to the line.
 #
-#	@todo TODO: do we need to check that we actually returned? how do we recover if
+#	@todo do we need to check that we actually returned? how do we recover if
 #	dead reckoning fails? --ABD
 #
 #	@returns None
@@ -162,8 +218,6 @@ def canBePicked(t):
 #==============================================================================#
 #                                    MAIN LOOP
 #==============================================================================#
-
-
 
 
 ## boolean indicating whether we are on the line

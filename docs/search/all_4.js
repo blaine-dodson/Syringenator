@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['obstacledetector_5fisr',['obstacleDetector_ISR',['../Syringenator_8hpp.html#a9e189084091b3c3bbee94b015c1a3257',1,'Syringenator.hpp']]],
-  ['ontheline',['onTheLine',['../namespaceSyringenator.html#a161fa877b77c9ebb120c1ed20739260b',1,'Syringenator']]]
+  ['linedetector_5fisr',['lineDetector_ISR',['../Syringenator_8hpp.html#ad664efb71d5032009deade168a23dfc0',1,'Syringenator.hpp']]],
+  ['linefollow',['lineFollow',['../namespaceSyringenator.html#a824ef6e71bc0975483435ffbdd58cb3e',1,'Syringenator']]],
+  ['log',['log',['../namespaceSyringenator.html#a263a26fdb4da94f277fb51f3e740f30d',1,'Syringenator']]],
+  ['loop',['loop',['../controller_8ino.html#afe461d27b9c48d5921c00d521181f12f',1,'controller.ino']]]
 ];
