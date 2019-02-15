@@ -91,6 +91,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a1c5a8cf020e400c8c0337977a5b6d921"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a1c5a8cf020e400c8c0337977a5b6d921">arduinoReceive</a> ()</td></tr>
 <tr class="memdesc:a1c5a8cf020e400c8c0337977a5b6d921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait some fixed time for the arduino to send one or more bytes.  <a href="#a1c5a8cf020e400c8c0337977a5b6d921">More...</a><br /></td></tr>
 <tr class="separator:a1c5a8cf020e400c8c0337977a5b6d921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa80e9ddf13cc7edc585486090bccd2ef"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#aa80e9ddf13cc7edc585486090bccd2ef">imageCart2floorCart</a> (x, y, d)</td></tr>
+<tr class="memdesc:aa80e9ddf13cc7edc585486090bccd2ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derive floor position from image data.  <a href="#aa80e9ddf13cc7edc585486090bccd2ef">More...</a><br /></td></tr>
+<tr class="separator:aa80e9ddf13cc7edc585486090bccd2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f676ad80a05466b143e7824a4c2ea22"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a1f676ad80a05466b143e7824a4c2ea22">floorCart2armCylinder</a> (x, y)</td></tr>
+<tr class="memdesc:a1f676ad80a05466b143e7824a4c2ea22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derive cylindrical coordinates, centered on the arm from cartesian coordinates centered on the camera.  <a href="#a1f676ad80a05466b143e7824a4c2ea22">More...</a><br /></td></tr>
+<tr class="separator:a1f676ad80a05466b143e7824a4c2ea22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff01237d3ff3e33f0ffc32927d813df0"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#aff01237d3ff3e33f0ffc32927d813df0">scan</a> ()</td></tr>
 <tr class="memdesc:aff01237d3ff3e33f0ffc32927d813df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A routine to take a picture and report back the closest target The Computer vision routine must be able to handle multiple targets in the image.  <a href="#aff01237d3ff3e33f0ffc32927d813df0">More...</a><br /></td></tr>
 <tr class="separator:aff01237d3ff3e33f0ffc32927d813df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -190,6 +196,89 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>A routine to determine if the target is in position to be picked up. </p>
 <p>Calculates whether the center of the target bounding box is in the pickup area.</p>
 <dl class="section return"><dt>Returns</dt><dd>a boolean </dd></dl>
+
+</div>
+</div>
+<a id="a1f676ad80a05466b143e7824a4c2ea22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f676ad80a05466b143e7824a4c2ea22">&#9670;&nbsp;</a></span>floorCart2armCylinder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def Syringenator.floorCart2armCylinder </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Derive cylindrical coordinates, centered on the arm from cartesian coordinates centered on the camera. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the x-value of the point of interest on the floor </td></tr>
+    <tr><td class="paramname">y</td><td>the y-value of the point of interest on the floor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a tuple (Azimuth, Range) </dd></dl>
+
+</div>
+</div>
+<a id="aa80e9ddf13cc7edc585486090bccd2ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa80e9ddf13cc7edc585486090bccd2ef">&#9670;&nbsp;</a></span>imageCart2floorCart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def Syringenator.imageCart2floorCart </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Derive floor position from image data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the x-value of the point of interest in the image </td></tr>
+    <tr><td class="paramname">y</td><td>the y-value of the point of interest in the image </td></tr>
+    <tr><td class="paramname">d</td><td>the distance value of the point of interest in the image </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a tuple (x, y) </dd></dl>
 
 </div>
 </div>
@@ -313,7 +402,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 </div><div class="memdoc">
 
 <p>signl the arduino to return to the line. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>TODO: do we need to check that we actually returned? how do we recover if dead reckoning fails? &ndash;ABD</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>do we need to check that we actually returned? how do we recover if dead reckoning fails? &ndash;ABD</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
 </div>
