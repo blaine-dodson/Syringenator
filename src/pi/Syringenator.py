@@ -1,9 +1,7 @@
 ##	@package Syringenator The top-level Pi program.
 #	@file Syringenator.py
-#	This is the main control script. It will run on the Raspberry Pi and direct all
-#	robot operations.
-#	@todo TODO: how do we initialize the robot run? a button press?
-#	--ABD
+#	This is the main control script. It will run on the Raspberry Pi and direct
+#	all robot operations.
 #
 #	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
@@ -41,6 +39,33 @@ def arduinoSend(bytes):
 #
 #	@returns a list of bytes
 def arduinoReceive():
+	pass
+
+
+#==============================================================================#
+#                           GEOMETRIC TRANSFORMATIONS
+#==============================================================================#
+
+
+##	@page calibration Calibration
+#
+
+##	Derive floor position from image data
+#
+#	@param x the x-value of the point of interest in the image
+#	@param y the y-value of the point of interest in the image
+#	@param d the distance value of the point of interest in the image
+#	@returns a tuple (x, y)
+def image2floor(x, y, d):
+	pass
+
+##	Derive cylindrical coordinates, centered on the arm from cartesian
+#	coordinates centered on the camera.
+#	
+#	@param x the x-value of the point of interest on the floor
+#	@param y the y-value of the point of interest on the floor
+#	@returns a tuple (Azimuth, Range)
+def camCart2armCylinder(x, y):
 	pass
 
 
@@ -164,7 +189,8 @@ def canBePicked(t):
 #==============================================================================#
 
 
-
+#	@todo TODO: how do we initialize the robot run? a button press?
+#	--ABD
 
 ## boolean indicating whether we are on the line
 onTheLine = True
