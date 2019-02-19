@@ -34,6 +34,8 @@ void lineDetector_ISR(void){
 	// if the line is still detected, advance the opposite motor.
 	// a delay may be appropriate in this loop to allow the motor to advance
 	
+	// TODO: Handle unreliability in the sensor
+	
 	
 	// clear the interrupt if necessary
 	
