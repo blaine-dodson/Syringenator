@@ -3,6 +3,7 @@ var searchData=
   ['arduino_5farm_5fdispose',['ARDUINO_ARM_DISPOSE',['../constants_8hpp.html#a86502ebe3d028d110d3b86b63c0d993c',1,'constants.hpp']]],
   ['arduino_5farm_5fpark',['ARDUINO_ARM_PARK',['../constants_8hpp.html#a57569374c140293ea3eb6d6368cb7bbd',1,'constants.hpp']]],
   ['arduino_5farm_5fpickup',['ARDUINO_ARM_PICKUP',['../constants_8hpp.html#ad91584ecea7eac2995a8561d04fb230e',1,'constants.hpp']]],
+  ['arduino_5favoid',['ARDUINO_AVOID',['../constants_8hpp.html#a70c1bd51dd9e0bc247e1b273581dc300',1,'constants.hpp']]],
   ['arduino_5fline_5ffollow',['ARDUINO_LINE_FOLLOW',['../constants_8hpp.html#aa7094214691a6fc7878fe2b0def3cf64',1,'constants.hpp']]],
   ['arduino_5fmove',['ARDUINO_MOVE',['../constants_8hpp.html#a181612c22e57680b1a7fbb5ec603f098',1,'constants.hpp']]],
   ['arduino_5fnull',['ARDUINO_NULL',['../constants_8hpp.html#a84268c0e68916a77e68d86d845c6f7f4',1,'constants.hpp']]],

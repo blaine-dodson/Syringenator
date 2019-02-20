@@ -35,6 +35,14 @@ PICKUP_X_MAX = 0
 PICKUP_Y_MIN = 0
 ## The maximum target center y-value that allows a pickup
 PICKUP_Y_MAX = 0
+## The maximum count of forward ticks used in moveCloser()
+FWD_MAX_TICKS = 200
+## The maximum absolute value of rotation ticks used in moveCloser()
+ROT_MAX_TICKS = 200
+## Calibration factor used in rotation calculation
+CAL_ROT_FACTOR = 1
+## Calibration factor used in forward calculation
+CAL_FWD_FACTOR = 1
 ## A place holder for troubleshooting etc.
 ARDUINO_NULL = 0x00
 ## If the arduino needs to acknowledge something
@@ -55,6 +63,8 @@ ARDUINO_ROTATE = 0x10
 ARDUINO_MOVE = 0x11
 ## serial command the arduino to follow the line
 ARDUINO_LINE_FOLLOW = 0x12
+## serial command the arduino to avoid an obstacle
+ARDUINO_AVOID = 0x13
 ## serial command the arduino to call the park action sequence
 ARDUINO_ARM_PARK = 0x20
 ## serial command the arduino to call the dispose action sequence
