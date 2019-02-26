@@ -12,7 +12,8 @@ sys.path.append('/usr/local/lib/python3.5/dist-packages/cv2')
 
 import cv2
 import os
-netrez=1024
+#at 320 they get pretty bad confidence on far
+netrez=416
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
