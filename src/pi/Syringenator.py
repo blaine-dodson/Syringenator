@@ -10,11 +10,24 @@
 
 
 import constants
+import cv2
+import numpy
+import pyrealsense2
+
+
+FRAME_RATE = 30
+IMG_WIDTH  = 640
+IMG_HEIGHT = 480
+
+NETREZ = 1024
+
+DEBUG_CAPTURE = False
 
 
 #==============================================================================#
 #                               DATA LOGGING
 #==============================================================================#
+
 
 ## Record system events for later analysis
 #
@@ -43,6 +56,58 @@ def arduinoSend(bytes):
 #	@returns a list of bytes
 def arduinoReceive():
 	pass
+
+
+#==============================================================================#
+#                            REALSENSE INITIALIZATION
+#==============================================================================#
+
+
+
+##	initialize the realsense camera.
+#	@returns a realsense2 pipeline object
+def initCamera():
+	cfg = pyrealsense2.config()
+	
+	#enable_stream(stream_type: rs.stream, width: int, height: int, format: rs.format=format.any, framerate: int=0L) -> None
+	cfg.enable_stream(
+		pyrealsense2.stream.color,
+		IMG_WIDTH, IMG_HEIGHT, 
+		pyrealsense2.format.bgr8,
+		FRAME_RATE
+	)
+	
+#	print(pyrealsense2.device_list())
+#	dev = pyrealsense2.device(pyrealsense2.device_list().front())
+#	
+#	if(dev == 0):
+#		print("No device")
+#	else:
+#		print(dev.get_info())
+#	
+#	print(pyrealsense2.device_list())
+	
+	
+	pipeline = pyrealsense2.pipeline()
+	
+	if(pipeline == None):
+		print("Pipeline not created")
+		exit() # @todo fix this
+
+	try:
+		# Create a context object. This object owns the handles to all connected
+		# realsense devices
+		pipeline.start(cfg)
+	except:
+		print("Pipeline did not start")
+		exit() # @todo fix this
+
+	# stabilize auto exposure. do we need to do this once, or before each pic?
+	for i in range(0,30):
+		frames = pipeline.wait_for_frames()
+	
+	print("Camera initialized")
+	return pipeline
 
 
 #==============================================================================#
@@ -117,9 +182,34 @@ class Target: pass
 #	determine the closest one to pursue.
 #	--ABD
 #
+#	@param pipe a realsense2 pipeline object configured with a color stream.
 #	@returns a target object
-def scan():
+def scan(pipe):
 	# get a picture from librealsense
+	
+	try:
+		frames = pipe.wait_for_frames()
+	except:
+		print("no frames")
+		initCamera()
+		return None
+	
+	frame = frames.get_color_frame()
+	
+	# how often does this happen?
+	if(frame == None):
+		print("no frame")
+		return None
+	
+	mat = numpy.reshape(
+		numpy.array(frame.get_data(), numpy.uint8),
+		(IMG_HEIGHT, IMG_WIDTH, 3)
+	)
+	
+	if(DEBUG_CAPTURE):
+		cv2.namedWindow("Display Image", cv2.WINDOW_AUTOSIZE );
+		cv2.imshow("Display Image", mat);
+		cv2.waitKey(0);
 	
 	# pass the picture to OpenCV
 	
@@ -216,7 +306,7 @@ def canBePicked(t):
 
 
 #==============================================================================#
-#                                    MAIN LOOP
+#                               INITIALIZATION
 #==============================================================================#
 
 
@@ -225,8 +315,18 @@ onTheLine = True
 ## The currently aquired target
 target = None
 
+
+cameraPipe = initCamera()
+
+
+#==============================================================================#
+#                                    MAIN LOOP
+#==============================================================================#
+
+
 while True:
-	target = scan()
+	print("loop")
+	target = scan(cameraPipe)
 	if target != None: # we have aquired a target
 		log(target)
 		if canBePicked(target):
