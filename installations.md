@@ -107,7 +107,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D INSTALL_PYTHON_EXAMPLES=ON \
     -D INSTALL_C_EXAMPLES=OFF \
     -D OPENCV_EXTRA_MODULES_PATH=~/Desktop/opencv_contrib-4.0.1/modules \
-    -D PYTHON_EXECUTABLE=~/Desktop/Syringenator/src/pi/pyVirtEnv/syringenator/bin/python \
+    -D PYTHON_EXECUTABLE=~/Desktop/Syringenator/pyVirtEnv/syringenator/bin/python \
     -D BUILD_EXAMPLES=ON \
     -D WITH_OPENMP=ON ..
 ```
@@ -148,9 +148,6 @@ cmake reports:
 -- Looking for sys/videoio.h - not found
 -- Checking for module 'libavresample'
 --   No package 'libavresample' found
--- Could not find OpenBLAS lib. Turning OpenBLAS_FOUND off
--- Found Atlas: /usr/include  
--- Found Atlas (include: /usr/include, library: /usr/lib/libatlas.so)
 -- LAPACK(Atlas): LAPACK_LIBRARIES: /usr/lib/liblapack.so;/usr/lib/libcblas.so;/usr/lib/libatlas.so
 -- LAPACK(Atlas): Support is enabled.
 -- Could NOT find JNI (missing: JAVA_INCLUDE_PATH JAVA_INCLUDE_PATH2 JAVA_AWT_INCLUDE_PATH) 
@@ -307,5 +304,6 @@ cmake reports:
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/big/Desktop/opencv-4.0.1/build
+
 ```
 
