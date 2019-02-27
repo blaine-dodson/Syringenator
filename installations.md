@@ -2,39 +2,48 @@
 
 # librealsense
 
+from [github](https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md)
+
 ## Downloads
 
 Update the system
-
-`sudo apt update`
+```
+sudo apt update
+```
 
 get the kernel headers so that we can compile new things
-
-`sudo apt install raspberrypi-kernel-headers`
+```
+sudo apt install raspberrypi-kernel-headers
+```
 
 make sure that raspberrypi-kernel and raspberrypi-bootloader are at the latest versions
 
 install git and other build tools
-
-`sudo apt install git build-essential -y`
+```
+sudo apt install git build-essential -y
+```
 
 get the latest librealsense
-
-`git clone --depth 1 https://github.com/IntelRealSense/librealsense.git`
+```
+git clone --depth 1 https://github.com/IntelRealSense/librealsense.git
+```
 
 
 Install Intel Realsense permission scripts located in librealsense source directory:
-
-`sudo cp config/99-realsense-libusb.rules /etc/udev/rules.d/`
-`sudo udevadm control --reload-rules && udevadm trigger`
+```
+sudo cp config/99-realsense-libusb.rules /etc/udev/rules.d/
+sudo udevadm control --reload-rules && udevadm trigger
+```
 
 get the source for the current kernel make sure version numbers match apt-cache
-
-`wget https://github.com/raspberrypi/linux/archive/raspberrypi-kernel_1.20161215-1.tar.gz`
+```
+wget https://github.com/raspberrypi/linux/archive/raspberrypi-kernel_1.20161215-1.tar.gz
+```
 
 extract it
-
-`tar -xzf raspberrypi-kernel_1.20161215-1.tar.gz`
+```
+tar -xzf raspberrypi-kernel_1.20161215-1.tar.gz
+```
 
 
 ## Kernel source patching
@@ -77,6 +86,78 @@ put the configuration in the source tree
 In the kernel directory update the config
 
 `make silentoldconfig`
+
+## Build librealsense
+
+```
+mkdir build && cd build
+```
+
+The default build is set to produce the core shared object and unit-tests binaries in Debug mode.
+```
+cmake ../
+```
+
+- -DCMAKE_BUILD_TYPE=Release to build with optimizations.
+- -DBUILD_EXAMPLES=true Builds librealsense along with the demos and tutorials
+- -DBUILD_GRAPHICAL_EXAMPLES=false For systems without OpenGL or X11 build only textual examples
+
+Command used:
+```
+cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=/home/big/Desktop/Syringenator/pyVirtEnv/syringenator/bin/python ../
+```
+
+cmake returns:
+```
+-- Info: REALSENSE_VERSION_STRING=2.18.0
+-- Setting Unix configurations
+-- Checking internet connection...
+-- Internet connection identified, enabling BUILD_WITH_TM2
+-- Found PythonInterp: /home/big/Desktop/Syringenator/pyVirtEnv/syringenator/bin/python (found version "2.7.12") 
+-- Found PythonLibs: /usr/lib/arm-linux-gnueabihf/libpython2.7.so
+-- pybind11 v2.2.1
+-- Performing Test HAS_FLTO
+-- Performing Test HAS_FLTO - Success
+-- LTO enabled
+-- Could NOT find Vulkan (missing: VULKAN_LIBRARY VULKAN_INCLUDE_DIR) 
+-- Using X11 for window creation
+-- Building with TM2
+-- ----------------------------------------------------------------------------
+-- T265 Product versions:
+-- - HOST 0.19.3.1505 (Default from versions.cmake)
+-- - Remote FW 0.0.18.4577 (Default from versions.cmake)
+-- - Remote CENTRAL APP 2.0.19.271 (Default from versions.cmake)
+-- - Remote CENTRAL BL 1.0.1.112 (Default from versions.cmake)
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Downloading FW 0.0.18.4577 from 'http://realsense-hw-public.s3.amazonaws.com/Releases/TM2/FW/target/0.0.18.4577/target-0.0.18.4577.mvcmd'
+-- Converting FW version 0.0.18.4577 from target.mvcmd to /home/big/Desktop/librealsense/third-party/libtm/libtm/src/fw.h
+-- Downloading Central App 2.0.19.271 from 'http://realsense-hw-public.s3.amazonaws.com/Releases/TM2/FW/app/2.0.19.271/central_app-2.0.19.271.bin'
+-- Converting Central App version 2.0.19.271 from central_app.bin to /home/big/Desktop/librealsense/third-party/libtm/libtm/src/CentralAppFw.h
+-- Downloading Central BL 1.0.1.112 from 'http://realsense-hw-public.s3.amazonaws.com/Releases/TM2/FW/bl/1.0.1.112/central_bl-1.0.1.112.bin'
+-- Converting Central BL version 1.0.1.112 from central_bl.bin to /home/big/Desktop/librealsense/third-party/libtm/libtm/src/CentralBlFw.h
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Building libtm project on , LIBTM version [0.19.3.1505], API version [10.0], branch [master], FW [0.0.18.4577], Central APP [2.0.19.271], Central BL [1.0.1.112]
+-- Creating version file /home/big/Desktop/librealsense/third-party/libtm/libtm/src/Version.h
+-- Building project tm as STATIC library lib
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Building all projects of libtm_samples
+-- Building project libtm_util
+-- ----------------------------------------------------------------------------
+-- CMake Done
+-- ----------------------------------------------------------------------------
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/big/Desktop/librealsense/build
+```
+
+Recompile and install librealsense binaries:
+
+```
+sudo make uninstall && make clean && make && sudo make install
+
+```
+
+
 
 
 # OpenCV
