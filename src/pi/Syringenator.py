@@ -13,7 +13,10 @@
 
 
 DEBUG_CAPTURE = False
-DEBUG_AQUISITION = True
+DEBUG_AQUISITION = False
+DEBUG_APPROACH = True
+DEBUG_TRANSFORM = True
+DEBUG_ORIENTATION = False
 DEBUG_TIMING = True
 
 import constants
@@ -24,6 +27,8 @@ import pyrealsense2
 
 if DEBUG_TIMING: import time
 
+if DEBUG_CAPTURE or DEBUG_AQUISITION or DEBUG_APPROACH:
+	cv2.namedWindow("View", cv2.WINDOW_AUTOSIZE );
 
 #==============================================================================#
 #                                 DEFINITIONS
@@ -42,12 +47,17 @@ class Target:
 		self.box = box
 	
 	def setImg(self, img):
-		self.img = img
+		self.image = img
 	
 	##	Get the taxicab distance to the target.
 	#	@returns an integer representing distance
 	def distance(self):
-		return self.centerX + self.centerY
+		xDist = self.centerX - (IMG_WIDTH/2)
+		yDist = IMG_HEIGHT - self.centerY
+		
+		if(xDist<0): xDist = -xDist
+		
+		return xDist + yDist
 	
 	def getBox(self):
 		return self.box
@@ -55,7 +65,7 @@ class Target:
 
 
 class NeuralNet:
-	NETREZ = 512
+	NETREZ = 320
 	WEIGHTSPATH = "nn/yolov3-tiny-obj_37000.weights"
 	CONFIGPATH = "nn/yolov3-tiny-obj.cfg"
 	
@@ -76,7 +86,7 @@ class NeuralNet:
 
 		# show timing information on YOLO
 		if(DEBUG_TIMING):
-			log("string", "getBoxes(): YOLO took {:.6f} seconds".format(end - start))
+			log("string", "YOLO took {:.6f} seconds".format(end - start))
 		return output
 
 
@@ -145,9 +155,10 @@ class Camera:
 		)
 	
 		if(DEBUG_CAPTURE):
-			cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
-			cv2.imshow("Image Capture", mat);
-			cv2.waitKey(2);
+			#cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
+			log("string", "photo capture")
+			cv2.imshow("View", mat);
+			cv2.waitKey(0);
 	
 		return mat
 
@@ -204,9 +215,9 @@ def arduinoSend(*bytes):
 #
 #	@returns a list of bytes
 def arduinoReceive():
-	bytes = []
+	
 	# do something
-	return bytes
+	return constants.ARDUINO_STATUS_READY
 
 
 #==============================================================================#
@@ -272,6 +283,79 @@ def extractTargets(dataIn):
 	
 	log("string", "extractTargets(): finish")
 	return targets
+
+
+# A small helper function for computing the sums of each quadrant 
+# to obtain syringe orientation -JMC
+def cmpCroppedColour(x_i,x_f,y_i,y_f,crop_colour):
+	Q = 0
+	for i in range(x_i,x_f):
+		for j in range(y_i,y_f):
+			Q += crop_colour[i][j]
+	return Q
+#           Q1 Q2 Q3
+#           Q4 Q5 Q6
+#           Q7 Q8 Q9
+
+# Essentially if the sum of Q1 and Q9 is 
+# greater than the sum of Q2 and Q8 and greater than the sum of Q3 and Q7 
+# and greater than the sum of Q4 and Q6 we know the syringe mus be oriented at a 135 
+# degree angle where zero is the syringe facing upward
+# -JMC
+def orientationCapture(x,y,w,h,img):
+
+	crop_colour = img[y:y+h, x:x+w]
+	gray = cv2.cvtColor(crop_colour, cv2.COLOR_BGR2GRAY)
+	gray[gray < 144] = 0
+
+
+	if DEBUG_ORIENTATION:
+		cv2.imshow("View", crop_colour);
+		cv2.waitKey(0);
+		cv2.imshow("View", gray);
+		cv2.waitKey(0);
+	
+	crop_colour = gray
+
+	Q1 = 0
+	Q2 = 0
+	Q3 = 0
+	Q4 = 0
+	Q6 = 0
+	Q7 = 0
+	Q8 = 0
+	Q9 = 0
+
+	Q1 = cmpCroppedColour(0,int(numpy.rint(len(crop_colour)/3)),0,int(numpy.rint(len(crop_colour[0])/3)),crop_colour)
+	Q2 = cmpCroppedColour(int(numpy.rint(len(crop_colour)/3) + 1), (int(2*numpy.rint(len(crop_colour)/3))), 0, int(numpy.rint(len(crop_colour[0])/3)), crop_colour)
+	Q3 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), 0, int(numpy.rint(len(crop_colour[0])/3)), crop_colour)
+	Q4 = cmpCroppedColour(0, int(numpy.rint(len(crop_colour)/3)), int(numpy.rint(len(crop_colour[0])/3) + 1), (int(2*numpy.rint(len(crop_colour[0]))/3)), crop_colour)
+	Q6 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), int(numpy.rint(len(crop_colour[0])/3) + 1), (int(2*numpy.rint(len(crop_colour[0]))/3)), crop_colour)
+	Q7 = cmpCroppedColour(0, int(numpy.rint(len(crop_colour)/3)), (2*int(numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
+	Q8 = cmpCroppedColour(int(numpy.rint(len(crop_colour)/3) + 1), (int(2*numpy.rint(len(crop_colour))/3)), (int(2*numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
+	Q9 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), (int(2*numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
+
+	degrees_0 = int(Q4 + Q6)
+	degrees_45 = Q1 + Q9
+	degrees_90 = Q2 + Q8
+	degrees_135 = Q3 + Q7
+
+	# first two if statements should take care of the issue of aspect ratio distortion.
+	# That is if a bounding box is so narrow around the syringe we just assume the 0 or 90 degree 
+	# case otherwise we do the summing of quadrants.
+	if w * 2 < h: 
+		return 90
+	elif h * 2 < w:
+		return 0
+	else:
+		if degrees_0 > degrees_45 and degrees_0 > degrees_90 and degrees_0 > degrees_135:
+		    return 0
+		if degrees_45 > degrees_0 and degrees_45 > degrees_90 and degrees_45 > degrees_135:
+		    return 45
+		if degrees_90 > degrees_0 and degrees_90 > degrees_45 and degrees_90 > degrees_135:
+		    return 90
+		if degrees_135 > degrees_0 and degrees_135 > degrees_90 and degrees_135 > degrees_45:
+		    return 135
 
 
 #==============================================================================#
@@ -343,6 +427,8 @@ def floorCart2armCylinder(x, y):
 #	@param pipe a realsense2 pipeline object configured with a color stream.
 #	@returns a target object
 def scan(cam, net):
+	log("string", "scan(): start")
+	
 	# get a picture from librealsense
 	image = cam.capture()
 	
@@ -371,7 +457,8 @@ def scan(cam, net):
 			)
 		
 		# show the output image
-		cv2.imshow("Targets", image)
+		#cv2.namedWindow("Targets", cv2.WINDOW_AUTOSIZE );
+		cv2.imshow("View", image)
 		cv2.waitKey(0)
 	
 	# pick the closest target
@@ -379,13 +466,17 @@ def scan(cam, net):
 	closest = None
 	
 	for t in targets:
+		#print("target distance is: " + str(t.distance()))
+		#print("d is: " + str(d))
 		if(t.distance() < d):
 			closest = t
 			d = closest.distance()
+			#print("updating closest")
 	
 	if(closest != None):
 		closest.setImg(image)
 	
+	log("string", "scan(): stop")
 	return closest
 
 
@@ -418,8 +509,6 @@ def canBePicked(t):
 #	the scan cycle.
 #
 #	Should we spend effort trying to avoid running over decoys here?
-#
-#	This routine should check for ARDUINO_STATUS_OBSTACLE. then what?
 #
 #	This routine is likely where we will have the most issues.
 #	--ABD
@@ -472,8 +561,9 @@ def approach(t):
 	while(status == None):
 		status = arduinoReceive()
 	log("string", "approach(): status is " + str(status) )
-	if status == ARDUINO_STATUS_OBSTACLE:
+	if status == constants.ARDUINO_STATUS_OBSTACLE:
 		obstacle = True
+		log("string", "obstacle detected")
 
 
 ## avoid an obstacle
@@ -517,11 +607,18 @@ def avoid():
 #	@param t a Target object containing the raw bitmap data
 #	@returns None
 def pickUp(t):
-	log("pickUp(): start")
+	log("string", "pickUp(): start")
 	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
 		pass
 	
 	# find the center and orientation of the target
+	o = orientationCapture(
+		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
+	T=0
+	r=0
+	
+	if DEBUG_TRANSFORM:
+		log("string", "o: " + str(o))
 	
 	# signal the arduino to pickUp
 	
@@ -583,9 +680,41 @@ def canBePicked(t):
 		t.centerY < constants.PICKUP_Y_MAX
 	):
 		log("string", "can pick")
+		if DEBUG_APPROACH:
+			cv2.rectangle(
+				t.image,
+				(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
+				(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
+				[200, 0, 0], 2
+			)
+			cv2.drawMarker(
+				t.image,
+				(t.centerX, t.centerY),
+				[0, 200, 0]
+			)
+			# show the output image
+			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
+			cv2.imshow("View", t.image)
+			cv2.waitKey(0)
 		return True
 	else:
 		log("string", "cannot pick")
+		if DEBUG_APPROACH:
+			cv2.rectangle(
+				t.image,
+				(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
+				(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
+				[220, 0, 0], 2
+			)
+			cv2.drawMarker(
+				t.image,
+				(t.centerX, t.centerY),
+				[0, 0, 150]
+			)
+			# show the output image
+			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
+			cv2.imshow("View", t.image)
+			cv2.waitKey(0)
 		return False
 
 
