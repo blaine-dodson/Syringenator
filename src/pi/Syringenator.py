@@ -13,8 +13,8 @@
 
 
 DEBUG_CAPTURE = False
-DEBUG_AQUISITION = True
-DEBUG_TIMING = True
+DEBUG_AQUISITION = False
+DEBUG_TIMING = False
 
 import constants
 import cv2
@@ -204,9 +204,9 @@ def arduinoSend(*bytes):
 #
 #	@returns a list of bytes
 def arduinoReceive():
-	bytes = []
+	
 	# do something
-	return bytes
+	return constants.ARDUINO_STATUS_READY
 
 
 #==============================================================================#
@@ -472,8 +472,9 @@ def approach(t):
 	while(status == None):
 		status = arduinoReceive()
 	log("string", "approach(): status is " + str(status) )
-	if status == ARDUINO_STATUS_OBSTACLE:
+	if status == constants.ARDUINO_STATUS_OBSTACLE:
 		obstacle = True
+		log("string", "obstacle detected")
 
 
 ## avoid an obstacle
