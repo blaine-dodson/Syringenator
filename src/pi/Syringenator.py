@@ -13,8 +13,9 @@
 
 
 DEBUG_CAPTURE = False
-DEBUG_AQUISITION = False
-DEBUG_TIMING = False
+DEBUG_AQUISITION = True
+DEBUG_APPROACH = True
+DEBUG_TIMING = True
 
 import constants
 import cv2
@@ -24,6 +25,8 @@ import pyrealsense2
 
 if DEBUG_TIMING: import time
 
+if DEBUG_CAPTURE or DEBUG_AQUISITION or DEBUG_APPROACH:
+	cv2.namedWindow("View", cv2.WINDOW_AUTOSIZE );
 
 #==============================================================================#
 #                                 DEFINITIONS
@@ -42,12 +45,17 @@ class Target:
 		self.box = box
 	
 	def setImg(self, img):
-		self.img = img
+		self.image = img
 	
 	##	Get the taxicab distance to the target.
 	#	@returns an integer representing distance
 	def distance(self):
-		return self.centerX + self.centerY
+		xDist = self.centerX - (IMG_WIDTH/2)
+		yDist = IMG_HEIGHT - self.centerY
+		
+		if(xDist<0): xDist = -xDist
+		
+		return xDist + yDist
 	
 	def getBox(self):
 		return self.box
@@ -76,7 +84,7 @@ class NeuralNet:
 
 		# show timing information on YOLO
 		if(DEBUG_TIMING):
-			log("string", "getBoxes(): YOLO took {:.6f} seconds".format(end - start))
+			log("string", "YOLO took {:.6f} seconds".format(end - start))
 		return output
 
 
@@ -145,9 +153,10 @@ class Camera:
 		)
 	
 		if(DEBUG_CAPTURE):
-			cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
-			cv2.imshow("Image Capture", mat);
-			cv2.waitKey(2);
+			#cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
+			log("string", "photo capture")
+			cv2.imshow("View", mat);
+			cv2.waitKey(0);
 	
 		return mat
 
@@ -343,6 +352,8 @@ def floorCart2armCylinder(x, y):
 #	@param pipe a realsense2 pipeline object configured with a color stream.
 #	@returns a target object
 def scan(cam, net):
+	log("string", "scan(): start")
+	
 	# get a picture from librealsense
 	image = cam.capture()
 	
@@ -371,7 +382,8 @@ def scan(cam, net):
 			)
 		
 		# show the output image
-		cv2.imshow("Targets", image)
+		#cv2.namedWindow("Targets", cv2.WINDOW_AUTOSIZE );
+		cv2.imshow("View", image)
 		cv2.waitKey(0)
 	
 	# pick the closest target
@@ -379,13 +391,17 @@ def scan(cam, net):
 	closest = None
 	
 	for t in targets:
+		#print("target distance is: " + str(t.distance()))
+		#print("d is: " + str(d))
 		if(t.distance() < d):
 			closest = t
 			d = closest.distance()
+			#print("updating closest")
 	
 	if(closest != None):
 		closest.setImg(image)
 	
+	log("string", "scan(): stop")
 	return closest
 
 
@@ -418,8 +434,6 @@ def canBePicked(t):
 #	the scan cycle.
 #
 #	Should we spend effort trying to avoid running over decoys here?
-#
-#	This routine should check for ARDUINO_STATUS_OBSTACLE. then what?
 #
 #	This routine is likely where we will have the most issues.
 #	--ABD
@@ -518,7 +532,7 @@ def avoid():
 #	@param t a Target object containing the raw bitmap data
 #	@returns None
 def pickUp(t):
-	log("pickUp(): start")
+	log("string", "pickUp(): start")
 	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
 		pass
 	
@@ -584,9 +598,41 @@ def canBePicked(t):
 		t.centerY < constants.PICKUP_Y_MAX
 	):
 		log("string", "can pick")
+		if DEBUG_APPROACH:
+			cv2.rectangle(
+				t.image,
+				(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
+				(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
+				[200, 0, 0], 2
+			)
+			cv2.drawMarker(
+				t.image,
+				(t.centerX, t.centerY),
+				[0, 200, 0]
+			)
+			# show the output image
+			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
+			cv2.imshow("View", t.image)
+			cv2.waitKey(0)
 		return True
 	else:
 		log("string", "cannot pick")
+		if DEBUG_APPROACH:
+			cv2.rectangle(
+				t.image,
+				(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
+				(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
+				[220, 0, 0], 2
+			)
+			cv2.drawMarker(
+				t.image,
+				(t.centerX, t.centerY),
+				[0, 0, 150]
+			)
+			# show the output image
+			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
+			cv2.imshow("View", t.image)
+			cv2.waitKey(0)
 		return False
 
 
