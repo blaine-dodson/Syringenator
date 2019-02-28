@@ -13,8 +13,10 @@
 
 
 DEBUG_CAPTURE = False
-DEBUG_AQUISITION = True
+DEBUG_AQUISITION = False
 DEBUG_APPROACH = True
+DEBUG_TRANSFORM = True
+DEBUG_ORIENTATION = False
 DEBUG_TIMING = True
 
 import constants
@@ -63,7 +65,7 @@ class Target:
 
 
 class NeuralNet:
-	NETREZ = 512
+	NETREZ = 320
 	WEIGHTSPATH = "nn/yolov3-tiny-obj_37000.weights"
 	CONFIGPATH = "nn/yolov3-tiny-obj.cfg"
 	
@@ -281,6 +283,8 @@ def extractTargets(dataIn):
 	
 	log("string", "extractTargets(): finish")
 	return targets
+
+
 # A small helper function for computing the sums of each quadrant 
 # to obtain syringe orientation -JMC
 def cmpCroppedColour(x_i,x_f,y_i,y_f,crop_colour):
@@ -299,50 +303,61 @@ def cmpCroppedColour(x_i,x_f,y_i,y_f,crop_colour):
 # degree angle where zero is the syringe facing upward
 # -JMC
 def orientationCapture(x,y,w,h,img):
-    
-    crop_colour = img[y:y+h, x:x+w]
-    cv2.threshold(crop_colour,x,y,cv2.THRESH_BINARY)
-    crop_colour[crop_colour < 144] = 0
-    
-    Q1 = 0
-    Q2 = 0
-    Q3 = 0
-    Q4 = 0
-    Q6 = 0
-    Q7 = 0
-    Q8 = 0
-    Q9 = 0
 
-    Q1 = cmpCroppedColour(0,int(numpy.rint(len(crop_colour)/3)),0,int(numpy.rint(len(crop_colour[0])/3)),crop_colour)
-    Q2 = cmpCroppedColour(int(numpy.rint(len(crop_colour)/3) + 1), (int(2*numpy.rint(len(crop_colour)/3))), 0, int(numpy.rint(len(crop_colour[0])/3)), crop_colour)
-    Q3 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), 0, int(numpy.rint(len(crop_colour[0])/3)), crop_colour)
-    Q4 = cmpCroppedColour(0, int(numpy.rint(len(crop_colour)/3)), int(numpy.rint(len(crop_colour[0])/3) + 1), (int(2*numpy.rint(len(crop_colour[0]))/3)), crop_colour)
-    Q6 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), int(numpy.rint(len(crop_colour[0])/3) + 1), (int(2*numpy.rint(len(crop_colour[0]))/3)), crop_colour)
-    Q7 = cmpCroppedColour(0, int(numpy.rint(len(crop_colour)/3)), (2*int(numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
-    Q8 = cmpCroppedColour(int(numpy.rint(len(crop_colour)/3) + 1), (int(2*numpy.rint(len(crop_colour))/3)), (int(2*numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
-    Q9 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), (int(2*numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
-    
-	degrees_0 = Q4 + Q6
-    degrees_45 = Q1 + Q9
-    degrees_90 = Q2 + Q8
-    degrees_135 = Q3 + Q7
-    
-    # first two if statements should take care of the issue of aspect ratio distortion.
-    # That is if a bounding box is so narrow around the syringe we just assume the 0 or 90 degree 
-    # case otherwise we do the summing of quadrants.
-    if w * 2 < h: 
-        return 90
-    elif h * 2 < w:
-        return 0
-    else:
-        if degrees_0 > degrees_45 and degrees_0 > degrees_90 and degrees_0 > degrees_135:
-            return 0
-        if degrees_45 > degrees_0 and degrees_45 > degrees_90 and degrees_45 > degrees_135:
-            return 45
-        if degrees_90 > degrees_0 and degrees_90 > degrees_45 and degrees_90 > degrees_135:
-            return 90
-        if degrees_135 > degrees_0 and degrees_135 > degrees_90 and degrees_135 > degrees_45:
-            return 135
+	crop_colour = img[y:y+h, x:x+w]
+	gray = cv2.cvtColor(crop_colour, cv2.COLOR_BGR2GRAY)
+	gray[gray < 144] = 0
+
+
+	if DEBUG_ORIENTATION:
+		cv2.imshow("View", crop_colour);
+		cv2.waitKey(0);
+		cv2.imshow("View", gray);
+		cv2.waitKey(0);
+	
+	crop_colour = gray
+
+	Q1 = 0
+	Q2 = 0
+	Q3 = 0
+	Q4 = 0
+	Q6 = 0
+	Q7 = 0
+	Q8 = 0
+	Q9 = 0
+
+	Q1 = cmpCroppedColour(0,int(numpy.rint(len(crop_colour)/3)),0,int(numpy.rint(len(crop_colour[0])/3)),crop_colour)
+	Q2 = cmpCroppedColour(int(numpy.rint(len(crop_colour)/3) + 1), (int(2*numpy.rint(len(crop_colour)/3))), 0, int(numpy.rint(len(crop_colour[0])/3)), crop_colour)
+	Q3 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), 0, int(numpy.rint(len(crop_colour[0])/3)), crop_colour)
+	Q4 = cmpCroppedColour(0, int(numpy.rint(len(crop_colour)/3)), int(numpy.rint(len(crop_colour[0])/3) + 1), (int(2*numpy.rint(len(crop_colour[0]))/3)), crop_colour)
+	Q6 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), int(numpy.rint(len(crop_colour[0])/3) + 1), (int(2*numpy.rint(len(crop_colour[0]))/3)), crop_colour)
+	Q7 = cmpCroppedColour(0, int(numpy.rint(len(crop_colour)/3)), (2*int(numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
+	Q8 = cmpCroppedColour(int(numpy.rint(len(crop_colour)/3) + 1), (int(2*numpy.rint(len(crop_colour))/3)), (int(2*numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
+	Q9 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), (int(2*numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
+
+	degrees_0 = int(Q4 + Q6)
+	degrees_45 = Q1 + Q9
+	degrees_90 = Q2 + Q8
+	degrees_135 = Q3 + Q7
+
+	# first two if statements should take care of the issue of aspect ratio distortion.
+	# That is if a bounding box is so narrow around the syringe we just assume the 0 or 90 degree 
+	# case otherwise we do the summing of quadrants.
+	if w * 2 < h: 
+		return 90
+	elif h * 2 < w:
+		return 0
+	else:
+		if degrees_0 > degrees_45 and degrees_0 > degrees_90 and degrees_0 > degrees_135:
+		    return 0
+		if degrees_45 > degrees_0 and degrees_45 > degrees_90 and degrees_45 > degrees_135:
+		    return 45
+		if degrees_90 > degrees_0 and degrees_90 > degrees_45 and degrees_90 > degrees_135:
+		    return 90
+		if degrees_135 > degrees_0 and degrees_135 > degrees_90 and degrees_135 > degrees_45:
+		    return 135
+
+
 #==============================================================================#
 #                           GEOMETRIC TRANSFORMATIONS
 #==============================================================================#
@@ -597,6 +612,13 @@ def pickUp(t):
 		pass
 	
 	# find the center and orientation of the target
+	o = orientationCapture(
+		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
+	T=0
+	r=0
+	
+	if DEBUG_TRANSFORM:
+		log("string", "o: " + str(o))
 	
 	# signal the arduino to pickUp
 	
