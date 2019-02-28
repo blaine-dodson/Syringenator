@@ -5,8 +5,8 @@ var indexSectionsWithContent =
   2: "s",
   3: "cs",
   4: "acfilmoprs",
-  5: "aopst",
-  6: "aps",
+  5: "acfoprst",
+  6: "acfprs",
   7: "cirt"
 };
 

@@ -3,6 +3,9 @@
 #	This is the main control script. It will run on the Raspberry Pi and direct
 #	all robot operations.
 #
+#	By convention each arduino command routine checks for arduino ready before
+#	starting, and logs arduino status on exit.
+#
 #	@todo how do we initialize the robot run? a button press?
 #	--ABD
 #
@@ -17,6 +20,7 @@ import constants
 import cv2
 import numpy
 import pyrealsense2
+#import serial
 
 if DEBUG_TIMING: import time
 
@@ -326,7 +330,7 @@ def floorCart2armCylinder(x, y):
 
 
 #==============================================================================#
-#                                MAIN ROUTINES
+#                              IMAGE COMMANDS
 #==============================================================================#
 
 
@@ -384,6 +388,27 @@ def scan(cam, net):
 	
 	return closest
 
+
+##	A routine to determine if the target is in position to be picked up.
+#
+#	Calculates whether the center of the target bounding box is in the pickup area.
+#
+#	@returns a boolean
+def canBePicked(t):
+	
+	
+	# is the target within the pick area?
+	if t.x > PICKUP_X_MIN and t.x < PICKUP_X_MAX and y > PICKUP_Y_MIN and y < PICKUP_Y_MAX:
+		return True
+	else:
+		return False
+
+
+#==============================================================================#
+#                                ARDUINO COMMANDS
+#==============================================================================#
+
+
 ##	Move the robot closer to the given target.
 #	The moveCloser() routine attempts to aproach the target by relatively small
 #	increments. Because the move routines may be interrupted by the obstacle
@@ -401,11 +426,74 @@ def scan(cam, net):
 #
 #	@param t a Target object containing the location of the target to be approched
 #	@returns None
-def moveCloser(t):
+def approach(t):
+	log("string", "approach(): start")
+	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
+		pass
 	
 	# face the target if necessary
+	if t.centerX < constants.PICKUP_X_MIN: # positive rotation
+		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX) 
+		if rotTicks > constants.ROT_MAX_TICKS:
+			rotTicks = constants.ROT_MAX_TICKS
+		
+		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
+		arduinoSend(constants.ARDUINO_ROTATE, rotTicks)
 	
-	pass
+	elif t.centerX > constants.PICKUP_X_MAX: # negative rotation
+		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MAX-t.centerX) 
+		if rotTicks < -constants.ROT_MAX_TICKS:
+			rotTicks = -constants.ROT_MAX_TICKS
+		
+		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
+		arduinoSend(constants.ARDUINO_ROTATE, rotTicks)
+	
+	# move forward if necessary
+	# the pixel origin is in the upper left corner
+	if t.centerY < constants.PICKUP_Y_MIN: # positive translation
+		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MIN-t.centerY)
+		if fwdTicks > constants.FWD_MAX_TICKS:
+			fwdTicks = constants.FWD_MAX_TICKS
+		
+		log("string", "ARDUINO_MOVE: " + str(fwdTicks))
+		arduinoSend(constants.ARDUINO_MOVE, fwdTicks)
+	
+	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
+		# this may not work as expected
+		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MAX-t.centerY)
+		if fwdTicks < -constants.FWD_MAX_TICKS:
+			fwdTicks = -constants.FWD_MAX_TICKS
+		
+		log("string", "ARDUINO_MOVE: " + str(fwdTicks) )
+		arduinoSend(constants.ARDUINO_MOVE, fwdTicks)
+	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "approach(): status is " + str(status) )
+	if status == ARDUINO_STATUS_OBSTACLE:
+		obstacle = True
+
+
+## avoid an obstacle
+#
+#	@returns None
+def avoid():
+	log("avoid(): start")
+	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
+		pass
+	
+	arduinoSend(ARDUINO_AVOID)
+	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "avoid(): status is " + str(status) )
+	obstacle = False
+
+
 
 ##	Attempt to pickup and dispose the target.
 #	This routine must determine orientation of the target. If this is not done by
@@ -429,29 +517,57 @@ def moveCloser(t):
 #	@param t a Target object containing the raw bitmap data
 #	@returns None
 def pickUp(t):
+	log("pickUp(): start")
+	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
+		pass
+	
 	# find the center and orientation of the target
 	
 	# signal the arduino to pickUp
 	
-	pass
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "pickUp(): status is " + str(status) )
+
 
 ##	signl the arduino to return to the line.
 #
 #	@todo do we need to check that we actually returned? how do we recover if
 #	dead reckoning fails? --ABD
 #
+#	We disscussed the possibility of a timer on lineFollow(), that if the line
+#	has not been detected recently then we know we are off track and must recoves
+#	somehow.
+#
 #	@returns None
 def returnToLine():
-	pass
+	log("returnToLine(): start")
+	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
+		pass
 	
-	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "returnToLine(): status is " + str(status) )
 
 ##	Follow the line.
 #
 #	this routine simply signals the arduino to execute its lineFollow() routine
 #
 #	@returns None
-def lineFollow(): pass
+def lineFollow():
+	log("lineFollow(): start")
+	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
+		pass
+	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "lineFollow(): status is " + str(status) )
 
 ##	A routine to determine if the target is in position to be picked up.
 #
@@ -466,8 +582,10 @@ def canBePicked(t):
 		t.centerY > constants.PICKUP_Y_MIN and
 		t.centerY < constants.PICKUP_Y_MAX
 	):
+		log("string", "can pick")
 		return True
 	else:
+		log("string", "cannot pick")
 		return False
 
 
@@ -478,6 +596,8 @@ def canBePicked(t):
 
 ## boolean indicating whether we are on the line
 onTheLine = True
+## boolean indicating that we have detected an obstacle
+obstacle = False
 ## The currently aquired target
 target = None
 
@@ -497,9 +617,12 @@ while True:
 		log("target", target)
 		if canBePicked(target):
 			pickUp(target)
+		elif obstacle:
+			# we can't pick the target, and moveCloser() failed with an obstacle
+			avoid()
 		else:
 			onTheLine = False
-			moveCloser(target)
+			approach(target)
 	elif onTheLine:
 		lineFollow()
 	else:
