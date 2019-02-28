@@ -28,17 +28,17 @@ ARM_ORIENT_MIN = 0
 ## The maximum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
 ARM_ORIENT_MAX = 0
 ## The minimum target center x-value that allows a pickup
-PICKUP_X_MIN = 200
+PICKUP_X_MIN = 230
 ## The maximum target center x-value that allows a pickup
-PICKUP_X_MAX = 460
+PICKUP_X_MAX = 400
 ## The minimum target center y-value that allows a pickup
-PICKUP_Y_MIN = 400
+PICKUP_Y_MIN = 420
 ## The maximum target center y-value that allows a pickup
 PICKUP_Y_MAX = 480
 ## The maximum count of forward ticks used in moveCloser()
-FWD_MAX_TICKS = 200
+FWD_MAX_TICKS = 127
 ## The maximum absolute value of rotation ticks used in moveCloser()
-ROT_MAX_TICKS = 200
+ROT_MAX_TICKS = 127
 ## Calibration factor used in rotation calculation
 CAL_ROT_FACTOR = 1
 ## Calibration factor used in forward calculation

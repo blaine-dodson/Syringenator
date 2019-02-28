@@ -13,7 +13,7 @@
 
 
 DEBUG_CAPTURE = False
-DEBUG_AQUISITION = False
+DEBUG_AQUISITION = True
 DEBUG_APPROACH = True
 DEBUG_TRANSFORM = True
 DEBUG_ORIENTATION = False
@@ -23,7 +23,7 @@ import constants
 import cv2
 import numpy
 import pyrealsense2
-#import serial
+import serial
 
 if DEBUG_TIMING: import time
 
@@ -456,8 +456,7 @@ def scan(cam, net):
 				0.5, [102, 220, 225], 2
 			)
 		
-		# show the output image
-		#cv2.namedWindow("Targets", cv2.WINDOW_AUTOSIZE );
+		
 		cv2.imshow("View", image)
 		cv2.waitKey(0)
 	
@@ -536,6 +535,12 @@ def approach(t):
 		
 		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
 		arduinoSend(constants.ARDUINO_ROTATE, rotTicks)
+	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "approach(): status is " + str(status) )
 	
 	# move forward if necessary
 	# the pixel origin is in the upper left corner
@@ -640,7 +645,7 @@ def pickUp(t):
 #
 #	@returns None
 def returnToLine():
-	log("returnToLine(): start")
+	log("string", "returnToLine(): start")
 	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
 		pass
 	
@@ -656,7 +661,7 @@ def returnToLine():
 #
 #	@returns None
 def lineFollow():
-	log("lineFollow(): start")
+	log("string", "lineFollow(): start")
 	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
 		pass
 	
