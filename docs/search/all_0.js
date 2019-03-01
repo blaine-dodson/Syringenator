@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['approach',['approach',['../namespaceSyringenator.html#aeead288841e4728e7a18337d815464e0',1,'Syringenator']]],
   ['arduino_5farm_5fdispose',['ARDUINO_ARM_DISPOSE',['../constants_8hpp.html#a86502ebe3d028d110d3b86b63c0d993c',1,'ARDUINO_ARM_DISPOSE():&#160;constants.hpp'],['../constants_8py.html#a868e5ebad4edc27cb1c6dc313cec7094',1,'constants.ARDUINO_ARM_DISPOSE()']]],
   ['arduino_5farm_5fpark',['ARDUINO_ARM_PARK',['../constants_8hpp.html#a57569374c140293ea3eb6d6368cb7bbd',1,'ARDUINO_ARM_PARK():&#160;constants.hpp'],['../constants_8py.html#a53723c1862d52155f319a0d173230568',1,'constants.ARDUINO_ARM_PARK()']]],
   ['arduino_5farm_5fpickup',['ARDUINO_ARM_PICKUP',['../constants_8hpp.html#ad91584ecea7eac2995a8561d04fb230e',1,'ARDUINO_ARM_PICKUP():&#160;constants.hpp'],['../constants_8py.html#a17f52a2eba1281743ebe4589f0fdf3f3',1,'constants.ARDUINO_ARM_PICKUP()']]],
@@ -15,7 +16,7 @@ var searchData=
   ['arduino_5fstatus_5fpick_5fsuccess',['ARDUINO_STATUS_PICK_SUCCESS',['../constants_8hpp.html#ad0229756653e38cf04e02d62f6e1ad4e',1,'ARDUINO_STATUS_PICK_SUCCESS():&#160;constants.hpp'],['../constants_8py.html#a5567eabdcef157ce5b607bab1ad6e5af',1,'constants.ARDUINO_STATUS_PICK_SUCCESS()']]],
   ['arduino_5fstatus_5fready',['ARDUINO_STATUS_READY',['../constants_8hpp.html#aea3ae5f1aae26a9773db867e7734b59a',1,'ARDUINO_STATUS_READY():&#160;constants.hpp'],['../constants_8py.html#a92e64e2f09948e66a5c52e4bb6d0b1c3',1,'constants.ARDUINO_STATUS_READY()']]],
   ['arduinoreceive',['arduinoReceive',['../namespaceSyringenator.html#a1c5a8cf020e400c8c0337977a5b6d921',1,'Syringenator']]],
-  ['arduinosend',['arduinoSend',['../namespaceSyringenator.html#ae7978d5b84170226249d8de2e204e762',1,'Syringenator']]],
+  ['arduinosend',['arduinoSend',['../namespaceSyringenator.html#aef583574ffc311d860031fd45e127136',1,'Syringenator']]],
   ['arm_5fazimuth_5fmax',['ARM_AZIMUTH_MAX',['../constants_8hpp.html#ac3eb154d603dad3e7179bb2626af59ea',1,'ARM_AZIMUTH_MAX():&#160;constants.hpp'],['../constants_8py.html#a32e0792803d2cda1bfc22b90f37f3e3d',1,'constants.ARM_AZIMUTH_MAX()']]],
   ['arm_5fazimuth_5fmin',['ARM_AZIMUTH_MIN',['../constants_8hpp.html#a2ce0dcdbd795d3528d9d8e648c5625e9',1,'ARM_AZIMUTH_MIN():&#160;constants.hpp'],['../constants_8py.html#a8112376fe415e03687dcfcf32508ff5b',1,'constants.ARM_AZIMUTH_MIN()']]],
   ['arm_5fcontrol',['ARM_CONTROL',['../constants_8hpp.html#a4ca4ed01391e5ed00ed1a9a3d4bfd920',1,'ARM_CONTROL():&#160;constants.hpp'],['../constants_8py.html#a6cd44c39def90b88882aeabde2c27957',1,'constants.ARM_CONTROL()']]],
