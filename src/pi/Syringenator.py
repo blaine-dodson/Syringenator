@@ -12,28 +12,190 @@
 #	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
 
-#==============================================================================#
-#                                LIBRARIES
-#==============================================================================#
-
+DEBUG_CAPTURE = False
+DEBUG_AQUISITION = False
+DEBUG_APPROACH = True
+DEBUG_TRANSFORM = True
+DEBUG_ORIENTATION = False
+DEBUG_TIMING = True
 
 import constants
 import cv2
-import serial
+import numpy
+import pyrealsense2
+#import serial
+
+if DEBUG_TIMING: import time
+
+if DEBUG_CAPTURE or DEBUG_AQUISITION or DEBUG_APPROACH:
+	cv2.namedWindow("View", cv2.WINDOW_AUTOSIZE );
+
+#==============================================================================#
+#                                 DEFINITIONS
+#==============================================================================#
+
+
+## A class to contain everything we know about an aquired target
+class Target:
+	# bounding box data
+	# bounding box center
+	# raw image data
+	def __init__(self, box, score, center):
+		self.confidence  = score
+		self.centerX = center[0]
+		self.centerY = center[1]
+		self.box = box
+	
+	def setImg(self, img):
+		self.image = img
+	
+	##	Get the taxicab distance to the target.
+	#	@returns an integer representing distance
+	def distance(self):
+		xDist = self.centerX - (IMG_WIDTH/2)
+		yDist = IMG_HEIGHT - self.centerY
+		
+		if(xDist<0): xDist = -xDist
+		
+		return xDist + yDist
+	
+	def getBox(self):
+		return self.box
+
+
+
+class NeuralNet:
+	NETREZ = 320
+	WEIGHTSPATH = "nn/yolov3-tiny-obj_37000.weights"
+	CONFIGPATH = "nn/yolov3-tiny-obj.cfg"
+	
+	def __init__(self):
+		self.nn = cv2.dnn.readNetFromDarknet(self.CONFIGPATH, self.WEIGHTSPATH)
+		layers = self.nn.getLayerNames()
+		self.ln = [layers[i[0] - 1] for i in self.nn.getUnconnectedOutLayers()]
+		log("string", "NeuralNet(): net loaded")
+	
+	def detect(self, img):
+		blob = cv2.dnn.blobFromImage(
+			img, 1 / 255.0, (self.NETREZ,self.NETREZ), swapRB=True
+		)
+		self.nn.setInput(blob)
+		if(DEBUG_TIMING): start = time.time()
+		output = self.nn.forward(self.ln)
+		if(DEBUG_TIMING): end = time.time()
+
+		# show timing information on YOLO
+		if(DEBUG_TIMING):
+			log("string", "YOLO took {:.6f} seconds".format(end - start))
+		return output
+
+
+
+class Camera:
+	def __init__(self):
+		cfg = pyrealsense2.config()
+	
+		#enable_stream(stream_type: rs.stream, width: int, height: int, format: rs.format=format.any, framerate: int=0L) -> None
+		cfg.enable_stream(
+			pyrealsense2.stream.color,
+			IMG_WIDTH, IMG_HEIGHT, 
+			pyrealsense2.format.bgr8,
+			FRAME_RATE
+		)
+	
+	#	print(pyrealsense2.device_list())
+	#	dev = pyrealsense2.device(pyrealsense2.device_list().front())
+	#	
+	#	if(dev == 0):
+	#		print("No device")
+	#	else:
+	#		print(dev.get_info())
+	#	
+	#	print(pyrealsense2.device_list())
+	
+	
+		self.pipeline = pyrealsense2.pipeline()
+	
+		if(self.pipeline == None):
+			og('string', "Pipeline not created")
+			exit() # @todo fix this
+
+		try:
+			# Create a context object. This object owns the handles to all connected
+			# realsense devices
+			self.pipeline.start(cfg)
+		except:
+			og('string', "Pipeline did not start")
+			exit() # @todo fix this
+
+		# stabilize auto exposure. do we need to do this once, or before each pic?
+		for i in range(0,30):
+			frames = self.pipeline.wait_for_frames()
+	
+		log('string', "Camera initialized")
+	
+	def capture(self):
+		try:
+			frames = self.pipeline.wait_for_frames()
+		except:
+			print("no frames")
+			initCamera()
+			return None
+	
+		frame = frames.get_color_frame()
+	
+		# how often does this happen?
+		if(frame == None):
+			print("no frame")
+			return None
+	
+		mat = numpy.reshape(
+			numpy.array(frame.get_data(), numpy.uint8),
+			(IMG_HEIGHT, IMG_WIDTH, 3)
+		)
+	
+		if(DEBUG_CAPTURE):
+			#cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
+			log("string", "photo capture")
+			cv2.imshow("View", mat);
+			cv2.waitKey(0);
+	
+		return mat
+
+
+#==============================================================================#
+#                                 GLOBALS
+#==============================================================================#
+
+
+# Realsense Parameters
+FRAME_RATE = 30
+IMG_WIDTH  = 640
+IMG_HEIGHT = 480
+
+# OpenCV Parameters
+CONFIDENCE=.5
+NMS_THRESHOLD=.1
 
 
 #==============================================================================#
 #                               DATA LOGGING
 #==============================================================================#
 
+
 ## Record system events for later analysis
 #
 # @returns None
-def log(arg):
-	if arg is string:
-		pass # log the string
-	if arg is Target:
-		pass # log target aquired
+def log(datatype, *args):
+	if(datatype == 'string'): # log the string
+		for x in args: print(x)
+	elif(datatype == 'target'):
+		print("Target aquired")
+		print(
+				"x: "+str(args[0].centerX)+" y: "+str(args[0].centerY)
+			)
+	else:
+		print("log(): unknown type")
 
 
 #==============================================================================#
@@ -45,14 +207,155 @@ def log(arg):
 #
 #	@param bytes one or more bytes of data to send to the arduino
 #	@returns None
-def arduinoSend(bytes):
-	pass
+def arduinoSend(*bytes):
+	for byte in bytes:
+		pass
 
 ##	Wait some fixed time for the arduino to send one or more bytes
 #
 #	@returns a list of bytes
 def arduinoReceive():
-	return None
+	
+	# do something
+	return constants.ARDUINO_STATUS_READY
+
+
+#==============================================================================#
+#                        EXTRACT TARGETS FROM CV OUTPUT
+#==============================================================================#
+
+
+# scale the bounding box coordinates back relative to the
+# size of the image, keeping in mind that YOLO actually
+# returns the center (x, y)-coordinates of the bounding
+# box followed by the boxes' width and height
+def rescale(detection):
+	box = detection[0:4] * numpy.array(
+		[IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT])
+	(centerX, centerY, width, height) = box.astype("int")
+	return (centerX, centerY, width, height)
+
+
+def extractTargets(dataIn):
+	boxes = []
+	centers = []
+	confidences = []
+	targets = []
+	
+	log("string", "extractTargets(): start")
+	
+	# loop over each of the layer outputs
+	for output in dataIn:
+		# loop over each of the detections
+		for detection in output:
+			# extract the class ID and confidence (i.e., probability) of
+			# the current object detection
+			scores = detection[5:]
+			classID = numpy.argmax(scores)
+			confidence = scores[classID]
+
+			# filter out weak predictions by ensuring the detected
+			# probability is greater than the minimum probability
+			if confidence > CONFIDENCE:
+				(centerX, centerY, width, height) = rescale(detection)
+
+				# use the center (x, y)-coordinates to derive the top
+				# left corner of the bounding box
+				x = int(centerX - (width / 2))
+				y = int(centerY - (height / 2))
+
+				# update our list of bounding box coordinates, confidences,
+				# and class IDs
+				boxes.append([x, y, int(width), int(height)])
+				confidences.append(float(confidence))
+				centers.append([centerX, centerY])
+
+
+	# apply non-maxima suppression to suppress weak, overlapping bounding
+	# boxes
+	idxs = cv2.dnn.NMSBoxes(boxes, confidences, CONFIDENCE,
+		NMS_THRESHOLD)
+	
+	if len(idxs) > 0:
+		for i in idxs.flatten():
+			targets.append(Target(boxes[i], confidences[i], centers[i]))
+	
+	
+	log("string", "extractTargets(): finish")
+	return targets
+
+
+# A small helper function for computing the sums of each quadrant 
+# to obtain syringe orientation -JMC
+def cmpCroppedColour(x_i,x_f,y_i,y_f,crop_colour):
+	Q = 0
+	for i in range(x_i,x_f):
+		for j in range(y_i,y_f):
+			Q += crop_colour[i][j]
+	return Q
+#           Q1 Q2 Q3
+#           Q4 Q5 Q6
+#           Q7 Q8 Q9
+
+# Essentially if the sum of Q1 and Q9 is 
+# greater than the sum of Q2 and Q8 and greater than the sum of Q3 and Q7 
+# and greater than the sum of Q4 and Q6 we know the syringe mus be oriented at a 135 
+# degree angle where zero is the syringe facing upward
+# -JMC
+def orientationCapture(x,y,w,h,img):
+
+	crop_colour = img[y:y+h, x:x+w]
+	gray = cv2.cvtColor(crop_colour, cv2.COLOR_BGR2GRAY)
+	gray[gray < 144] = 0
+
+
+	if DEBUG_ORIENTATION:
+		cv2.imshow("View", crop_colour);
+		cv2.waitKey(0);
+		cv2.imshow("View", gray);
+		cv2.waitKey(0);
+	
+	crop_colour = gray
+
+	Q1 = 0
+	Q2 = 0
+	Q3 = 0
+	Q4 = 0
+	Q6 = 0
+	Q7 = 0
+	Q8 = 0
+	Q9 = 0
+
+	Q1 = cmpCroppedColour(0,int(numpy.rint(len(crop_colour)/3)),0,int(numpy.rint(len(crop_colour[0])/3)),crop_colour)
+	Q2 = cmpCroppedColour(int(numpy.rint(len(crop_colour)/3) + 1), (int(2*numpy.rint(len(crop_colour)/3))), 0, int(numpy.rint(len(crop_colour[0])/3)), crop_colour)
+	Q3 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), 0, int(numpy.rint(len(crop_colour[0])/3)), crop_colour)
+	Q4 = cmpCroppedColour(0, int(numpy.rint(len(crop_colour)/3)), int(numpy.rint(len(crop_colour[0])/3) + 1), (int(2*numpy.rint(len(crop_colour[0]))/3)), crop_colour)
+	Q6 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), int(numpy.rint(len(crop_colour[0])/3) + 1), (int(2*numpy.rint(len(crop_colour[0]))/3)), crop_colour)
+	Q7 = cmpCroppedColour(0, int(numpy.rint(len(crop_colour)/3)), (2*int(numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
+	Q8 = cmpCroppedColour(int(numpy.rint(len(crop_colour)/3) + 1), (int(2*numpy.rint(len(crop_colour))/3)), (int(2*numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
+	Q9 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), (int(2*numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
+
+	degrees_0 = int(Q4 + Q6)
+	degrees_45 = Q1 + Q9
+	degrees_90 = Q2 + Q8
+	degrees_135 = Q3 + Q7
+
+	# first two if statements should take care of the issue of aspect ratio distortion.
+	# That is if a bounding box is so narrow around the syringe we just assume the 0 or 90 degree 
+	# case otherwise we do the summing of quadrants.
+	if w * 2 < h: 
+		return 90
+	elif h * 2 < w:
+		return 0
+	else:
+		if degrees_0 > degrees_45 and degrees_0 > degrees_90 and degrees_0 > degrees_135:
+		    return 0
+		if degrees_45 > degrees_0 and degrees_45 > degrees_90 and degrees_45 > degrees_135:
+		    return 45
+		if degrees_90 > degrees_0 and degrees_90 > degrees_45 and degrees_90 > degrees_135:
+		    return 90
+		if degrees_135 > degrees_0 and degrees_135 > degrees_90 and degrees_135 > degrees_45:
+		    return 135
 
 
 #==============================================================================#
@@ -115,31 +418,66 @@ def floorCart2armCylinder(x, y):
 #==============================================================================#
 
 
-## A class to contain everything we know about an aquired target
-class Target: pass
-	# bounding box data
-	# bounding box center
-	# raw image data
-
 ##	A routine to take a picture and report back the closest target
 #	The Computer vision routine must be able to handle multiple targets in the
 #	image. It would be best if all targets are reported. Then this routine will
 #	determine the closest one to pursue.
 #	--ABD
 #
+#	@param pipe a realsense2 pipeline object configured with a color stream.
 #	@returns a target object
-def scan():
+def scan(cam, net):
+	log("string", "scan(): start")
+	
 	# get a picture from librealsense
+	image = cam.capture()
 	
 	# pass the picture to OpenCV
+	cvOutput = net.detect(image)
 	
+	targets = extractTargets(cvOutput)
 	
-	# if there is a target construct the target object
-	target = Target()
+	if(DEBUG_AQUISITION):
+		for t in targets:
+			(x, y, w, h) = t.box
+			
+			text = "{}: {:.4f}".format("syringe", t.confidence)
+			
+			print(
+				"x: "+str(x)+" y: "+str(y)+" w: "+str(w)+" h: "+str(h)+" "+text
+			)
+			
+			# draw a bounding box rectangle and label on the image
+			cv2.rectangle(image, (x, y), (x + w, y + h), [102, 220, 225], 2)
+			
+			#can get rid of
+			cv2.putText(
+				image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
+				0.5, [102, 220, 225], 2
+			)
+		
+		# show the output image
+		#cv2.namedWindow("Targets", cv2.WINDOW_AUTOSIZE );
+		cv2.imshow("View", image)
+		cv2.waitKey(0)
 	
-	# calculate x=(x_1+x_2)/2 and y=(y_1+y_2)/2
+	# pick the closest target
+	d = 2000000
+	closest = None
 	
-	return None
+	for t in targets:
+		#print("target distance is: " + str(t.distance()))
+		#print("d is: " + str(d))
+		if(t.distance() < d):
+			closest = t
+			d = closest.distance()
+			#print("updating closest")
+	
+	if(closest != None):
+		closest.setImg(image)
+	
+	log("string", "scan(): stop")
+	return closest
 
 
 ##	A routine to determine if the target is in position to be picked up.
@@ -172,59 +510,60 @@ def canBePicked(t):
 #
 #	Should we spend effort trying to avoid running over decoys here?
 #
-#	This routine should check for ARDUINO_STATUS_OBSTACLE. then what?
-#
 #	This routine is likely where we will have the most issues.
 #	--ABD
 #
 #	@param t a Target object containing the location of the target to be approched
 #	@returns None
-def moveCloser(t):
-	log("moveCloser(): start")
-	while(arduinoReceive() != ARDUINO_STATUS_READY):
+def approach(t):
+	log("string", "approach(): start")
+	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
 		pass
 	
 	# face the target if necessary
-	if t.x < PICKUP_X_MIN:
-		rotTicks = CAL_ROT_FACTOR*(PICKUP_X_MIN-t.x) # positive rotation
-		if rotTicks > ROT_MAX_TICKS:
-			rotTicks = ROT_MAX_TICKS
+	if t.centerX < constants.PICKUP_X_MIN: # positive rotation
+		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX) 
+		if rotTicks > constants.ROT_MAX_TICKS:
+			rotTicks = constants.ROT_MAX_TICKS
 		
-		log("ARDUINO_ROTATE: ", rotTicks)
-		arduinoSend(ARDUINO_ROTATE, rotTicks)
+		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
+		arduinoSend(constants.ARDUINO_ROTATE, rotTicks)
 	
-	elif t.x> PICKUP_X_MAX:
-		rotTicks = CAL_ROT_FACTOR*(PICKUP_X_MAX-t.x) # negative rotation
-		if rotTicks < -ROT_MAX_TICKS:
-			rotTicks = -ROT_MAX_TICKS
+	elif t.centerX > constants.PICKUP_X_MAX: # negative rotation
+		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MAX-t.centerX) 
+		if rotTicks < -constants.ROT_MAX_TICKS:
+			rotTicks = -constants.ROT_MAX_TICKS
 		
-		log("ARDUINO_ROTATE: ", rotTicks)
-		arduinoSend(ARDUINO_ROTATE, rotTicks)
+		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
+		arduinoSend(constants.ARDUINO_ROTATE, rotTicks)
 	
 	# move forward if necessary
 	# the pixel origin is in the upper left corner
-	if t.y < PICKUP_Y_MIN:
-		fwdTicks = CAL_FWD_FACTOR*(PICKUP_Y_MIN-t.y) # positive translation
-		if fwdTicks > FWD_MAX_TICKS:
-			fwdTicks = FWD_MAX_TICKS
+	if t.centerY < constants.PICKUP_Y_MIN: # positive translation
+		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MIN-t.centerY)
+		if fwdTicks > constants.FWD_MAX_TICKS:
+			fwdTicks = constants.FWD_MAX_TICKS
 		
-		log("ARDUINO_MOVE: ", fwdTicks)
-		arduinoSend(ARDUINO_MOVE, fwdTicks)
+		log("string", "ARDUINO_MOVE: " + str(fwdTicks))
+		arduinoSend(constants.ARDUINO_MOVE, fwdTicks)
 	
-	elif t.y > PICKUP_Y_MAX: # this may not work as expected
-		fwdTicks = CAL_FWD_FACTOR*(PICKUP_Y_MAX-t.y) # negative translation
-		if fwdTicks < -FWD_MAX_TICKS:
-			fwdTicks = -FWD_MAX_TICKS
+	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
+		# this may not work as expected
+		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MAX-t.centerY)
+		if fwdTicks < -constants.FWD_MAX_TICKS:
+			fwdTicks = -constants.FWD_MAX_TICKS
 		
-		log("ARDUINO_MOVE: ", fwdTicks)
-		arduinoSend(ARDUINO_MOVE, fwdTicks)
+		log("string", "ARDUINO_MOVE: " + str(fwdTicks) )
+		arduinoSend(constants.ARDUINO_MOVE, fwdTicks)
 	
 	# in all cases we wait for the arduino to be ready
-	while((status=arduinoReceive()) == None):
-		pass
-	log("moveCloser(): status is", status)
-	if status == ARDUINO_STATUS_OBSTACLE:
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "approach(): status is " + str(status) )
+	if status == constants.ARDUINO_STATUS_OBSTACLE:
 		obstacle = True
+		log("string", "obstacle detected")
 
 
 ## avoid an obstacle
@@ -232,15 +571,16 @@ def moveCloser(t):
 #	@returns None
 def avoid():
 	log("avoid(): start")
-	while(arduinoReceive() != ARDUINO_STATUS_READY):
+	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
 		pass
 	
 	arduinoSend(ARDUINO_AVOID)
 	
 	# in all cases we wait for the arduino to be ready
-	while((status=arduinoReceive()) == None):
-		pass
-	log("avoid(): status is", status)
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "avoid(): status is " + str(status) )
 	obstacle = False
 
 
@@ -267,18 +607,26 @@ def avoid():
 #	@param t a Target object containing the raw bitmap data
 #	@returns None
 def pickUp(t):
-	log("pickUp(): start")
-	while(arduinoReceive() != ARDUINO_STATUS_READY):
+	log("string", "pickUp(): start")
+	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
 		pass
 	
 	# find the center and orientation of the target
+	o = orientationCapture(
+		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
+	T=0
+	r=0
+	
+	if DEBUG_TRANSFORM:
+		log("string", "o: " + str(o))
 	
 	# signal the arduino to pickUp
 	
 	# in all cases we wait for the arduino to be ready
-	while((status=arduinoReceive()) == None):
-		pass
-	log("pickUp(): status is", status)
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "pickUp(): status is " + str(status) )
 
 
 ##	signl the arduino to return to the line.
@@ -293,13 +641,14 @@ def pickUp(t):
 #	@returns None
 def returnToLine():
 	log("returnToLine(): start")
-	while(arduinoReceive() != ARDUINO_STATUS_READY):
+	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
 		pass
 	
 	# in all cases we wait for the arduino to be ready
-	while((status=arduinoReceive()) == None):
-		pass
-	log("returnToLine(): status is", status)
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "returnToLine(): status is " + str(status) )
 
 ##	Follow the line.
 #
@@ -308,17 +657,69 @@ def returnToLine():
 #	@returns None
 def lineFollow():
 	log("lineFollow(): start")
-	while(arduinoReceive() != ARDUINO_STATUS_READY):
+	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
 		pass
 	
 	# in all cases we wait for the arduino to be ready
-	while((status=arduinoReceive()) == None):
-		pass
-	log("lineFollow(): status is", status)
+	status = None
+	while(status == None):
+		status = arduinoReceive()
+	log("string", "lineFollow(): status is " + str(status) )
+
+##	A routine to determine if the target is in position to be picked up.
+#
+#	Calculates whether the center of the target bounding box is in the pickup area.
+#
+#	@returns a boolean
+def canBePicked(t):
+	# is the target within the pick area?
+	if(
+		t.centerX > constants.PICKUP_X_MIN and
+		t.centerX < constants.PICKUP_X_MAX and
+		t.centerY > constants.PICKUP_Y_MIN and
+		t.centerY < constants.PICKUP_Y_MAX
+	):
+		log("string", "can pick")
+		if DEBUG_APPROACH:
+			cv2.rectangle(
+				t.image,
+				(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
+				(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
+				[200, 0, 0], 2
+			)
+			cv2.drawMarker(
+				t.image,
+				(t.centerX, t.centerY),
+				[0, 200, 0]
+			)
+			# show the output image
+			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
+			cv2.imshow("View", t.image)
+			cv2.waitKey(0)
+		return True
+	else:
+		log("string", "cannot pick")
+		if DEBUG_APPROACH:
+			cv2.rectangle(
+				t.image,
+				(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
+				(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
+				[220, 0, 0], 2
+			)
+			cv2.drawMarker(
+				t.image,
+				(t.centerX, t.centerY),
+				[0, 0, 150]
+			)
+			# show the output image
+			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
+			cv2.imshow("View", t.image)
+			cv2.waitKey(0)
+		return False
 
 
 #==============================================================================#
-#                                   MAIN LOOP
+#                               INITIALIZATION
 #==============================================================================#
 
 
@@ -329,10 +730,20 @@ obstacle = False
 ## The currently aquired target
 target = None
 
+camera = Camera()
+neuralNet = NeuralNet()
+
+
+#==============================================================================#
+#                                    MAIN LOOP
+#==============================================================================#
+
+
+log('string', "Syringenator: Start")
 while True:
-	target = scan()
+	target = scan(camera,neuralNet)
 	if target != None: # we have aquired a target
-		log(target)
+		log("target", target)
 		if canBePicked(target):
 			pickUp(target)
 		elif obstacle:
@@ -340,7 +751,7 @@ while True:
 			avoid()
 		else:
 			onTheLine = False
-			moveCloser(target)
+			approach(target)
 	elif onTheLine:
 		lineFollow()
 	else:
