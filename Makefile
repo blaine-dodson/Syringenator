@@ -14,9 +14,11 @@ ARDDIR:=$(srcdir)/controller
 PIDIR :=$(srcdir)/pi
 
 
-.PHONEY: all pfd super_clean constants
+CPPFLAGS:= --std=c++11 -g -I/usr/local/include/opencv4/
 
-all: constants pdf
+.PHONEY: all all_docs clean super_clean constants
+
+all: constants all_docs
 
 
 ################################################################################
@@ -64,11 +66,11 @@ docsource+=$(wildcard $(ARDDIR)/*)
 docsource+=$(wildcard $(PIDIR)/*)
 pdfman   :=refman.pdf
 
-pdf: $(pdfman)
+all_docs: $(pdfman)
 
 $(pdfman): docs
 	$(MAKE) -C latex all
-	mv latex/refman.pdf ./
+	mv latex/refman.pdf ./$(pdfman)
 
 # also produces latex file
 docs: doxygen.cfg $(docsource) $(PYCONST)
@@ -77,11 +79,24 @@ docs: doxygen.cfg $(docsource) $(PYCONST)
 
 
 ################################################################################
-#                                    CLEAN
+#                                   DEMOS
 ################################################################################
 
 
+demoImgCapCpp: $(PIDIR)/demoImgCap.cpp
+	g++ $(CPPFLAGS) -o $@ $^ -lrealsense2 -lopencv_core -lopencv_highgui
+
+
+################################################################################
+#                                    CLEAN
+################################################################################
+
+cleanfiles:=imgCapCpp
+
+clean:
+	rm -fr *.pyc $(cleanfiles)
+
 super_clean:
-	rm -fr docs latex $(pdfman) $(ARDCONST) $(PYCONST) *.pyc
+	rm -fr docs latex $(pdfman) $(ARDCONST) $(PYCONST)
 
 

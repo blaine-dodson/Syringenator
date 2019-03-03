@@ -3,6 +3,7 @@ var searchData=
   ['arduino_5farm_5fdispose',['ARDUINO_ARM_DISPOSE',['../constants_8hpp.html#a86502ebe3d028d110d3b86b63c0d993c',1,'ARDUINO_ARM_DISPOSE():&#160;constants.hpp'],['../constants_8py.html#a868e5ebad4edc27cb1c6dc313cec7094',1,'constants.ARDUINO_ARM_DISPOSE()']]],
   ['arduino_5farm_5fpark',['ARDUINO_ARM_PARK',['../constants_8hpp.html#a57569374c140293ea3eb6d6368cb7bbd',1,'ARDUINO_ARM_PARK():&#160;constants.hpp'],['../constants_8py.html#a53723c1862d52155f319a0d173230568',1,'constants.ARDUINO_ARM_PARK()']]],
   ['arduino_5farm_5fpickup',['ARDUINO_ARM_PICKUP',['../constants_8hpp.html#ad91584ecea7eac2995a8561d04fb230e',1,'ARDUINO_ARM_PICKUP():&#160;constants.hpp'],['../constants_8py.html#a17f52a2eba1281743ebe4589f0fdf3f3',1,'constants.ARDUINO_ARM_PICKUP()']]],
+  ['arduino_5favoid',['ARDUINO_AVOID',['../constants_8hpp.html#a70c1bd51dd9e0bc247e1b273581dc300',1,'ARDUINO_AVOID():&#160;constants.hpp'],['../constants_8py.html#ad1f83321d7915e7c9a929b6be93e72c2',1,'constants.ARDUINO_AVOID()']]],
   ['arduino_5fline_5ffollow',['ARDUINO_LINE_FOLLOW',['../constants_8hpp.html#aa7094214691a6fc7878fe2b0def3cf64',1,'ARDUINO_LINE_FOLLOW():&#160;constants.hpp'],['../constants_8py.html#a7944abd6ac614939a63da46e49d770f4',1,'constants.ARDUINO_LINE_FOLLOW()']]],
   ['arduino_5fmove',['ARDUINO_MOVE',['../constants_8hpp.html#a181612c22e57680b1a7fbb5ec603f098',1,'ARDUINO_MOVE():&#160;constants.hpp'],['../constants_8py.html#acf86d86890beb6e2039a03726e431d71',1,'constants.ARDUINO_MOVE()']]],
   ['arduino_5fnull',['ARDUINO_NULL',['../constants_8hpp.html#a84268c0e68916a77e68d86d845c6f7f4',1,'ARDUINO_NULL():&#160;constants.hpp'],['../constants_8py.html#a4fc285d2a763b856a59abf7415a88f39',1,'constants.ARDUINO_NULL()']]],
@@ -24,5 +25,6 @@ var searchData=
   ['arm_5frange_5fmin',['ARM_RANGE_MIN',['../constants_8hpp.html#a4759bb57bec1d5d93ecddbf5384f3edc',1,'ARM_RANGE_MIN():&#160;constants.hpp'],['../constants_8py.html#a185349fe1a4462c42310332cc79acacb',1,'constants.ARM_RANGE_MIN()']]],
   ['armdispose',['armDispose',['../Syringenator_8hpp.html#a4378f1f92482e766c7e5d0c41dc97ae6',1,'Syringenator.hpp']]],
   ['armpark',['armPark',['../Syringenator_8hpp.html#a9ec347be5f02ccfe7e4c03fbce6a4d9d',1,'Syringenator.hpp']]],
-  ['armpick',['armPick',['../Syringenator_8hpp.html#a7bce05d8cc8087b6256ac2d1ed0b83b0',1,'Syringenator.hpp']]]
+  ['armpick',['armPick',['../Syringenator_8hpp.html#a7bce05d8cc8087b6256ac2d1ed0b83b0',1,'Syringenator.hpp']]],
+  ['avoid',['avoid',['../namespaceSyringenator.html#a016cd1486a3a7856574f47bfc14303ec',1,'Syringenator']]]
 ];

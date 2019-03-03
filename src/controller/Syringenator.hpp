@@ -42,6 +42,7 @@ extern volatile bool done_with_command; //for deadReckoning and other routines t
  *	--ABD
  */
 
+
 /**	A function to respond to a detected obstacle while under locamotion.
  *	There may be two cases to handle: whether we are line following, or aproaching.
  *	If we are line following we need to ensure that we don't lose the line while
