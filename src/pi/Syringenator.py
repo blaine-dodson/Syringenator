@@ -162,6 +162,18 @@ class Camera:
 	
 		return mat
 
+class ComPort:
+	def __init__(self):
+		self.p = serial.Serial('/dev/ttyACM0', timeout=1)
+	
+	def status(self):
+		byte = self.p.read(1)
+		print("got byte: " + str(byte))
+		return byte
+	
+	def send(self, count, *bytes):
+		self.p.write(bytes)
+
 
 #==============================================================================#
 #                                 GLOBALS
@@ -737,6 +749,7 @@ target = None
 
 camera = Camera()
 neuralNet = NeuralNet()
+comPort = ComPort()
 
 
 #==============================================================================#
