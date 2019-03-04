@@ -49,6 +49,7 @@ ARDUINO_ARM_PARK            0x20 serial command the arduino to call the park act
 ARDUINO_ARM_DISPOSE         0x21 serial command the arduino to call the dispose action sequence
 ARDUINO_ARM_PICKUP          0x22 serial command the arduino to attempt a pick, followed by three bytes: azimuth, range, and orientation
 
+SERIAL_BAUD 9600 baudrate for serial communication between Arduino and Pi
 
 
 PORT_MOTOR_FWD   None Arduino pin for port motor forward

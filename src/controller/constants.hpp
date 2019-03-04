@@ -45,6 +45,7 @@
 #define ARDUINO_ARM_PARK 0x20 ///< serial command the arduino to call the park action sequence
 #define ARDUINO_ARM_DISPOSE 0x21 ///< serial command the arduino to call the dispose action sequence
 #define ARDUINO_ARM_PICKUP 0x22 ///< serial command the arduino to attempt a pick, followed by three bytes: azimuth, range, and orientation
+#define SERIAL_BAUD 9600 ///< baudrate for serial communication between Arduino and Pi
 #define PORT_MOTOR_FWD None ///< Arduino pin for port motor forward
 #define PORT_MOTOR_REV None ///< Arduino pin for port motor reverse
 #define STBD_MOTOR_FWD None ///< Arduino pin for starboard motor forward

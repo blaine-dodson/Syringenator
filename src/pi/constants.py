@@ -71,6 +71,8 @@ ARDUINO_ARM_PARK = 0x20
 ARDUINO_ARM_DISPOSE = 0x21
 ## serial command the arduino to attempt a pick, followed by three bytes: azimuth, range, and orientation
 ARDUINO_ARM_PICKUP = 0x22
+## baudrate for serial communication between Arduino and Pi
+SERIAL_BAUD = 9600
 ## Arduino pin for port motor forward
 PORT_MOTOR_FWD = None
 ## Arduino pin for port motor reverse
