@@ -12,7 +12,7 @@
 #	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
 
-DEBUG_CAPTURE = False
+DEBUG_CAPTURE = True
 DEBUG_AQUISITION = True
 DEBUG_APPROACH = True
 DEBUG_TRANSFORM = True
@@ -23,7 +23,8 @@ import constants
 import cv2
 import numpy
 import pyrealsense2
-import serial
+
+import SySerial
 
 if DEBUG_TIMING: import time
 
@@ -103,17 +104,6 @@ class Camera:
 			FRAME_RATE
 		)
 	
-	#	print(pyrealsense2.device_list())
-	#	dev = pyrealsense2.device(pyrealsense2.device_list().front())
-	#	
-	#	if(dev == 0):
-	#		print("No device")
-	#	else:
-	#		print(dev.get_info())
-	#	
-	#	print(pyrealsense2.device_list())
-	
-	
 		self.pipeline = pyrealsense2.pipeline()
 	
 		if(self.pipeline == None):
@@ -125,7 +115,7 @@ class Camera:
 			# realsense devices
 			self.pipeline.start(cfg)
 		except:
-			og('string', "Pipeline did not start")
+			log('string', "Pipeline did not start")
 			exit() # @todo fix this
 
 		# stabilize auto exposure. do we need to do this once, or before each pic?
@@ -158,21 +148,11 @@ class Camera:
 			#cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
 			log("string", "photo capture")
 			cv2.imshow("View", mat);
-			cv2.waitKey(0);
+			cv2.waitKey(1000);
 	
 		return mat
 
-class ComPort:
-	def __init__(self):
-		self.p = serial.Serial('/dev/ttyACM0', timeout=1)
-	
-	def status(self):
-		byte = self.p.read(1)
-		print("got byte: " + str(byte))
-		return byte
-	
-	def send(self, count, *bytes):
-		self.p.write(bytes)
+
 
 
 #==============================================================================#
@@ -208,28 +188,6 @@ def log(datatype, *args):
 			)
 	else:
 		print("log(): unknown type")
-
-
-#==============================================================================#
-#                             ARDUINO COMMUNICATION
-#==============================================================================#
-
-
-##	Send serial data to the arduino
-#
-#	@param bytes one or more bytes of data to send to the arduino
-#	@returns None
-def arduinoSend(*bytes):
-	for byte in bytes:
-		pass
-
-##	Wait some fixed time for the arduino to send one or more bytes
-#
-#	@returns a list of bytes
-def arduinoReceive():
-	
-	# do something
-	return constants.ARDUINO_STATUS_READY
 
 
 #==============================================================================#
@@ -470,7 +428,7 @@ def scan(cam, net):
 		
 		
 		cv2.imshow("View", image)
-		cv2.waitKey(0)
+		cv2.waitKey(1000)
 	
 	# pick the closest target
 	d = 2000000
@@ -528,7 +486,7 @@ def canBePicked(t):
 #	@returns None
 def approach(t):
 	log("string", "approach(): start")
-	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
+	while(comPort.status() != constants.ARDUINO_STATUS_READY):
 		pass
 	
 	# face the target if necessary
@@ -538,7 +496,7 @@ def approach(t):
 			rotTicks = constants.ROT_MAX_TICKS
 		
 		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
-		arduinoSend(constants.ARDUINO_ROTATE, rotTicks)
+		comPort.send(constants.ARDUINO_ROTATE, rotTicks)
 	
 	elif t.centerX > constants.PICKUP_X_MAX: # negative rotation
 		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MAX-t.centerX) 
@@ -546,12 +504,12 @@ def approach(t):
 			rotTicks = -constants.ROT_MAX_TICKS
 		
 		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
-		arduinoSend(constants.ARDUINO_ROTATE, rotTicks)
+		comPort.send(constants.ARDUINO_ROTATE, rotTicks)
 	
 	# in all cases we wait for the arduino to be ready
 	status = None
 	while(status == None):
-		status = arduinoReceive()
+		status = comPort.status()
 	log("string", "approach(): status is " + str(status) )
 	
 	# move forward if necessary
@@ -562,7 +520,7 @@ def approach(t):
 			fwdTicks = constants.FWD_MAX_TICKS
 		
 		log("string", "ARDUINO_MOVE: " + str(fwdTicks))
-		arduinoSend(constants.ARDUINO_MOVE, fwdTicks)
+		comPort.send(constants.ARDUINO_MOVE, fwdTicks)
 	
 	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
 		# this may not work as expected
@@ -571,12 +529,12 @@ def approach(t):
 			fwdTicks = -constants.FWD_MAX_TICKS
 		
 		log("string", "ARDUINO_MOVE: " + str(fwdTicks) )
-		arduinoSend(constants.ARDUINO_MOVE, fwdTicks)
+		comPort.send(constants.ARDUINO_MOVE, fwdTicks)
 	
 	# in all cases we wait for the arduino to be ready
 	status = None
 	while(status == None):
-		status = arduinoReceive()
+		status = comPort.status()
 	log("string", "approach(): status is " + str(status) )
 	if status == constants.ARDUINO_STATUS_OBSTACLE:
 		obstacle = True
@@ -588,15 +546,15 @@ def approach(t):
 #	@returns None
 def avoid():
 	log("avoid(): start")
-	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
+	while(comPort.status() != constants.ARDUINO_STATUS_READY):
 		pass
 	
-	arduinoSend(ARDUINO_AVOID)
+	comPort.send(constants.ARDUINO_AVOID)
 	
 	# in all cases we wait for the arduino to be ready
 	status = None
 	while(status == None):
-		status = arduinoReceive()
+		status = comPort.status()
 	log("string", "avoid(): status is " + str(status) )
 	obstacle = False
 
@@ -625,7 +583,7 @@ def avoid():
 #	@returns None
 def pickUp(t):
 	log("string", "pickUp(): start")
-	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
+	while(comPort.status() != constants.ARDUINO_STATUS_READY):
 		pass
 	
 	# find the center and orientation of the target
@@ -637,12 +595,23 @@ def pickUp(t):
 	if DEBUG_TRANSFORM:
 		log("string", "o: " + str(o))
 	
+	# limit the ranges
+	if T>constants.ARM_AZIMUTH_MAX: T = constants.ARM_AZIMUTH_MAX
+	if T<constants.ARM_AZIMUTH_MIN: T = constants.ARM_AZIMUTH_MIN
+	
+	if r>constants.ARM_RANGE_MAX: r = constants.ARM_RANGE_MAX
+	if r<constants.ARM_RANGE_MIN: r = constants.ARM_RANGE_MIN
+	
+	if o>constants.ARM_ORIENT_MAX: o = constants.ARM_ORIENT_MAX
+	if o<constants.ARM_ORIENT_MIN: o = constants.ARM_ORIENT_MIN
+	
 	# signal the arduino to pickUp
+	comPort.send(constants.ARDUINO_ARM_PICKUP, T, r, o)
 	
 	# in all cases we wait for the arduino to be ready
 	status = None
 	while(status == None):
-		status = arduinoReceive()
+		status = comPort.status()
 	log("string", "pickUp(): status is " + str(status) )
 
 
@@ -658,13 +627,15 @@ def pickUp(t):
 #	@returns None
 def returnToLine():
 	log("string", "returnToLine(): start")
-	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
+	while(comPort.status() != constants.ARDUINO_STATUS_READY):
 		pass
+	
+	comPort.send(constants.ARDUINO_RETURN)
 	
 	# in all cases we wait for the arduino to be ready
 	status = None
 	while(status == None):
-		status = arduinoReceive()
+		status = comPort.status()
 	log("string", "returnToLine(): status is " + str(status) )
 
 ##	Follow the line.
@@ -674,13 +645,15 @@ def returnToLine():
 #	@returns None
 def lineFollow():
 	log("string", "lineFollow(): start")
-	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
+	while(comPort.status() != constants.ARDUINO_STATUS_READY):
 		pass
+	
+	comPort.send(constants.ARDUINO_LINE_FOLLOW)
 	
 	# in all cases we wait for the arduino to be ready
 	status = None
 	while(status == None):
-		status = arduinoReceive()
+		status = comPort.status()
 	log("string", "lineFollow(): status is " + str(status) )
 
 ##	A routine to determine if the target is in position to be picked up.
@@ -712,7 +685,7 @@ def canBePicked(t):
 			# show the output image
 			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
 			cv2.imshow("View", t.image)
-			cv2.waitKey(0)
+			cv2.waitKey(1000)
 		return True
 	else:
 		log("string", "cannot pick")
@@ -731,7 +704,7 @@ def canBePicked(t):
 			# show the output image
 			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
 			cv2.imshow("View", t.image)
-			cv2.waitKey(0)
+			cv2.waitKey(1000)
 		return False
 
 
@@ -749,7 +722,7 @@ target = None
 
 camera = Camera()
 neuralNet = NeuralNet()
-comPort = ComPort()
+comPort = SySerial.ComPort()
 
 
 #==============================================================================#

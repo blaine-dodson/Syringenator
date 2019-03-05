@@ -18,15 +18,15 @@
 ## The minimum azimuth byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
 ARM_AZIMUTH_MIN = 0
 ## The maximum azimuth byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
-ARM_AZIMUTH_MAX = 0
+ARM_AZIMUTH_MAX = 180
 ## The minimum range byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
-ARM_RANGE_MIN = 0
+ARM_RANGE_MIN = 12
 ## The maximum range byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
-ARM_RANGE_MAX = 0
+ARM_RANGE_MAX = 19
 ## The minimum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
 ARM_ORIENT_MIN = 0
 ## The maximum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
-ARM_ORIENT_MAX = 0
+ARM_ORIENT_MAX = 180
 ## The minimum target center x-value that allows a pickup
 PICKUP_X_MIN = 230
 ## The maximum target center x-value that allows a pickup
@@ -65,6 +65,8 @@ ARDUINO_MOVE = 0x11
 ARDUINO_LINE_FOLLOW = 0x12
 ## serial command the arduino to avoid an obstacle
 ARDUINO_AVOID = 0x13
+## serial command the arduino to return to the line
+ARDUINO_RETURN = 0x14
 ## serial command the arduino to call the park action sequence
 ARDUINO_ARM_PARK = 0x20
 ## serial command the arduino to call the dispose action sequence
