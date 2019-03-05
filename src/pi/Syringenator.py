@@ -31,6 +31,7 @@ if DEBUG_TIMING: import time
 if DEBUG_CAPTURE or DEBUG_AQUISITION or DEBUG_APPROACH:
 	cv2.namedWindow("View", cv2.WINDOW_AUTOSIZE );
 
+
 #==============================================================================#
 #                                 DEFINITIONS
 #==============================================================================#
@@ -151,8 +152,6 @@ class Camera:
 			cv2.waitKey(1000);
 	
 		return mat
-
-
 
 
 #==============================================================================#
@@ -502,6 +501,8 @@ def approach(t):
 		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MAX-t.centerX) 
 		if rotTicks < -constants.ROT_MAX_TICKS:
 			rotTicks = -constants.ROT_MAX_TICKS
+		
+		print "rotTicks is: " + type(rotTicks)
 		
 		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
 		comPort.send(constants.ARDUINO_ROTATE, rotTicks)
