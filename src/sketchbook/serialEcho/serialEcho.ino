@@ -15,18 +15,17 @@ char serialDataIn[IN_BUF_SZ];
 int bytesRead=0;
 void serialEvent(){
 	bytesRead = Serial.readBytesUntil(ARDUINO_NULL, serialDataIn, IN_BUF_SZ);
-	digitalWrite(LED_BUILTIN, HIGH);
 }
 
 void loop(){
 	
 	if(bytesRead){
-		digitalWrite(LED_BUILTIN, HIGH);
 		for(int i=0; i<bytesRead; i++)
 			Serial.write(serialDataIn[i]);
-		
-		delay(100)
-		digitalWrite(LED_BUILTIN, LOW);
 		bytesRead =0;
+		
+		digitalWrite(LED_BUILTIN, HIGH);
+		delay(100);
+		digitalWrite(LED_BUILTIN, LOW);
 	}
 }
