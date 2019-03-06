@@ -24,12 +24,14 @@ import cv2
 import numpy
 import pyrealsense2
 import coordinateXforms as xform
+import SySerial
 
 
 if DEBUG_TIMING: import time
 
 if DEBUG_CAPTURE or DEBUG_AQUISITION or DEBUG_APPROACH:
 	cv2.namedWindow("View", cv2.WINDOW_AUTOSIZE );
+
 
 #==============================================================================#
 #                                 DEFINITIONS
@@ -104,17 +106,6 @@ class Camera:
 			FRAME_RATE
 		)
 	
-	#	print(pyrealsense2.device_list())
-	#	dev = pyrealsense2.device(pyrealsense2.device_list().front())
-	#	
-	#	if(dev == 0):
-	#		print("No device")
-	#	else:
-	#		print(dev.get_info())
-	#	
-	#	print(pyrealsense2.device_list())
-	
-	
 		self.pipeline = pyrealsense2.pipeline()
 	
 		if(self.pipeline == None):
@@ -126,7 +117,7 @@ class Camera:
 			# realsense devices
 			self.pipeline.start(cfg)
 		except:
-			og('string', "Pipeline did not start")
+			log('string', "Pipeline did not start")
 			exit() # @todo fix this
 
 		# stabilize auto exposure. do we need to do this once, or before each pic?
@@ -159,7 +150,7 @@ class Camera:
 			#cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
 			log("string", "photo capture")
 			cv2.imshow("View", mat);
-			cv2.waitKey(0);
+			cv2.waitKey(1000);
 	
 		return mat
 
@@ -199,28 +190,6 @@ def log(datatype, *args):
 			)
 	else:
 		print("log(): unknown type")
-
-
-#==============================================================================#
-#                             ARDUINO COMMUNICATION
-#==============================================================================#
-
-
-##	Send serial data to the arduino
-#
-#	@param bytes one or more bytes of data to send to the arduino
-#	@returns None
-def arduinoSend(*bytes):
-	for byte in bytes:
-		pass
-
-##	Wait some fixed time for the arduino to send one or more bytes
-#
-#	@returns a list of bytes
-def arduinoReceive():
-	
-	# do something
-	return constants.ARDUINO_STATUS_READY
 
 
 #==============================================================================#
@@ -452,10 +421,9 @@ def scan(cam, net):
 				0.5, [102, 220, 225], 2
 			)
 		
-		# show the output image
-		#cv2.namedWindow("Targets", cv2.WINDOW_AUTOSIZE );
+		
 		cv2.imshow("View", image)
-		cv2.waitKey(0)
+		cv2.waitKey(1000)
 	
 	# pick the closest target
 	d = 2000000
@@ -474,174 +442,6 @@ def scan(cam, net):
 	
 	log("string", "scan(): stop")
 	return closest
-
-
-#==============================================================================#
-#                                ARDUINO COMMANDS
-#==============================================================================#
-
-
-##	Move the robot closer to the given target.
-#	The moveCloser() routine attempts to aproach the target by relatively small
-#	increments. Because the move routines may be interrupted by the obstacle
-#	avoidance ISRs and the risk of jambing the wheels etc. we cannot expect to be
-#	able to approch successfully on the first try. Hence moveCloser() should only
-#	move a relatively short distance before exiting to allow another loop through
-#	the scan cycle.
-#
-#	Should we spend effort trying to avoid running over decoys here?
-#
-#	This routine is likely where we will have the most issues.
-#	--ABD
-#
-#	@param t a Target object containing the location of the target to be approched
-#	@returns None
-def approach(t):
-	log("string", "approach(): start")
-	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
-		pass
-	
-	# face the target if necessary
-	if t.centerX < constants.PICKUP_X_MIN: # positive rotation
-		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX) 
-		if rotTicks > constants.ROT_MAX_TICKS:
-			rotTicks = constants.ROT_MAX_TICKS
-		
-		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
-		arduinoSend(constants.ARDUINO_ROTATE, rotTicks)
-	
-	elif t.centerX > constants.PICKUP_X_MAX: # negative rotation
-		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MAX-t.centerX) 
-		if rotTicks < -constants.ROT_MAX_TICKS:
-			rotTicks = -constants.ROT_MAX_TICKS
-		
-		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
-		arduinoSend(constants.ARDUINO_ROTATE, rotTicks)
-	
-	# move forward if necessary
-	# the pixel origin is in the upper left corner
-	if t.centerY < constants.PICKUP_Y_MIN: # positive translation
-		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MIN-t.centerY)
-		if fwdTicks > constants.FWD_MAX_TICKS:
-			fwdTicks = constants.FWD_MAX_TICKS
-		
-		log("string", "ARDUINO_MOVE: " + str(fwdTicks))
-		arduinoSend(constants.ARDUINO_MOVE, fwdTicks)
-	
-	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
-		# this may not work as expected
-		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MAX-t.centerY)
-		if fwdTicks < -constants.FWD_MAX_TICKS:
-			fwdTicks = -constants.FWD_MAX_TICKS
-		
-		log("string", "ARDUINO_MOVE: " + str(fwdTicks) )
-		arduinoSend(constants.ARDUINO_MOVE, fwdTicks)
-	
-	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = arduinoReceive()
-	log("string", "approach(): status is " + str(status) )
-	if status == constants.ARDUINO_STATUS_OBSTACLE:
-		obstacle = True
-		log("string", "obstacle detected")
-
-
-## avoid an obstacle
-#
-#	@returns None
-def avoid():
-	log("avoid(): start")
-	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
-		pass
-	
-	arduinoSend(ARDUINO_AVOID)
-	
-	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = arduinoReceive()
-	log("string", "avoid(): status is " + str(status) )
-	obstacle = False
-
-
-
-##	Attempt to pickup and dispose the target.
-#	This routine must determine orientation of the target. If this is not done by
-#	some OpenCV magic we can attempt it here using the raw image data and the
-#	bounding box.
-#
-#	Divide the longer dimension of the bounding box by some constant divisor. Scan
-#	along each of those raster lines twice. On the first pass calculate an average
-#	brightness (RGB values can be summed). The second pass will pick out points of
-#	greatest brightness. Find the centers of clustered bright pixeles. We now have
-#	a set of points in cartesian space. Have Jake find the slope of the line of
-#	best fit.
-#
-#	The center can be estimated as the center of the bounding box, or the center of
-#	the points, the mean of both, etc.
-#
-#	Once the values for x, y, and m have been determined they will have to pass
-#	through a calibration transform to determine the arm a, r, o values.
-#	--ABD
-#
-#	@param t a Target object containing the raw bitmap data
-#	@returns None
-def pickUp(t):
-	log("string", "pickUp(): start")
-	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
-		pass
-	
-	# find the center and orientation of the target
-	floorCart2armCylinder(imageCart2floorCart(t))
-	
-	#(theta, r, phi) = armCoordinates(t)
-	
-	# signal the arduino to pickUp
-	
-	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = arduinoReceive()
-	log("string", "pickUp(): status is " + str(status) )
-
-
-##	signl the arduino to return to the line.
-#
-#	@todo do we need to check that we actually returned? how do we recover if
-#	dead reckoning fails? --ABD
-#
-#	We disscussed the possibility of a timer on lineFollow(), that if the line
-#	has not been detected recently then we know we are off track and must recoves
-#	somehow.
-#
-#	@returns None
-def returnToLine():
-	log("returnToLine(): start")
-	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
-		pass
-	
-	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = arduinoReceive()
-	log("string", "returnToLine(): status is " + str(status) )
-
-##	Follow the line.
-#
-#	this routine simply signals the arduino to execute its lineFollow() routine
-#
-#	@returns None
-def lineFollow():
-	log("lineFollow(): start")
-	while(arduinoReceive() != constants.ARDUINO_STATUS_READY):
-		pass
-	
-	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = arduinoReceive()
-	log("string", "lineFollow(): status is " + str(status) )
 
 ##	A routine to determine if the target is in position to be picked up.
 #
@@ -672,7 +472,7 @@ def canBePicked(t):
 			# show the output image
 			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
 			cv2.imshow("View", t.image)
-			cv2.waitKey(0)
+			cv2.waitKey(1000)
 		return True
 	else:
 		log("string", "cannot pick")
@@ -691,8 +491,198 @@ def canBePicked(t):
 			# show the output image
 			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
 			cv2.imshow("View", t.image)
-			cv2.waitKey(0)
+			cv2.waitKey(1000)
 		return False
+
+
+#==============================================================================#
+#                                ARDUINO COMMANDS
+#==============================================================================#
+
+
+##	Move the robot closer to the given target.
+#	The moveCloser() routine attempts to aproach the target by relatively small
+#	increments. Because the move routines may be interrupted by the obstacle
+#	avoidance ISRs and the risk of jambing the wheels etc. we cannot expect to be
+#	able to approch successfully on the first try. Hence moveCloser() should only
+#	move a relatively short distance before exiting to allow another loop through
+#	the scan cycle.
+#
+#	Should we spend effort trying to avoid running over decoys here?
+#
+#	This routine is likely where we will have the most issues.
+#	--ABD
+#
+#	@param t a Target object containing the location of the target to be approched
+#	@returns None
+def approach(t):
+	log("string", "approach(): start")
+	while(comPort.status() != constants.ARDUINO_STATUS_READY):
+		pass
+	
+	# face the target if necessary
+	if t.centerX < constants.PICKUP_X_MIN: # positive rotation
+		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX) 
+		if rotTicks > constants.ROT_MAX_TICKS:
+			rotTicks = constants.ROT_MAX_TICKS
+		
+		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
+		comPort.send([constants.ARDUINO_ROTATE, rotTicks])
+	
+	elif t.centerX > constants.PICKUP_X_MAX: # negative rotation
+		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MAX-t.centerX) 
+		if rotTicks < -constants.ROT_MAX_TICKS:
+			rotTicks = -constants.ROT_MAX_TICKS
+		
+		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
+		comPort.send([constants.ARDUINO_ROTATE, rotTicks])
+	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = comPort.status()
+	log("string", "approach(): status is " + str(status) )
+	
+	# move forward if necessary
+	# the pixel origin is in the upper left corner
+	if t.centerY < constants.PICKUP_Y_MIN: # positive translation
+		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MIN-t.centerY)
+		if fwdTicks > constants.FWD_MAX_TICKS:
+			fwdTicks = constants.FWD_MAX_TICKS
+		
+		log("string", "ARDUINO_MOVE: " + str(fwdTicks))
+		comPort.send([constants.ARDUINO_MOVE, fwdTicks])
+	
+	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
+		# this may not work as expected
+		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MAX-t.centerY)
+		if fwdTicks < -constants.FWD_MAX_TICKS:
+			fwdTicks = -constants.FWD_MAX_TICKS
+		
+		log("string", "ARDUINO_MOVE: " + str(fwdTicks) )
+		comPort.send([constants.ARDUINO_MOVE, fwdTicks])
+	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = comPort.status()
+	log("string", "approach(): status is " + str(status) )
+	if status == constants.ARDUINO_STATUS_OBSTACLE:
+		obstacle = True
+		log("string", "obstacle detected")
+
+
+## avoid an obstacle
+#
+#	@returns None
+def avoid():
+	log("avoid(): start")
+	while(comPort.status() != constants.ARDUINO_STATUS_READY):
+		pass
+	
+	comPort.send([constants.ARDUINO_AVOID])
+	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = comPort.status()
+	log("string", "avoid(): status is " + str(status) )
+	obstacle = False
+
+
+
+##	Attempt to pickup and dispose the target.
+#	This routine must determine orientation of the target. If this is not done by
+#	some OpenCV magic we can attempt it here using the raw image data and the
+#	bounding box.
+#
+#	Divide the longer dimension of the bounding box by some constant divisor. Scan
+#	along each of those raster lines twice. On the first pass calculate an average
+#	brightness (RGB values can be summed). The second pass will pick out points of
+#	greatest brightness. Find the centers of clustered bright pixeles. We now have
+#	a set of points in cartesian space. Have Jake find the slope of the line of
+#	best fit.
+#
+#	The center can be estimated as the center of the bounding box, or the center of
+#	the points, the mean of both, etc.
+#
+#	Once the values for x, y, and m have been determined they will have to pass
+#	through a calibration transform to determine the arm a, r, o values.
+#	--ABD
+#
+#	@param t a Target object containing the raw bitmap data
+#	@returns None
+def pickUp(t):
+	log("string", "pickUp(): start")
+	while(comPort.status() != constants.ARDUINO_STATUS_READY):
+		pass
+	
+	# find the center and orientation of the target
+	(theta,r) = floorCart2armCylinder(imageCart2floorCart(t))
+	
+	phi = xform.orientationCapture(
+		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
+	
+	# limit the ranges
+	if theta>constants.ARM_AZIMUTH_MAX: theta = constants.ARM_AZIMUTH_MAX
+	if theta<constants.ARM_AZIMUTH_MIN: theta = constants.ARM_AZIMUTH_MIN
+	
+	if r>constants.ARM_RANGE_MAX: r = constants.ARM_RANGE_MAX
+	if r<constants.ARM_RANGE_MIN: r = constants.ARM_RANGE_MIN
+	
+	if phi>constants.ARM_ORIENT_MAX: phi = constants.ARM_ORIENT_MAX
+	if phi<constants.ARM_ORIENT_MIN: phi = constants.ARM_ORIENT_MIN
+	
+	# signal the arduino to pickUp
+	comPort.send([constants.ARDUINO_ARM_PICKUP, theta, r, phi])
+	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = comPort.status()
+	log("string", "pickUp(): status is " + str(status) )
+
+
+##	signl the arduino to return to the line.
+#
+#	@todo do we need to check that we actually returned? how do we recover if
+#	dead reckoning fails? --ABD
+#
+#	We disscussed the possibility of a timer on lineFollow(), that if the line
+#	has not been detected recently then we know we are off track and must recoves
+#	somehow.
+#
+#	@returns None
+def returnToLine():
+	log("string", "returnToLine(): start")
+	while(comPort.status() != constants.ARDUINO_STATUS_READY):
+		pass
+	
+	comPort.send([constants.ARDUINO_RETURN])
+	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = comPort.status()
+	log("string", "returnToLine(): status is " + str(status) )
+
+##	Follow the line.
+#
+#	this routine simply signals the arduino to execute its lineFollow() routine
+#
+#	@returns None
+def lineFollow():
+	log("string", "lineFollow(): start")
+	while(comPort.status() != constants.ARDUINO_STATUS_READY):
+		pass
+	
+	comPort.send([constants.ARDUINO_LINE_FOLLOW])
+	
+	# in all cases we wait for the arduino to be ready
+	status = None
+	while(status == None):
+		status = comPort.status()
+	log("string", "lineFollow(): status is " + str(status) )
 
 
 #==============================================================================#
@@ -709,6 +699,7 @@ target = None
 
 camera = Camera()
 neuralNet = NeuralNet()
+comPort = SySerial.ComPort()
 
 
 #==============================================================================#
