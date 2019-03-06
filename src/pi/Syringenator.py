@@ -12,12 +12,13 @@
 #	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
 
-DEBUG_CAPTURE = True
+DEBUG_CAPTURE = False
 DEBUG_AQUISITION = True
 DEBUG_APPROACH = True
 DEBUG_TRANSFORM = True
 DEBUG_ORIENTATION = True
 DEBUG_TIMING = True
+DEBUG_CAL = False
 
 import constants
 import cv2
@@ -29,7 +30,7 @@ import SySerial
 
 if DEBUG_TIMING: import time
 
-if DEBUG_CAPTURE or DEBUG_AQUISITION or DEBUG_APPROACH:
+if DEBUG_CAPTURE or DEBUG_AQUISITION or DEBUG_APPROACH or DEBUG_CAL:
 	cv2.namedWindow("View", cv2.WINDOW_AUTOSIZE );
 
 
@@ -150,7 +151,7 @@ class Camera:
 			#cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
 			log("string", "photo capture")
 			cv2.imshow("View", mat);
-			cv2.waitKey(1000);
+			cv2.waitKey(500);
 	
 		return mat
 
@@ -281,10 +282,8 @@ def extractTargets(dataIn):
 #	This coordinate system is used to locate targets around the robot. It
 #	consists of a signed integer tuple fore-aft and port-starboard. Positive
 #	values are forward and starboard. Its axes are at right angles and its origin
-#	is directly below the origin of Image Cartesian.
-#	Its units of length are centimeters. Smaller units introduce unecessary and
-#	likely unrealistic precision. Larger units would require this system to use
-#	floats.
+#	is at the front edge of the robot.
+#	Its units of length are millimeters.
 #
 #	## Arm Cylindrical
 #	This coordinate system is used to locate targets around the xArm. It consists
@@ -295,29 +294,32 @@ def extractTargets(dataIn):
 
 
 
-XPIX2LEN = (numpy.tan(FOV_X/2*numpy.pi/180))/(IMG_WIDTH/2)*constants.CAL_CAM_AXIS
-YPIX2LEN = (numpy.tan(FOV_Y/2*numpy.pi/180))/(IMG_HEIGHT/2)*constants.CAL_CAM_AXIS
+#XPIX2LEN = (numpy.tan(FOV_X/2*numpy.pi/180))/(IMG_WIDTH/2)*constants.CAL_CAM_AXIS
+#YPIX2LEN = (numpy.tan(FOV_Y/2*numpy.pi/180))/(IMG_HEIGHT/2)*constants.CAL_CAM_AXIS
+
+XPIX2LEN = 2
+YPIX2LEN = 10/7.0
 
 ##	Derive floor position from image data
 #
 #	@param x the x-value of the point of interest in the image
 #	@param y the y-value of the point of interest in the image
 #	@param d the distance value of the point of interest in the image
-#	@returns a tuple (x, y)
+#	@returns a tuple (x, y) the coordinates on the floor in mm
 def imageCart2floorCart(t):
 	
+#	if DEBUG_TRANSFORM:
+#		print "XPIX2LEN: " + str(XPIX2LEN)
+#		print "YPIX2LEN: " + str(YPIX2LEN)
+	
+	xf = int(XPIX2LEN*(t.centerX - IMG_WIDTH/2))
+	yf = int(YPIX2LEN*(IMG_HEIGHT - t.centerY))
+	
 	if DEBUG_TRANSFORM:
-		print "XPIX2LEN: " + str(XPIX2LEN)
-		print "YPIX2LEN: " + str(YPIX2LEN)
+		print "xf: " + str(xf)
+		print "yf: " + str(yf)
 	
-	xp = XPIX2LEN*(t.centerX - IMG_WIDTH/2)
-	yp = YPIX2LEN*(t.centerY - IMG_HEIGHT/2)
-	
-	if DEBUG_TRANSFORM:
-		print "xp: " + str(xp)
-		print "yp: " + str(yp)
-	
-	return (xp, yp)
+	return (xf, yf)
 
 ##	Derive cylindrical coordinates, centered on the arm from cartesian
 #	coordinates centered on the camera.
@@ -326,55 +328,58 @@ def imageCart2floorCart(t):
 #	@param y the y-value of the point of interest on the floor
 #	@returns a tuple (Azimuth, Range)
 def floorCart2armCylinder((x, y)):
-	y -= constants.CAL_ARM_OFFSET
+	y += constants.CAL_ARM_OFFSET
 	
-	r = numpy.sqrt(x**2 + y**2)/10
+	#r = numpy.rint(numpy.sqrt(x**2 + y**2)/10)
+	r  = xform.fndRadius(y,x)
 	
-	if DEBUG_TRANSFORM:
-		print "r: " + str(r)
-	
-	az = 0
+	if x>0:
+		az = int(numpy.rint(180-(180/numpy.pi) * numpy.arctan(y/x)))
+	elif x<0:
+		az = int(numpy.rint(-(180/numpy.pi) * numpy.arctan(y/x)))
+	else:
+		az = 90
 	
 	return (az, r)
 
 
-def armCoordinates(t):
-	
-	x = xform.estCoordinateX(
-		constants.CAL_CAM_HEIGHT,
-		IMG_WIDTH/2, IMG_HEIGHT/2,
-		constants.CAL_CAM_ANGLE,
-		FOV_X, FOV_Y,
-		t.centerX, t.centerY,
-		constants.CAL_ARM_OFFSET
-	)
-	
-	z = xform.estCoordinateZ(
-		constants.CAL_CAM_HEIGHT,
-		IMG_HEIGHT/2,
-		constants.CAL_CAM_ANGLE,
-		FOV_Y,
-		t.centerY,
-		constants.CAL_ARM_OFFSET
-	)
-	
-	if DEBUG_TRANSFORM:
-		print("x value: " + str(x))
-		print("z value: " + str(z))
-	
-	theta = xform.findTheta(z,x)
-	
-	radius = xform.fndRadius(z,x)
-	
-	phi = xform.orientationCapture(
-		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
-	
-	if DEBUG_TRANSFORM:
-		log("string", "Theta : " + str(theta))
-		log("string", "Radius: " + str(radius))
-		log("string", "Phi   : " + str(phi))
-	
-	return (theta, radius, phi)
+#def armCoordinates(t):
+#	
+#	x = xform.estCoordinateX(
+#		constants.CAL_CAM_HEIGHT,
+#		IMG_WIDTH/2, IMG_HEIGHT/2,
+#		constants.CAL_CAM_ANGLE,
+#		FOV_X, FOV_Y,
+#		t.centerX, t.centerY,
+#		constants.CAL_ARM_OFFSET
+#	)
+#	
+#	z = xform.estCoordinateZ(
+#		constants.CAL_CAM_HEIGHT,
+#		IMG_HEIGHT/2,
+#		constants.CAL_CAM_ANGLE,
+#		FOV_Y,
+#		t.centerY,
+#		constants.CAL_ARM_OFFSET
+#	)
+#	
+#	if DEBUG_TRANSFORM:
+#		print("x value: " + str(x))
+#		print("z value: " + str(z))
+#	
+#	theta = xform.findTheta(z,x)
+#	
+#	radius = xform.fndRadius(z,x)
+#	
+#	phi = xform.orientationCapture(
+#		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
+#	
+#	if DEBUG_TRANSFORM:
+#		log("string", "Theta : " + str(theta))
+#		log("string", "Radius: " + str(radius))
+#		log("string", "Phi   : " + str(phi))
+#	
+#	return (theta, radius, phi)
 
 
 
@@ -633,6 +638,11 @@ def pickUp(t):
 	if phi>constants.ARM_ORIENT_MAX: phi = constants.ARM_ORIENT_MAX
 	if phi<constants.ARM_ORIENT_MIN: phi = constants.ARM_ORIENT_MIN
 	
+	if DEBUG_TRANSFORM:
+		print "theta: " + str(theta) + " type: " + str(type(theta))
+		print "r: " + str(r) + " type: " + str(type(r))
+		print "phi: " + str(phi) + " type: " + str(type(phi))
+	
 	# signal the arduino to pickUp
 	comPort.send([constants.ARDUINO_ARM_PICKUP, theta, r, phi])
 	
@@ -705,6 +715,32 @@ comPort = SySerial.ComPort()
 #==============================================================================#
 #                                    MAIN LOOP
 #==============================================================================#
+
+
+while DEBUG_CAL:
+	image = camera.capture()
+	cv2.line(image, (IMG_WIDTH/2,0), (IMG_WIDTH/2,IMG_HEIGHT), [255,0,255])
+	
+	for y in range(constants.PICKUP_Y_MAX, constants.PICKUP_Y_MIN, -10):
+		cv2.line(image, (0,y), (IMG_WIDTH,y), [255,0,0])
+	
+	
+	cv2.rectangle(
+		image,
+		(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
+		(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
+		[200, 0, 0], 2
+	)
+	cv2.imshow("View", image)
+	crop = image[
+		constants.PICKUP_Y_MIN:constants.PICKUP_Y_MAX,
+		constants.PICKUP_X_MIN:constants.PICKUP_X_MAX
+	]
+	
+	
+	bigger = cv2.resize(src=crop, dsize=(0,0), fx=4, fy=4)
+	cv2.imshow("Bigger", bigger)
+	cv2.waitKey(0)
 
 
 log('string', "Syringenator: Start")
