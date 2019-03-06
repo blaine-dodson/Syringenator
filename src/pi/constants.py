@@ -43,6 +43,14 @@ ROT_MAX_TICKS = 200
 CAL_ROT_FACTOR = 1
 ## Calibration factor used in forward calculation
 CAL_FWD_FACTOR = 1
+## Offset of the arm axis from the camera axis [mm]
+CAL_ARM_OFFSET = 54
+## Height of the camera from the floor [mm]
+CAL_CAM_HEIGHT = 984
+## Angle of the camera from the horizon [radians]
+CAL_CAM_ANGLE = 1.2117
+## distance to the floor on the camera's center axis
+CAL_CAM_AXIS = 1140
 ## A place holder for troubleshooting etc.
 ARDUINO_NULL = 0x00
 ## If the arduino needs to acknowledge something

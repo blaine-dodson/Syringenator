@@ -28,8 +28,12 @@ PICKUP_Y_MAX 480 The maximum target center y-value that allows a pickup
 FWD_MAX_TICKS 200 The maximum count of forward ticks used in moveCloser()
 ROT_MAX_TICKS 200 The maximum absolute value of rotation ticks used in moveCloser()
 
-CAL_ROT_FACTOR 1 Calibration factor used in rotation calculation
-CAL_FWD_FACTOR 1 Calibration factor used in forward calculation
+CAL_ROT_FACTOR      1 Calibration factor used in rotation calculation
+CAL_FWD_FACTOR      1 Calibration factor used in forward calculation
+CAL_ARM_OFFSET     54 Offset of the arm axis from the camera axis [mm]
+CAL_CAM_HEIGHT    984 Height of the camera from the floor [mm]
+CAL_CAM_ANGLE  1.2117 Angle of the camera from the horizon [radians]
+CAL_CAM_AXIS     1140 distance to the floor on the camera's center axis
 
 
 ARDUINO_NULL                0x00 A place holder for troubleshooting etc.

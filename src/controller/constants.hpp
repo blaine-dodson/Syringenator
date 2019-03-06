@@ -31,6 +31,10 @@
 #define ROT_MAX_TICKS 200 ///< The maximum absolute value of rotation ticks used in moveCloser()
 #define CAL_ROT_FACTOR 1 ///< Calibration factor used in rotation calculation
 #define CAL_FWD_FACTOR 1 ///< Calibration factor used in forward calculation
+#define CAL_ARM_OFFSET 54 ///< Offset of the arm axis from the camera axis [mm]
+#define CAL_CAM_HEIGHT 984 ///< Height of the camera from the floor [mm]
+#define CAL_CAM_ANGLE 1.2117 ///< Angle of the camera from the horizon [radians]
+#define CAL_CAM_AXIS 1140 ///< distance to the floor on the camera's center axis
 #define ARDUINO_NULL 0x00 ///< A place holder for troubleshooting etc.
 #define ARDUINO_STATUS_ACK 0x01 ///< If the arduino needs to acknowledge something
 #define ARDUINO_STATUS_READY 0x02 ///< If the arduino needs to indicate it is ready

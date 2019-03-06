@@ -12,18 +12,19 @@
 #	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
 
-DEBUG_CAPTURE = False
-DEBUG_AQUISITION = False
+DEBUG_CAPTURE = True
+DEBUG_AQUISITION = True
 DEBUG_APPROACH = True
 DEBUG_TRANSFORM = True
-DEBUG_ORIENTATION = False
+DEBUG_ORIENTATION = True
 DEBUG_TIMING = True
 
 import constants
 import cv2
 import numpy
 import pyrealsense2
-#import serial
+import coordinateXforms as xform
+
 
 if DEBUG_TIMING: import time
 
@@ -172,9 +173,11 @@ class Camera:
 FRAME_RATE = 30
 IMG_WIDTH  = 640
 IMG_HEIGHT = 480
+FOV_X      = 63.4
+FOV_Y      = 40.4
 
 # OpenCV Parameters
-CONFIDENCE=.5
+CONFIDENCE   =.5
 NMS_THRESHOLD=.1
 
 
@@ -285,79 +288,6 @@ def extractTargets(dataIn):
 	return targets
 
 
-# A small helper function for computing the sums of each quadrant 
-# to obtain syringe orientation -JMC
-def cmpCroppedColour(x_i,x_f,y_i,y_f,crop_colour):
-	Q = 0
-	for i in range(x_i,x_f):
-		for j in range(y_i,y_f):
-			Q += crop_colour[i][j]
-	return Q
-#           Q1 Q2 Q3
-#           Q4 Q5 Q6
-#           Q7 Q8 Q9
-
-# Essentially if the sum of Q1 and Q9 is 
-# greater than the sum of Q2 and Q8 and greater than the sum of Q3 and Q7 
-# and greater than the sum of Q4 and Q6 we know the syringe mus be oriented at a 135 
-# degree angle where zero is the syringe facing upward
-# -JMC
-def orientationCapture(x,y,w,h,img):
-
-	crop_colour = img[y:y+h, x:x+w]
-	gray = cv2.cvtColor(crop_colour, cv2.COLOR_BGR2GRAY)
-	gray[gray < 144] = 0
-
-
-	if DEBUG_ORIENTATION:
-		cv2.imshow("View", crop_colour);
-		cv2.waitKey(0);
-		cv2.imshow("View", gray);
-		cv2.waitKey(0);
-	
-	crop_colour = gray
-
-	Q1 = 0
-	Q2 = 0
-	Q3 = 0
-	Q4 = 0
-	Q6 = 0
-	Q7 = 0
-	Q8 = 0
-	Q9 = 0
-
-	Q1 = cmpCroppedColour(0,int(numpy.rint(len(crop_colour)/3)),0,int(numpy.rint(len(crop_colour[0])/3)),crop_colour)
-	Q2 = cmpCroppedColour(int(numpy.rint(len(crop_colour)/3) + 1), (int(2*numpy.rint(len(crop_colour)/3))), 0, int(numpy.rint(len(crop_colour[0])/3)), crop_colour)
-	Q3 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), 0, int(numpy.rint(len(crop_colour[0])/3)), crop_colour)
-	Q4 = cmpCroppedColour(0, int(numpy.rint(len(crop_colour)/3)), int(numpy.rint(len(crop_colour[0])/3) + 1), (int(2*numpy.rint(len(crop_colour[0]))/3)), crop_colour)
-	Q6 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), int(numpy.rint(len(crop_colour[0])/3) + 1), (int(2*numpy.rint(len(crop_colour[0]))/3)), crop_colour)
-	Q7 = cmpCroppedColour(0, int(numpy.rint(len(crop_colour)/3)), (2*int(numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
-	Q8 = cmpCroppedColour(int(numpy.rint(len(crop_colour)/3) + 1), (int(2*numpy.rint(len(crop_colour))/3)), (int(2*numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
-	Q9 = cmpCroppedColour((int(2*numpy.rint(len(crop_colour))/3) + 1), int(numpy.rint(len(crop_colour))), (int(2*numpy.rint(len(crop_colour[0]))/3) + 1), int(numpy.rint(len(crop_colour[0]))), crop_colour)
-
-	degrees_0 = int(Q4 + Q6)
-	degrees_45 = Q1 + Q9
-	degrees_90 = Q2 + Q8
-	degrees_135 = Q3 + Q7
-
-	# first two if statements should take care of the issue of aspect ratio distortion.
-	# That is if a bounding box is so narrow around the syringe we just assume the 0 or 90 degree 
-	# case otherwise we do the summing of quadrants.
-	if w * 2 < h: 
-		return 90
-	elif h * 2 < w:
-		return 0
-	else:
-		if degrees_0 > degrees_45 and degrees_0 > degrees_90 and degrees_0 > degrees_135:
-		    return 0
-		if degrees_45 > degrees_0 and degrees_45 > degrees_90 and degrees_45 > degrees_135:
-		    return 45
-		if degrees_90 > degrees_0 and degrees_90 > degrees_45 and degrees_90 > degrees_135:
-		    return 90
-		if degrees_135 > degrees_0 and degrees_135 > degrees_90 and degrees_135 > degrees_45:
-		    return 135
-
-
 #==============================================================================#
 #                           GEOMETRIC TRANSFORMATIONS
 #==============================================================================#
@@ -394,14 +324,31 @@ def orientationCapture(x,y,w,h,img):
 #	convenient for the use of the arm, and its range of values is recorded in
 #	constants.in
 
+
+
+XPIX2LEN = (numpy.tan(FOV_X/2*numpy.pi/180))/(IMG_WIDTH/2)*constants.CAL_CAM_AXIS
+YPIX2LEN = (numpy.tan(FOV_Y/2*numpy.pi/180))/(IMG_HEIGHT/2)*constants.CAL_CAM_AXIS
+
 ##	Derive floor position from image data
 #
 #	@param x the x-value of the point of interest in the image
 #	@param y the y-value of the point of interest in the image
 #	@param d the distance value of the point of interest in the image
 #	@returns a tuple (x, y)
-def imageCart2floorCart(x, y, d):
-	pass
+def imageCart2floorCart(t):
+	
+	if DEBUG_TRANSFORM:
+		print "XPIX2LEN: " + str(XPIX2LEN)
+		print "YPIX2LEN: " + str(YPIX2LEN)
+	
+	xp = XPIX2LEN*(t.centerX - IMG_WIDTH/2)
+	yp = YPIX2LEN*(t.centerY - IMG_HEIGHT/2)
+	
+	if DEBUG_TRANSFORM:
+		print "xp: " + str(xp)
+		print "yp: " + str(yp)
+	
+	return (xp, yp)
 
 ##	Derive cylindrical coordinates, centered on the arm from cartesian
 #	coordinates centered on the camera.
@@ -409,8 +356,57 @@ def imageCart2floorCart(x, y, d):
 #	@param x the x-value of the point of interest on the floor
 #	@param y the y-value of the point of interest on the floor
 #	@returns a tuple (Azimuth, Range)
-def floorCart2armCylinder(x, y):
-	pass
+def floorCart2armCylinder((x, y)):
+	y -= constants.CAL_ARM_OFFSET
+	
+	r = numpy.sqrt(x**2 + y**2)/10
+	
+	if DEBUG_TRANSFORM:
+		print "r: " + str(r)
+	
+	az = 0
+	
+	return (az, r)
+
+
+def armCoordinates(t):
+	
+	x = xform.estCoordinateX(
+		constants.CAL_CAM_HEIGHT,
+		IMG_WIDTH/2, IMG_HEIGHT/2,
+		constants.CAL_CAM_ANGLE,
+		FOV_X, FOV_Y,
+		t.centerX, t.centerY,
+		constants.CAL_ARM_OFFSET
+	)
+	
+	z = xform.estCoordinateZ(
+		constants.CAL_CAM_HEIGHT,
+		IMG_HEIGHT/2,
+		constants.CAL_CAM_ANGLE,
+		FOV_Y,
+		t.centerY,
+		constants.CAL_ARM_OFFSET
+	)
+	
+	if DEBUG_TRANSFORM:
+		print("x value: " + str(x))
+		print("z value: " + str(z))
+	
+	theta = xform.findTheta(z,x)
+	
+	radius = xform.fndRadius(z,x)
+	
+	phi = xform.orientationCapture(
+		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
+	
+	if DEBUG_TRANSFORM:
+		log("string", "Theta : " + str(theta))
+		log("string", "Radius: " + str(radius))
+		log("string", "Phi   : " + str(phi))
+	
+	return (theta, radius, phi)
+
 
 
 #==============================================================================#
@@ -478,21 +474,6 @@ def scan(cam, net):
 	
 	log("string", "scan(): stop")
 	return closest
-
-
-##	A routine to determine if the target is in position to be picked up.
-#
-#	Calculates whether the center of the target bounding box is in the pickup area.
-#
-#	@returns a boolean
-def canBePicked(t):
-	
-	
-	# is the target within the pick area?
-	if t.x > PICKUP_X_MIN and t.x < PICKUP_X_MAX and y > PICKUP_Y_MIN and y < PICKUP_Y_MAX:
-		return True
-	else:
-		return False
 
 
 #==============================================================================#
@@ -612,13 +593,9 @@ def pickUp(t):
 		pass
 	
 	# find the center and orientation of the target
-	o = orientationCapture(
-		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
-	T=0
-	r=0
+	floorCart2armCylinder(imageCart2floorCart(t))
 	
-	if DEBUG_TRANSFORM:
-		log("string", "o: " + str(o))
+	#(theta, r, phi) = armCoordinates(t)
 	
 	# signal the arduino to pickUp
 	
