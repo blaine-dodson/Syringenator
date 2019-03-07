@@ -110,16 +110,13 @@ void stop_motors() {
     interrupts();
 }
 
-void moveFWBW(int ticks, byte motorspeed = 255) {
+void moveFWBW(int ticks, byte motorspeed = DEFAULT_DUTY_CYCLE) {
   noInterrupts();
 	done_with_move= 0;
 	encoder_count_left = 0;
 	if(ticks > 0) desired_count_left = ticks; //forwards
   	else desired_count_left = -1*ticks; //backwards
   interrupts();
-
-  analogWrite(leftmotor_pwm , motorspeed);
-  analogWrite(rightmotor_pwm , motorspeed);
 
   //Set up directions of motors
   if (ticks > 0) {//forwards
@@ -139,19 +136,15 @@ void moveFWBW(int ticks, byte motorspeed = 255) {
 
 //This method is used for a robot that is motionless and wants to turn sharply
 //This will be done_with_move by turning one wheel one direction and the other wheel will go the other
-void pivot(int ticks, byte speed =255 ) {
+void pivot(int ticks, byte speed = DEFAULT_DUTY_CYCLE ) {
   noInterrupts();
     done_with_move= 0;
     encoder_count_left = 0;
-    if(ticks < 0) desired_count_left =  -1* ticks; //hoping to turn  left...
+    if(ticks < 0) desired_count_left =  -1* ticks;
     else desired_count_left = 1 * ticks;
   interrupts();
 
-  analogWrite(leftmotor_pwm , speed); //Duty cycle is 50% so 50% max speed of the motors
-  analogWrite(rightmotor_pwm , speed); //Duty cycle is 50% so 50% max speed of the motors
-
-  //dont know exactly what direction will do what yet... need to test...
-  if (ticks > 0) {//pivot right
+  if (ticks < 0) {//pivot right
     digitalWrite(leftmotor_dir_a, 1);
     digitalWrite(leftmotor_dir_b, 0);
 

@@ -1,4 +1,3 @@
-
 /**	@file Syringenator.hpp
  *
  *	Arduino controller code
@@ -17,6 +16,8 @@
 roboMove move_log [LOGSIZE];
 int move_log_size = 0;
 
+#define LINE_TIMER_LIMIT  5000
+#define MOVEMENT_SCALAR 229
 //variables for the interrupts
 volatile bool readDirection = 1; //forwards = 1, back is 0
 volatile bool follow_or_obj = 1; //line follow = 0, object detection = 1
@@ -24,6 +25,8 @@ volatile int distanceSensTriggered = 0; //holds flag condition from sensor readi
 volatile unsigned int left = 100, right = 100;
 volatile bool done_with_command = 1;
 volatile byte sensorFlag;
+volatile unsigned int line_follow_count = 0;
+
 /******************************************************************************/
 //                         INTERRUPT SERVICE ROUTINES
 /******************************************************************************/
@@ -67,6 +70,7 @@ int setupSensor_ISR(){
       interrupts();
 }
 
+//If you don't want to use either of the sensors, turn off the ISR with stopSensor_ISR
 ISR(TIMER3_COMPA_vect){//Obstacle Detection routine
     if(follow_or_obj){
         if(readDirection){
@@ -75,24 +79,36 @@ ISR(TIMER3_COMPA_vect){//Obstacle Detection routine
         else {
             sensorFlag = readBackSensors();
         }
-        if(sensorFlag != 0)
-            distanceSensTriggered = sensorFlag;
+        if(sensorFlag != 0) distanceSensTriggered = sensorFlag;
     }else{
+            line_follow_count++;
             stopSensor_ISR();
-            readLines();
-            startSensor_ISR();
+            if(line_follow_count >= LINE_TIMER_LIMIT){
+                line_follow_count = 0;
+                stop_motors();
+                return;
+            }else{
+                readLines();
+                startSensor_ISR();
+        }
     }
 }
 
-void stopSensor_ISR(){
+void stopSensor_ISR(void){
     noInterrupts();
     TIMSK3 = 0;
     interrupts();
 }
 
-void startSensor_ISR(){
+void startSensor_ISR(void){
     noInterrupts();
     TIMSK3 |= (1 << OCIE3A);
+    interrupts();
+}
+
+void switchSensorMode(bool mode){// 1 for obstacle, 0 for line sensor
+    noInterrupts();
+    follow_or_obj = mode;
     interrupts();
 }
 
@@ -104,14 +120,10 @@ void serialCommunication_ISR(void){}
 int isDoneCommand(int type_command){
     noInterrupts();
     bool motor_move = done_with_move;
-    // bool arm_move = done_with_arm;
-    bool arm_move = 1;
     bool temp = done_with_command;
     interrupts();
     if(type_command == 1)
         return motor_move;
-    else if(type_command ==2 )
-        return arm_move;
     else
         return temp;
 }
@@ -119,22 +131,27 @@ int isDoneCommand(int type_command){
 //                              LOCAMOTION CONTROL
 /******************************************************************************/
 
-
 /**	Rotate the robot around central axis
  *	rotate by running both motors at the same speed in opposite directions
  *
  *	@param ticks sign indicates direction of rotation: positive is rotation to
  *	the right. magnitude indicates the number of encoder ticks on each motor.
  */
-
- void moveRotate(char angle, bool mode = 0){//expecting input to be from -90 to 90 degrees
-     int desired_ticks = angle/90.0 * FULL90ROT; //convert angle to the appropriate wheel rotation amount
-     if(mode){
+ void moveRotate(byte angle, bool mode = 0){//expecting input to be from -90 to 90 degrees
+     if(mode){//for obstacle avoidance, used when we go away from the line to pick up a target
+         startSensor_ISR();
          noInterrupts();
          readDirection = 0;//read back sensors while pivoting
          follow_or_obj = 1;
          interrupts();
     }
+    int desired_ticks;
+    if(angle > 126){//change input to be able to turn left
+        desired_ticks = angle - 127 /90.0;
+    }else{
+        desired_ticks = (-1*(126 - angle))/90.0;
+    }
+     desired_ticks = desired_ticks * FULL90ROT; //convert angle to the appropriate wheel rotation amount
      logMove(0,desired_ticks);
      pivot(desired_ticks);
  }
@@ -145,22 +162,23 @@ int isDoneCommand(int type_command){
  *	positive is forward.
  */
 
-void moveStraight(byte ticks, bool mode = 0){ //ticks is going to come in as a byte value (0-255)
-    if(mode){
+void moveStraight(byte ticks, byte direction, bool mode = 0){//ticks is going to come in as a byte value (0-255)
+    if(mode){//for obstacle avoidance, used when we go away from the line to pick up a target
+        startSensor_ISR();
         noInterrupts();
         readDirection = 1;
         follow_or_obj = 1;
         interrupts();
     }
+    int newticks;
+    if(direction) newticks = ticks * MOVEMENT_SCALAR;//convert input to the range of ticks we wants
+                                          //this value is ~1/5th of a revolution..
+                                          //the max distance we can go is ~1056cm with 1 call...
+    else newticks = -1 * ticks * MOVEMENT_SCALAR;
 
-    //convert input to the range of ticks we wants
-    int newticks = ticks * 229; //this value is ~1/5th of a revolution..
-    //the max distance we can go is ~1056cm with 1 call...
     logMove(1, newticks);
-    //initiate straight movement routine
-    moveFWBW(newticks);
+    moveFWBW(newticks);//initiate straight movement routine
 }
-
 /*
     Dead reckoning routine to go back to line
 */
@@ -176,7 +194,6 @@ int deadReckoning(void){
     }
     return 1;//complete
 }
-
 /*
     function to put a move into the roboMove array,
     usually called before the initiation of a move
@@ -191,20 +208,18 @@ int logMove(int type, int ticks){
         return 0; //log full, either send it to data logger or increase size of log array
     }
 }
-
 /**	Routine to follow the guide-line for some fixed interval
  *
  *	This function assumes that we are already over the line
  */
-
 void readLines(){
     //Simple line following routine
     unsigned int left = readLine_left();
     unsigned int right = readLine_right();
 
-  if (left <= 70){ //if found left
-    moveRotate(-30); //turn left
-    while(!done_with_move);//busywait
+    if (left <= 70){ //if found left
+        moveRotate(-30); //turn left
+        while(!done_with_move);//busywait
     }
   else if (right <= 70){ //if found right
       moveRotate(30);  //turn right!
@@ -218,6 +233,7 @@ void moveLineFollow(void){ //this will actually turn on the line reading in the 
     noInterrupts();
     follow_or_obj = 0;
     interrupts();
+    startSensor_ISR();//
 }
 
 void stopLineFollow(void){
@@ -231,24 +247,20 @@ void stopLineFollow(void){
 */
 //
 // int avoidFrontObstacle(int case){
-//     int logrotate= 0;
-//     // identify what case it is
-//     noInterrupts();
 //
-//     interrupts();
+//     // identify what case it is
 //     do{
 //         switch(case){
 //             case -1: //Obstacle is closer to the right sensor
-//                 moveRotate(-30); //pivot left
-//                 logrotate -=30;
+//                 moveRotate(255); //pivot left 30 degrees
+//
 //                 break;
 //             case 1: //Obstacle is closer to the left sensor
-//                 moveRotate(30);
-//                 logrotate+=30;
+//                 moveRotate(0); //pivot right 30 degrees
+//
 //                 break;
 //             case 0: //No obstacle within risk distance sensed...
 //         }
-//
 //         //check flag again...
 //         noInterrupts();
 //         int currentSense = sensorFlag;
@@ -263,12 +275,12 @@ void stopLineFollow(void){
 //      //serial communitcation goes here or return some kind of value to send
 //
 // }
-//
-// /*
-//     This function will be called when we are trying to pivot and a side sensor is triggered.
-//     This will probably depend on our distance that will set off the trigger. But we may want to get
-//     as close as possible by pivoting then just go straight.
-// */
+
+/*
+    This function will be called when we are trying to pivot and a side sensor is triggered.
+    This will probably depend on our distance that will set off the trigger. But we may want to get
+    as close as possible by pivoting then just go straight.
+*/
 // int avoidSideObstacle(){
 //
 //     moveStraight(30);
@@ -315,131 +327,127 @@ void armDispose(void){
  */
 
 
- void grabObject(byte angle, byte radius, byte handAngle) {
+ void grabObject(byte angle, byte radius, byte handAngle){
 
-   LobotServo servos[6];
-   //Calculate position based off the angle for ID:6
-   //756 is a constant position for the ratio of 180 degrees to position number
-   servos[5].ID = 6;
-   servos[5].Position = (angle / 180.0) * 1000;
-   Serial.println(servos[5].Position);
-   //Calculate position based off the handAngle for ID:2
-   //881 is a constant position for the ratio of 90 degrees to position number
-   //90 being Position 500 (the default position)
-   servos[1].ID = 2;
-
-   //All case statements are degrees with 90 being parallel to the robot
-   switch (handAngle) {
-     case 45:
-       servos[1].Position = 300;
-       break;
-     case 90:
-       servos[1].Position = 500;
-       break;
-     case 135:
-       servos[1].Position = 700;
-       break;
+  LobotServo servos[6];
+  //Calculate position based off the angle for ID:6
+  //756 is a constant position for the ratio of 180 degrees to position number
+  servos[5].ID = 6;
+  servos[5].Position = (angle/180.0)*760 + 100;
+  Serial.println(servos[5].Position);
+  servos[1].ID = 2;
+  //All case statements are degrees with 90 being parallel to the robot
+  switch(handAngle){
+    case 45:
+      servos[1].Position = 300;
+      break;
+    case 90:
+      servos[1].Position = 500;
+      break;
+    case 135:
+      servos[1].Position = 700;
+      break;
+    default:
+      servos[1].Position = 100;
+  }
+  //xArm.moveServo(2, servos[1].Position, 1000);
+  //Set hand to default narrow open postion ID:1 which is 3cm wide
+  servos[0].ID = 1;
+  servos[0].Position = 500;
+  //All case statements are in cm
+  switch(radius){
+    case 19:
+      servos[2].ID = 3;
+      servos[2].Position = 114;
+      servos[3].ID = 4;
+      servos[3].Position = 481;
+      servos[4].ID = 5;
+      servos[4].Position = 102;
+      break;
+    case 18:
+      servos[2].ID = 3;
+      servos[2].Position = 208;
+      servos[3].ID = 4;
+      servos[3].Position = 658;
+      servos[4].ID = 5;
+      servos[4].Position = 184;
+      break;
+    case 17:
+      servos[2].ID = 3;
+      servos[2].Position = 264;
+      servos[3].ID = 4;
+      servos[3].Position = 752;
+      servos[4].ID = 5;
+      servos[4].Position = 231;
+      break;
+    case 16:
+      servos[2].ID = 3;
+      servos[2].Position = 283;
+      servos[3].ID = 4;
+      servos[3].Position = 796;
+      servos[4].ID = 5;
+      servos[4].Position = 252;
+      break;
+    case 15:
+      servos[2].ID = 3;
+      servos[2].Position = 291;
+      servos[3].ID = 4;
+      servos[3].Position = 816;
+      servos[4].ID = 5;
+      servos[4].Position = 261;
+      break;
+    case 14:
+      servos[2].ID = 3;
+      servos[2].Position = 308;
+      servos[3].ID = 4;
+      servos[3].Position = 853;
+      servos[4].ID = 5;
+      servos[4].Position = 278;
+      break;
+    case 13:
+      servos[2].ID = 3;
+      servos[2].Position = 325;
+      servos[3].ID = 4;
+      servos[3].Position = 885;
+      servos[4].ID = 5;
+      servos[4].Position = 293;
+      break;
+    case 12:
+      servos[2].ID = 3;
+      servos[2].Position = 342;
+      servos[3].ID = 4;
+      servos[3].Position = 914;
+      servos[4].ID = 5;
+      servos[4].Position = 309;
+      break;
      default:
-       servos[1].Position = 100;
-   }
+     //Default is 19 cm
+      servos[2].ID = 3;
+      servos[2].Position = 114;
+      servos[3].ID = 4;
+      servos[3].Position = 481;
+      servos[4].ID = 5;
+      servos[4].Position = 102;
+      break;
+  }
 
-   servos[0].ID = 1;
-   servos[0].Position = 500;
-
-   //All case statements are in cm
-   switch (radius) {
-     case 19:
-       servos[2].ID = 3;
-       servos[2].Position = 114;
-       servos[3].ID = 4;
-       servos[3].Position = 481;
-       servos[4].ID = 5;
-       servos[4].Position = 102;
-       break;
-     case 18:
-       servos[2].ID = 3;
-       servos[2].Position = 208;
-       servos[3].ID = 4;
-       servos[3].Position = 658;
-       servos[4].ID = 5;
-       servos[4].Position = 184;
-       break;
-     case 17:
-       servos[2].ID = 3;
-       servos[2].Position = 264;
-       servos[3].ID = 4;
-       servos[3].Position = 752;
-       servos[4].ID = 5;
-       servos[4].Position = 231;
-       break;
-     case 16:
-       servos[2].ID = 3;
-       servos[2].Position = 283;
-       servos[3].ID = 4;
-       servos[3].Position = 796;
-       servos[4].ID = 5;
-       servos[4].Position = 252;
-       break;
-     case 15:
-       servos[2].ID = 3;
-       servos[2].Position = 291;
-       servos[3].ID = 4;
-       servos[3].Position = 816;
-       servos[4].ID = 5;
-       servos[4].Position = 261;
-       break;
-     case 14:
-       servos[2].ID = 3;
-       servos[2].Position = 308;
-       servos[3].ID = 4;
-       servos[3].Position = 853;
-       servos[4].ID = 5;
-       servos[4].Position = 278;
-       break;
-     case 13:
-       servos[2].ID = 3;
-       servos[2].Position = 325;
-       servos[3].ID = 4;
-       servos[3].Position = 885;
-       servos[4].ID = 5;
-       servos[4].Position = 293;
-       break;
-     case 12:
-       servos[2].ID = 3;
-       servos[2].Position = 342;
-       servos[3].ID = 4;
-       servos[3].Position = 914;
-       servos[4].ID = 5;
-       servos[4].Position = 309;
-       break;
-     default:
-       //Default is 19 cm
-       servos[2].ID = 3;
-       servos[2].Position = 114;
-       servos[3].ID = 4;
-       servos[3].Position = 481;
-       servos[4].ID = 5;
-       servos[4].Position = 102;
-       break;
-   }
-
-   //Move servos to the positions given
-   xArm.moveServos(servos, 6, 2000);
-   delay(2000);
-   //Close the grip on the needle
-   xArm.moveServo(1, 1000, 2000);
-   delay(2000);
-   //Drop the needle
-   //Run action group 1, 1 time
-   xArm.runActionGroup(1, 1);
-   delay(3000);
-   //Return to default resting position
-   servos[0].Position = 498;
-   servos[1].Position = 478;
-   servos[2].Position = 46;
-   servos[3].Position = 913;
-   servos[4].Position = 879;
-   servos[5].Position = 501;
-   xArm.moveServos(servos, 6, 2000);
-   delay(2000);
- }
+  //Move servos to the positions given
+  xArm.moveServos(servos, 6, 2000);
+  delay(2000);
+  //Close the grip on the needle
+  xArm.moveServo(1, 1000, 2000);
+  delay(3000);
+  //Drop the needle
+  //Run action group 1, 1 time
+  xArm.runActionGroup(1, 1);
+  delay(4500);
+  //Return to default resting position
+  servos[0].Position = 498;
+  servos[1].Position = 478;
+  servos[2].Position = 46;
+  servos[3].Position = 913;
+  servos[4].Position = 879;
+  servos[5].Position = 501;
+  xArm.moveServos(servos, 6, 2000);
+  delay(2000);
+}

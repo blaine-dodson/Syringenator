@@ -20,7 +20,7 @@ struct roboMove{
 };
 
 #define LOGSIZE 256 //for the deadReckoning logger
-#define FULL90ROT  1070//the number of ticks it takes to rotate the robot 90 degrees
+#define FULL90ROT  1100//the number of ticks it takes to rotate the robot 90 degrees
 
 extern volatile bool done_with_command; //for deadReckoning and other routines that have subflags
 
@@ -41,7 +41,6 @@ extern volatile bool done_with_command; //for deadReckoning and other routines t
  *	This may need to be two routines, one for each sensor
  *	--ABD
  */
-
 
 /**	A function to respond to a detected obstacle while under locamotion.
  *	There may be two cases to handle: whether we are line following, or aproaching.
@@ -74,7 +73,7 @@ int isDoneCommand(int type_command);//check for done flag of command type
  *	the right. magnitude indicates the number of encoder ticks on each motor.
  */
 
-void moveRotate(char angle, bool mode = 0);
+void moveRotate(byte angle, bool mode = 0);
 
 /** Move the robot forward or reverse
  *
@@ -83,8 +82,7 @@ void moveRotate(char angle, bool mode = 0);
  *  @param mode: 0 = line follow, 1 = object avoidance
  */
 
-void moveStraight(byte ticks, bool mode = 0);
-
+void moveStraight(byte ticks, byte direction = 1, bool mode = 0);
 /*
     Dead reckoning routine to go back to line
 */
