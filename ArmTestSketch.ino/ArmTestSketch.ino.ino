@@ -2,9 +2,9 @@
 #include <SoftwareSerial.h>
 
 //Variable Declarations
-char angle = 45;
+char angle = 60;
 char radius = 19;
-char handAngle = 0;
+char handAngle = 135;
 uint16_t *servoPos;
 
 //#define rxPin 19
@@ -38,6 +38,12 @@ void grabObject(byte angle, byte radius, byte handAngle){
   servos[5].Position = (angle/180.0)*760 + 100;
   Serial.println(servos[5].Position);
   servos[1].ID = 2;
+  //Calculations to take into account the angle of the arm
+  if(angle <= 70)
+    handAngle = (handAngle + 135) % 180;
+  else if(angle >= 110)
+    handAngle = (handAngle + 45) % 180;
+    
   //All case statements are degrees with 90 being parallel to the robot
   switch(handAngle){
     case 45:
@@ -137,8 +143,14 @@ void grabObject(byte angle, byte radius, byte handAngle){
   xArm.moveServos(servos, 6, 2000);
   delay(2000);
   //Close the grip on the needle
-  xArm.moveServo(1, 1000, 2000);
-  delay(3000);
+  xArm.moveServo(1, 1000, 1500);
+  delay(1600);
+  //Return hand orientation to default position 0
+  xArm.moveServo(2, 100, 2000);
+  delay(2000);
+  //Close the grip on the needle
+  xArm.moveServo(1, 1000, 1000);
+  delay(1100);
   //Drop the needle
   //Run action group 1, 1 time
   xArm.runActionGroup(1, 1);
