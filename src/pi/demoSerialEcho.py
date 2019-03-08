@@ -10,6 +10,9 @@ print("start demo")
 
 
 while(True):
+#	while(port.status() != constants.ARDUINO_STATUS_READY):
+#		pass
+	
 	# read some numbers from command line
 	inStr = raw_input("enter bytes: ")
 	byteStrings = inStr.split()

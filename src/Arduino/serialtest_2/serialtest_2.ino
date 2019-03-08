@@ -1,7 +1,7 @@
 #include <SensorLib.h>
 #include <MotorLib.h>
 #include <Syringenator.hpp>
-#include <Constants.hpp>
+#include <constants.h>
 #include <LobotServoController.h>
 
 char buffer[4];
@@ -40,6 +40,7 @@ void parseCommand(char input[ ]) { //commands sent to the arduino from the raspb
       break;
     case ARDUINO_LINE_FOLLOW:
       moveLineFollow();
+      while(!isDoneCommand(2));
       break;
     case ARDUINO_ARM_PICKUP:
       grabObject(input[1], input[2], input[3]);
