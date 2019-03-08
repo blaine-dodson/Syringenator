@@ -187,7 +187,7 @@ def log(datatype, *args):
 	elif(datatype == 'target'):
 		print("Target aquired")
 		print(
-				"x: "+str(args[0].centerX)+" y: "+str(args[0].centerY)
+				"centerX: "+str(args[0].centerX)+" centerY: "+str(args[0].centerY)
 			)
 	else:
 		print("log(): unknown type")

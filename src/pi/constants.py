@@ -44,7 +44,7 @@ CAL_ROT_FACTOR = 1
 ## Calibration factor used in forward calculation
 CAL_FWD_FACTOR = 1
 ## Offset of the arm axis from the camera axis [mm]
-CAL_ARM_OFFSET = 54
+CAL_ARM_OFFSET = 95
 ## Height of the camera from the floor [mm]
 CAL_CAM_HEIGHT = 984
 ## Angle of the camera from the horizon [radians]
