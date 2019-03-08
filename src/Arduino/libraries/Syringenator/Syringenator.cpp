@@ -23,7 +23,6 @@ volatile bool readDirection = 1; //forwards = 1, back is 0
 volatile bool follow_or_obj = 1; //line follow = 0, object detection = 1
 volatile int distanceSensTriggered = 0; //holds flag condition from sensor readings
 volatile unsigned int left = 100, right = 100;
-volatile bool done_with_command = 1;
 volatile byte sensorFlag;
 volatile unsigned int line_follow_count = 0;
 
@@ -121,7 +120,7 @@ void serialCommunication_ISR(void){}
 int isDoneCommand(int type_command){
     noInterrupts();
     bool motor_move = done_with_move;
-    // bool temp = done_with_command;
+    bool temp = done_with_command;
     interrupts();
     if(type_command == 1)
         return motor_move;
