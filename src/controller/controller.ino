@@ -17,10 +17,9 @@ void setup() {
   setupSensor_ISR(); //use this to set up timer interrupts for line sensors and distance sensors
   Serial.begin(9600); //For communication with the pi
   Serial1.begin(9600); //For communication with the xarm
+  Serial.write(ARDUINO_STATUS_READY);
   Serial.flush();
   clearBuffer();
-
-  Serial.print(ARDUINO_STATUS_READY);//Let the pi know we are initialized and ready for commands
 }
 
 void loop() {
@@ -30,7 +29,6 @@ void loop() {
   }
   delay(50);
 }
-
 //easiest to send serial data as ascii strings to python...
 void parseCommand(char input[ ]) { //commands sent to the arduino from the raspberry pi
   switch (input[0]) {
@@ -47,8 +45,8 @@ void parseCommand(char input[ ]) { //commands sent to the arduino from the raspb
       grabObject(input[1], input[2], input[3]);
       break;
   }
-   while (!isDoneCommand(1));
-  Serial.print(ARDUINO_STATUS_READY);
+  while (!isDoneCommand(1));
+  Serial.write(ARDUINO_STATUS_READY);
   clearBuffer();
 }
 
