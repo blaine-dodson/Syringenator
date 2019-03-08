@@ -6,7 +6,8 @@ import constants
 
 class ComPort:
 	def __init__(self):
-		self.p = serial.Serial('/dev/ttyUSB0', timeout=1)
+		#self.p = serial.Serial('/dev/ttyUSB0', timeout=1)
+		self.p = serial.Serial('/dev/ttyACM0', timeout=1)
 	
 	def status(self):
 		if self.p.in_waiting == 0:

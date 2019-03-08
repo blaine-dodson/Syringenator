@@ -11,7 +11,7 @@ SHELL:=/bin/bash
 srcdir:=src
 
 ARDDIR:=$(srcdir)/controller
-ARDLIBDIR:= $(srcdir)/sketchbook/libraries
+ARDLIBDIR:= $(srcdir)/Arduino/libraries
 PIDIR :=$(srcdir)/pi
 
 

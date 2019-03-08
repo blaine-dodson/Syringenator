@@ -1,7 +1,7 @@
 #include <SensorLib.h>
 #include <MotorLib.h>
 #include <Syringenator.hpp>
-#include <Constants.hpp>
+#include <constants.h>
 #include <LobotServoController.h>
 
 char buffer[4];
