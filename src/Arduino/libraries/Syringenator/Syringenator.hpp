@@ -6,7 +6,7 @@
  *	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
  */
 
-#include "constants.hpp"
+#include "constants.h"
 #include "MotorLib.h"
 #include "SensorLib.h"
 #include "Arduino.h"
@@ -62,6 +62,9 @@ void startSensor_ISR();
 
 void serialCommunication_ISR(void);
 int isDoneCommand(int type_command);//check for done flag of command type
+bool isReady(void);
+
+
 /******************************************************************************/
 //                              LOCAMOTION CONTROL
 /******************************************************************************/

@@ -52,35 +52,39 @@ CAL_CAM_ANGLE = 1.2117
 ## distance to the floor on the camera's center axis
 CAL_CAM_AXIS = 1140
 ## A place holder for troubleshooting etc.
-ARDUINO_NULL = 0x00
+ARDUINO_NULL = 0
 ## If the arduino needs to acknowledge something
-ARDUINO_STATUS_ACK = 0x01
+ARDUINO_STATUS_ACK = 65
 ## If the arduino needs to indicate it is ready
-ARDUINO_STATUS_READY = 0x02
+ARDUINO_STATUS_READY = 82
 ## Report that the pick failed
-ARDUINO_STATUS_PICK_FAIL = 0x03
+ARDUINO_STATUS_PICK_FAIL = 3
 ## Report that the pick succeded
-ARDUINO_STATUS_PICK_SUCCESS = 0x04
+ARDUINO_STATUS_PICK_SUCCESS = 4
 ## Report a general arm failure
-ARDUINO_STATUS_ARM_FAULT = 0x05
+ARDUINO_STATUS_ARM_FAULT = 5
 ## Report an obstacle detected
-ARDUINO_STATUS_OBSTACLE = 0x06
-## serial command the arduino to rotate the robot, followed by one signed byte indicating magnitude and direction
-ARDUINO_ROTATE = 0x10
-## serial command the arduino to advance the robot, followed by one signed byte indicating magnitude and direction
-ARDUINO_MOVE = 0x11
+ARDUINO_STATUS_OBSTACLE = 6
+## Report the command not understood
+ARDUINO_STATUS_NACK = 78
 ## serial command the arduino to follow the line
-ARDUINO_LINE_FOLLOW = 0x12
+ARDUINO_LINE_FOLLOW = 12
 ## serial command the arduino to avoid an obstacle
-ARDUINO_AVOID = 0x13
+ARDUINO_AVOID = 13
 ## serial command the arduino to return to the line
-ARDUINO_RETURN = 0x14
+ARDUINO_RETURN = 14
+## serial command the arduino forward
+ARDUINO_FWD = 15
+## serial command the arduino to rotate right
+ARDUINO_RIGHT = 16
+## serial command the arduino to rotate left
+ARDUINO_LEFT = 17
 ## serial command the arduino to call the park action sequence
-ARDUINO_ARM_PARK = 0x20
+ARDUINO_ARM_PARK = 20
 ## serial command the arduino to call the dispose action sequence
-ARDUINO_ARM_DISPOSE = 0x21
+ARDUINO_ARM_DISPOSE = 21
 ## serial command the arduino to attempt a pick, followed by three bytes: azimuth, range, and orientation
-ARDUINO_ARM_PICKUP = 0x22
+ARDUINO_ARM_PICKUP = 22
 ## baudrate for serial communication between Arduino and Pi
 SERIAL_BAUD = 9600
 ## Arduino pin for port motor forward

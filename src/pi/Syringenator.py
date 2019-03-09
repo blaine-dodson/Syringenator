@@ -334,9 +334,9 @@ def floorCart2armCylinder((x, y)):
 	r  = xform.fndRadius(y,x)
 	
 	if x>0:
-		az = int(numpy.rint(180-(180/numpy.pi) * numpy.arctan(y/x)))
+		az = int(numpy.rint((180/numpy.pi) * numpy.arctan(y/x)))
 	elif x<0:
-		az = int(numpy.rint(-(180/numpy.pi) * numpy.arctan(y/x)))
+		az = int(numpy.rint(180+(180/numpy.pi) * numpy.arctan(y/x)))
 	else:
 		az = 90
 	
@@ -522,8 +522,7 @@ def canBePicked(t):
 #	@returns None
 def approach(t):
 	log("string", "approach(): start")
-	while(comPort.status() != constants.ARDUINO_STATUS_READY):
-		pass
+	comPort.waitForReady()
 	
 	# face the target if necessary
 	if t.centerX < constants.PICKUP_X_MIN: # positive rotation
@@ -531,22 +530,23 @@ def approach(t):
 		if rotTicks > constants.ROT_MAX_TICKS:
 			rotTicks = constants.ROT_MAX_TICKS
 		
-		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
-		comPort.send([constants.ARDUINO_ROTATE, rotTicks])
+		log("string", "ARDUINO_LEFT: " + str(rotTicks))
+		comPort.send([constants.ARDUINO_LEFT, rotTicks])
 	
 	elif t.centerX > constants.PICKUP_X_MAX: # negative rotation
-		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MAX-t.centerX) 
-		if rotTicks < -constants.ROT_MAX_TICKS:
-			rotTicks = -constants.ROT_MAX_TICKS
+		rotTicks = constants.CAL_ROT_FACTOR*(t.centerX-constants.PICKUP_X_MAX)
+		if rotTicks > constants.ROT_MAX_TICKS:
+			rotTicks = constants.ROT_MAX_TICKS
 		
-		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
-		comPort.send([constants.ARDUINO_ROTATE, rotTicks])
+		log("string", "ARDUINO_RIGHT: " + str(rotTicks))
+		comPort.send([constants.ARDUINO_RIGHT, rotTicks])
 	
 	# in all cases we wait for the arduino to be ready
 	status = None
 	while(status == None):
 		status = comPort.status()
-	log("string", "approach(): status is " + str(status) )
+	log("string", "approach(): status is " + SySerial.statusString(status) )
+	comPort.waitForReady()
 	
 	# move forward if necessary
 	# the pixel origin is in the upper left corner
@@ -555,26 +555,26 @@ def approach(t):
 		if fwdTicks > constants.FWD_MAX_TICKS:
 			fwdTicks = constants.FWD_MAX_TICKS
 		
-		log("string", "ARDUINO_MOVE: " + str(fwdTicks))
-		comPort.send([constants.ARDUINO_MOVE, fwdTicks])
+		log("string", "ARDUINO_FWD: " + str(fwdTicks))
+		comPort.send([constants.ARDUINO_FWD, fwdTicks])
 	
-	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
-		# this may not work as expected
-		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MAX-t.centerY)
-		if fwdTicks < -constants.FWD_MAX_TICKS:
-			fwdTicks = -constants.FWD_MAX_TICKS
-		
-		log("string", "ARDUINO_MOVE: " + str(fwdTicks) )
-		comPort.send([constants.ARDUINO_MOVE, fwdTicks])
+#	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
+#		# this may not work as expected
+#		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MAX-t.centerY)
+#		if fwdTicks < -constants.FWD_MAX_TICKS:
+#			fwdTicks = -constants.FWD_MAX_TICKS
+#		
+#		log("string", "ARDUINO_MOVE: " + str(fwdTicks) )
+#		comPort.send([constants.ARDUINO_MOVE, fwdTicks])
 	
 	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
+	status = comPort.status()
+	while(status != constants.ARDUINO_STATUS_READY):
+		log("string", "approach(): status is " + SySerial.statusString(status) )
 		status = comPort.status()
-	log("string", "approach(): status is " + str(status) )
-	if status == constants.ARDUINO_STATUS_OBSTACLE:
-		obstacle = True
-		log("string", "obstacle detected")
+		if status == constants.ARDUINO_STATUS_OBSTACLE:
+			obstacle = True
+			log("string", "obstacle detected")
 
 
 ## avoid an obstacle
@@ -582,17 +582,15 @@ def approach(t):
 #	@returns None
 def avoid():
 	log("avoid(): start")
-	while(comPort.status() != constants.ARDUINO_STATUS_READY):
-		pass
+	comPort.waitForReady()
 	
 	comPort.send([constants.ARDUINO_AVOID])
 	
 	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = comPort.status()
-	log("string", "avoid(): status is " + str(status) )
+	status = comPort.status()
+	log("string", "avoid(): status is " + SySerial.statusString(status) )
 	obstacle = False
+	comPort.waitForReady()
 
 
 
@@ -619,8 +617,7 @@ def avoid():
 #	@returns None
 def pickUp(t):
 	log("string", "pickUp(): start")
-	while(comPort.status() != constants.ARDUINO_STATUS_READY):
-		pass
+	comPort.waitForReady()
 	
 	# find the center and orientation of the target
 	(theta,r) = floorCart2armCylinder(imageCart2floorCart(t))
@@ -647,10 +644,9 @@ def pickUp(t):
 	comPort.send([constants.ARDUINO_ARM_PICKUP, theta, r, phi])
 	
 	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = comPort.status()
-	log("string", "pickUp(): status is " + str(status) )
+	status = comPort.status()
+	log("string", "pickUp(): status is " + SySerial.statusString(status) )
+	comPort.waitForReady()
 
 
 ##	signl the arduino to return to the line.
@@ -665,16 +661,15 @@ def pickUp(t):
 #	@returns None
 def returnToLine():
 	log("string", "returnToLine(): start")
-	while(comPort.status() != constants.ARDUINO_STATUS_READY):
-		pass
+	comPort.waitForReady()
 	
 	comPort.send([constants.ARDUINO_RETURN])
 	
 	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = comPort.status()
-	log("string", "returnToLine(): status is " + str(status) )
+	status = comPort.status()
+	log("string", "returnToLine(): status is " + SySerial.statusString(status) )
+	comPort.waitForReady()
+
 
 ##	Follow the line.
 #
@@ -683,16 +678,14 @@ def returnToLine():
 #	@returns None
 def lineFollow():
 	log("string", "lineFollow(): start")
-	while(comPort.status() != constants.ARDUINO_STATUS_READY):
-		pass
+	comPort.waitForReady()
 	
 	comPort.send([constants.ARDUINO_LINE_FOLLOW])
 	
 	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = comPort.status()
-	log("string", "lineFollow(): status is " + str(status) )
+	status = comPort.status()
+	log("string", "lineFollow(): status is " + SySerial.statusString(status))
+	comPort.waitForReady()
 
 
 #==============================================================================#

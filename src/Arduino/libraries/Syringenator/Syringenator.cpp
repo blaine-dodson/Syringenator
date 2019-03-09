@@ -7,7 +7,7 @@
  */
 
 #include "Syringenator.hpp"
-#include "constants.hpp"
+
 #include "MotorLib.h"
 #include "SensorLib.h"
 #include "Arduino.h"
@@ -127,6 +127,16 @@ int isDoneCommand(int type_command){
     else
         return temp;
 }
+
+bool isReady(void){
+	noInterrupts();
+	bool motor_move = done_with_move;
+	bool temp = done_with_command;
+	interrupts();
+	return motor_move && temp;
+}
+
+
 /******************************************************************************/
 //                              LOCAMOTION CONTROL
 /******************************************************************************/
@@ -146,11 +156,13 @@ int isDoneCommand(int type_command){
          interrupts();
     }
     int desired_ticks;
-    if(angle > 126){//change input to be able to turn left
-        desired_ticks = angle - 127 /90.0;
-    }else{
-        desired_ticks = (-1*(126 - angle))/90.0;
-    }
+    
+    desired_ticks = angle / 90.0;
+//    if(angle > 126){//change input to be able to turn left
+//        desired_ticks = angle - 127 /90.0;
+//    }else{
+//        desired_ticks = (-1*(126 - angle))/90.0;
+//    }
      desired_ticks = desired_ticks * FULL90ROT; //convert angle to the appropriate wheel rotation amount
      logMove(0,desired_ticks);
      pivot(desired_ticks);
