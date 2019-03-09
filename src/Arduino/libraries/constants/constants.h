@@ -27,14 +27,16 @@
 #define ARM_RANGE_MAX 19 ///< The maximum range byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
 #define ARM_ORIENT_MIN 0 ///< The minimum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
 #define ARM_ORIENT_MAX 180 ///< The maximum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
-#define PICKUP_X_MIN 230 ///< The minimum target center x-value that allows a pickup
-#define PICKUP_X_MAX 400 ///< The maximum target center x-value that allows a pickup
+#define PICKUP_X_MIN 250 ///< The minimum target center x-value that allows a pickup
+#define PICKUP_X_MAX 410 ///< The maximum target center x-value that allows a pickup
 #define PICKUP_Y_MIN 420 ///< The minimum target center y-value that allows a pickup
-#define PICKUP_Y_MAX 480 ///< The maximum target center y-value that allows a pickup
+#define PICKUP_Y_MAX 470 ///< The maximum target center y-value that allows a pickup
 #define FWD_MAX_TICKS 127 ///< The maximum count of forward ticks used in moveCloser()
+#define FWD_MIN_TICKS 1 ///< The minimum count of forward ticks
 #define ROT_MAX_TICKS 127 ///< The maximum absolute value of rotation ticks used in moveCloser()
+#define ROT_MIN_TICKS 1 ///< The minimum count of rotational ticks
 #define CAL_ROT_FACTOR 1 ///< Calibration factor used in rotation calculation
-#define CAL_FWD_FACTOR 1 ///< Calibration factor used in forward calculation
+#define CAL_FWD_FACTOR 0.07 ///< Calibration factor used in forward calculation
 #define CAL_ARM_OFFSET 95 ///< Offset of the arm axis from the camera axis [mm]
 #define CAL_CAM_HEIGHT 984 ///< Height of the camera from the floor [mm]
 #define CAL_CAM_ANGLE 1.2117 ///< Angle of the camera from the horizon [radians]

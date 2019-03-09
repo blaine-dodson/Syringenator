@@ -18,7 +18,8 @@ DEBUG_APPROACH = True
 DEBUG_TRANSFORM = True
 DEBUG_ORIENTATION = True
 DEBUG_TIMING = True
-DEBUG_CAL = False
+CAL_X = False
+DISABLE_WHEELS = False
 
 import constants
 import cv2
@@ -150,8 +151,9 @@ class Camera:
 		if(DEBUG_CAPTURE):
 			#cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
 			log("string", "photo capture")
-			cv2.imshow("View", mat);
-			cv2.waitKey(500);
+			cv2.imshow("View", mat)
+			cv2.waitKey(1000)
+			log("string", "--")
 	
 		return mat
 
@@ -297,7 +299,7 @@ def extractTargets(dataIn):
 #XPIX2LEN = (numpy.tan(FOV_X/2*numpy.pi/180))/(IMG_WIDTH/2)*constants.CAL_CAM_AXIS
 #YPIX2LEN = (numpy.tan(FOV_Y/2*numpy.pi/180))/(IMG_HEIGHT/2)*constants.CAL_CAM_AXIS
 
-XPIX2LEN = 2
+XPIX2LEN = 10/6.48
 YPIX2LEN = 10/7.0
 
 ##	Derive floor position from image data
@@ -312,8 +314,8 @@ def imageCart2floorCart(t):
 #		print "XPIX2LEN: " + str(XPIX2LEN)
 #		print "YPIX2LEN: " + str(YPIX2LEN)
 	
-	xf = int(XPIX2LEN*(t.centerX - IMG_WIDTH/2))
-	yf = int(YPIX2LEN*(IMG_HEIGHT - t.centerY))
+	xf = XPIX2LEN*(t.centerX - IMG_WIDTH/2)
+	yf = YPIX2LEN*(IMG_HEIGHT - t.centerY)
 	
 	if DEBUG_TRANSFORM:
 		print "xf: " + str(xf)
@@ -429,6 +431,7 @@ def scan(cam, net):
 		
 		cv2.imshow("View", image)
 		cv2.waitKey(1000)
+		log("string", "--")
 	
 	# pick the closest target
 	d = 2000000
@@ -478,6 +481,7 @@ def canBePicked(t):
 			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
 			cv2.imshow("View", t.image)
 			cv2.waitKey(1000)
+			log("string", "--")
 		return True
 	else:
 		log("string", "cannot pick")
@@ -497,6 +501,7 @@ def canBePicked(t):
 			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
 			cv2.imshow("View", t.image)
 			cv2.waitKey(1000)
+			log("string", "--")
 		return False
 
 
@@ -524,19 +529,25 @@ def approach(t):
 	log("string", "approach(): start")
 	comPort.waitForReady()
 	
+	if DISABLE_WHEELS: return
+	
 	# face the target if necessary
 	if t.centerX < constants.PICKUP_X_MIN: # positive rotation
-		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX) 
+		rotTicks = int(constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX))
 		if rotTicks > constants.ROT_MAX_TICKS:
 			rotTicks = constants.ROT_MAX_TICKS
+		if rotTicks < constants.ROT_MIN_TICKS:
+			rotTicks = constants.ROT_MIN_TICKS
 		
 		log("string", "ARDUINO_LEFT: " + str(rotTicks))
 		comPort.send([constants.ARDUINO_LEFT, rotTicks])
 	
 	elif t.centerX > constants.PICKUP_X_MAX: # negative rotation
-		rotTicks = constants.CAL_ROT_FACTOR*(t.centerX-constants.PICKUP_X_MAX)
+		rotTicks = int(constants.CAL_ROT_FACTOR*(t.centerX-constants.PICKUP_X_MAX))
 		if rotTicks > constants.ROT_MAX_TICKS:
 			rotTicks = constants.ROT_MAX_TICKS
+		if rotTicks < constants.ROT_MIN_TICKS:
+			rotTicks = constants.ROT_MIN_TICKS
 		
 		log("string", "ARDUINO_RIGHT: " + str(rotTicks))
 		comPort.send([constants.ARDUINO_RIGHT, rotTicks])
@@ -551,9 +562,11 @@ def approach(t):
 	# move forward if necessary
 	# the pixel origin is in the upper left corner
 	if t.centerY < constants.PICKUP_Y_MIN: # positive translation
-		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MIN-t.centerY)
+		fwdTicks = int(constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MIN-t.centerY))
 		if fwdTicks > constants.FWD_MAX_TICKS:
 			fwdTicks = constants.FWD_MAX_TICKS
+		if fwdTicks < constants.FWD_MIN_TICKS:
+			fwdTicks = constants.FWD_MIN_TICKS
 		
 		log("string", "ARDUINO_FWD: " + str(fwdTicks))
 		comPort.send([constants.ARDUINO_FWD, fwdTicks])
@@ -583,6 +596,8 @@ def approach(t):
 def avoid():
 	log("avoid(): start")
 	comPort.waitForReady()
+	
+	if DISABLE_WHEELS: return
 	
 	comPort.send([constants.ARDUINO_AVOID])
 	
@@ -647,6 +662,8 @@ def pickUp(t):
 	status = comPort.status()
 	log("string", "pickUp(): status is " + SySerial.statusString(status) )
 	comPort.waitForReady()
+	
+	if DEBUG_TRANSFORM: raw_input("press any key")
 
 
 ##	signl the arduino to return to the line.
@@ -662,6 +679,8 @@ def pickUp(t):
 def returnToLine():
 	log("string", "returnToLine(): start")
 	comPort.waitForReady()
+	
+	if DISABLE_WHEELS: return
 	
 	comPort.send([constants.ARDUINO_RETURN])
 	
@@ -679,6 +698,8 @@ def returnToLine():
 def lineFollow():
 	log("string", "lineFollow(): start")
 	comPort.waitForReady()
+	
+	if DISABLE_WHEELS: return
 	
 	comPort.send([constants.ARDUINO_LINE_FOLLOW])
 	
@@ -710,28 +731,46 @@ comPort = SySerial.ComPort()
 #==============================================================================#
 
 
-while DEBUG_CAL:
+while CAL_X:
+	SCALE = 4
+	
 	image = camera.capture()
-	cv2.line(image, (IMG_WIDTH/2,0), (IMG_WIDTH/2,IMG_HEIGHT), [255,0,255])
-	
-	for y in range(constants.PICKUP_Y_MAX, constants.PICKUP_Y_MIN, -10):
-		cv2.line(image, (0,y), (IMG_WIDTH,y), [255,0,0])
-	
-	
 	cv2.rectangle(
 		image,
 		(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
 		(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
 		[200, 0, 0], 2
 	)
+	
 	cv2.imshow("View", image)
 	crop = image[
 		constants.PICKUP_Y_MIN:constants.PICKUP_Y_MAX,
 		constants.PICKUP_X_MIN:constants.PICKUP_X_MAX
 	]
+	bigger = cv2.resize(src=crop, dsize=(0,0), fx=SCALE, fy=SCALE)
+	
+	biggerDim = (
+		(constants.PICKUP_X_MAX-constants.PICKUP_X_MIN)*SCALE,
+		(constants.PICKUP_Y_MAX-constants.PICKUP_Y_MIN)*SCALE
+	)
+	print "dimentions: " + str(biggerDim)
+	
+	#centerline
+	centerX = (IMG_WIDTH/2-constants.PICKUP_X_MIN)*SCALE
+	
+	cv2.line(bigger, (centerX,0), (centerX,biggerDim[1]), [255,0,255])
 	
 	
-	bigger = cv2.resize(src=crop, dsize=(0,0), fx=4, fy=4)
+	# x lines
+	for x in range(10*SCALE,max(centerX, biggerDim[0]-centerX), 10*SCALE):
+		cv2.line(bigger, (centerX+x,0), (centerX+x,biggerDim[1]), [255,0,0])
+		cv2.line(bigger, (centerX-x,0), (centerX-x,biggerDim[1]), [255,0,0])
+	
+	
+	for y in range(constants.PICKUP_Y_MAX, constants.PICKUP_Y_MIN, -10):
+		cv2.line(image, (0,y), (IMG_WIDTH,y), [255,0,0])
+	
+	
 	cv2.imshow("Bigger", bigger)
 	cv2.waitKey(0)
 
