@@ -20,7 +20,8 @@ struct roboMove{
 };
 
 #define LOGSIZE 256 //for the deadReckoning logger
-#define FULL90ROT  1100//the number of ticks it takes to rotate the robot 90 degrees
+#define FULL90ROT_RIGHT  875//the number of ticks it takes to rotate the robot 90 degrees
+#define FULL90ROT_LEFT   835
 
 extern volatile bool done_with_command; //for deadReckoning and other routines that have subflags
 
@@ -73,7 +74,7 @@ int isDoneCommand(int type_command);//check for done flag of command type
  *	the right. magnitude indicates the number of encoder ticks on each motor.
  */
 
-void moveRotate(byte angle, bool mode = 0);
+void moveRotate(byte direction, byte angle, bool mode = 0);
 
 /** Move the robot forward or reverse
  *
