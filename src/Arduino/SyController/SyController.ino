@@ -63,19 +63,9 @@ void parseCommand(uint8_t * bytes, int cnt){
 		if(cnt == 4){
 			Serial.write(ARDUINO_STATUS_ACK);
 			grabObject(bytes[1], bytes[2], bytes[3]);
-		}else
-			
+		}else 
 			Serial.write(ARDUINO_STATUS_NACK);
-			digitalWrite(LED_BUILTIN, LOW);
-			delay(500);
-			for(int i=0; i<cnt; i++){
-			
-				digitalWrite(LED_BUILTIN, HIGH);
-				delay(500);
-				digitalWrite(LED_BUILTIN, LOW);
-				delay(500);
-			}
-			
+		
 		break;
 	
 	case ARDUINO_AVOID:
