@@ -141,32 +141,58 @@ bool isReady(void){
 //                              LOCAMOTION CONTROL
 /******************************************************************************/
 
+
 /**	Rotate the robot around central axis
  *	rotate by running both motors at the same speed in opposite directions
  *
  *	@param ticks sign indicates direction of rotation: positive is rotation to
  *	the right. magnitude indicates the number of encoder ticks on each motor.
  */
- void moveRotate(byte angle, bool mode = 0){//expecting input to be from -90 to 90 degrees
-     if(mode){//for obstacle avoidance, used when we go away from the line to pick up a target
-         startSensor_ISR();
-         noInterrupts();
-         readDirection = 0;//read back sensors while pivoting
-         follow_or_obj = 1;
-         interrupts();
-    }
+void moveRotate(byte direction, byte angle, bool mode = 0){//expecting input to be from -90 to 90 degrees
+
+    //else we are in line follow mode already...
+    float temp;
     int desired_ticks;
-    
-    desired_ticks = angle / 90.0;
-//    if(angle > 126){//change input to be able to turn left
-//        desired_ticks = angle - 127 /90.0;
-//    }else{
-//        desired_ticks = (-1*(126 - angle))/90.0;
-//    }
-     desired_ticks = desired_ticks * FULL90ROT; //convert angle to the appropriate wheel rotation amount
-     logMove(0,desired_ticks);
+
+    if(direction == ARDUINO_RIGHT){//change input to be able to turn right
+        temp = angle /90.0;
+        desired_ticks = temp * FULL90ROT_RIGHT; //convert angle to the appropriate wheel rotation amount
+    }else{
+        temp = angle /90.0;
+        desired_ticks = -1* temp * FULL90ROT_LEFT; //convert angle to the appropriate wheel rotation amount
+    }
+    if(mode){//for obstacle avoidance, used when we go away from the line to pick up a target
+        startSensor_ISR();
+        noInterrupts();
+        readDirection = 0;//read back sensors while pivoting
+        follow_or_obj = 1;
+        interrupts();
+        logMove(0,desired_ticks);
+   }
      pivot(desired_ticks);
- }
+}
+
+
+//void moveRotate(byte angle, bool mode = 0){//expecting input to be from -90 to 90 degrees
+//     if(mode){//for obstacle avoidance, used when we go away from the line to pick up a target
+//         startSensor_ISR();
+//         noInterrupts();
+//         readDirection = 0;//read back sensors while pivoting
+//         follow_or_obj = 1;
+//         interrupts();
+//    }
+//    int desired_ticks;
+//    
+//    desired_ticks = angle / 90.0;
+////    if(angle > 126){//change input to be able to turn left
+////        desired_ticks = angle - 127 /90.0;
+////    }else{
+////        desired_ticks = (-1*(126 - angle))/90.0;
+////    }
+//     desired_ticks = desired_ticks * FULL90ROT; //convert angle to the appropriate wheel rotation amount
+//     logMove(0,desired_ticks);
+//     pivot(desired_ticks);
+//}
 
 /** Move the robot forward or reverse
  *
@@ -174,21 +200,20 @@ bool isReady(void){
  *	positive is forward.
  */
 
-void moveStraight(byte ticks, byte direction, bool mode = 0){//ticks is going to come in as a byte value (0-255)
+void moveStraight(byte ticks, byte direction = 1, bool mode = 0){//ticks is going to come in as a byte value (0-255)
+    int newticks;
+    if(direction) newticks = ticks * MOVEMENT_SCALAR;//convert input to the range of ticks we wants
+                                          //this value is ~1/5th of a revolution..
+                                          //the max distance we can go is ~1056cm with 1 call...
+    else newticks = -1 * ticks * MOVEMENT_SCALAR;
     if(mode){//for obstacle avoidance, used when we go away from the line to pick up a target
         startSensor_ISR();
         noInterrupts();
         readDirection = 1;
         follow_or_obj = 1;
         interrupts();
+        logMove(1, newticks);
     }
-    int newticks;
-    if(direction) newticks = ticks * MOVEMENT_SCALAR;//convert input to the range of ticks we wants
-                                          //this value is ~1/5th of a revolution..
-                                          //the max distance we can go is ~1056cm with 1 call...
-    else newticks = -1 * ticks * MOVEMENT_SCALAR;
-
-    logMove(1, newticks);
     moveFWBW(newticks);//initiate straight movement routine
 }
 /*
@@ -229,12 +254,12 @@ void readLines(){
     unsigned int left = readLine_left();
     unsigned int right = readLine_right();
 
-    if (left <= 70){ //if found left
-        moveRotate(-30); //turn left
+    if (left <= 70){ //if line detected left
+        moveRotate(ARDUINO_LEFT,30);
         while(!done_with_move);//busywait
     }
   else if (right <= 70){ //if found right
-      moveRotate(30);  //turn right!
+      moveRotate(ARDUINO_RIGHT, 30);
       while(!done_with_move);
     }
   else //if not found go forward a certain amount

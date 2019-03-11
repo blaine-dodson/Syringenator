@@ -3,5 +3,7 @@
 latex
 *.out
 
+.DS_Store
+
 # executables
 demoImgCapCpp

@@ -561,7 +561,7 @@ def approach(t):
 	
 	# move forward if necessary
 	# the pixel origin is in the upper left corner
-	if t.centerY < constants.PICKUP_Y_MIN: # positive translation
+	if t.centerY <= constants.PICKUP_Y_MIN: # positive translation
 		fwdTicks = int(constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MIN-t.centerY))
 		if fwdTicks > constants.FWD_MAX_TICKS:
 			fwdTicks = constants.FWD_MAX_TICKS
@@ -663,7 +663,7 @@ def pickUp(t):
 	log("string", "pickUp(): status is " + SySerial.statusString(status) )
 	comPort.waitForReady()
 	
-	if DEBUG_TRANSFORM: raw_input("press any key")
+	if DEBUG_TRANSFORM: raw_input("press any enter")
 
 
 ##	signl the arduino to return to the line.

@@ -4,6 +4,8 @@
 #include "MotorLib.h"
 
 #define DEFAULT_DUTY_CYCLE  255
+#define RIGHT_SPEED 255
+#define LEFT_SPEED 241
 #define WHEEL_CIRCUMFERENCE 23.9389360204 //this is in cm!
 
 /* Duty Cycle table!
@@ -86,8 +88,8 @@ void motorSetup(byte l_motor_pwm = 13, byte l_motor_dir_a = 22, byte l_motor_dir
   pinMode(rightmotor_dir_a, OUTPUT);
   pinMode(rightmotor_dir_b, OUTPUT);
 
-  analogWrite(leftmotor_pwm , DEFAULT_DUTY_CYCLE);
-  analogWrite(rightmotor_pwm , DEFAULT_DUTY_CYCLE);
+  analogWrite(leftmotor_pwm , LEFT_SPEED);
+  analogWrite(rightmotor_pwm , RIGHT_SPEED);
 }
 
 /*The motor enables basically have three states
@@ -140,13 +142,13 @@ void moveFWBW(int ticks, byte motorspeed = DEFAULT_DUTY_CYCLE) {
 //This will be done_with_move by turning one wheel one direction and the other wheel will go the other
 void pivot(int ticks, byte speed = DEFAULT_DUTY_CYCLE ) {
   noInterrupts();
-    done_with_move= 0;
+    done_with_move = 0;
     encoder_count_left = 0;
-    if(ticks < 0) desired_count_left =  -1* ticks;
+    if(ticks < 0) desired_count_left =  -1 * ticks;
     else desired_count_left = 1 * ticks;
   interrupts();
 
-  if (ticks < 0) {//pivot right
+  if (ticks > 0) {//pivot right
     digitalWrite(leftmotor_dir_a, 1);
     digitalWrite(leftmotor_dir_b, 0);
 
