@@ -23,18 +23,10 @@
 #define ARM_RANGE_MAX 0 ///< The maximum range byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
 #define ARM_ORIENT_MIN 0 ///< The minimum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
 #define ARM_ORIENT_MAX 0 ///< The maximum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
-#define PICKUP_X_MIN 230 ///< The minimum target center x-value that allows a pickup
-#define PICKUP_X_MAX 400 ///< The maximum target center x-value that allows a pickup
-#define PICKUP_Y_MIN 420 ///< The minimum target center y-value that allows a pickup
-#define PICKUP_Y_MAX 480 ///< The maximum target center y-value that allows a pickup
-#define FWD_MAX_TICKS 127 ///< The maximum count of forward ticks used in moveCloser()
-#define ROT_MAX_TICKS 127 ///< The maximum absolute value of rotation ticks used in moveCloser()
-#define CAL_ROT_FACTOR 1 ///< Calibration factor used in rotation calculation
-#define CAL_FWD_FACTOR 1 ///< Calibration factor used in forward calculation
-#define CAL_ARM_OFFSET 54 ///< Offset of the arm axis from the camera axis [mm]
-#define CAL_CAM_HEIGHT 984 ///< Height of the camera from the floor [mm]
-#define CAL_CAM_ANGLE 1.2117 ///< Angle of the camera from the horizon [radians]
-#define CAL_CAM_AXIS 1140 ///< distance to the floor on the camera's center axis
+#define PICKUP_X_MIN 0 ///< The minimum target center x-value that allows a pickup
+#define PICKUP_X_MAX 0 ///< The maximum target center x-value that allows a pickup
+#define PICKUP_Y_MIN 0 ///< The minimum target center y-value that allows a pickup
+#define PICKUP_Y_MAX 0 ///< The maximum target center y-value that allows a pickup
 #define ARDUINO_NULL 0x00 ///< A place holder for troubleshooting etc.
 #define ARDUINO_STATUS_ACK 0x01 ///< If the arduino needs to acknowledge something
 #define ARDUINO_STATUS_READY 0x02 ///< If the arduino needs to indicate it is ready
@@ -45,11 +37,9 @@
 #define ARDUINO_ROTATE 0x10 ///< serial command the arduino to rotate the robot, followed by one signed byte indicating magnitude and direction
 #define ARDUINO_MOVE 0x11 ///< serial command the arduino to advance the robot, followed by one signed byte indicating magnitude and direction
 #define ARDUINO_LINE_FOLLOW 0x12 ///< serial command the arduino to follow the line
-#define ARDUINO_AVOID 0x13 ///< serial command the arduino to avoid an obstacle
 #define ARDUINO_ARM_PARK 0x20 ///< serial command the arduino to call the park action sequence
 #define ARDUINO_ARM_DISPOSE 0x21 ///< serial command the arduino to call the dispose action sequence
 #define ARDUINO_ARM_PICKUP 0x22 ///< serial command the arduino to attempt a pick, followed by three bytes: azimuth, range, and orientation
-#define SERIAL_BAUD 9600 ///< baudrate for serial communication between Arduino and Pi
 #define PORT_MOTOR_FWD None ///< Arduino pin for port motor forward
 #define PORT_MOTOR_REV None ///< Arduino pin for port motor reverse
 #define STBD_MOTOR_FWD None ///< Arduino pin for starboard motor forward
