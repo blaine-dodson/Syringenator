@@ -16,13 +16,23 @@ void serialEvent(){
 	bytesRead = Serial.readBytes(serialDataIn, IN_BUF_SZ);
 }
 
+void errorBlink(void){
+	digitalWrite(LED_BUILTIN, LOW);
+	for(int i=0; i< 10; i++){
+		delay(300);
+		digitalWrite(LED_BUILTIN, HIGH);
+		delay(300);
+		digitalWrite(LED_BUILTIN, LOW);
+	}
+}
+
 
 void parseCommand(uint8_t * bytes, int cnt){
 	switch(bytes[0]){
 	case ARDUINO_LINE_FOLLOW:
 		if(cnt == 1){
 			Serial.write(ARDUINO_STATUS_ACK);
-			//moveLineFollow();
+			moveLineFollow();
 		}else
 			Serial.write(ARDUINO_STATUS_NACK);
 		break;
@@ -46,7 +56,7 @@ void parseCommand(uint8_t * bytes, int cnt){
 	case ARDUINO_RIGHT:
 		if(cnt == 2){
 			Serial.write(ARDUINO_STATUS_ACK);
-			moveRotate(bytes[1]);
+			moveRotate(ARDUINO_RIGHT, bytes[1]);
 		}else
 			Serial.write(ARDUINO_STATUS_NACK);
 		break;
@@ -54,7 +64,7 @@ void parseCommand(uint8_t * bytes, int cnt){
 	case ARDUINO_LEFT:
 		if(cnt == 2){
 			Serial.write(ARDUINO_STATUS_ACK);
-			moveRotate(-bytes[1]);
+			moveRotate(ARDUINO_LEFT, bytes[1]);
 		}else
 			Serial.write(ARDUINO_STATUS_NACK);
 		break;

@@ -82,7 +82,7 @@ ISR(TIMER3_COMPA_vect){//Obstacle Detection routine
     }else{
             line_follow_count++;
             stopSensor_ISR();
-            if(line_follow_count >= LINE_TIMER_LIMIT){
+            if(line_follow_count >= LINE_FOLLOW_TIME){
                 line_follow_count = 0;
                 done_with_command = 1;
                 stop_motors();
@@ -112,10 +112,7 @@ void switchSensorMode(bool mode){// 1 for obstacle, 0 for line sensor
     interrupts();
 }
 
-/**	A function to handle incomming communication from the pi.
- *
- */
-void serialCommunication_ISR(void){}
+
 
 int isDoneCommand(int type_command){
     noInterrupts();

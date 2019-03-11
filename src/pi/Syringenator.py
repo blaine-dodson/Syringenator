@@ -19,6 +19,7 @@ DEBUG_TRANSFORM = True
 DEBUG_ORIENTATION = True
 DEBUG_TIMING = True
 CAL_X = False
+CAL_Y = False
 DISABLE_WHEELS = False
 
 import constants
@@ -31,7 +32,7 @@ import SySerial
 
 if DEBUG_TIMING: import time
 
-if DEBUG_CAPTURE or DEBUG_AQUISITION or DEBUG_APPROACH or DEBUG_CAL:
+if DEBUG_CAPTURE or DEBUG_AQUISITION or DEBUG_APPROACH:
 	cv2.namedWindow("View", cv2.WINDOW_AUTOSIZE );
 
 
@@ -314,7 +315,7 @@ def imageCart2floorCart(t):
 #		print "XPIX2LEN: " + str(XPIX2LEN)
 #		print "YPIX2LEN: " + str(YPIX2LEN)
 	
-	xf = XPIX2LEN*(t.centerX - IMG_WIDTH/2)
+	xf = XPIX2LEN*(t.centerX - IMG_WIDTH/2+(constants.CAL_CAM_X_OFFSET))
 	yf = YPIX2LEN*(IMG_HEIGHT - t.centerY)
 	
 	if DEBUG_TRANSFORM:
@@ -343,46 +344,6 @@ def floorCart2armCylinder((x, y)):
 		az = 90
 	
 	return (az, r)
-
-
-#def armCoordinates(t):
-#	
-#	x = xform.estCoordinateX(
-#		constants.CAL_CAM_HEIGHT,
-#		IMG_WIDTH/2, IMG_HEIGHT/2,
-#		constants.CAL_CAM_ANGLE,
-#		FOV_X, FOV_Y,
-#		t.centerX, t.centerY,
-#		constants.CAL_ARM_OFFSET
-#	)
-#	
-#	z = xform.estCoordinateZ(
-#		constants.CAL_CAM_HEIGHT,
-#		IMG_HEIGHT/2,
-#		constants.CAL_CAM_ANGLE,
-#		FOV_Y,
-#		t.centerY,
-#		constants.CAL_ARM_OFFSET
-#	)
-#	
-#	if DEBUG_TRANSFORM:
-#		print("x value: " + str(x))
-#		print("z value: " + str(z))
-#	
-#	theta = xform.findTheta(z,x)
-#	
-#	radius = xform.fndRadius(z,x)
-#	
-#	phi = xform.orientationCapture(
-#		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
-#	
-#	if DEBUG_TRANSFORM:
-#		log("string", "Theta : " + str(theta))
-#		log("string", "Radius: " + str(radius))
-#		log("string", "Phi   : " + str(phi))
-#	
-#	return (theta, radius, phi)
-
 
 
 #==============================================================================#
@@ -451,57 +412,72 @@ def scan(cam, net):
 	log("string", "scan(): stop")
 	return closest
 
+
+def pixelRadius(t):
+	x = t.centerX - IMG_WIDTH/2 + constants.CAL_CAM_X_OFFSET
+	y = IMG_HEIGHT - t.centerY + constants.PICKUP_ARM_OFFSET
+	
+	#print "x: " + str(x) + " y: " + str(y)
+	
+	r = int(numpy.rint(numpy.sqrt(x**2 + y**2)))
+	
+	if r < constants.PICKUP_RADIUS: return 0
+	else: return r
+
 ##	A routine to determine if the target is in position to be picked up.
 #
 #	Calculates whether the center of the target bounding box is in the pickup area.
 #
 #	@returns a boolean
 def canBePicked(t):
+	if DEBUG_APPROACH:
+		cv2.rectangle(
+			t.image,
+			(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
+			(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
+			[200, 0, 0], 1
+		)
+		cv2.circle(
+			t.image,
+			(IMG_WIDTH/2-constants.CAL_CAM_X_OFFSET,
+			IMG_HEIGHT+constants.PICKUP_ARM_OFFSET),
+			constants.PICKUP_RADIUS,
+			[200, 0, 0]
+		)
+	
 	# is the target within the pick area?
 	if(
 		t.centerX > constants.PICKUP_X_MIN and
 		t.centerX < constants.PICKUP_X_MAX and
 		t.centerY > constants.PICKUP_Y_MIN and
-		t.centerY < constants.PICKUP_Y_MAX
+		t.centerY < constants.PICKUP_Y_MAX and
+		pixelRadius(t) == 0
 	):
 		log("string", "can pick")
 		if DEBUG_APPROACH:
-			cv2.rectangle(
-				t.image,
-				(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
-				(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
-				[200, 0, 0], 2
-			)
 			cv2.drawMarker(
 				t.image,
 				(t.centerX, t.centerY),
 				[0, 200, 0]
 			)
 			# show the output image
-			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
 			cv2.imshow("View", t.image)
-			cv2.waitKey(1000)
 			log("string", "--")
+			cv2.waitKey(0)
 		return True
 	else:
 		log("string", "cannot pick")
 		if DEBUG_APPROACH:
-			cv2.rectangle(
-				t.image,
-				(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
-				(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
-				[220, 0, 0], 2
-			)
 			cv2.drawMarker(
 				t.image,
 				(t.centerX, t.centerY),
 				[0, 0, 150]
 			)
 			# show the output image
-			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
 			cv2.imshow("View", t.image)
-			cv2.waitKey(1000)
+			log("string", "radius: " + str(pixelRadius(t)))
 			log("string", "--")
+			cv2.waitKey(0)
 		return False
 
 
@@ -532,7 +508,7 @@ def approach(t):
 	if DISABLE_WHEELS: return
 	
 	# face the target if necessary
-	if t.centerX < constants.PICKUP_X_MIN: # positive rotation
+	if t.centerX <= constants.PICKUP_X_MIN: # positive rotation
 		rotTicks = int(constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX))
 		if rotTicks > constants.ROT_MAX_TICKS:
 			rotTicks = constants.ROT_MAX_TICKS
@@ -542,7 +518,7 @@ def approach(t):
 		log("string", "ARDUINO_LEFT: " + str(rotTicks))
 		comPort.send([constants.ARDUINO_LEFT, rotTicks])
 	
-	elif t.centerX > constants.PICKUP_X_MAX: # negative rotation
+	elif t.centerX >= constants.PICKUP_X_MAX: # negative rotation
 		rotTicks = int(constants.CAL_ROT_FACTOR*(t.centerX-constants.PICKUP_X_MAX))
 		if rotTicks > constants.ROT_MAX_TICKS:
 			rotTicks = constants.ROT_MAX_TICKS
@@ -570,6 +546,16 @@ def approach(t):
 		
 		log("string", "ARDUINO_FWD: " + str(fwdTicks))
 		comPort.send([constants.ARDUINO_FWD, fwdTicks])
+	
+	elif pixelRadius(t) != 0:
+		CORNER_ROT = 20
+		
+		if t.centerX > IMG_WIDTH/2:
+			log("string", "ARDUINO_RIGHT: " + str(CORNER_ROT))
+			comPort.send([constants.ARDUINO_RIGHT, CORNER_ROT])
+		else:
+			log("string", "ARDUINO_FWD: " + str(CORNER_ROT))
+			comPort.send([constants.ARDUINO_LEFT, CORNER_ROT])
 	
 #	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
 #		# this may not work as expected
@@ -753,10 +739,9 @@ while CAL_X:
 		(constants.PICKUP_X_MAX-constants.PICKUP_X_MIN)*SCALE,
 		(constants.PICKUP_Y_MAX-constants.PICKUP_Y_MIN)*SCALE
 	)
-	print "dimentions: " + str(biggerDim)
 	
 	#centerline
-	centerX = (IMG_WIDTH/2-constants.PICKUP_X_MIN)*SCALE
+	centerX = (IMG_WIDTH/2-constants.PICKUP_X_MIN+(constants.CAL_CAM_X_OFFSET))*SCALE
 	
 	cv2.line(bigger, (centerX,0), (centerX,biggerDim[1]), [255,0,255])
 	
@@ -769,6 +754,57 @@ while CAL_X:
 	
 	for y in range(constants.PICKUP_Y_MAX, constants.PICKUP_Y_MIN, -10):
 		cv2.line(image, (0,y), (IMG_WIDTH,y), [255,0,0])
+	
+	
+	cv2.imshow("Bigger", bigger)
+	cv2.waitKey(0)
+
+
+while CAL_Y:
+	SCALE = 4
+	
+	image = camera.capture()
+	cv2.line(image,
+		(constants.PICKUP_X_MIN, 0),
+		(constants.PICKUP_X_MIN, IMG_HEIGHT), [200, 0, 0]
+	)
+	
+	cv2.line(image,
+		(constants.PICKUP_X_MAX, 0),
+		(constants.PICKUP_X_MAX, IMG_HEIGHT), [200, 0, 0]
+	)
+	
+	CROP_Y_MIN = 400
+#	CIRCLE_Y_OFFSET = 50
+#	CIRCLE_R = 120
+	
+	cv2.circle(
+		image,
+		(IMG_WIDTH/2-constants.CAL_CAM_X_OFFSET,
+		IMG_HEIGHT+constants.PICKUP_ARM_OFFSET),
+		constants.PICKUP_RADIUS,
+		[200, 0, 0]
+	)
+	
+	cv2.imshow("View", image)
+	crop = image[
+		CROP_Y_MIN:constants.PICKUP_Y_MAX,
+		constants.PICKUP_X_MIN:constants.PICKUP_X_MAX
+	]
+	bigger = cv2.resize(src=crop, dsize=(0,0), fx=SCALE, fy=SCALE)
+	
+	biggerDim = (
+		(constants.PICKUP_X_MAX-constants.PICKUP_X_MIN)*SCALE,
+		(constants.PICKUP_Y_MAX-CROP_Y_MIN)*SCALE
+	)
+	
+	#centerline
+	centerX = (IMG_WIDTH/2-constants.PICKUP_X_MIN-(constants.CAL_CAM_X_OFFSET))*SCALE
+	
+	cv2.line(bigger, (centerX,0), (centerX,biggerDim[1]), [255,0,255])
+	
+	for y in range(biggerDim[1], 0, -10*SCALE):
+		cv2.line(bigger, (0,y), (biggerDim[0],y), [255,0,0])
 	
 	
 	cv2.imshow("Bigger", bigger)

@@ -30,11 +30,15 @@ ARM_ORIENT_MAX = 180
 ## The minimum target center x-value that allows a pickup
 PICKUP_X_MIN = 250
 ## The maximum target center x-value that allows a pickup
-PICKUP_X_MAX = 410
+PICKUP_X_MAX = 415
 ## The minimum target center y-value that allows a pickup
 PICKUP_Y_MIN = 420
 ## The maximum target center y-value that allows a pickup
 PICKUP_Y_MAX = 470
+## The pixel value for the arm radius
+PICKUP_RADIUS = 120
+## The arms offset from the bottom of the image [px]
+PICKUP_ARM_OFFSET = 50
 ## The maximum count of forward ticks used in moveCloser()
 FWD_MAX_TICKS = 127
 ## The minimum count of forward ticks
@@ -42,9 +46,9 @@ FWD_MIN_TICKS = 1
 ## The maximum absolute value of rotation ticks used in moveCloser()
 ROT_MAX_TICKS = 127
 ## The minimum count of rotational ticks
-ROT_MIN_TICKS = 1
+ROT_MIN_TICKS = 10
 ## Calibration factor used in rotation calculation
-CAL_ROT_FACTOR = 1
+CAL_ROT_FACTOR = 0.35
 ## Calibration factor used in forward calculation
 CAL_FWD_FACTOR = 0.07
 ## Offset of the arm axis from the camera axis [mm]
@@ -55,6 +59,8 @@ CAL_CAM_HEIGHT = 984
 CAL_CAM_ANGLE = 1.2117
 ## distance to the floor on the camera's center axis
 CAL_CAM_AXIS = 1140
+## x-offset between camera and body
+CAL_CAM_X_OFFSET = -15
 ## A place holder for troubleshooting etc.
 ARDUINO_NULL = 0
 ## If the arduino needs to acknowledge something
@@ -89,6 +95,8 @@ ARDUINO_ARM_PARK = 20
 ARDUINO_ARM_DISPOSE = 21
 ## serial command the arduino to attempt a pick, followed by three bytes: azimuth, range, and orientation
 ARDUINO_ARM_PICKUP = 22
+## timer ticks to follow the line
+LINE_FOLLOW_TIME = 100
 ## baudrate for serial communication between Arduino and Pi
 SERIAL_BAUD = 9600
 ## Arduino pin for port motor forward
