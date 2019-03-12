@@ -28,9 +28,9 @@ ARM_ORIENT_MIN = 0
 ## The maximum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
 ARM_ORIENT_MAX = 180
 ## The minimum target center x-value that allows a pickup
-PICKUP_X_MIN = 260
+PICKUP_X_MIN = 270
 ## The maximum target center x-value that allows a pickup
-PICKUP_X_MAX = 405
+PICKUP_X_MAX = 395
 ## The minimum target center y-value that allows a pickup
 PICKUP_Y_MIN = 420
 ## The maximum target center y-value that allows a pickup
