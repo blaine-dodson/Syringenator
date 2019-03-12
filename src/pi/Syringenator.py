@@ -13,14 +13,15 @@
 
 
 DEBUG_CAPTURE = False
-DEBUG_AQUISITION = True
-DEBUG_APPROACH = True
-DEBUG_TRANSFORM = True
-DEBUG_ORIENTATION = True
-DEBUG_TIMING = True
+DEBUG_AQUISITION = False
+DEBUG_APPROACH = False
+DEBUG_TRANSFORM = False
+DEBUG_ORIENTATION = False
+DEBUG_TIMING = False
 CAL_X = False
 CAL_Y = False
 DISABLE_WHEELS = False
+
 
 import constants
 import cv2
@@ -79,7 +80,7 @@ class NeuralNet:
 		self.nn = cv2.dnn.readNetFromDarknet(self.CONFIGPATH, self.WEIGHTSPATH)
 		layers = self.nn.getLayerNames()
 		self.ln = [layers[i[0] - 1] for i in self.nn.getUnconnectedOutLayers()]
-		log("string", "NeuralNet(): net loaded")
+		log.record("string", "NeuralNet(): net loaded")
 	
 	def detect(self, img):
 		blob = cv2.dnn.blobFromImage(
@@ -92,7 +93,7 @@ class NeuralNet:
 
 		# show timing information on YOLO
 		if(DEBUG_TIMING):
-			log("string", "YOLO took {:.6f} seconds".format(end - start))
+			log.record("string", "YOLO took {:.6f} seconds".format(end - start))
 		return output
 
 
@@ -120,14 +121,14 @@ class Camera:
 			# realsense devices
 			self.pipeline.start(cfg)
 		except:
-			log('string', "Pipeline did not start")
+			log.record('string', "Pipeline did not start")
 			exit() # @todo fix this
 
 		# stabilize auto exposure. do we need to do this once, or before each pic?
 		for i in range(0,30):
 			frames = self.pipeline.wait_for_frames()
 	
-		log('string', "Camera initialized")
+		log.record('string', "Camera initialized")
 	
 	def capture(self):
 		try:
@@ -151,12 +152,34 @@ class Camera:
 	
 		if(DEBUG_CAPTURE):
 			#cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
-			log("string", "photo capture")
+			log.record("string", "photo capture")
 			cv2.imshow("View", mat)
 			cv2.waitKey(1000)
-			log("string", "--")
+			log.record("string", "--")
 	
 		return mat
+
+
+class Log:
+	def __init__(self):
+		self.file = open("log.txt", "a")
+		self.file.write("\n\n\n====FILE OPEN====")
+	
+	## Record system events for later analysis
+	#
+	# @returns None
+	def record(self, datatype, *args):
+		if(datatype == 'string'): # log the string
+			for x in args:
+				print(x)
+				self.file.write(x)
+		elif(datatype == 'target'):
+			print("Target aquired")
+			print(
+					"centerX: "+str(args[0].centerX)+" centerY: "+str(args[0].centerY)
+				)
+		else:
+			print("log(): unknown type")
 
 
 #==============================================================================#
@@ -181,19 +204,7 @@ NMS_THRESHOLD=.1
 #==============================================================================#
 
 
-## Record system events for later analysis
-#
-# @returns None
-def log(datatype, *args):
-	if(datatype == 'string'): # log the string
-		for x in args: print(x)
-	elif(datatype == 'target'):
-		print("Target aquired")
-		print(
-				"centerX: "+str(args[0].centerX)+" centerY: "+str(args[0].centerY)
-			)
-	else:
-		print("log(): unknown type")
+
 
 
 #==============================================================================#
@@ -218,7 +229,7 @@ def extractTargets(dataIn):
 	confidences = []
 	targets = []
 	
-	log("string", "extractTargets(): start")
+	log.record("string", "extractTargets(): start")
 	
 	# loop over each of the layer outputs
 	for output in dataIn:
@@ -257,7 +268,7 @@ def extractTargets(dataIn):
 			targets.append(Target(boxes[i], confidences[i], centers[i]))
 	
 	
-	log("string", "extractTargets(): finish")
+	log.record("string", "extractTargets(): finish")
 	return targets
 
 
@@ -301,7 +312,7 @@ def extractTargets(dataIn):
 #YPIX2LEN = (numpy.tan(FOV_Y/2*numpy.pi/180))/(IMG_HEIGHT/2)*constants.CAL_CAM_AXIS
 
 XPIX2LEN = 10/6.48
-YPIX2LEN = 10/7.0
+YPIX2LEN = 10/6.0
 
 ##	Derive floor position from image data
 #
@@ -360,7 +371,7 @@ def floorCart2armCylinder((x, y)):
 #	@param pipe a realsense2 pipeline object configured with a color stream.
 #	@returns a target object
 def scan(cam, net):
-	log("string", "scan(): start")
+	log.record("string", "scan(): start")
 	
 	# get a picture from librealsense
 	image = cam.capture()
@@ -391,8 +402,8 @@ def scan(cam, net):
 		
 		
 		cv2.imshow("View", image)
+		log.record("string", "--")
 		cv2.waitKey(1000)
-		log("string", "--")
 	
 	# pick the closest target
 	d = 2000000
@@ -409,7 +420,7 @@ def scan(cam, net):
 	if(closest != None):
 		closest.setImg(image)
 	
-	log("string", "scan(): stop")
+	log.record("string", "scan(): stop")
 	return closest
 
 
@@ -450,10 +461,10 @@ def canBePicked(t):
 		t.centerX > constants.PICKUP_X_MIN and
 		t.centerX < constants.PICKUP_X_MAX and
 		t.centerY > constants.PICKUP_Y_MIN and
-		t.centerY < constants.PICKUP_Y_MAX and
-		pixelRadius(t) == 0
+		t.centerY < constants.PICKUP_Y_MAX 
+		#and pixelRadius(t) == 0
 	):
-		log("string", "can pick")
+		log.record("string", "can pick")
 		if DEBUG_APPROACH:
 			cv2.drawMarker(
 				t.image,
@@ -462,11 +473,11 @@ def canBePicked(t):
 			)
 			# show the output image
 			cv2.imshow("View", t.image)
-			log("string", "--")
-			cv2.waitKey(0)
+			log.record("string", "--")
+			cv2.waitKey(1000)
 		return True
 	else:
-		log("string", "cannot pick")
+		log.record("string", "cannot pick")
 		if DEBUG_APPROACH:
 			cv2.drawMarker(
 				t.image,
@@ -475,9 +486,9 @@ def canBePicked(t):
 			)
 			# show the output image
 			cv2.imshow("View", t.image)
-			log("string", "radius: " + str(pixelRadius(t)))
-			log("string", "--")
-			cv2.waitKey(0)
+			log.record("string", "radius: " + str(pixelRadius(t)))
+			log.record("string", "--")
+			cv2.waitKey(1000)
 		return False
 
 
@@ -502,37 +513,59 @@ def canBePicked(t):
 #	@param t a Target object containing the location of the target to be approched
 #	@returns None
 def approach(t):
-	log("string", "approach(): start")
+	log.record("string", "approach(): start")
 	comPort.waitForReady()
 	
 	if DISABLE_WHEELS: return
 	
 	# face the target if necessary
-	if t.centerX <= constants.PICKUP_X_MIN: # positive rotation
-		rotTicks = int(constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX))
+#	if t.centerX <= constants.PICKUP_X_MIN: # positive rotation
+#		rotTicks = int(constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX))
+#		if rotTicks > constants.ROT_MAX_TICKS:
+#			rotTicks = constants.ROT_MAX_TICKS
+#		if rotTicks < constants.ROT_MIN_TICKS:
+#			rotTicks = constants.ROT_MIN_TICKS
+#		
+#		log.record("string", "ARDUINO_LEFT: " + str(rotTicks))
+#		comPort.send([constants.ARDUINO_LEFT, rotTicks])
+#	
+#	elif t.centerX >= constants.PICKUP_X_MAX: # negative rotation
+#		rotTicks = int(constants.CAL_ROT_FACTOR*(t.centerX-constants.PICKUP_X_MAX))
+#		if rotTicks > constants.ROT_MAX_TICKS:
+#			rotTicks = constants.ROT_MAX_TICKS
+#		if rotTicks < constants.ROT_MIN_TICKS:
+#			rotTicks = constants.ROT_MIN_TICKS
+#		
+#		log.record("string", "ARDUINO_RIGHT: " + str(rotTicks))
+#		comPort.send([constants.ARDUINO_RIGHT, rotTicks])
+	
+	# face the target if necessary
+	if t.centerX <= constants.PICKUP_X_MIN: # Left side
+		rotTicks = int(constants.CAL_ROT_FACTOR*(IMG_WIDTH/2-t.centerX))
 		if rotTicks > constants.ROT_MAX_TICKS:
 			rotTicks = constants.ROT_MAX_TICKS
 		if rotTicks < constants.ROT_MIN_TICKS:
 			rotTicks = constants.ROT_MIN_TICKS
 		
-		log("string", "ARDUINO_LEFT: " + str(rotTicks))
+		log.record("string", "ARDUINO_LEFT: " + str(rotTicks))
 		comPort.send([constants.ARDUINO_LEFT, rotTicks])
 	
 	elif t.centerX >= constants.PICKUP_X_MAX: # negative rotation
-		rotTicks = int(constants.CAL_ROT_FACTOR*(t.centerX-constants.PICKUP_X_MAX))
+		rotTicks = int(constants.CAL_ROT_FACTOR*(t.centerX-IMG_WIDTH/2))
 		if rotTicks > constants.ROT_MAX_TICKS:
 			rotTicks = constants.ROT_MAX_TICKS
 		if rotTicks < constants.ROT_MIN_TICKS:
 			rotTicks = constants.ROT_MIN_TICKS
 		
-		log("string", "ARDUINO_RIGHT: " + str(rotTicks))
+		log.record("string", "ARDUINO_RIGHT: " + str(rotTicks))
 		comPort.send([constants.ARDUINO_RIGHT, rotTicks])
+	
 	
 	# in all cases we wait for the arduino to be ready
 	status = None
 	while(status == None):
 		status = comPort.status()
-	log("string", "approach(): status is " + SySerial.statusString(status) )
+	log.record("string", "approach(): status is " + SySerial.statusString(status) )
 	comPort.waitForReady()
 	
 	# move forward if necessary
@@ -544,17 +577,17 @@ def approach(t):
 		if fwdTicks < constants.FWD_MIN_TICKS:
 			fwdTicks = constants.FWD_MIN_TICKS
 		
-		log("string", "ARDUINO_FWD: " + str(fwdTicks))
+		log.record("string", "ARDUINO_FWD: " + str(fwdTicks))
 		comPort.send([constants.ARDUINO_FWD, fwdTicks])
 	
 	elif pixelRadius(t) != 0:
 		CORNER_ROT = 20
 		
 		if t.centerX > IMG_WIDTH/2:
-			log("string", "ARDUINO_RIGHT: " + str(CORNER_ROT))
+			log.record("string", "ARDUINO_RIGHT: " + str(CORNER_ROT))
 			comPort.send([constants.ARDUINO_RIGHT, CORNER_ROT])
 		else:
-			log("string", "ARDUINO_FWD: " + str(CORNER_ROT))
+			log.record("string", "ARDUINO_LEFT: " + str(CORNER_ROT))
 			comPort.send([constants.ARDUINO_LEFT, CORNER_ROT])
 	
 #	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
@@ -563,24 +596,24 @@ def approach(t):
 #		if fwdTicks < -constants.FWD_MAX_TICKS:
 #			fwdTicks = -constants.FWD_MAX_TICKS
 #		
-#		log("string", "ARDUINO_MOVE: " + str(fwdTicks) )
+#		log.record("string", "ARDUINO_MOVE: " + str(fwdTicks) )
 #		comPort.send([constants.ARDUINO_MOVE, fwdTicks])
 	
 	# in all cases we wait for the arduino to be ready
 	status = comPort.status()
 	while(status != constants.ARDUINO_STATUS_READY):
-		log("string", "approach(): status is " + SySerial.statusString(status) )
+		log.record("string", "approach(): status is " + SySerial.statusString(status) )
 		status = comPort.status()
 		if status == constants.ARDUINO_STATUS_OBSTACLE:
 			obstacle = True
-			log("string", "obstacle detected")
+			log.record("string", "obstacle detected")
 
 
 ## avoid an obstacle
 #
 #	@returns None
 def avoid():
-	log("avoid(): start")
+	log.record("avoid(): start")
 	comPort.waitForReady()
 	
 	if DISABLE_WHEELS: return
@@ -589,7 +622,7 @@ def avoid():
 	
 	# in all cases we wait for the arduino to be ready
 	status = comPort.status()
-	log("string", "avoid(): status is " + SySerial.statusString(status) )
+	log.record("string", "avoid(): status is " + SySerial.statusString(status) )
 	obstacle = False
 	comPort.waitForReady()
 
@@ -617,7 +650,7 @@ def avoid():
 #	@param t a Target object containing the raw bitmap data
 #	@returns None
 def pickUp(t):
-	log("string", "pickUp(): start")
+	log.record("string", "pickUp(): start")
 	comPort.waitForReady()
 	
 	# find the center and orientation of the target
@@ -625,6 +658,8 @@ def pickUp(t):
 	
 	phi = xform.orientationCapture(
 		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
+	
+	phi = (phi + theta - 90) % constants.ARM_ORIENT_MAX
 	
 	# limit the ranges
 	if theta>constants.ARM_AZIMUTH_MAX: theta = constants.ARM_AZIMUTH_MAX
@@ -640,16 +675,17 @@ def pickUp(t):
 		print "theta: " + str(theta) + " type: " + str(type(theta))
 		print "r: " + str(r) + " type: " + str(type(r))
 		print "phi: " + str(phi) + " type: " + str(type(phi))
+		raw_input("press enter")
 	
 	# signal the arduino to pickUp
 	comPort.send([constants.ARDUINO_ARM_PICKUP, theta, r, phi])
 	
 	# in all cases we wait for the arduino to be ready
 	status = comPort.status()
-	log("string", "pickUp(): status is " + SySerial.statusString(status) )
+	log.record("string", "pickUp(): status is " + SySerial.statusString(status) )
 	comPort.waitForReady()
 	
-	if DEBUG_TRANSFORM: raw_input("press any enter")
+	#if DEBUG_TRANSFORM: raw_input("press enter")
 
 
 ##	signl the arduino to return to the line.
@@ -663,7 +699,7 @@ def pickUp(t):
 #
 #	@returns None
 def returnToLine():
-	log("string", "returnToLine(): start")
+	log.record("string", "returnToLine(): start")
 	comPort.waitForReady()
 	
 	if DISABLE_WHEELS: return
@@ -672,7 +708,7 @@ def returnToLine():
 	
 	# in all cases we wait for the arduino to be ready
 	status = comPort.status()
-	log("string", "returnToLine(): status is " + SySerial.statusString(status) )
+	log.record("string", "returnToLine(): status is " + SySerial.statusString(status) )
 	comPort.waitForReady()
 
 
@@ -682,7 +718,7 @@ def returnToLine():
 #
 #	@returns None
 def lineFollow():
-	log("string", "lineFollow(): start")
+	log.record("string", "lineFollow(): start")
 	comPort.waitForReady()
 	
 	if DISABLE_WHEELS: return
@@ -691,7 +727,7 @@ def lineFollow():
 	
 	# in all cases we wait for the arduino to be ready
 	status = comPort.status()
-	log("string", "lineFollow(): status is " + SySerial.statusString(status))
+	log.record("string", "lineFollow(): status is " + SySerial.statusString(status))
 	comPort.waitForReady()
 
 
@@ -707,9 +743,11 @@ obstacle = False
 ## The currently aquired target
 target = None
 
+log = Log()
 camera = Camera()
 neuralNet = NeuralNet()
 comPort = SySerial.ComPort()
+
 
 
 #==============================================================================#
@@ -811,11 +849,11 @@ while CAL_Y:
 	cv2.waitKey(0)
 
 
-log('string', "Syringenator: Start")
+log.record('string', "Syringenator: Start")
 while True:
 	target = scan(camera,neuralNet)
 	if target != None: # we have aquired a target
-		log("target", target)
+		log.record("target", target)
 		if canBePicked(target):
 			pickUp(target)
 		elif obstacle:

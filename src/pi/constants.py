@@ -28,15 +28,15 @@ ARM_ORIENT_MIN = 0
 ## The maximum orientation byte value that can be passed to the arduino with ARDUINO_ARM_PICKUP
 ARM_ORIENT_MAX = 180
 ## The minimum target center x-value that allows a pickup
-PICKUP_X_MIN = 250
+PICKUP_X_MIN = 260
 ## The maximum target center x-value that allows a pickup
-PICKUP_X_MAX = 415
+PICKUP_X_MAX = 405
 ## The minimum target center y-value that allows a pickup
 PICKUP_Y_MIN = 420
 ## The maximum target center y-value that allows a pickup
 PICKUP_Y_MAX = 470
 ## The pixel value for the arm radius
-PICKUP_RADIUS = 120
+PICKUP_RADIUS = 110
 ## The arms offset from the bottom of the image [px]
 PICKUP_ARM_OFFSET = 50
 ## The maximum count of forward ticks used in moveCloser()
@@ -44,13 +44,13 @@ FWD_MAX_TICKS = 127
 ## The minimum count of forward ticks
 FWD_MIN_TICKS = 1
 ## The maximum absolute value of rotation ticks used in moveCloser()
-ROT_MAX_TICKS = 127
+ROT_MAX_TICKS = 90
 ## The minimum count of rotational ticks
 ROT_MIN_TICKS = 10
 ## Calibration factor used in rotation calculation
-CAL_ROT_FACTOR = 0.35
+CAL_ROT_FACTOR = 0.15
 ## Calibration factor used in forward calculation
-CAL_FWD_FACTOR = 0.07
+CAL_FWD_FACTOR = 0.18
 ## Offset of the arm axis from the camera axis [mm]
 CAL_ARM_OFFSET = 95
 ## Height of the camera from the floor [mm]

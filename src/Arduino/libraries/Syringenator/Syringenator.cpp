@@ -17,7 +17,7 @@ roboMove move_log [LOGSIZE];
 int move_log_size = 0;
 
 #define LINE_TIMER_LIMIT 500
-#define MOVEMENT_SCALAR 125//229
+#define MOVEMENT_SCALAR 50 //125//229
 //variables for the interrupts
 volatile bool readDirection = 1; //forwards = 1, back is 0
 volatile bool follow_or_obj = 1; //line follow = 0, object detection = 1
@@ -164,7 +164,7 @@ void moveRotate(byte direction, byte angle, bool mode = 0){//expecting input to 
         readDirection = 0;//read back sensors while pivoting
         follow_or_obj = 1;
         interrupts();
-        logMove(0,desired_ticks);
+        logMove(0,desired_ticks,direction);
    }
      pivot(desired_ticks);
 }
@@ -221,7 +221,13 @@ int deadReckoning(void){
             if(move_log[move_log_size - 1].typeMove){
                 moveFWBW(-1 * move_log[move_log_size - 1].ticks);
             }else{
-                pivot(-1 * move_log[move_log_size - 1].ticks);
+            	if(move_log[move_log_size - 1].direction == ARDUINO_RIGHT){
+            		int ticks = -1 * move_log[move_log_size - 1].ticks *(835.0/875.0);
+            		pivot(ticks);
+            	}else{
+					int ticks = -1 * move_log[move_log_size - 1].ticks *(875.0/835.0);
+            		pivot(ticks);
+            	}
             }
             move_log_size--;
             while(!done_with_move);
@@ -232,9 +238,9 @@ int deadReckoning(void){
     function to put a move into the roboMove array,
     usually called before the initiation of a move
 */
-int logMove(int type, int ticks){
+int logMove(int type, int ticks,byte direction = 0){
     if(move_log_size < LOGSIZE){
-        roboMove temp = {type, ticks};
+        roboMove temp = {type, ticks,direction};
         move_log[move_log_size] = temp;
         move_log_size++;
         return 1;
@@ -371,20 +377,21 @@ void armDispose(void){
   servos[5].Position = (angle/180.0)*760 + 100;
   Serial.println(servos[5].Position);
   servos[1].ID = 2;
-  //All case statements are degrees with 90 being parallel to the robot
-  switch(handAngle){
-    case 45:
-      servos[1].Position = 300;
-      break;
-    case 90:
-      servos[1].Position = 500;
-      break;
-    case 135:
-      servos[1].Position = 700;
-      break;
-    default:
-      servos[1].Position = 100;
-  }
+  servos[1].Position = (40*handAngle)/9 + 100;
+//  //All case statements are degrees with 90 being parallel to the robot
+//  switch(handAngle){
+//    case 45:
+//      servos[1].Position = 300;
+//      break;
+//    case 90:
+//      servos[1].Position = 500;
+//      break;
+//    case 135:
+//      servos[1].Position = 700;
+//      break;
+//    default:
+//      servos[1].Position = 100;
+//  }
   //xArm.moveServo(2, servos[1].Position, 1000);
   //Set hand to default narrow open postion ID:1 which is 3cm wide
   servos[0].ID = 1;

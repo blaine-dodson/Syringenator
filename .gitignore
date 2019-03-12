@@ -5,5 +5,7 @@ latex
 
 .DS_Store
 
+log.txt
+
 # executables
 demoImgCapCpp

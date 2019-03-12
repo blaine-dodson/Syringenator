@@ -17,6 +17,7 @@ struct roboMove{
     bool typeMove; //true == moveStraight
                    //false == pivot
     int ticks;
+    byte direction;
 };
 
 #define LOGSIZE 256 //for the deadReckoning logger
@@ -97,7 +98,7 @@ int deadReckoning(void);
  *	This function assumes that we are already over the line
 */
 
-int logMove(int type, int ticks);
+int logMove(int type, int ticks,byte direction = 0);
 
 void stopLineFollow(void);
 void moveLineFollow(void);

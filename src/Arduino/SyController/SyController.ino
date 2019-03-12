@@ -48,7 +48,7 @@ void parseCommand(uint8_t * bytes, int cnt){
 	case ARDUINO_FWD:
 		if(cnt == 2){
 			Serial.write(ARDUINO_STATUS_ACK);
-			moveStraight(bytes[1]);
+			moveStraight(bytes[1],1,1);
 		}else
 			Serial.write(ARDUINO_STATUS_NACK);
 		break;
@@ -56,7 +56,7 @@ void parseCommand(uint8_t * bytes, int cnt){
 	case ARDUINO_RIGHT:
 		if(cnt == 2){
 			Serial.write(ARDUINO_STATUS_ACK);
-			moveRotate(ARDUINO_RIGHT, bytes[1]);
+			moveRotate(ARDUINO_RIGHT, bytes[1],1);
 		}else
 			Serial.write(ARDUINO_STATUS_NACK);
 		break;
@@ -64,7 +64,7 @@ void parseCommand(uint8_t * bytes, int cnt){
 	case ARDUINO_LEFT:
 		if(cnt == 2){
 			Serial.write(ARDUINO_STATUS_ACK);
-			moveRotate(ARDUINO_LEFT, bytes[1]);
+			moveRotate(ARDUINO_LEFT, bytes[1],1);
 		}else
 			Serial.write(ARDUINO_STATUS_NACK);
 		break;
