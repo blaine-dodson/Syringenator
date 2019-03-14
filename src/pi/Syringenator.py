@@ -13,14 +13,15 @@
 
 
 DEBUG_CAPTURE = False
-DEBUG_AQUISITION = False
-DEBUG_APPROACH = False
-DEBUG_TRANSFORM = False
-DEBUG_ORIENTATION = False
-DEBUG_TIMING = False
+DEBUG_AQUISITION = True
+DEBUG_APPROACH = True
+DEBUG_TRANSFORM = True
+DEBUG_ORIENTATION = True
+DEBUG_TIMING = True
 CAL_X = False
 CAL_Y = False
 DISABLE_WHEELS = False
+DISABLE_LINE_FOLLOW = True
 
 
 import constants
@@ -172,7 +173,7 @@ class Log:
 		if(datatype == 'string'): # log the string
 			for x in args:
 				print(x)
-				self.file.write(x)
+				self.file.write(x + "\n")
 		elif(datatype == 'target'):
 			print("Target aquired")
 			print(
@@ -335,6 +336,17 @@ def imageCart2floorCart(t):
 	
 	return (xf, yf)
 
+def pixelRadius(t):
+	x = t.centerX - IMG_WIDTH/2 + constants.CAL_CAM_X_OFFSET
+	y = IMG_HEIGHT - t.centerY + constants.PICKUP_ARM_OFFSET
+	
+	#print "x: " + str(x) + " y: " + str(y)
+	
+	r = int(numpy.rint(numpy.sqrt(x**2 + y**2)))
+	
+	if r < constants.PICKUP_RADIUS: return 0
+	else: return r
+
 ##	Derive cylindrical coordinates, centered on the arm from cartesian
 #	coordinates centered on the camera.
 #	
@@ -355,6 +367,16 @@ def floorCart2armCylinder((x, y)):
 		az = 90
 	
 	return (az, r)
+
+def floorCart2steer((x, y)):
+	#y -= 50
+	
+	if x>0: # right side
+		return int(numpy.rint(90-(180/numpy.pi) * numpy.arctan(y/x)))
+	elif x<0: # left side
+		return -int(numpy.rint(90+(180/numpy.pi) * numpy.arctan(y/x)))
+	else:
+		return 0 # center
 
 
 #==============================================================================#
@@ -424,16 +446,7 @@ def scan(cam, net):
 	return closest
 
 
-def pixelRadius(t):
-	x = t.centerX - IMG_WIDTH/2 + constants.CAL_CAM_X_OFFSET
-	y = IMG_HEIGHT - t.centerY + constants.PICKUP_ARM_OFFSET
-	
-	#print "x: " + str(x) + " y: " + str(y)
-	
-	r = int(numpy.rint(numpy.sqrt(x**2 + y**2)))
-	
-	if r < constants.PICKUP_RADIUS: return 0
-	else: return r
+
 
 ##	A routine to determine if the target is in position to be picked up.
 #
@@ -462,7 +475,7 @@ def canBePicked(t):
 		t.centerX < constants.PICKUP_X_MAX and
 		t.centerY > constants.PICKUP_Y_MIN and
 		t.centerY < constants.PICKUP_Y_MAX 
-		#and pixelRadius(t) == 0
+		and pixelRadius(t) == 0
 	):
 		log.record("string", "can pick")
 		if DEBUG_APPROACH:
@@ -540,26 +553,39 @@ def approach(t):
 #		comPort.send([constants.ARDUINO_RIGHT, rotTicks])
 	
 	# face the target if necessary
-	if t.centerX <= constants.PICKUP_X_MIN: # Left side
-		rotTicks = int(constants.CAL_ROT_FACTOR*(IMG_WIDTH/2-t.centerX))
+#	if t.centerX <= constants.PICKUP_X_MIN: # Left side
+#		rotTicks = int(constants.CAL_ROT_FACTOR*(IMG_WIDTH/2-t.centerX))
+#		if rotTicks > constants.ROT_MAX_TICKS:
+#			rotTicks = constants.ROT_MAX_TICKS
+#		if rotTicks < constants.ROT_MIN_TICKS:
+#			rotTicks = constants.ROT_MIN_TICKS
+#		
+#		log.record("string", "ARDUINO_LEFT: " + str(rotTicks))
+#		comPort.send([constants.ARDUINO_LEFT, rotTicks])
+#	
+#	elif t.centerX >= constants.PICKUP_X_MAX: # negative rotation
+#		rotTicks = int(constants.CAL_ROT_FACTOR*(t.centerX-IMG_WIDTH/2))
+#		if rotTicks > constants.ROT_MAX_TICKS:
+#			rotTicks = constants.ROT_MAX_TICKS
+#		if rotTicks < constants.ROT_MIN_TICKS:
+#			rotTicks = constants.ROT_MIN_TICKS
+#		
+#		log.record("string", "ARDUINO_RIGHT: " + str(rotTicks))
+#		comPort.send([constants.ARDUINO_RIGHT, rotTicks])
+	
+	rotTicks = floorCart2steer(imageCart2floorCart(t))
+	
+	if rotTicks < -constants.ROT_MIN_TICKS: # left side
+		rotTicks = -rotTicks
 		if rotTicks > constants.ROT_MAX_TICKS:
 			rotTicks = constants.ROT_MAX_TICKS
-		if rotTicks < constants.ROT_MIN_TICKS:
-			rotTicks = constants.ROT_MIN_TICKS
-		
 		log.record("string", "ARDUINO_LEFT: " + str(rotTicks))
 		comPort.send([constants.ARDUINO_LEFT, rotTicks])
-	
-	elif t.centerX >= constants.PICKUP_X_MAX: # negative rotation
-		rotTicks = int(constants.CAL_ROT_FACTOR*(t.centerX-IMG_WIDTH/2))
+	elif rotTicks > constants.ROT_MIN_TICKS:
 		if rotTicks > constants.ROT_MAX_TICKS:
 			rotTicks = constants.ROT_MAX_TICKS
-		if rotTicks < constants.ROT_MIN_TICKS:
-			rotTicks = constants.ROT_MIN_TICKS
-		
 		log.record("string", "ARDUINO_RIGHT: " + str(rotTicks))
 		comPort.send([constants.ARDUINO_RIGHT, rotTicks])
-	
 	
 	# in all cases we wait for the arduino to be ready
 	status = None
@@ -580,15 +606,15 @@ def approach(t):
 		log.record("string", "ARDUINO_FWD: " + str(fwdTicks))
 		comPort.send([constants.ARDUINO_FWD, fwdTicks])
 	
-	elif pixelRadius(t) != 0:
-		CORNER_ROT = 20
-		
-		if t.centerX > IMG_WIDTH/2:
-			log.record("string", "ARDUINO_RIGHT: " + str(CORNER_ROT))
-			comPort.send([constants.ARDUINO_RIGHT, CORNER_ROT])
-		else:
-			log.record("string", "ARDUINO_LEFT: " + str(CORNER_ROT))
-			comPort.send([constants.ARDUINO_LEFT, CORNER_ROT])
+#	elif pixelRadius(t) != 0:
+#		CORNER_ROT = 20
+#		
+#		if t.centerX > IMG_WIDTH/2:
+#			log.record("string", "ARDUINO_RIGHT: " + str(CORNER_ROT))
+#			comPort.send([constants.ARDUINO_RIGHT, CORNER_ROT])
+#		else:
+#			log.record("string", "ARDUINO_LEFT: " + str(CORNER_ROT))
+#			comPort.send([constants.ARDUINO_LEFT, CORNER_ROT])
 	
 #	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
 #		# this may not work as expected
@@ -740,13 +766,28 @@ def lineFollow():
 onTheLine = True
 ## boolean indicating that we have detected an obstacle
 obstacle = False
+# whether we have had a target in the pickup window
+inWindow = False
 ## The currently aquired target
 target = None
+
+pickUpCount = 0
+
+PICKUP_LIMIT = 2
 
 log = Log()
 camera = Camera()
 neuralNet = NeuralNet()
 comPort = SySerial.ComPort()
+
+
+comPort.waitForReady()
+comPort.send([constants.ARDUINO_ARM_PICKUP, 90, 15, 0])
+
+# in all cases we wait for the arduino to be ready
+status = comPort.status()
+log.record("string", "initArm: status is " + SySerial.statusString(status))
+comPort.waitForReady()
 
 
 
@@ -854,8 +895,14 @@ while True:
 	target = scan(camera,neuralNet)
 	if target != None: # we have aquired a target
 		log.record("target", target)
-		if canBePicked(target):
+		if canBePicked(target) and pickUpCount < PICKUP_LIMIT:
+			inWindow = True
+			pickUpCount += 1
 			pickUp(target)
+		elif inWindow:
+			inWindow = False
+			pickUpCount = 0
+			returnToLine()
 		elif obstacle:
 			# we can't pick the target, and moveCloser() failed with an obstacle
 			avoid()
@@ -863,7 +910,7 @@ while True:
 			onTheLine = False
 			approach(target)
 	elif onTheLine:
-		lineFollow()
+		if not DISABLE_LINE_FOLLOW: lineFollow()
 	else:
 		returnToLine()
 		onTheLine = True

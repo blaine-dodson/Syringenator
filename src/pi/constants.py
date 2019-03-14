@@ -40,18 +40,18 @@ PICKUP_RADIUS = 110
 ## The arms offset from the bottom of the image [px]
 PICKUP_ARM_OFFSET = 50
 ## The maximum count of forward ticks used in moveCloser()
-FWD_MAX_TICKS = 127
+FWD_MAX_TICKS = 140
 ## The minimum count of forward ticks
-FWD_MIN_TICKS = 1
+FWD_MIN_TICKS = 2
 ## The maximum absolute value of rotation ticks used in moveCloser()
 ROT_MAX_TICKS = 90
 ## The minimum count of rotational ticks
-ROT_MIN_TICKS = 10
+ROT_MIN_TICKS = 5
 ## Calibration factor used in rotation calculation
 CAL_ROT_FACTOR = 0.15
 ## Calibration factor used in forward calculation
-CAL_FWD_FACTOR = 0.18
-## Offset of the arm axis from the camera axis [mm]
+CAL_FWD_FACTOR = 0.20
+## Offset of the arm axis from the bottom of the image [mm]
 CAL_ARM_OFFSET = 95
 ## Height of the camera from the floor [mm]
 CAL_CAM_HEIGHT = 984

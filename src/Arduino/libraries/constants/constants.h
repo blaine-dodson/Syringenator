@@ -33,13 +33,13 @@
 #define PICKUP_Y_MAX 470 ///< The maximum target center y-value that allows a pickup
 #define PICKUP_RADIUS 110 ///< The pixel value for the arm radius
 #define PICKUP_ARM_OFFSET 50 ///< The arms offset from the bottom of the image [px]
-#define FWD_MAX_TICKS 127 ///< The maximum count of forward ticks used in moveCloser()
-#define FWD_MIN_TICKS 1 ///< The minimum count of forward ticks
+#define FWD_MAX_TICKS 140 ///< The maximum count of forward ticks used in moveCloser()
+#define FWD_MIN_TICKS 2 ///< The minimum count of forward ticks
 #define ROT_MAX_TICKS 90 ///< The maximum absolute value of rotation ticks used in moveCloser()
-#define ROT_MIN_TICKS 10 ///< The minimum count of rotational ticks
+#define ROT_MIN_TICKS 5 ///< The minimum count of rotational ticks
 #define CAL_ROT_FACTOR 0.15 ///< Calibration factor used in rotation calculation
-#define CAL_FWD_FACTOR 0.18 ///< Calibration factor used in forward calculation
-#define CAL_ARM_OFFSET 95 ///< Offset of the arm axis from the camera axis [mm]
+#define CAL_FWD_FACTOR 0.20 ///< Calibration factor used in forward calculation
+#define CAL_ARM_OFFSET 95 ///< Offset of the arm axis from the bottom of the image [mm]
 #define CAL_CAM_HEIGHT 984 ///< Height of the camera from the floor [mm]
 #define CAL_CAM_ANGLE 1.2117 ///< Angle of the camera from the horizon [radians]
 #define CAL_CAM_AXIS 1140 ///< distance to the floor on the camera's center axis
