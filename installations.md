@@ -2,7 +2,7 @@
 
 # librealsense
 
-from [github](https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md)
+from [github](https://github.com/IntelRealSense/librealsense/blob/master/doc/)
 
 ## Downloads
 
