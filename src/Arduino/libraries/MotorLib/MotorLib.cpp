@@ -162,3 +162,18 @@ void pivot(int ticks, byte speed = DEFAULT_DUTY_CYCLE ) {
     digitalWrite(rightmotor_dir_b, 1);
   }
 }
+
+void pivot_off_left(){
+	digitalWrite(rightmotor_dir_a, 1);
+    digitalWrite(rightmotor_dir_b, 0);
+    digitalWrite(leftmotor_dir_a, 0);  
+    digitalWrite(leftmotor_dir_b, 0);
+	
+}
+void pivot_off_right(){
+	digitalWrite(rightmotor_dir_a, 0);
+    digitalWrite(rightmotor_dir_b, 0);
+    digitalWrite(leftmotor_dir_a, 1);  
+    digitalWrite(leftmotor_dir_b, 0);
+    
+}

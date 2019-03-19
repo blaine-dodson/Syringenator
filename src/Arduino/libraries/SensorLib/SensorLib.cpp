@@ -63,7 +63,7 @@ void setupLineSensors(byte in_left_wheel_pin = 31, byte in_right_wheel_pin = 29)
 */
 
 int readLine_right() {
-//  noInterrupts();
+	noInterrupts();
   pinMode(line_right_pin, OUTPUT);
   digitalWrite(line_right_pin, HIGH);
   delayMicroseconds(10);
@@ -73,12 +73,12 @@ int readLine_right() {
 
   while (digitalRead(line_right_pin) == HIGH && micros() - time < 3000);
   int diff = micros() - time;
- //interrupts();
+  interrupts();
   return diff;
 }
 
 int readLine_left() {
-  //noInterrupts();
+  noInterrupts();
   pinMode(line_left_pin, OUTPUT);
   digitalWrite(line_left_pin, HIGH);
   delayMicroseconds(10);
@@ -88,6 +88,6 @@ int readLine_left() {
 
   while (digitalRead(line_left_pin) == HIGH && micros() - time < 3000);
   int diff = micros() - time;
- //interrupts();
+ interrupts();
   return diff;
 }

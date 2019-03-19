@@ -20,5 +20,7 @@ void moveFWBW(int ticks, byte motorspeed = 255);
 
 //This will do a conversion of the input angle to the arguments the pivot function needs
 void pivot(int ticks,byte speed =255);
+void pivot_off_left();
+void pivot_off_right();
 
 #endif

@@ -18,14 +18,18 @@ int move_log_size = 0;
 
 #define LINE_TIMER_LIMIT 500
 #define MOVEMENT_SCALAR 50 //125//229
+#define LINE_THRESHOLD 110
 //variables for the interrupts
 volatile bool readDirection = 1; //forwards = 1, back is 0
-volatile bool follow_or_obj = 1; //line follow = 0, object detection = 1
+volatile bool follow_or_obj = true; //line follow = 0, object detection = 1
 volatile int distanceSensTriggered = 0; //holds flag condition from sensor readings
 volatile unsigned int left = 100, right = 100;
 volatile byte sensorFlag;
 volatile unsigned int line_follow_count = 0;
 
+//dead reckoning sensing variables
+volatile bool leftLineSensed = false;
+volatile bool rightLineSensed = false;
 /******************************************************************************/
 //                         INTERRUPT SERVICE ROUTINES
 /******************************************************************************/
@@ -71,17 +75,16 @@ int setupSensor_ISR(){
 
 //If you don't want to use either of the sensors, turn off the ISR with stopSensor_ISR
 ISR(TIMER3_COMPA_vect){//Obstacle Detection routine
-    if(follow_or_obj){
-        if(readDirection){
-             sensorFlag = readFrontSensors();
-         }
-        else {
-            sensorFlag = readBackSensors();
-        }
-        if(sensorFlag != 0) distanceSensTriggered = sensorFlag;
-    }else{
+	stopSensor_ISR();
+    if(follow_or_obj){ //dead reckoning check lines.
+    	unsigned int left = readLine_left();
+    	unsigned int right = readLine_right();
+        if( left  <= 110) leftLineSensed = true;
+        if( right <= 110) rightLineSensed = true;
+       startSensor_ISR();
+    }else if(!follow_or_obj ){
             line_follow_count++;
-            stopSensor_ISR();
+            
             if(line_follow_count >= LINE_FOLLOW_TIME){
                 line_follow_count = 0;
                 done_with_command = 1;
@@ -133,6 +136,30 @@ bool isReady(void){
 	return motor_move && temp;
 }
 
+// This is a fine line algorithm
+// @param rotRobot constant for which rotation the robot needs to do 
+// rotate left or rotate right
+// @param reoRobot constant for reorienting the robot after catching 
+// the line
+// @param caughtLine a flag for controlling the flow of find line
+void findLine(byte rotRobot, byte reoRobot, bool caughtLine) {
+	while(!caughtLine) {
+	// rotate by 2 degrees and move straight by one ticks
+	// until we find the line
+		moveRotate(rotRobot, 2);
+		while(!done_with_move);
+		moveStraight(1);
+		while(!done_with_move);
+		noInterrupts();
+		if(readLine_left() <= LINE_THRESHOLD) {
+			moveRotate(reoRobot, 35);
+			while(!done_with_move);
+			caughtLine = true;
+		}
+		interrupts();
+	}
+	
+}
 
 /******************************************************************************/
 //                              LOCAMOTION CONTROL
@@ -217,6 +244,14 @@ void moveStraight(byte ticks, byte direction = 1, bool mode = 0){//ticks is goin
     Dead reckoning routine to go back to line
 */
 int deadReckoning(void){
+//	noInterrupts();
+//    follow_or_obj = true; 
+//    leftLineSensed = false;
+//    rightLineSensed = false;
+//    
+//    interrupts();
+//    startSensor_ISR();
+//    
     while(move_log_size > 0){ //start from end of array and move to beginning
             if(move_log[move_log_size - 1].typeMove){
                 moveFWBW(-1 * move_log[move_log_size - 1].ticks);
@@ -232,6 +267,72 @@ int deadReckoning(void){
             move_log_size--;
             while(!done_with_move);
     }
+//    
+//    //end of dead reckoning checking if we are ready for line follow
+//    //stopSensor_ISR();
+//    
+//    if(leftLineSensed && rightLineSensed){
+////   	findLine(ARDUINO_LEFT, ARDUINO_RIGHT, false);
+//		//noInterrupts();
+//			leftLineSensed = false;
+//			rightLineSensed = false;
+//			follow_or_obj = true;
+//		//interrupts();
+//			moveRotate(ARDUINO_RIGHT,45);
+//			while(!done_with_move);
+//			while(!leftLineSensed){
+//				moveStraight(1,0,0);
+//			}
+//		
+//			stop_motors();
+//			for(int i = 0; i < 5; i++){
+//				moveStraight(1,0,0);
+//				if(rightLineSensed){
+//					break;
+//				}
+//			}
+//			
+//			
+//			stopSensor_ISR();
+
+//		
+//    }
+//    else if(!leftLineSensed && !rightLineSensed){//we never passed the line
+//    	leftLineSensed = false;
+//			rightLineSensed = false;
+//			follow_or_obj = true;
+//	//	//interrupts();
+//		//bool tempflag = 0;
+//		//	while(!tempflag){
+//				moveRotate(ARDUINO_LEFT,50);
+//				while(!done_with_move);
+//				//for(int i = 0; i < 30; i ++){
+//				while(!rightLineSensed){
+//					moveStraight(1,0,0);
+//				}
+////					if(rightLineSensed){
+////						//tempflag = 1;
+////						break;
+////					}
+//				
+//			//}
+//			stop_motors();
+//			for(int i = 0; i < 5; i++){
+//				moveStraight(1,0,0);
+//				if(leftLineSensed){
+//					break;
+//				}
+//			}
+//			
+//			
+//			stopSensor_ISR();
+//    }
+//    
+//    noInterrupts();
+//    leftLineSensed = false;
+//    rightLineSensed = false;
+//    interrupts();
+//    
     return 1;//complete
 }
 /*
@@ -257,19 +358,77 @@ void readLines(){
     unsigned int left = readLine_left();
     unsigned int right = readLine_right();
 
-    if (left <= 70){ //if line detected left
+    if (left <= LINE_THRESHOLD){ //if line detected left
         moveRotate(ARDUINO_LEFT,30);
         while(!done_with_move);//busywait
     }
-  else if (right <= 70){ //if found right
+  else if (right <= LINE_THRESHOLD){ //if found right
       moveRotate(ARDUINO_RIGHT, 30);
       while(!done_with_move);
     }
-  else //if not found go forward a certain amount
+  else{ //if not found go forward a certain amount
     moveStraight(100);
+  }
 }
 
 void moveLineFollow(void){ //this will actually turn on the line reading in the timer interrupt
+	//check for the case that we have one of the sensors on the line already
+	unsigned int left = readLine_left();
+	unsigned int right = readLine_right();
+	noInterrupts();
+	follow_or_obj = 1;
+	interrupts();
+	startSensor_ISR();
+	delay(50);
+	//left <= LINE_THRESHOLD
+	if(left <= 90){
+	moveRotate(ARDUINO_RIGHT,5);
+	while(!done_with_move);
+		left = readLine_left();
+		delay(50);
+		if(left <= 90){
+		moveRotate(ARDUINO_RIGHT,30);
+		while(!done_with_move);
+		noInterrupts();
+		leftLineSensed = false;
+		interrupts();
+		while(!leftLineSensed){
+			moveStraight(1,0,0);
+			}
+		stop_motors();
+		for(int i = 0; i < 10; i++){
+				moveStraight(1,0,0);
+				if(rightLineSensed){
+					break;
+				}
+			}
+		}
+	}
+	else if(right <= 90){
+		moveRotate(ARDUINO_LEFT,10);
+		while(!done_with_move);
+		
+		delay(50);
+		if(right <= 90){
+		moveRotate(ARDUINO_LEFT,35);
+		while(!done_with_move);
+		noInterrupts();
+		rightLineSensed = false;
+		interrupts();
+		while(!rightLineSensed){
+			moveStraight(1,0,0);
+			}
+		stop_motors();
+		for(int i = 0; i < 10; i++){
+				moveStraight(1,0,0);
+				if(leftLineSensed){
+					break;
+				}
+			}
+		}
+	}
+	stopSensor_ISR();
+	//we are ready to line follow
     noInterrupts();
     follow_or_obj = 0;
     done_with_command = 0;
