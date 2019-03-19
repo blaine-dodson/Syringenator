@@ -77,8 +77,13 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSyringenator_1_1Camera.html">Camera</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class to wrap the <a class="el" href="classSyringenator_1_1Camera.html" title="A class to wrap the Camera.">Camera</a>.  <a href="classSyringenator_1_1Camera.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSyringenator_1_1Log.html">Log</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class to wrap the logging functions.  <a href="classSyringenator_1_1Log.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSyringenator_1_1NeuralNet.html">NeuralNet</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class to wrap the DNN.  <a href="classSyringenator_1_1NeuralNet.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSyringenator_1_1Target.html">Target</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class to contain everything we know about an aquired target.  <a href="classSyringenator_1_1Target.html#details">More...</a><br /></td></tr>
@@ -86,39 +91,30 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acef60c3f1fe6dd1975020a67344d8c55"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#acef60c3f1fe6dd1975020a67344d8c55">log</a> (datatype, *args)</td></tr>
-<tr class="memdesc:acef60c3f1fe6dd1975020a67344d8c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Record system events for later analysis.  <a href="#acef60c3f1fe6dd1975020a67344d8c55">More...</a><br /></td></tr>
-<tr class="separator:acef60c3f1fe6dd1975020a67344d8c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef583574ffc311d860031fd45e127136"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#aef583574ffc311d860031fd45e127136">arduinoSend</a> (*bytes)</td></tr>
-<tr class="memdesc:aef583574ffc311d860031fd45e127136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send serial data to the arduino.  <a href="#aef583574ffc311d860031fd45e127136">More...</a><br /></td></tr>
-<tr class="separator:aef583574ffc311d860031fd45e127136"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c5a8cf020e400c8c0337977a5b6d921"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a1c5a8cf020e400c8c0337977a5b6d921">arduinoReceive</a> ()</td></tr>
-<tr class="memdesc:a1c5a8cf020e400c8c0337977a5b6d921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait some fixed time for the arduino to send one or more bytes.  <a href="#a1c5a8cf020e400c8c0337977a5b6d921">More...</a><br /></td></tr>
-<tr class="separator:a1c5a8cf020e400c8c0337977a5b6d921"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d67726cfe3853e0ee9ec74db4c29b01"><td class="memItemLeft" align="right" valign="top"><a id="a0d67726cfe3853e0ee9ec74db4c29b01"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>rescale</b> (detection)</td></tr>
-<tr class="separator:a0d67726cfe3853e0ee9ec74db4c29b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1bd867b9fcfb18a97b20fa5bd4a92c8"><td class="memItemLeft" align="right" valign="top"><a id="aa1bd867b9fcfb18a97b20fa5bd4a92c8"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>extractTargets</b> (dataIn)</td></tr>
-<tr class="separator:aa1bd867b9fcfb18a97b20fa5bd4a92c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1b3e58810b726c90c352e0a756d3275"><td class="memItemLeft" align="right" valign="top"><a id="ae1b3e58810b726c90c352e0a756d3275"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>cmpCroppedColour</b> (x_i, x_f, y_i, y_f, crop_colour)</td></tr>
-<tr class="separator:ae1b3e58810b726c90c352e0a756d3275"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab541bc5d619d596d6141b6e72eab7e86"><td class="memItemLeft" align="right" valign="top"><a id="ab541bc5d619d596d6141b6e72eab7e86"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>orientationCapture</b> (x, y, w, h, img)</td></tr>
-<tr class="separator:ab541bc5d619d596d6141b6e72eab7e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa80e9ddf13cc7edc585486090bccd2ef"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#aa80e9ddf13cc7edc585486090bccd2ef">imageCart2floorCart</a> (x, y, d)</td></tr>
-<tr class="memdesc:aa80e9ddf13cc7edc585486090bccd2ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derive floor position from image data.  <a href="#aa80e9ddf13cc7edc585486090bccd2ef">More...</a><br /></td></tr>
-<tr class="separator:aa80e9ddf13cc7edc585486090bccd2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0d67726cfe3853e0ee9ec74db4c29b01"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pyimagesearch.html#ga0d67726cfe3853e0ee9ec74db4c29b01">rescale</a> (detection)</td></tr>
+<tr class="memdesc:ga0d67726cfe3853e0ee9ec74db4c29b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rescale the bounding box coordinates scale the bounding box coordinates back relative to the size of the image, keeping in mind that YOLO actually returns the center (x, y)-coordinates of the bounding box followed by the boxes' width and height.  <a href="group__pyimagesearch.html#ga0d67726cfe3853e0ee9ec74db4c29b01">More...</a><br /></td></tr>
+<tr class="separator:ga0d67726cfe3853e0ee9ec74db4c29b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa1bd867b9fcfb18a97b20fa5bd4a92c8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pyimagesearch.html#gaa1bd867b9fcfb18a97b20fa5bd4a92c8">extractTargets</a> (dataIn)</td></tr>
+<tr class="memdesc:gaa1bd867b9fcfb18a97b20fa5bd4a92c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">process the OpenCV output to generate actionable targets  <a href="group__pyimagesearch.html#gaa1bd867b9fcfb18a97b20fa5bd4a92c8">More...</a><br /></td></tr>
+<tr class="separator:gaa1bd867b9fcfb18a97b20fa5bd4a92c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a651e4be4a8641e226c69f773f036f044"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a651e4be4a8641e226c69f773f036f044">imageCart2floorCart</a> (t)</td></tr>
+<tr class="memdesc:a651e4be4a8641e226c69f773f036f044"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derive floor position from image data.  <a href="#a651e4be4a8641e226c69f773f036f044">More...</a><br /></td></tr>
+<tr class="separator:a651e4be4a8641e226c69f773f036f044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac79a7b8610cd3ace6071b66ef1966d54"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#ac79a7b8610cd3ace6071b66ef1966d54">pixelRadius</a> (t)</td></tr>
+<tr class="memdesc:ac79a7b8610cd3ace6071b66ef1966d54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine how far a target is outside of the pickup radius.  <a href="#ac79a7b8610cd3ace6071b66ef1966d54">More...</a><br /></td></tr>
+<tr class="separator:ac79a7b8610cd3ace6071b66ef1966d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f676ad80a05466b143e7824a4c2ea22"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a1f676ad80a05466b143e7824a4c2ea22">floorCart2armCylinder</a> (x, y)</td></tr>
 <tr class="memdesc:a1f676ad80a05466b143e7824a4c2ea22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derive cylindrical coordinates, centered on the arm from cartesian coordinates centered on the camera.  <a href="#a1f676ad80a05466b143e7824a4c2ea22">More...</a><br /></td></tr>
 <tr class="separator:a1f676ad80a05466b143e7824a4c2ea22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3785d4ef336d9ee8f3f01b892b42873"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#ac3785d4ef336d9ee8f3f01b892b42873">floorCart2steer</a> (x, y)</td></tr>
+<tr class="memdesc:ac3785d4ef336d9ee8f3f01b892b42873"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a steering azimuth from floor cartesian.  <a href="#ac3785d4ef336d9ee8f3f01b892b42873">More...</a><br /></td></tr>
+<tr class="separator:ac3785d4ef336d9ee8f3f01b892b42873"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e6e05298ef5797be8e131ea8c567fa2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a0e6e05298ef5797be8e131ea8c567fa2">scan</a> (cam, net)</td></tr>
 <tr class="memdesc:a0e6e05298ef5797be8e131ea8c567fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A routine to take a picture and report back the closest target The Computer vision routine must be able to handle multiple targets in the image.  <a href="#a0e6e05298ef5797be8e131ea8c567fa2">More...</a><br /></td></tr>
 <tr class="separator:a0e6e05298ef5797be8e131ea8c567fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a686f125a174b097e1a6d5b48665a2d4d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a686f125a174b097e1a6d5b48665a2d4d">canBePicked</a> (t)</td></tr>
-<tr class="memdesc:a686f125a174b097e1a6d5b48665a2d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A routine to determine if the target is in position to be picked up.  <a href="#a686f125a174b097e1a6d5b48665a2d4d">More...</a><br /></td></tr>
-<tr class="separator:a686f125a174b097e1a6d5b48665a2d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb08d40f080a03cb4e7a43ee3ab4854b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#acb08d40f080a03cb4e7a43ee3ab4854b">canBePicked</a> (t)</td></tr>
+<tr class="memdesc:acb08d40f080a03cb4e7a43ee3ab4854b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A routine to determine if the target is in position to be picked up.  <a href="#acb08d40f080a03cb4e7a43ee3ab4854b">More...</a><br /></td></tr>
+<tr class="separator:acb08d40f080a03cb4e7a43ee3ab4854b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeead288841e4728e7a18337d815464e0"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#aeead288841e4728e7a18337d815464e0">approach</a> (t)</td></tr>
 <tr class="memdesc:aeead288841e4728e7a18337d815464e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the robot closer to the given target.  <a href="#aeead288841e4728e7a18337d815464e0">More...</a><br /></td></tr>
 <tr class="separator:aeead288841e4728e7a18337d815464e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,23 +134,45 @@ def&#160;</td><td class="memItemRight" valign="bottom"><b>orientationCapture</b>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ac8547ce584f081c6985c152e77d135e4"><td class="memItemLeft" align="right" valign="top"><a id="ac8547ce584f081c6985c152e77d135e4"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_CAPTURE</b> = False</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#ac8547ce584f081c6985c152e77d135e4">DEBUG_CAPTURE</a> = False</td></tr>
+<tr class="memdesc:ac8547ce584f081c6985c152e77d135e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display an image once it's been captured. <br /></td></tr>
 <tr class="separator:ac8547ce584f081c6985c152e77d135e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10914928795562145ed9c7ad0f863cdf"><td class="memItemLeft" align="right" valign="top"><a id="a10914928795562145ed9c7ad0f863cdf"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_AQUISITION</b> = False</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a10914928795562145ed9c7ad0f863cdf">DEBUG_AQUISITION</a> = False</td></tr>
+<tr class="memdesc:a10914928795562145ed9c7ad0f863cdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw centers and bounding boxes on the image. <br /></td></tr>
 <tr class="separator:a10914928795562145ed9c7ad0f863cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44d0add7c95363de7a84b2d6cc2f339a"><td class="memItemLeft" align="right" valign="top"><a id="a44d0add7c95363de7a84b2d6cc2f339a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_APPROACH</b> = True</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a44d0add7c95363de7a84b2d6cc2f339a">DEBUG_APPROACH</a> = False</td></tr>
+<tr class="memdesc:a44d0add7c95363de7a84b2d6cc2f339a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report on turn and forward values during approach. <br /></td></tr>
 <tr class="separator:a44d0add7c95363de7a84b2d6cc2f339a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a22110dd92dd9057fe5e3ae9ee05b93"><td class="memItemLeft" align="right" valign="top"><a id="a6a22110dd92dd9057fe5e3ae9ee05b93"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_TRANSFORM</b> = True</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a6a22110dd92dd9057fe5e3ae9ee05b93">DEBUG_TRANSFORM</a> = False</td></tr>
+<tr class="memdesc:a6a22110dd92dd9057fe5e3ae9ee05b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report azimuth and range values during pickUp. <br /></td></tr>
 <tr class="separator:a6a22110dd92dd9057fe5e3ae9ee05b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1565028af3138f7e66f54ea0b78de6c"><td class="memItemLeft" align="right" valign="top"><a id="af1565028af3138f7e66f54ea0b78de6c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_ORIENTATION</b> = False</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#af1565028af3138f7e66f54ea0b78de6c">DEBUG_ORIENTATION</a> = False</td></tr>
+<tr class="memdesc:af1565028af3138f7e66f54ea0b78de6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">display processed image for hand orientation <br /></td></tr>
 <tr class="separator:af1565028af3138f7e66f54ea0b78de6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a813f345d1c1f8fc6d97c7681d80b61c2"><td class="memItemLeft" align="right" valign="top"><a id="a813f345d1c1f8fc6d97c7681d80b61c2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_TIMING</b> = True</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a813f345d1c1f8fc6d97c7681d80b61c2">DEBUG_TIMING</a> = False</td></tr>
+<tr class="memdesc:a813f345d1c1f8fc6d97c7681d80b61c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">report on yolo timing <br /></td></tr>
 <tr class="separator:a813f345d1c1f8fc6d97c7681d80b61c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed576723e64d7d60732d3dfb4d6b7d76"><td class="memItemLeft" align="right" valign="top"><a id="aed576723e64d7d60732d3dfb4d6b7d76"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#aed576723e64d7d60732d3dfb4d6b7d76">CAL_X</a> = False</td></tr>
+<tr class="memdesc:aed576723e64d7d60732d3dfb4d6b7d76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt the normal loop and take X calibration photos. <br /></td></tr>
+<tr class="separator:aed576723e64d7d60732d3dfb4d6b7d76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9a84f319faed790567c4436c9144aa9"><td class="memItemLeft" align="right" valign="top"><a id="aa9a84f319faed790567c4436c9144aa9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#aa9a84f319faed790567c4436c9144aa9">CAL_Y</a> = False</td></tr>
+<tr class="memdesc:aa9a84f319faed790567c4436c9144aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt the normal loop and take Y calibration photos. <br /></td></tr>
+<tr class="separator:aa9a84f319faed790567c4436c9144aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa79ff86c57783a4080b0a1ce6d68a6a6"><td class="memItemLeft" align="right" valign="top"><a id="aa79ff86c57783a4080b0a1ce6d68a6a6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#aa79ff86c57783a4080b0a1ce6d68a6a6">DISABLE_WHEELS</a> = False</td></tr>
+<tr class="memdesc:aa79ff86c57783a4080b0a1ce6d68a6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable any wheel commands. <br /></td></tr>
+<tr class="separator:aa79ff86c57783a4080b0a1ce6d68a6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0ba0e03d917472b49c4bdcae6872dee"><td class="memItemLeft" align="right" valign="top"><a id="af0ba0e03d917472b49c4bdcae6872dee"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#af0ba0e03d917472b49c4bdcae6872dee">DISABLE_LINE_FOLLOW</a> = False</td></tr>
+<tr class="memdesc:af0ba0e03d917472b49c4bdcae6872dee"><td class="mdescLeft">&#160;</td><td class="mdescRight">robot only picks and returns to start position <br /></td></tr>
+<tr class="separator:af0ba0e03d917472b49c4bdcae6872dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca69d2132967f90720513f9a08998227"><td class="memItemLeft" align="right" valign="top"><a id="aca69d2132967f90720513f9a08998227"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>FRAME_RATE</b> = 30</td></tr>
 <tr class="separator:aca69d2132967f90720513f9a08998227"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,12 +182,24 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>IMG_WIDTH</b> = 640</t
 <tr class="memitem:a3d06bf2fa78c9044b6d23996ce33fa01"><td class="memItemLeft" align="right" valign="top"><a id="a3d06bf2fa78c9044b6d23996ce33fa01"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>IMG_HEIGHT</b> = 480</td></tr>
 <tr class="separator:a3d06bf2fa78c9044b6d23996ce33fa01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae58e522dfeb469b1cf051cc37354ce86"><td class="memItemLeft" align="right" valign="top"><a id="ae58e522dfeb469b1cf051cc37354ce86"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>FOV_X</b> = 63.4</td></tr>
+<tr class="separator:ae58e522dfeb469b1cf051cc37354ce86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a468849e2a457643b11ad4a2ed5d447ab"><td class="memItemLeft" align="right" valign="top"><a id="a468849e2a457643b11ad4a2ed5d447ab"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>FOV_Y</b> = 40.4</td></tr>
+<tr class="separator:a468849e2a457643b11ad4a2ed5d447ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2768cd9e857e02dcb18974fdf1606892"><td class="memItemLeft" align="right" valign="top"><a id="a2768cd9e857e02dcb18974fdf1606892"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>CONFIDENCE</b> = .5</td></tr>
 <tr class="separator:a2768cd9e857e02dcb18974fdf1606892"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f595996eb2e0e555e2cc93e7eb50b8c"><td class="memItemLeft" align="right" valign="top"><a id="a5f595996eb2e0e555e2cc93e7eb50b8c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>NMS_THRESHOLD</b> = .1</td></tr>
 <tr class="separator:a5f595996eb2e0e555e2cc93e7eb50b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6f6a492f4f525a5ea529db11dd98b3"><td class="memItemLeft" align="right" valign="top"><a id="a5b6f6a492f4f525a5ea529db11dd98b3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>XPIX2LEN</b> = 10/6.48</td></tr>
+<tr class="separator:a5b6f6a492f4f525a5ea529db11dd98b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc602c30e50341be9ff98063d04d027a"><td class="memItemLeft" align="right" valign="top"><a id="adc602c30e50341be9ff98063d04d027a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>YPIX2LEN</b> = 10/6.0</td></tr>
+<tr class="separator:adc602c30e50341be9ff98063d04d027a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a161fa877b77c9ebb120c1ed20739260b"><td class="memItemLeft" align="right" valign="top"><a id="a161fa877b77c9ebb120c1ed20739260b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a161fa877b77c9ebb120c1ed20739260b">onTheLine</a> = True</td></tr>
 <tr class="memdesc:a161fa877b77c9ebb120c1ed20739260b"><td class="mdescLeft">&#160;</td><td class="mdescRight">boolean indicating whether we are on the line <br /></td></tr>
@@ -178,16 +208,55 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a71404cafb7562b5fa6bc0abacfeba7c2">obstacle</a> = False</td></tr>
 <tr class="memdesc:a71404cafb7562b5fa6bc0abacfeba7c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">boolean indicating that we have detected an obstacle <br /></td></tr>
 <tr class="separator:a71404cafb7562b5fa6bc0abacfeba7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf34dc0eaeb0a49dc362709f58d8fd49"><td class="memItemLeft" align="right" valign="top"><a id="aaf34dc0eaeb0a49dc362709f58d8fd49"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>inWindow</b> = False</td></tr>
+<tr class="separator:aaf34dc0eaeb0a49dc362709f58d8fd49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa574be83d026c46beac3e2391b26ffc6"><td class="memItemLeft" align="right" valign="top"><a id="aa574be83d026c46beac3e2391b26ffc6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#aa574be83d026c46beac3e2391b26ffc6">target</a> = None</td></tr>
 <tr class="memdesc:aa574be83d026c46beac3e2391b26ffc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The currently aquired target. <br /></td></tr>
 <tr class="separator:aa574be83d026c46beac3e2391b26ffc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a68fcf44e157d801839d02c6ff160c"><td class="memItemLeft" align="right" valign="top"><a id="a40a68fcf44e157d801839d02c6ff160c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a40a68fcf44e157d801839d02c6ff160c">pickUpCount</a> = 0</td></tr>
+<tr class="memdesc:a40a68fcf44e157d801839d02c6ff160c"><td class="mdescLeft">&#160;</td><td class="mdescRight">the number of times a pickup has been attempted <br /></td></tr>
+<tr class="separator:a40a68fcf44e157d801839d02c6ff160c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a425b1cc00b25c6d971d52545bd3766c6"><td class="memItemLeft" align="right" valign="top"><a id="a425b1cc00b25c6d971d52545bd3766c6"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSyringenator.html#a425b1cc00b25c6d971d52545bd3766c6">PICKUP_LIMIT</a> = 2</td></tr>
+<tr class="memdesc:a425b1cc00b25c6d971d52545bd3766c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">the maximum number of times to attempt a pickup <br /></td></tr>
+<tr class="separator:a425b1cc00b25c6d971d52545bd3766c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6550920cbebe8b5b7c5975b42658313"><td class="memItemLeft" align="right" valign="top"><a id="af6550920cbebe8b5b7c5975b42658313"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>log</b> = <a class="el" href="classSyringenator_1_1Log.html">Log</a>()</td></tr>
+<tr class="separator:af6550920cbebe8b5b7c5975b42658313"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a430a4b7f2f9e757dd71008732d7b8b"><td class="memItemLeft" align="right" valign="top"><a id="a5a430a4b7f2f9e757dd71008732d7b8b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>camera</b> = <a class="el" href="classSyringenator_1_1Camera.html">Camera</a>()</td></tr>
 <tr class="separator:a5a430a4b7f2f9e757dd71008732d7b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b5822d5cf20e86847e373ff17ebfb12"><td class="memItemLeft" align="right" valign="top"><a id="a0b5822d5cf20e86847e373ff17ebfb12"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>neuralNet</b> = <a class="el" href="classSyringenator_1_1NeuralNet.html">NeuralNet</a>()</td></tr>
 <tr class="separator:a0b5822d5cf20e86847e373ff17ebfb12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4fce4f10d639d23f143ce6b9ee7eea0"><td class="memItemLeft" align="right" valign="top"><a id="ae4fce4f10d639d23f143ce6b9ee7eea0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>comPort</b> = SySerial.ComPort()</td></tr>
+<tr class="separator:ae4fce4f10d639d23f143ce6b9ee7eea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1929fc5f03c03b5db3363b0ff81912c6"><td class="memItemLeft" align="right" valign="top"><a id="a1929fc5f03c03b5db3363b0ff81912c6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>status</b> = comPort.status()</td></tr>
+<tr class="separator:a1929fc5f03c03b5db3363b0ff81912c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab85c04644de2bc4ab9c3f6be17114801"><td class="memItemLeft" align="right" valign="top"><a id="ab85c04644de2bc4ab9c3f6be17114801"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>SCALE</b> = 4</td></tr>
+<tr class="separator:ab85c04644de2bc4ab9c3f6be17114801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37685b2cf2db3a559d1310e71a30102f"><td class="memItemLeft" align="right" valign="top"><a id="a37685b2cf2db3a559d1310e71a30102f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>image</b> = camera.capture()</td></tr>
+<tr class="separator:a37685b2cf2db3a559d1310e71a30102f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43099729fe676000097467cc2e07eed3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>crop</b></td></tr>
+<tr class="separator:a43099729fe676000097467cc2e07eed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78b3ad58882b95ac05593ecbcbe632f2"><td class="memItemLeft" align="right" valign="top"><a id="a78b3ad58882b95ac05593ecbcbe632f2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>bigger</b> = cv2.resize(src=crop, dsize=(0,0), fx=SCALE, fy=SCALE)</td></tr>
+<tr class="separator:a78b3ad58882b95ac05593ecbcbe632f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9331813816aba07085cd189b35e523a"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><b>biggerDim</b></td></tr>
+<tr class="separator:af9331813816aba07085cd189b35e523a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4275513d07faca4322db3bbd86543994"><td class="memItemLeft" align="right" valign="top"><a id="a4275513d07faca4322db3bbd86543994"></a>
+tuple&#160;</td><td class="memItemRight" valign="bottom"><b>centerX</b> = (IMG_WIDTH/2-<a class="el" href="constants_8h.html#ad6cca053f9b98a265fc54722c39628ea">constants.PICKUP_X_MIN</a>+(<a class="el" href="constants_8h.html#a6e797e37963daa0c0cfa2e53d78f8ff3">constants.CAL_CAM_X_OFFSET</a>))*SCALE</td></tr>
+<tr class="separator:a4275513d07faca4322db3bbd86543994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b311edf0ce64602ed9bedd4012e570e"><td class="memItemLeft" align="right" valign="top"><a id="a4b311edf0ce64602ed9bedd4012e570e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>CROP_Y_MIN</b> = 400</td></tr>
+<tr class="separator:a4b311edf0ce64602ed9bedd4012e570e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The top-level Pi program. </p>
@@ -222,53 +291,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 
 </div>
 </div>
-<a id="a1c5a8cf020e400c8c0337977a5b6d921"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c5a8cf020e400c8c0337977a5b6d921">&#9670;&nbsp;</a></span>arduinoReceive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def Syringenator.arduinoReceive </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Wait some fixed time for the arduino to send one or more bytes. </p>
-<dl class="section return"><dt>Returns</dt><dd>a list of bytes </dd></dl>
-
-</div>
-</div>
-<a id="aef583574ffc311d860031fd45e127136"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef583574ffc311d860031fd45e127136">&#9670;&nbsp;</a></span>arduinoSend()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def Syringenator.arduinoSend </td>
-          <td>(</td>
-          <td class="paramtype">*&#160;</td>
-          <td class="paramname"><em>bytes</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Send serial data to the arduino. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">bytes</td><td>one or more bytes of data to send to the arduino </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
-
-</div>
-</div>
 <a id="a016cd1486a3a7856574f47bfc14303ec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a016cd1486a3a7856574f47bfc14303ec">&#9670;&nbsp;</a></span>avoid()</h2>
 
@@ -289,8 +311,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 
 </div>
 </div>
-<a id="a686f125a174b097e1a6d5b48665a2d4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a686f125a174b097e1a6d5b48665a2d4d">&#9670;&nbsp;</a></span>canBePicked()</h2>
+<a id="acb08d40f080a03cb4e7a43ee3ab4854b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb08d40f080a03cb4e7a43ee3ab4854b">&#9670;&nbsp;</a></span>canBePicked()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -349,14 +371,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 
 </div>
 </div>
-<a id="aa80e9ddf13cc7edc585486090bccd2ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa80e9ddf13cc7edc585486090bccd2ef">&#9670;&nbsp;</a></span>imageCart2floorCart()</h2>
+<a id="ac3785d4ef336d9ee8f3f01b892b42873"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3785d4ef336d9ee8f3f01b892b42873">&#9670;&nbsp;</a></span>floorCart2steer()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">def Syringenator.imageCart2floorCart </td>
+          <td class="memname">def Syringenator.floorCart2steer </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>x</em>, </td>
@@ -365,13 +387,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>d</em>&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -381,16 +397,41 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
       </table>
 </div><div class="memdoc">
 
-<p>Derive floor position from image data. </p>
+<p>Generate a steering azimuth from floor cartesian. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x</td><td>the x-value of the point of interest in the image </td></tr>
-    <tr><td class="paramname">y</td><td>the y-value of the point of interest in the image </td></tr>
-    <tr><td class="paramname">d</td><td>the distance value of the point of interest in the image </td></tr>
+    <tr><td class="paramname">(x,y)</td><td>a floor cartesian tuple </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a tuple (x, y) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>an steering angle in degrees. </dd></dl>
+
+</div>
+</div>
+<a id="a651e4be4a8641e226c69f773f036f044"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a651e4be4a8641e226c69f773f036f044">&#9670;&nbsp;</a></span>imageCart2floorCart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def Syringenator.imageCart2floorCart </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Derive floor position from image data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>a <a class="el" href="classSyringenator_1_1Target.html" title="A class to contain everything we know about an aquired target.">Target</a> object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a tuple (x, y) the coordinates on the floor in mm </dd></dl>
 
 </div>
 </div>
@@ -411,37 +452,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 
 <p>Follow the line. </p>
 <p>this routine simply signals the arduino to execute its <a class="el" href="namespaceSyringenator.html#a824ef6e71bc0975483435ffbdd58cb3e" title="Follow the line.">lineFollow()</a> routine</p>
-<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
-
-</div>
-</div>
-<a id="acef60c3f1fe6dd1975020a67344d8c55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acef60c3f1fe6dd1975020a67344d8c55">&#9670;&nbsp;</a></span>log()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def Syringenator.log </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>datatype</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">*&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Record system events for later analysis. </p>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
 </div>
@@ -474,6 +484,33 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
+
+</div>
+</div>
+<a id="ac79a7b8610cd3ace6071b66ef1966d54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac79a7b8610cd3ace6071b66ef1966d54">&#9670;&nbsp;</a></span>pixelRadius()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def Syringenator.pixelRadius </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determine how far a target is outside of the pickup radius. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>a <a class="el" href="classSyringenator_1_1Target.html" title="A class to contain everything we know about an aquired target.">Target</a> object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a distance in some unit </dd></dl>
 
 </div>
 </div>
@@ -529,12 +566,42 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>It would be best if all targets are reported. Then this routine will determine the closest one to pursue. &ndash;ABD</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pipe</td><td>a realsense2 pipeline object configured with a color stream. </td></tr>
+    <tr><td class="paramname">cam</td><td>a <a class="el" href="classSyringenator_1_1Camera.html" title="A class to wrap the Camera.">Camera</a> object to get pictures from </td></tr>
+    <tr><td class="paramname">net</td><td>a <a class="el" href="classSyringenator_1_1NeuralNet.html" title="A class to wrap the DNN.">NeuralNet</a> object to process the pictures </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a target object </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="classSyringenator_1_1Target.html" title="A class to contain everything we know about an aquired target.">Target</a> oblject </dd></dl>
 
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="af9331813816aba07085cd189b35e523a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9331813816aba07085cd189b35e523a">&#9670;&nbsp;</a></span>biggerDim</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple Syringenator.biggerDim</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  (</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;        (constants.PICKUP_X_MAX-constants.PICKUP_X_MIN)*SCALE,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;        (constants.PICKUP_Y_MAX-constants.PICKUP_Y_MIN)*SCALE</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    )</div></div><!-- fragment -->
+</div>
+</div>
+<a id="a43099729fe676000097467cc2e07eed3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43099729fe676000097467cc2e07eed3">&#9670;&nbsp;</a></span>crop</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Syringenator.crop</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  image[</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;        constants.PICKUP_Y_MIN:constants.PICKUP_Y_MAX,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;        constants.PICKUP_X_MIN:constants.PICKUP_X_MAX</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    ]</div></div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

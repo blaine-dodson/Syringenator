@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['target',['Target',['../classSyringenator_1_1Target.html',1,'Syringenator']]]
+  ['neuralnet',['NeuralNet',['../classSyringenator_1_1NeuralNet.html',1,'Syringenator']]]
 ];

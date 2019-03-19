@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['stbd_5faft_5fobstacle',['STBD_AFT_OBSTACLE',['../constants_8hpp.html#ae88648cf1446b71a10d545ee369c7bd4',1,'constants.hpp']]],
-  ['stbd_5ffwd_5fobstacle',['STBD_FWD_OBSTACLE',['../constants_8hpp.html#a8fce462da093b958b053b4a7aabf7e2d',1,'constants.hpp']]],
-  ['stbd_5fline_5fsense',['STBD_LINE_SENSE',['../constants_8hpp.html#a1e342456768e55b8bb5f20c8f00846bb',1,'constants.hpp']]],
-  ['stbd_5fmotor_5ffwd',['STBD_MOTOR_FWD',['../constants_8hpp.html#ab6b02838ef0e56f5b501bdbc934a761d',1,'constants.hpp']]],
-  ['stbd_5fmotor_5frev',['STBD_MOTOR_REV',['../constants_8hpp.html#a6998e3a3d5b0f7c5716754fccdcc7f3d',1,'constants.hpp']]]
+  ['rot_5fmax_5fticks',['ROT_MAX_TICKS',['../constants_8h.html#afab08cbdd96fc15a2f63d77286f4d6b3',1,'constants.h']]],
+  ['rot_5fmin_5fticks',['ROT_MIN_TICKS',['../constants_8h.html#a2ce6bb7e387175640a2960c5b4e42b4e',1,'constants.h']]]
 ];

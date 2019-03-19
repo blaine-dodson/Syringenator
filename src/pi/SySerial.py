@@ -4,15 +4,27 @@ import serial
 import constants
 import time
 
-
+## Timeout seconds to wait for status byte
 TIMEOUT = 2
 
+##	Instantiate  the communication port with the Arduino
+#	@author Ammon Dodson
+#
+#	I wanted to prevent any situation where we would wait indefinitely for the
+#	arduino. So the arduino sends ready bytes repeatedly and this class has to
+#	deal with the buffer filling effects.
+#
+#	@private p is the pyserial port
+
 class ComPort:
+	## Constructor opens a serial port.
 	def __init__(self):
+		# different arduino's appear as different devices
 		try: self.p = serial.Serial('/dev/ttyACM0', timeout=1)
 		except: self.p = serial.Serial('/dev/ttyUSB0', timeout=1)
 	
-	
+	##	Get the arduino's current status byte.
+	#	@returns an integer with the value of the arduino status.
 	def status(self):
 		then = time.time()
 		status = constants.ARDUINO_NULL
@@ -30,6 +42,8 @@ class ComPort:
 		
 		return status
 	
+	##	Send a command to the arduino.
+	#	@returns None
 	def send(self, bytes):
 		length = len(bytes)
 		#print "length is: " + str(length)
@@ -39,6 +53,9 @@ class ComPort:
 		if(length != sentLength): print "SySerial: length mismatch"
 		self.p.flush()
 	
+	##	Wait for a ARDUINO_STATUS_READY byte.
+	#	@returns None
+	#	Will loop indefinitely if no arduino is present.
 	def waitForReady(self):
 		status = constants.ARDUINO_NULL
 		while (status!=constants.ARDUINO_STATUS_READY):
@@ -46,6 +63,7 @@ class ComPort:
 				status = bytearray(self.p.read())[0]
 
 
+## Convert an arduino status byte to a human readable string.
 def statusString(s):
 	table = {
 		constants.ARDUINO_NULL               : "ARDUINO_NULL",

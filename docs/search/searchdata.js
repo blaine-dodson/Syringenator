@@ -1,13 +1,14 @@
 var indexSectionsWithContent =
 {
-  0: "acdfilmnoprst",
-  1: "cnt",
+  0: "acdefgilmnoprst",
+  1: "clnrt",
   2: "s",
   3: "cs",
-  4: "acdfilmoprs",
-  5: "acfoprst",
-  6: "acfprs",
-  7: "cirt"
+  4: "acdefgilmprs",
+  5: "acdfloprst",
+  6: "acflprs",
+  7: "p",
+  8: "cirt"
 };
 
 var indexSectionNames =
@@ -19,7 +20,8 @@ var indexSectionNames =
   4: "functions",
   5: "variables",
   6: "defines",
-  7: "pages"
+  7: "groups",
+  8: "pages"
 };
 
 var indexSectionLabels =
@@ -31,6 +33,7 @@ var indexSectionLabels =
   4: "Functions",
   5: "Variables",
   6: "Macros",
-  7: "Pages"
+  7: "Modules",
+  8: "Pages"
 };
 
