@@ -3,5 +3,9 @@
 latex
 *.out
 
+.DS_Store
+
+log.txt
+
 # executables
 demoImgCapCpp

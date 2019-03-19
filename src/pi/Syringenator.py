@@ -12,12 +12,17 @@
 #	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
 
-DEBUG_CAPTURE = True
-DEBUG_AQUISITION = True
-DEBUG_APPROACH = True
-DEBUG_TRANSFORM = True
-DEBUG_ORIENTATION = True
-DEBUG_TIMING = True
+DEBUG_CAPTURE = False
+DEBUG_AQUISITION = False
+DEBUG_APPROACH = False
+DEBUG_TRANSFORM = False
+DEBUG_ORIENTATION = False
+DEBUG_TIMING = False
+CAL_X = False
+CAL_Y = False
+DISABLE_WHEELS = False
+DISABLE_LINE_FOLLOW = False
+
 
 import constants
 import cv2
@@ -76,7 +81,7 @@ class NeuralNet:
 		self.nn = cv2.dnn.readNetFromDarknet(self.CONFIGPATH, self.WEIGHTSPATH)
 		layers = self.nn.getLayerNames()
 		self.ln = [layers[i[0] - 1] for i in self.nn.getUnconnectedOutLayers()]
-		log("string", "NeuralNet(): net loaded")
+		log.record("string", "NeuralNet(): net loaded")
 	
 	def detect(self, img):
 		blob = cv2.dnn.blobFromImage(
@@ -89,7 +94,7 @@ class NeuralNet:
 
 		# show timing information on YOLO
 		if(DEBUG_TIMING):
-			log("string", "YOLO took {:.6f} seconds".format(end - start))
+			log.record("string", "YOLO took {:.6f} seconds".format(end - start))
 		return output
 
 
@@ -117,14 +122,14 @@ class Camera:
 			# realsense devices
 			self.pipeline.start(cfg)
 		except:
-			log('string', "Pipeline did not start")
+			log.record('string', "Pipeline did not start")
 			exit() # @todo fix this
 
 		# stabilize auto exposure. do we need to do this once, or before each pic?
 		for i in range(0,30):
 			frames = self.pipeline.wait_for_frames()
 	
-		log('string', "Camera initialized")
+		log.record('string', "Camera initialized")
 	
 	def capture(self):
 		try:
@@ -148,11 +153,34 @@ class Camera:
 	
 		if(DEBUG_CAPTURE):
 			#cv2.namedWindow("Image Capture", cv2.WINDOW_AUTOSIZE );
-			log("string", "photo capture")
-			cv2.imshow("View", mat);
-			cv2.waitKey(1000);
+			log.record("string", "photo capture")
+			cv2.imshow("View", mat)
+			cv2.waitKey(1000)
+			log.record("string", "--")
 	
 		return mat
+
+
+class Log:
+	def __init__(self):
+		self.file = open("log.txt", "a")
+		self.file.write("\n\n\n====FILE OPEN====")
+	
+	## Record system events for later analysis
+	#
+	# @returns None
+	def record(self, datatype, *args):
+		if(datatype == 'string'): # log the string
+			for x in args:
+				print(x)
+				self.file.write(x + "\n")
+		elif(datatype == 'target'):
+			print("Target aquired")
+			print(
+					"centerX: "+str(args[0].centerX)+" centerY: "+str(args[0].centerY)
+				)
+		else:
+			print("log(): unknown type")
 
 
 #==============================================================================#
@@ -177,19 +205,7 @@ NMS_THRESHOLD=.1
 #==============================================================================#
 
 
-## Record system events for later analysis
-#
-# @returns None
-def log(datatype, *args):
-	if(datatype == 'string'): # log the string
-		for x in args: print(x)
-	elif(datatype == 'target'):
-		print("Target aquired")
-		print(
-				"x: "+str(args[0].centerX)+" y: "+str(args[0].centerY)
-			)
-	else:
-		print("log(): unknown type")
+
 
 
 #==============================================================================#
@@ -214,7 +230,7 @@ def extractTargets(dataIn):
 	confidences = []
 	targets = []
 	
-	log("string", "extractTargets(): start")
+	log.record("string", "extractTargets(): start")
 	
 	# loop over each of the layer outputs
 	for output in dataIn:
@@ -253,7 +269,7 @@ def extractTargets(dataIn):
 			targets.append(Target(boxes[i], confidences[i], centers[i]))
 	
 	
-	log("string", "extractTargets(): finish")
+	log.record("string", "extractTargets(): finish")
 	return targets
 
 
@@ -281,10 +297,8 @@ def extractTargets(dataIn):
 #	This coordinate system is used to locate targets around the robot. It
 #	consists of a signed integer tuple fore-aft and port-starboard. Positive
 #	values are forward and starboard. Its axes are at right angles and its origin
-#	is directly below the origin of Image Cartesian.
-#	Its units of length are centimeters. Smaller units introduce unecessary and
-#	likely unrealistic precision. Larger units would require this system to use
-#	floats.
+#	is at the front edge of the robot.
+#	Its units of length are millimeters.
 #
 #	## Arm Cylindrical
 #	This coordinate system is used to locate targets around the xArm. It consists
@@ -295,29 +309,43 @@ def extractTargets(dataIn):
 
 
 
-XPIX2LEN = (numpy.tan(FOV_X/2*numpy.pi/180))/(IMG_WIDTH/2)*constants.CAL_CAM_AXIS
-YPIX2LEN = (numpy.tan(FOV_Y/2*numpy.pi/180))/(IMG_HEIGHT/2)*constants.CAL_CAM_AXIS
+#XPIX2LEN = (numpy.tan(FOV_X/2*numpy.pi/180))/(IMG_WIDTH/2)*constants.CAL_CAM_AXIS
+#YPIX2LEN = (numpy.tan(FOV_Y/2*numpy.pi/180))/(IMG_HEIGHT/2)*constants.CAL_CAM_AXIS
+
+XPIX2LEN = 10/6.48
+YPIX2LEN = 10/6.0
 
 ##	Derive floor position from image data
 #
 #	@param x the x-value of the point of interest in the image
 #	@param y the y-value of the point of interest in the image
 #	@param d the distance value of the point of interest in the image
-#	@returns a tuple (x, y)
+#	@returns a tuple (x, y) the coordinates on the floor in mm
 def imageCart2floorCart(t):
 	
+#	if DEBUG_TRANSFORM:
+#		print "XPIX2LEN: " + str(XPIX2LEN)
+#		print "YPIX2LEN: " + str(YPIX2LEN)
+	
+	xf = XPIX2LEN*(t.centerX - IMG_WIDTH/2+(constants.CAL_CAM_X_OFFSET))
+	yf = YPIX2LEN*(IMG_HEIGHT - t.centerY)
+	
 	if DEBUG_TRANSFORM:
-		print "XPIX2LEN: " + str(XPIX2LEN)
-		print "YPIX2LEN: " + str(YPIX2LEN)
+		print "xf: " + str(xf)
+		print "yf: " + str(yf)
 	
-	xp = XPIX2LEN*(t.centerX - IMG_WIDTH/2)
-	yp = YPIX2LEN*(t.centerY - IMG_HEIGHT/2)
+	return (xf, yf)
+
+def pixelRadius(t):
+	x = t.centerX - IMG_WIDTH/2 + constants.CAL_CAM_X_OFFSET
+	y = IMG_HEIGHT - t.centerY + constants.PICKUP_ARM_OFFSET
 	
-	if DEBUG_TRANSFORM:
-		print "xp: " + str(xp)
-		print "yp: " + str(yp)
+	#print "x: " + str(x) + " y: " + str(y)
 	
-	return (xp, yp)
+	r = int(numpy.rint(numpy.sqrt(x**2 + y**2)))
+	
+	if r < constants.PICKUP_RADIUS: return 0
+	else: return r
 
 ##	Derive cylindrical coordinates, centered on the arm from cartesian
 #	coordinates centered on the camera.
@@ -326,56 +354,29 @@ def imageCart2floorCart(t):
 #	@param y the y-value of the point of interest on the floor
 #	@returns a tuple (Azimuth, Range)
 def floorCart2armCylinder((x, y)):
-	y -= constants.CAL_ARM_OFFSET
+	y += constants.CAL_ARM_OFFSET
 	
-	r = numpy.sqrt(x**2 + y**2)/10
+	#r = numpy.rint(numpy.sqrt(x**2 + y**2)/10)
+	r  = xform.fndRadius(y,x)
 	
-	if DEBUG_TRANSFORM:
-		print "r: " + str(r)
-	
-	az = 0
+	if x>0:
+		az = int(numpy.rint((180/numpy.pi) * numpy.arctan(y/x)))
+	elif x<0:
+		az = int(numpy.rint(180+(180/numpy.pi) * numpy.arctan(y/x)))
+	else:
+		az = 90
 	
 	return (az, r)
 
-
-def armCoordinates(t):
+def floorCart2steer((x, y)):
+	#y -= 50
 	
-	x = xform.estCoordinateX(
-		constants.CAL_CAM_HEIGHT,
-		IMG_WIDTH/2, IMG_HEIGHT/2,
-		constants.CAL_CAM_ANGLE,
-		FOV_X, FOV_Y,
-		t.centerX, t.centerY,
-		constants.CAL_ARM_OFFSET
-	)
-	
-	z = xform.estCoordinateZ(
-		constants.CAL_CAM_HEIGHT,
-		IMG_HEIGHT/2,
-		constants.CAL_CAM_ANGLE,
-		FOV_Y,
-		t.centerY,
-		constants.CAL_ARM_OFFSET
-	)
-	
-	if DEBUG_TRANSFORM:
-		print("x value: " + str(x))
-		print("z value: " + str(z))
-	
-	theta = xform.findTheta(z,x)
-	
-	radius = xform.fndRadius(z,x)
-	
-	phi = xform.orientationCapture(
-		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
-	
-	if DEBUG_TRANSFORM:
-		log("string", "Theta : " + str(theta))
-		log("string", "Radius: " + str(radius))
-		log("string", "Phi   : " + str(phi))
-	
-	return (theta, radius, phi)
-
+	if x>0: # right side
+		return int(numpy.rint(90-(180/numpy.pi) * numpy.arctan(y/x)))
+	elif x<0: # left side
+		return -int(numpy.rint(90+(180/numpy.pi) * numpy.arctan(y/x)))
+	else:
+		return 0 # center
 
 
 #==============================================================================#
@@ -392,7 +393,7 @@ def armCoordinates(t):
 #	@param pipe a realsense2 pipeline object configured with a color stream.
 #	@returns a target object
 def scan(cam, net):
-	log("string", "scan(): start")
+	log.record("string", "scan(): start")
 	
 	# get a picture from librealsense
 	image = cam.capture()
@@ -423,6 +424,7 @@ def scan(cam, net):
 		
 		
 		cv2.imshow("View", image)
+		log.record("string", "--")
 		cv2.waitKey(1000)
 	
 	# pick the closest target
@@ -440,8 +442,11 @@ def scan(cam, net):
 	if(closest != None):
 		closest.setImg(image)
 	
-	log("string", "scan(): stop")
+	log.record("string", "scan(): stop")
 	return closest
+
+
+
 
 ##	A routine to determine if the target is in position to be picked up.
 #
@@ -449,48 +454,53 @@ def scan(cam, net):
 #
 #	@returns a boolean
 def canBePicked(t):
+	if DEBUG_APPROACH:
+		cv2.rectangle(
+			t.image,
+			(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
+			(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
+			[200, 0, 0], 1
+		)
+		cv2.circle(
+			t.image,
+			(IMG_WIDTH/2-constants.CAL_CAM_X_OFFSET,
+			IMG_HEIGHT+constants.PICKUP_ARM_OFFSET),
+			constants.PICKUP_RADIUS,
+			[200, 0, 0]
+		)
+	
 	# is the target within the pick area?
 	if(
 		t.centerX > constants.PICKUP_X_MIN and
 		t.centerX < constants.PICKUP_X_MAX and
 		t.centerY > constants.PICKUP_Y_MIN and
-		t.centerY < constants.PICKUP_Y_MAX
+		t.centerY < constants.PICKUP_Y_MAX 
+		and pixelRadius(t) == 0
 	):
-		log("string", "can pick")
+		log.record("string", "can pick")
 		if DEBUG_APPROACH:
-			cv2.rectangle(
-				t.image,
-				(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
-				(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
-				[200, 0, 0], 2
-			)
 			cv2.drawMarker(
 				t.image,
 				(t.centerX, t.centerY),
 				[0, 200, 0]
 			)
 			# show the output image
-			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
 			cv2.imshow("View", t.image)
+			log.record("string", "--")
 			cv2.waitKey(1000)
 		return True
 	else:
-		log("string", "cannot pick")
+		log.record("string", "cannot pick")
 		if DEBUG_APPROACH:
-			cv2.rectangle(
-				t.image,
-				(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
-				(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
-				[220, 0, 0], 2
-			)
 			cv2.drawMarker(
 				t.image,
 				(t.centerX, t.centerY),
 				[0, 0, 150]
 			)
 			# show the output image
-			#cv2.namedWindow("Approach", cv2.WINDOW_AUTOSIZE );
 			cv2.imshow("View", t.image)
+			log.record("string", "radius: " + str(pixelRadius(t)))
+			log.record("string", "--")
 			cv2.waitKey(1000)
 		return False
 
@@ -516,78 +526,131 @@ def canBePicked(t):
 #	@param t a Target object containing the location of the target to be approched
 #	@returns None
 def approach(t):
-	log("string", "approach(): start")
-	while(comPort.status() != constants.ARDUINO_STATUS_READY):
-		pass
+	log.record("string", "approach(): start")
+	comPort.waitForReady()
+	
+	if DISABLE_WHEELS: return
 	
 	# face the target if necessary
-	if t.centerX < constants.PICKUP_X_MIN: # positive rotation
-		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX) 
+#	if t.centerX <= constants.PICKUP_X_MIN: # positive rotation
+#		rotTicks = int(constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MIN-t.centerX))
+#		if rotTicks > constants.ROT_MAX_TICKS:
+#			rotTicks = constants.ROT_MAX_TICKS
+#		if rotTicks < constants.ROT_MIN_TICKS:
+#			rotTicks = constants.ROT_MIN_TICKS
+#		
+#		log.record("string", "ARDUINO_LEFT: " + str(rotTicks))
+#		comPort.send([constants.ARDUINO_LEFT, rotTicks])
+#	
+#	elif t.centerX >= constants.PICKUP_X_MAX: # negative rotation
+#		rotTicks = int(constants.CAL_ROT_FACTOR*(t.centerX-constants.PICKUP_X_MAX))
+#		if rotTicks > constants.ROT_MAX_TICKS:
+#			rotTicks = constants.ROT_MAX_TICKS
+#		if rotTicks < constants.ROT_MIN_TICKS:
+#			rotTicks = constants.ROT_MIN_TICKS
+#		
+#		log.record("string", "ARDUINO_RIGHT: " + str(rotTicks))
+#		comPort.send([constants.ARDUINO_RIGHT, rotTicks])
+	
+	# face the target if necessary
+#	if t.centerX <= constants.PICKUP_X_MIN: # Left side
+#		rotTicks = int(constants.CAL_ROT_FACTOR*(IMG_WIDTH/2-t.centerX))
+#		if rotTicks > constants.ROT_MAX_TICKS:
+#			rotTicks = constants.ROT_MAX_TICKS
+#		if rotTicks < constants.ROT_MIN_TICKS:
+#			rotTicks = constants.ROT_MIN_TICKS
+#		
+#		log.record("string", "ARDUINO_LEFT: " + str(rotTicks))
+#		comPort.send([constants.ARDUINO_LEFT, rotTicks])
+#	
+#	elif t.centerX >= constants.PICKUP_X_MAX: # negative rotation
+#		rotTicks = int(constants.CAL_ROT_FACTOR*(t.centerX-IMG_WIDTH/2))
+#		if rotTicks > constants.ROT_MAX_TICKS:
+#			rotTicks = constants.ROT_MAX_TICKS
+#		if rotTicks < constants.ROT_MIN_TICKS:
+#			rotTicks = constants.ROT_MIN_TICKS
+#		
+#		log.record("string", "ARDUINO_RIGHT: " + str(rotTicks))
+#		comPort.send([constants.ARDUINO_RIGHT, rotTicks])
+	
+	rotTicks = floorCart2steer(imageCart2floorCart(t))
+	
+	if rotTicks < -constants.ROT_MIN_TICKS: # left side
+		rotTicks = -rotTicks
 		if rotTicks > constants.ROT_MAX_TICKS:
 			rotTicks = constants.ROT_MAX_TICKS
-		
-		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
-		comPort.send([constants.ARDUINO_ROTATE, rotTicks])
-	
-	elif t.centerX > constants.PICKUP_X_MAX: # negative rotation
-		rotTicks = constants.CAL_ROT_FACTOR*(constants.PICKUP_X_MAX-t.centerX) 
-		if rotTicks < -constants.ROT_MAX_TICKS:
-			rotTicks = -constants.ROT_MAX_TICKS
-		
-		log("string", "ARDUINO_ROTATE: " + str(rotTicks))
-		comPort.send([constants.ARDUINO_ROTATE, rotTicks])
+		log.record("string", "ARDUINO_LEFT: " + str(rotTicks))
+		comPort.send([constants.ARDUINO_LEFT, rotTicks])
+	elif rotTicks > constants.ROT_MIN_TICKS:
+		if rotTicks > constants.ROT_MAX_TICKS:
+			rotTicks = constants.ROT_MAX_TICKS
+		log.record("string", "ARDUINO_RIGHT: " + str(rotTicks))
+		comPort.send([constants.ARDUINO_RIGHT, rotTicks])
 	
 	# in all cases we wait for the arduino to be ready
 	status = None
 	while(status == None):
 		status = comPort.status()
-	log("string", "approach(): status is " + str(status) )
+	log.record("string", "approach(): status is " + SySerial.statusString(status) )
+	comPort.waitForReady()
 	
 	# move forward if necessary
 	# the pixel origin is in the upper left corner
-	if t.centerY < constants.PICKUP_Y_MIN: # positive translation
-		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MIN-t.centerY)
+	if t.centerY <= constants.PICKUP_Y_MIN: # positive translation
+		fwdTicks = int(constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MIN-t.centerY))
 		if fwdTicks > constants.FWD_MAX_TICKS:
 			fwdTicks = constants.FWD_MAX_TICKS
+		if fwdTicks < constants.FWD_MIN_TICKS:
+			fwdTicks = constants.FWD_MIN_TICKS
 		
-		log("string", "ARDUINO_MOVE: " + str(fwdTicks))
-		comPort.send([constants.ARDUINO_MOVE, fwdTicks])
+		log.record("string", "ARDUINO_FWD: " + str(fwdTicks))
+		comPort.send([constants.ARDUINO_FWD, fwdTicks])
 	
-	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
-		# this may not work as expected
-		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MAX-t.centerY)
-		if fwdTicks < -constants.FWD_MAX_TICKS:
-			fwdTicks = -constants.FWD_MAX_TICKS
-		
-		log("string", "ARDUINO_MOVE: " + str(fwdTicks) )
-		comPort.send([constants.ARDUINO_MOVE, fwdTicks])
+#	elif pixelRadius(t) != 0:
+#		CORNER_ROT = 20
+#		
+#		if t.centerX > IMG_WIDTH/2:
+#			log.record("string", "ARDUINO_RIGHT: " + str(CORNER_ROT))
+#			comPort.send([constants.ARDUINO_RIGHT, CORNER_ROT])
+#		else:
+#			log.record("string", "ARDUINO_LEFT: " + str(CORNER_ROT))
+#			comPort.send([constants.ARDUINO_LEFT, CORNER_ROT])
+	
+#	elif t.centerY > constants.PICKUP_Y_MAX: # negative translation
+#		# this may not work as expected
+#		fwdTicks = constants.CAL_FWD_FACTOR*(constants.PICKUP_Y_MAX-t.centerY)
+#		if fwdTicks < -constants.FWD_MAX_TICKS:
+#			fwdTicks = -constants.FWD_MAX_TICKS
+#		
+#		log.record("string", "ARDUINO_MOVE: " + str(fwdTicks) )
+#		comPort.send([constants.ARDUINO_MOVE, fwdTicks])
 	
 	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
+	status = comPort.status()
+	while(status != constants.ARDUINO_STATUS_READY):
+		log.record("string", "approach(): status is " + SySerial.statusString(status) )
 		status = comPort.status()
-	log("string", "approach(): status is " + str(status) )
-	if status == constants.ARDUINO_STATUS_OBSTACLE:
-		obstacle = True
-		log("string", "obstacle detected")
+		if status == constants.ARDUINO_STATUS_OBSTACLE:
+			obstacle = True
+			log.record("string", "obstacle detected")
 
 
 ## avoid an obstacle
 #
 #	@returns None
 def avoid():
-	log("avoid(): start")
-	while(comPort.status() != constants.ARDUINO_STATUS_READY):
-		pass
+	log.record("avoid(): start")
+	comPort.waitForReady()
+	
+	if DISABLE_WHEELS: return
 	
 	comPort.send([constants.ARDUINO_AVOID])
 	
 	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = comPort.status()
-	log("string", "avoid(): status is " + str(status) )
+	status = comPort.status()
+	log.record("string", "avoid(): status is " + SySerial.statusString(status) )
 	obstacle = False
+	comPort.waitForReady()
 
 
 
@@ -613,15 +676,16 @@ def avoid():
 #	@param t a Target object containing the raw bitmap data
 #	@returns None
 def pickUp(t):
-	log("string", "pickUp(): start")
-	while(comPort.status() != constants.ARDUINO_STATUS_READY):
-		pass
+	log.record("string", "pickUp(): start")
+	comPort.waitForReady()
 	
 	# find the center and orientation of the target
 	(theta,r) = floorCart2armCylinder(imageCart2floorCart(t))
 	
 	phi = xform.orientationCapture(
 		int(t.box[0]), int(t.box[1]), int(t.box[2]), int(t.box[3]), t.image)
+	
+	phi = (phi + theta - 90) % constants.ARM_ORIENT_MAX
 	
 	# limit the ranges
 	if theta>constants.ARM_AZIMUTH_MAX: theta = constants.ARM_AZIMUTH_MAX
@@ -633,14 +697,21 @@ def pickUp(t):
 	if phi>constants.ARM_ORIENT_MAX: phi = constants.ARM_ORIENT_MAX
 	if phi<constants.ARM_ORIENT_MIN: phi = constants.ARM_ORIENT_MIN
 	
+	if DEBUG_TRANSFORM:
+		print "theta: " + str(theta) + " type: " + str(type(theta))
+		print "r: " + str(r) + " type: " + str(type(r))
+		print "phi: " + str(phi) + " type: " + str(type(phi))
+		raw_input("press enter")
+	
 	# signal the arduino to pickUp
 	comPort.send([constants.ARDUINO_ARM_PICKUP, theta, r, phi])
 	
 	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = comPort.status()
-	log("string", "pickUp(): status is " + str(status) )
+	status = comPort.status()
+	log.record("string", "pickUp(): status is " + SySerial.statusString(status) )
+	comPort.waitForReady()
+	
+	#if DEBUG_TRANSFORM: raw_input("press enter")
 
 
 ##	signl the arduino to return to the line.
@@ -654,17 +725,18 @@ def pickUp(t):
 #
 #	@returns None
 def returnToLine():
-	log("string", "returnToLine(): start")
-	while(comPort.status() != constants.ARDUINO_STATUS_READY):
-		pass
+	log.record("string", "returnToLine(): start")
+	comPort.waitForReady()
+	
+	if DISABLE_WHEELS: return
 	
 	comPort.send([constants.ARDUINO_RETURN])
 	
 	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = comPort.status()
-	log("string", "returnToLine(): status is " + str(status) )
+	status = comPort.status()
+	log.record("string", "returnToLine(): status is " + SySerial.statusString(status) )
+	comPort.waitForReady()
+
 
 ##	Follow the line.
 #
@@ -672,17 +744,17 @@ def returnToLine():
 #
 #	@returns None
 def lineFollow():
-	log("string", "lineFollow(): start")
-	while(comPort.status() != constants.ARDUINO_STATUS_READY):
-		pass
+	log.record("string", "lineFollow(): start")
+	comPort.waitForReady()
+	
+	if DISABLE_WHEELS: return
 	
 	comPort.send([constants.ARDUINO_LINE_FOLLOW])
 	
 	# in all cases we wait for the arduino to be ready
-	status = None
-	while(status == None):
-		status = comPort.status()
-	log("string", "lineFollow(): status is " + str(status) )
+	status = comPort.status()
+	log.record("string", "lineFollow(): status is " + SySerial.statusString(status))
+	comPort.waitForReady()
 
 
 #==============================================================================#
@@ -694,12 +766,29 @@ def lineFollow():
 onTheLine = True
 ## boolean indicating that we have detected an obstacle
 obstacle = False
+# whether we have had a target in the pickup window
+inWindow = False
 ## The currently aquired target
 target = None
 
+pickUpCount = 0
+
+PICKUP_LIMIT = 2
+
+log = Log()
 camera = Camera()
 neuralNet = NeuralNet()
 comPort = SySerial.ComPort()
+
+
+comPort.waitForReady()
+comPort.send([constants.ARDUINO_ARM_PICKUP, 90, 15, 0])
+
+# in all cases we wait for the arduino to be ready
+status = comPort.status()
+log.record("string", "initArm: status is " + SySerial.statusString(status))
+comPort.waitForReady()
+
 
 
 #==============================================================================#
@@ -707,13 +796,113 @@ comPort = SySerial.ComPort()
 #==============================================================================#
 
 
-log('string', "Syringenator: Start")
+while CAL_X:
+	SCALE = 4
+	
+	image = camera.capture()
+	cv2.rectangle(
+		image,
+		(constants.PICKUP_X_MIN, constants.PICKUP_Y_MIN),
+		(constants.PICKUP_X_MAX, constants.PICKUP_Y_MAX),
+		[200, 0, 0], 2
+	)
+	
+	cv2.imshow("View", image)
+	crop = image[
+		constants.PICKUP_Y_MIN:constants.PICKUP_Y_MAX,
+		constants.PICKUP_X_MIN:constants.PICKUP_X_MAX
+	]
+	bigger = cv2.resize(src=crop, dsize=(0,0), fx=SCALE, fy=SCALE)
+	
+	biggerDim = (
+		(constants.PICKUP_X_MAX-constants.PICKUP_X_MIN)*SCALE,
+		(constants.PICKUP_Y_MAX-constants.PICKUP_Y_MIN)*SCALE
+	)
+	
+	#centerline
+	centerX = (IMG_WIDTH/2-constants.PICKUP_X_MIN+(constants.CAL_CAM_X_OFFSET))*SCALE
+	
+	cv2.line(bigger, (centerX,0), (centerX,biggerDim[1]), [255,0,255])
+	
+	
+	# x lines
+	for x in range(10*SCALE,max(centerX, biggerDim[0]-centerX), 10*SCALE):
+		cv2.line(bigger, (centerX+x,0), (centerX+x,biggerDim[1]), [255,0,0])
+		cv2.line(bigger, (centerX-x,0), (centerX-x,biggerDim[1]), [255,0,0])
+	
+	
+	for y in range(constants.PICKUP_Y_MAX, constants.PICKUP_Y_MIN, -10):
+		cv2.line(image, (0,y), (IMG_WIDTH,y), [255,0,0])
+	
+	
+	cv2.imshow("Bigger", bigger)
+	cv2.waitKey(0)
+
+
+while CAL_Y:
+	SCALE = 4
+	
+	image = camera.capture()
+	cv2.line(image,
+		(constants.PICKUP_X_MIN, 0),
+		(constants.PICKUP_X_MIN, IMG_HEIGHT), [200, 0, 0]
+	)
+	
+	cv2.line(image,
+		(constants.PICKUP_X_MAX, 0),
+		(constants.PICKUP_X_MAX, IMG_HEIGHT), [200, 0, 0]
+	)
+	
+	CROP_Y_MIN = 400
+#	CIRCLE_Y_OFFSET = 50
+#	CIRCLE_R = 120
+	
+	cv2.circle(
+		image,
+		(IMG_WIDTH/2-constants.CAL_CAM_X_OFFSET,
+		IMG_HEIGHT+constants.PICKUP_ARM_OFFSET),
+		constants.PICKUP_RADIUS,
+		[200, 0, 0]
+	)
+	
+	cv2.imshow("View", image)
+	crop = image[
+		CROP_Y_MIN:constants.PICKUP_Y_MAX,
+		constants.PICKUP_X_MIN:constants.PICKUP_X_MAX
+	]
+	bigger = cv2.resize(src=crop, dsize=(0,0), fx=SCALE, fy=SCALE)
+	
+	biggerDim = (
+		(constants.PICKUP_X_MAX-constants.PICKUP_X_MIN)*SCALE,
+		(constants.PICKUP_Y_MAX-CROP_Y_MIN)*SCALE
+	)
+	
+	#centerline
+	centerX = (IMG_WIDTH/2-constants.PICKUP_X_MIN-(constants.CAL_CAM_X_OFFSET))*SCALE
+	
+	cv2.line(bigger, (centerX,0), (centerX,biggerDim[1]), [255,0,255])
+	
+	for y in range(biggerDim[1], 0, -10*SCALE):
+		cv2.line(bigger, (0,y), (biggerDim[0],y), [255,0,0])
+	
+	
+	cv2.imshow("Bigger", bigger)
+	cv2.waitKey(0)
+
+
+log.record('string', "Syringenator: Start")
 while True:
 	target = scan(camera,neuralNet)
 	if target != None: # we have aquired a target
-		log("target", target)
-		if canBePicked(target):
+		log.record("target", target)
+		if canBePicked(target) and pickUpCount < PICKUP_LIMIT:
+			inWindow = True
+			pickUpCount += 1
 			pickUp(target)
+		elif inWindow:
+			inWindow = False
+			pickUpCount = 0
+			returnToLine()
 		elif obstacle:
 			# we can't pick the target, and moveCloser() failed with an obstacle
 			avoid()
@@ -721,7 +910,7 @@ while True:
 			onTheLine = False
 			approach(target)
 	elif onTheLine:
-		lineFollow()
+		if not DISABLE_LINE_FOLLOW: lineFollow()
 	else:
 		returnToLine()
 		onTheLine = True

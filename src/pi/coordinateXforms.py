@@ -63,12 +63,12 @@ def estCoordinateZ(h, hres_y, beta, alpha_y, yp, offset):
 # @param z coordinate taken from estCoordinateZ = z
 # @param coordinate taken from estCoordinateX = z
 def fndRadius(z, x):
-    return int(10 * numpy.rint(numpy.sqrt(z**2 + x**2)))
+    return int( numpy.rint(numpy.sqrt(z**2 + x**2)/10))
 # returns the theta value for the robotic arm which is in polar coordinates
 # @param z coordinate taken from estCoordinateZ = z
 # @param coordinate taken from estCoordinateX = z
 def findTheta(z, x):
-    return int(numpy.rint((numpy.arctan(z / x)) * (180 / numpy.pi)))
+    return int(numpy.rint((numpy.arctan(z / -x)) * (180 / numpy.pi)))
 # returns the angle of rotation for robot
 # @param adjacent side of the triangle
 # @param hypotenuse side of the triangle
