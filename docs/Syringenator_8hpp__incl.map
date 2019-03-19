@@ -1,4 +1,10 @@
-<map id="src/controller/Syringenator.hpp" name="src/controller/Syringenator.hpp">
-<area shape="rect" id="node1" title="Arduino controller code –ABD." alt="" coords="5,5,204,32"/>
-<area shape="rect" id="node2" href="$constants_8hpp.html" title="Constants shared across the whole system." alt="" coords="53,80,157,107"/>
+<map id="src/Arduino/libraries/Syringenator/Syringenator.hpp" name="src/Arduino/libraries/Syringenator/Syringenator.hpp">
+<area shape="rect" id="node1" title="Arduino controller code –ABD." alt="" coords="139,5,341,47"/>
+<area shape="rect" id="node2" href="$constants_8h.html" title="Constants shared across the whole system." alt="" coords="5,95,96,121"/>
+<area shape="rect" id="node3" href="$MotorLib_8h_source.html" title=" " alt="" coords="120,95,203,121"/>
+<area shape="rect" id="node4" title=" " alt="" coords="169,169,247,196"/>
+<area shape="rect" id="node5" href="$SensorLib_8h_source.html" title=" " alt="" coords="277,95,368,121"/>
+<area shape="rect" id="node8" title=" " alt="" coords="392,95,547,121"/>
+<area shape="rect" id="node6" title=" " alt="" coords="271,169,375,196"/>
+<area shape="rect" id="node7" title=" " alt="" coords="399,169,531,196"/>
 </map>

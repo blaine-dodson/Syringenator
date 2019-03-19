@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['target',['Target',['../classSyringenator_1_1Target.html',1,'Syringenator']]]
+  ['camera',['Camera',['../classSyringenator_1_1Camera.html',1,'Syringenator']]]
 ];

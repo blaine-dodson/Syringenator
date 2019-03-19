@@ -12,15 +12,27 @@
 #	@copyright Copyright &copy; 2019 by the authors. All rights reserved.
 
 
+## Display an image once it's been captured
 DEBUG_CAPTURE = False
+## Draw centers and bounding boxes on the image
 DEBUG_AQUISITION = False
+## Report on turn and forward values during approach
 DEBUG_APPROACH = False
+## Report azimuth and range values during pickUp
 DEBUG_TRANSFORM = False
+## display processed image for hand orientation
 DEBUG_ORIENTATION = False
+## report on yolo timing
 DEBUG_TIMING = False
+
+## Interrupt the normal loop and take X calibration photos
 CAL_X = False
+## Interrupt the normal loop and take Y calibration photos
 CAL_Y = False
+
+## Disable any wheel commands
 DISABLE_WHEELS = False
+## robot only picks and returns to start position
 DISABLE_LINE_FOLLOW = False
 
 
@@ -71,7 +83,7 @@ class Target:
 		return self.box
 
 
-
+## A class to wrap the DNN
 class NeuralNet:
 	NETREZ = 320
 	WEIGHTSPATH = "nn/yolov3-tiny-obj_37000.weights"
@@ -83,6 +95,7 @@ class NeuralNet:
 		self.ln = [layers[i[0] - 1] for i in self.nn.getUnconnectedOutLayers()]
 		log.record("string", "NeuralNet(): net loaded")
 	
+	## process an image
 	def detect(self, img):
 		blob = cv2.dnn.blobFromImage(
 			img, 1 / 255.0, (self.NETREZ,self.NETREZ), swapRB=True
@@ -98,7 +111,7 @@ class NeuralNet:
 		return output
 
 
-
+## A class to wrap the Camera
 class Camera:
 	def __init__(self):
 		cfg = pyrealsense2.config()
@@ -131,6 +144,7 @@ class Camera:
 	
 		log.record('string', "Camera initialized")
 	
+	## Capture an image and return it as a multidimentional matrix
 	def capture(self):
 		try:
 			frames = self.pipeline.wait_for_frames()
@@ -161,6 +175,7 @@ class Camera:
 		return mat
 
 
+## A class to wrap the logging functions
 class Log:
 	def __init__(self):
 		self.file = open("log.txt", "a")
@@ -200,23 +215,25 @@ CONFIDENCE   =.5
 NMS_THRESHOLD=.1
 
 
-#==============================================================================#
-#                               DATA LOGGING
-#==============================================================================#
-
-
-
 
 
 #==============================================================================#
 #                        EXTRACT TARGETS FROM CV OUTPUT
 #==============================================================================#
 
+##	@defgroup pyimagesearch pyimagesearch Code
+#
+#	This code was taken and refactored from [pyimagesearch](https://www.pyimagesearch.com/)
+#
+#	@{
 
-# scale the bounding box coordinates back relative to the
-# size of the image, keeping in mind that YOLO actually
-# returns the center (x, y)-coordinates of the bounding
-# box followed by the boxes' width and height
+
+##	Rescale the bounding box coordinates
+#	scale the bounding box coordinates back relative to the size of the image,
+#	keeping in mind that YOLO actually returns the center (x, y)-coordinates of
+#	the bounding box followed by the boxes' width and height
+#
+#	@returns (centerX, centerY, width, height) for the target
 def rescale(detection):
 	box = detection[0:4] * numpy.array(
 		[IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT])
@@ -224,6 +241,8 @@ def rescale(detection):
 	return (centerX, centerY, width, height)
 
 
+##	process the OpenCV output to generate actionable targets
+#	@param dataIn the data from OpenCV
 def extractTargets(dataIn):
 	boxes = []
 	centers = []
@@ -272,6 +291,8 @@ def extractTargets(dataIn):
 	log.record("string", "extractTargets(): finish")
 	return targets
 
+## @}
+
 
 #==============================================================================#
 #                           GEOMETRIC TRANSFORMATIONS
@@ -317,9 +338,7 @@ YPIX2LEN = 10/6.0
 
 ##	Derive floor position from image data
 #
-#	@param x the x-value of the point of interest in the image
-#	@param y the y-value of the point of interest in the image
-#	@param d the distance value of the point of interest in the image
+#	@param t a Target object
 #	@returns a tuple (x, y) the coordinates on the floor in mm
 def imageCart2floorCart(t):
 	
@@ -336,6 +355,9 @@ def imageCart2floorCart(t):
 	
 	return (xf, yf)
 
+##	Determine how far a target is outside of the pickup radius.
+#	@param t a Target object
+#	@returns a distance in some unit
 def pixelRadius(t):
 	x = t.centerX - IMG_WIDTH/2 + constants.CAL_CAM_X_OFFSET
 	y = IMG_HEIGHT - t.centerY + constants.PICKUP_ARM_OFFSET
@@ -368,6 +390,10 @@ def floorCart2armCylinder((x, y)):
 	
 	return (az, r)
 
+
+##	Generate a steering azimuth from floor cartesian.
+#	@param (x, y) a floor cartesian tuple
+#	@returns an steering angle in degrees.
 def floorCart2steer((x, y)):
 	#y -= 50
 	
@@ -390,8 +416,9 @@ def floorCart2steer((x, y)):
 #	determine the closest one to pursue.
 #	--ABD
 #
-#	@param pipe a realsense2 pipeline object configured with a color stream.
-#	@returns a target object
+#	@param cam a Camera object to get pictures from
+#	@param net a NeuralNet object to process the pictures
+#	@returns a Target oblject
 def scan(cam, net):
 	log.record("string", "scan(): start")
 	
@@ -771,8 +798,10 @@ inWindow = False
 ## The currently aquired target
 target = None
 
+## the number of times a pickup has been attempted
 pickUpCount = 0
 
+## the maximum number of times to attempt a pickup
 PICKUP_LIMIT = 2
 
 log = Log()

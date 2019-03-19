@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['obstacle',['obstacle',['../namespaceSyringenator.html#a71404cafb7562b5fa6bc0abacfeba7c2',1,'Syringenator']]],
-  ['ontheline',['onTheLine',['../namespaceSyringenator.html#a161fa877b77c9ebb120c1ed20739260b',1,'Syringenator']]]
+  ['fwd_5fmax_5fticks',['FWD_MAX_TICKS',['../constants_8py.html#a2910a51c761f6ca634135667b43a0e24',1,'constants']]],
+  ['fwd_5fmin_5fticks',['FWD_MIN_TICKS',['../constants_8py.html#abff2970fe7c390fa563e968c57fa0d96',1,'constants']]]
 ];
