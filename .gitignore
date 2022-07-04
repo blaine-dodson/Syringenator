@@ -2,6 +2,7 @@
 *.log
 latex
 *.out
+*.bak
 
 .DS_Store
 

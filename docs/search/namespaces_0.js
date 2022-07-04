@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['syringenator',['Syringenator',['../namespaceSyringenator.html',1,'']]]
+  ['syringenator_0',['Syringenator',['../namespaceSyringenator.html',1,'']]]
 ];

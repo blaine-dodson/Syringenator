@@ -1,0 +1,27 @@
+digraph "src/Arduino"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  compound=true
+  subgraph clusterdir_68267d1309a1af8e8297ef4c3efbcdba {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", style="filled,dashed,", label="src", fontname="Helvetica", fontsize="10", URL="dir_68267d1309a1af8e8297ef4c3efbcdba.html"]
+  subgraph clusterdir_f958e8ac58b19dadf38a4a7b4cb38a1f {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", style="filled,bold,", label="", fontname="Helvetica", fontsize="10", URL="dir_f958e8ac58b19dadf38a4a7b4cb38a1f.html"]
+    dir_f958e8ac58b19dadf38a4a7b4cb38a1f [shape=plaintext, label="Arduino"];
+  dir_e7666842848d0e0b271729714ad7efbd [shape=box, label="blink", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_e7666842848d0e0b271729714ad7efbd.html"];
+  dir_f99f708cec72a15cd88662dbbe55aa94 [shape=box, label="libraries", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_f99f708cec72a15cd88662dbbe55aa94.html"];
+  dir_e54d49665e7889d4e4ff8e9867438a3c [shape=box, label="SensArray", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_e54d49665e7889d4e4ff8e9867438a3c.html"];
+  dir_39aa5bb9d17d45ec8ed85c00743cf9a1 [shape=box, label="serialEcho", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_39aa5bb9d17d45ec8ed85c00743cf9a1.html"];
+  dir_6084b29b48260ee83b892a022e221cdf [shape=box, label="serialSend", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_6084b29b48260ee83b892a022e221cdf.html"];
+  dir_f09449eb3d51bdd04dc99c9546812bfc [shape=box, label="serialtest_2", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_f09449eb3d51bdd04dc99c9546812bfc.html"];
+  dir_f021fb0ecc6f160be8a53d2dbf7c524c [shape=box, label="SyController", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_f021fb0ecc6f160be8a53d2dbf7c524c.html"];
+  dir_fd4980829fe187e274a6b21bd05c972f [shape=box, label="SyTest", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_fd4980829fe187e274a6b21bd05c972f.html"];
+  }
+  }
+  dir_39aa5bb9d17d45ec8ed85c00743cf9a1->dir_f99f708cec72a15cd88662dbbe55aa94 [headlabel="1", labeldistance=1.5 headhref="dir_000008_000003.html"];
+  dir_6084b29b48260ee83b892a022e221cdf->dir_f99f708cec72a15cd88662dbbe55aa94 [headlabel="1", labeldistance=1.5 headhref="dir_000009_000003.html"];
+  dir_f09449eb3d51bdd04dc99c9546812bfc->dir_f99f708cec72a15cd88662dbbe55aa94 [headlabel="2", labeldistance=1.5 headhref="dir_000010_000003.html"];
+  dir_f021fb0ecc6f160be8a53d2dbf7c524c->dir_f99f708cec72a15cd88662dbbe55aa94 [headlabel="2", labeldistance=1.5 headhref="dir_000012_000003.html"];
+  dir_fd4980829fe187e274a6b21bd05c972f->dir_f99f708cec72a15cd88662dbbe55aa94 [headlabel="2", labeldistance=1.5 headhref="dir_000014_000003.html"];
+}

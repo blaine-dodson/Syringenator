@@ -1,0 +1,13 @@
+digraph "src/Arduino/serialEcho"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  compound=true
+  subgraph clusterdir_f958e8ac58b19dadf38a4a7b4cb38a1f {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", style="filled,dashed,", label="Arduino", fontname="Helvetica", fontsize="10", URL="dir_f958e8ac58b19dadf38a4a7b4cb38a1f.html"]
+  dir_f99f708cec72a15cd88662dbbe55aa94 [shape=box, label="libraries", style="filled,", fillcolor="#a2b4d6", color="red", URL="dir_f99f708cec72a15cd88662dbbe55aa94.html"];
+  dir_39aa5bb9d17d45ec8ed85c00743cf9a1 [shape=box, label="serialEcho", style="filled,bold,", fillcolor="#edf0f7", color="grey25", URL="dir_39aa5bb9d17d45ec8ed85c00743cf9a1.html"];
+  }
+  dir_39aa5bb9d17d45ec8ed85c00743cf9a1->dir_f99f708cec72a15cd88662dbbe55aa94 [headlabel="1", labeldistance=1.5 headhref="dir_000008_000003.html"];
+}

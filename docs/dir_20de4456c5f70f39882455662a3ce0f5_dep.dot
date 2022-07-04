@@ -1,0 +1,11 @@
+digraph "src/Arduino/libraries/MotorLib"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  compound=true
+  subgraph clusterdir_f99f708cec72a15cd88662dbbe55aa94 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", style="filled,dashed,", label="libraries", fontname="Helvetica", fontsize="10", URL="dir_f99f708cec72a15cd88662dbbe55aa94.html"]
+  dir_20de4456c5f70f39882455662a3ce0f5 [shape=box, label="MotorLib", style="filled,bold,", fillcolor="#edf0f7", color="grey25", URL="dir_20de4456c5f70f39882455662a3ce0f5.html"];
+  }
+}
